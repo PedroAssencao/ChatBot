@@ -31,3 +31,4 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.pdb
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.genruntimeconfig.cache
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\ref\Chatbot.API.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net6.0\Newtonsoft.Json.dll
