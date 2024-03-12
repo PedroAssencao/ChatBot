@@ -24,6 +24,7 @@ namespace Chatbot.API.Controllers
         public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
         {
             string dadosJson = "";
+
             try
             {
                 dadosJson = _methods.MensagemDeMenu(requestBody.RootElement);

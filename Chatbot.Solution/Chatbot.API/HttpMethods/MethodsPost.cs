@@ -42,10 +42,10 @@ namespace Chatbot.API.HttpMethods
 
                 if (mensagem != null && mensagem != "" && mensagem != " ")
                 {
-                    dadosJson = string.Format(@"{
+                    dadosJson = @"{
                                       ""messaging_product"": ""whatsapp"",
                                       ""recipient_type"": ""individual"",
-                                      ""to"": ""{0}"",
+                                      ""to"": ""5579988132044"",
                                       ""type"": ""interactive"",
                                       ""interactive"": {
                                         ""type"": ""list"",
@@ -82,7 +82,52 @@ namespace Chatbot.API.HttpMethods
                                           ]
                                         }
                                       }
-                                    }",numeroDeEnvio);
+                                    }";
+
+                    /*dadosJson = string.Format(@"{{
+                    ""messaging_product"": ""whatsapp"",
+                    ""recipient_type"": ""individual"",
+                    ""to"": ""{0}"",
+                    ""type"": ""interactive"",
+                    ""interactive"": {{
+                        ""type"": ""list"",
+                        ""header"": {{
+                            ""type"": ""text"",
+                            ""text"": ""Bem Vindo A Margi!""
+                        }},
+                        ""body"": {{
+                            ""text"": ""Selecione o Assunto a se tratar abaixo""
+                        }},
+                        ""footer"": {{
+                            ""text"": ""Obrigado Por Usar O Sistema Margi!""
+                        }},
+                        ""action"": {{
+                            ""button"": ""Menu de Opções"",
+                            ""sections"": [
+                                {{
+                                    ""title"": ""Shorter Section Title"",
+                                    ""rows"": [
+                                        {{
+                                            ""id"": ""unique-row-identifier"",
+                                            ""title"": ""Financeiro"",
+                                            ""description"": ""Tratar Assuntos Financeiros""
+                                        }},
+                                        {{
+                                            ""id"": ""unique-row-identifier2"",
+                                            ""title"": ""Ajuda"",
+                                            ""description"": ""Solicitar Ajuda Ao Atendente""
+                                        }},
+                                        {{
+                                            ""id"": ""unique-row-identifier3"",
+                                            ""title"": ""2 Via Boleto"",
+                                            ""description"": ""Solicitar 2 via para boleto""
+                                        }}
+                                    ]
+                                }}
+                            ]
+                        }}
+                    }}
+                }}", numeroDeEnvio);*/
                 }
                 else
                 {
@@ -175,18 +220,26 @@ namespace Chatbot.API.HttpMethods
 
         public async Task<bool> MetodoPostParaAsMensagens(string dadosJson)
         {
-            var conteudo = new StringContent(dadosJson, Encoding.UTF8, "application/json");
-
-            var resposta = await HttpClient.PostAsync(_configuration.GetSection("security").GetSection("UrlAndAccessToken").Value, conteudo);
-
-            if (resposta.IsSuccessStatusCode)
+            if (dadosJson != "" || dadosJson != " ")
             {
-                return true;
+                var conteudo = new StringContent(dadosJson, Encoding.UTF8, "application/json");
+
+                var resposta = await HttpClient.PostAsync(_configuration.GetSection("security").GetSection("UrlAndAccessToken").Value, conteudo);
+
+                if (resposta.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 return false;
             }
+            
 
         }
     }
