@@ -35,15 +35,7 @@ namespace Chatbot.API.Controllers
 
             var resposta = await _methods.MetodoPostParaAsMensagens(dadosJson);
 
-            if (resposta)
-            {
-                return Ok("Mensagem Enviada com suscesso");
-            }
-            else
-            {
-                return BadRequest("Mensagem Vazia");
-            }
-
+            return resposta ? Ok() : BadRequest();
         }
 
 
