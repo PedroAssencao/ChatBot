@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
+using System.Text;
 using System.Text.Json;
 
 namespace Chatbot.API.HttpMethods
@@ -6,100 +8,186 @@ namespace Chatbot.API.HttpMethods
     public class MethodsPost
     {
         private readonly IConfiguration _configuration;
+        private readonly HttpClient HttpClient;
 
-        public MethodsPost(
-            IConfiguration configuration)
+        public MethodsPost(IConfiguration configuration)
         {
             _configuration = configuration;
+            HttpClient = new HttpClient();
         }
 
-        public async Task<bool> HookMethod(JsonDocument requestBody)
+        public string MensagemDeMenu(dynamic Values) 
         {
-           
-                var Values = requestBody.RootElement;
-                var mensagem = Values
-    .GetProperty("entry")[0]
-    .GetProperty("changes")[0]
-    .GetProperty("value")
-    .GetProperty("messages")[0]
-    .GetProperty("text")
-    .GetProperty("body")
-    .GetString();
-                if (mensagem != null)
+            var mensagem = "";
+            var numeroDeEnvio = "";
+            var dadosJson = "";
+            try
+            {
+                mensagem = Values
+               .GetProperty("entry")[0]
+               .GetProperty("changes")[0]
+               .GetProperty("value")
+               .GetProperty("messages")[0]
+               .GetProperty("text")
+               .GetProperty("body")
+               .GetString();
+
+                numeroDeEnvio = Values
+              .GetProperty("entry")[0]
+              .GetProperty("changes")[0]
+              .GetProperty("value")
+              .GetProperty("messages")[0]
+              .GetProperty("from")
+              .GetString();
+
+                if (mensagem != null && mensagem != "" && mensagem != " ")
                 {
-
-                    string accessToken = _configuration.GetSection("security").GetSection("AccessToken").Value;
-
-                    // URL para fazer um post em uma timeline
-                    string url = $"https://graph.facebook.com/v18.0/194454180428439/messages?access_token={accessToken}";
-
-                    // Dados que você deseja postar
-                    string dadosJson = @"
-{
-    ""messaging_product"": ""whatsapp"",
-    ""recipient_type"": ""individual"",
-    ""to"": ""5579988132044"",
-    ""type"": ""template"",
-    ""template"": {
-        ""name"": ""boas_vindas_5"",
-        ""language"": {
-            ""code"": ""pt_BR""
-        },
-        ""components"": [
-            {
-                ""type"": ""body"",
-                ""parameters"": [
-                    {
-                        ""type"": ""text"",
-                        ""text"": ""Pedro""
-                    },
-                    {
-                        ""type"": ""text"",
-                        ""text"": ""Teclado""
-                    }
-                ]
-            },
-            {
-                ""type"": ""header"",
-                ""parameters"": [
-                    {
-                        ""type"": ""text"",
-                        ""text"": ""Margi""
-                    }
-                ]
-            }
-        ]
-    }
-}";
-
-
-                    using (var httpClient = new HttpClient())
-                    {
-                        // Serializa os dados para formato JSON
-                        var conteudo = new StringContent(dadosJson, Encoding.UTF8, "application/json");
-
-                        // Adiciona o token de acesso aos cabeçalhos da requisição
-
-                        // Envia a requisição POST
-                        var resposta = await httpClient.PostAsync(url, conteudo);
-
-                        // Verifica se a requisição foi bem-sucedida (código de status 2xx)
-                        if (resposta.IsSuccessStatusCode)
-                        {
-                            Console.WriteLine("POST na Graph API bem-sucedido!");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Erro no POST. Código de status: {resposta.StatusCode}");
-                        }
-                    }
-
-                    return true;
+                    dadosJson = string.Format(@"{
+                                      ""messaging_product"": ""whatsapp"",
+                                      ""recipient_type"": ""individual"",
+                                      ""to"": ""{0}"",
+                                      ""type"": ""interactive"",
+                                      ""interactive"": {
+                                        ""type"": ""list"",
+                                        ""header"": {
+                                          ""type"": ""text"",
+                                          ""text"": ""Bem Vindo A Margi!""
+                                        },
+                                        ""body"": {
+                                          ""text"": ""Selecione o Assunto a se tratar abaixo""
+                                        },
+                                        ""footer"": {
+                                          ""text"": ""Obrigado Por Usar O Sistema Margi!""
+                                        },
+                                        ""action"": {
+                                          ""button"": ""Menu de Opções"",
+                                          ""sections"": [
+                                            {  ""title"": ""Shorter Section Title""  ,
+                                              ""rows"": [
+                                                {
+                                                  ""id"": ""unique-row-identifier"",
+                                                  ""title"": ""Financeiro"",
+                                                  ""description"": ""Tratar Assuntos Financeiros""
+                                                },{
+                                                  ""id"": ""unique-row-identifier2"",
+                                                  ""title"": ""Ajuda"",
+                                                  ""description"": ""Solicitar Ajuda Ao Atendente""
+                                                },{
+                                                  ""id"": ""unique-row-identifier3"",
+                                                  ""title"": ""2 Via Boleto"",
+                                                  ""description"": ""Solicitar 2 via para boleto""
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }",numeroDeEnvio);
                 }
                 else
                 {
-                    return false;
+                    throw new Exception();
                 }
+                return dadosJson;
+
+            }
+            catch (Exception)
+            {
+
+                throw new Exception();
+            }
+        
+        }
+
+        public string MensagemParaOBotResponder(dynamic Values)
+        {
+            var descricaoDaMensagem = "";
+            var dadosJson = "";
+            try
+            {
+                descricaoDaMensagem = Values
+               .GetProperty("entry")[0]
+               .GetProperty("changes")[0]
+               .GetProperty("value")
+               .GetProperty("messages")[0]
+               .GetProperty("interactive")
+               .GetProperty("list_reply")
+               .GetProperty("description")
+               .GetString();
+
+                if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
+                {
+                    if (descricaoDaMensagem == "Solicitar 2 via para boleto")
+                    {
+                        dadosJson = @"{
+                          ""messaging_product"": ""whatsapp"",
+                          ""recipient_type"": ""individual"",
+                          ""to"": ""5579988132044"",
+                          ""type"": ""text"",
+                          ""text"": {
+                            ""preview_url"": false,
+                            ""body"": ""Mensagem Referente A Solicitar 2 via para boleto para Teste""
+                            }
+                    }
+                    ";
+                    }
+                    if (descricaoDaMensagem == "Solicitar Ajuda Ao Atendente")
+                    {
+                        dadosJson = @"{
+                          ""messaging_product"": ""whatsapp"",
+                          ""recipient_type"": ""individual"",
+                          ""to"": ""5579988132044"",
+                          ""type"": ""text"",
+                          ""text"": {
+                            ""preview_url"": false,
+                            ""body"": ""Mensagem Referente A Solicitar Ajuda Ao Atendente para Teste""
+                            }
+                    }
+                    ";
+                    }
+                    if (descricaoDaMensagem == "Tratar Assuntos Financeiros")
+                    {
+                        dadosJson = @"{
+                          ""messaging_product"": ""whatsapp"",
+                          ""recipient_type"": ""individual"",
+                          ""to"": ""5579988132044"",
+                          ""type"": ""text"",
+                          ""text"": {
+                            ""preview_url"": false,
+                            ""body"": ""Mensagem Referente A Assuntos Financeiros para Teste""
+                            }
+                    }
+                    ";
+                    }
+
+                }
+                else
+                {
+                    throw new Exception();
+                }
+                return dadosJson;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Menssagem Vazia Ou Feita Por Bot");
+            }
+        }
+
+        public async Task<bool> MetodoPostParaAsMensagens(string dadosJson)
+        {
+            var conteudo = new StringContent(dadosJson, Encoding.UTF8, "application/json");
+
+            var resposta = await HttpClient.PostAsync(_configuration.GetSection("security").GetSection("UrlAndAccessToken").Value, conteudo);
+
+            if (resposta.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }
