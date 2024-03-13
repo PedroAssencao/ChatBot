@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Chatbot.API.Models;
+using Chatbot.API.Repository;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Text.Json;
@@ -9,18 +11,22 @@ namespace Chatbot.API.HttpMethods
     {
         private readonly IConfiguration _configuration;
         private readonly HttpClient HttpClient;
+        private readonly CadastroRepository _cadastroRepository;
 
-        public MethodsPost(IConfiguration configuration)
+        public MethodsPost(IConfiguration configuration, CadastroRepository cadastroRepository)
         {
             _configuration = configuration;
             HttpClient = new HttpClient();
+            _cadastroRepository = cadastroRepository;
         }
 
-        public string MensagemDeMenu(dynamic Values) 
+        public async Task<string> MensagemDeMenu(dynamic Values)
         {
             var mensagem = "";
             var numeroDeEnvio = "";
             var dadosJson = "";
+            var timestamp = "";
+            var waId = "";
             try
             {
                 mensagem = Values
@@ -40,10 +46,51 @@ namespace Chatbot.API.HttpMethods
               .GetProperty("from")
               .GetString();
 
-            
+                timestamp = Values
+            .GetProperty("entry")[0]
+            .GetProperty("changes")[0]
+            .GetProperty("value")
+            .GetProperty("messages")[0]
+            .GetProperty("timestamp")
+            .GetString();
 
-               if (mensagem != null && mensagem != "" && mensagem != " ")
-               {
+                waId = Values
+            .GetProperty("entry")[0]
+            .GetProperty("changes")[0]
+            .GetProperty("value")
+            .GetProperty("contacts")[0]
+            .GetProperty("wa_id")
+            .GetString();
+
+
+                var dados = await _cadastroRepository.GetAll();
+
+                var Item = dados.FirstOrDefault(x => x.CatWaId == waId);
+
+                if (Item == null)
+                {
+                    Cadastro NovoCadastro = new Cadastro();
+                    NovoCadastro.CatTimeStamp = timestamp;
+                    NovoCadastro.CatWaId = waId;
+                    await _cadastroRepository.Adicionar(NovoCadastro);
+                }
+                //era para cair aqui se a mensagem fosse repetida porem ele gera uma mensagem nova as vezes em vez de dar dup e isso ta fudendo o codigo
+                else if (Item.CatTimeStamp == timestamp)
+                {
+                    throw new Exception("Mensagem Repetida");
+                }
+                //por que ai essa porra cai aqui e nao adianta de nada essa verificacao
+                else
+                {
+                    Item.CatTimeStamp = timestamp;
+                    Item.CatWaId = waId;
+                    await _cadastroRepository.Update(Item);
+                }
+
+
+
+                if (mensagem != null && mensagem != "" && mensagem != " ")
+                {
                     dadosJson = @"{
                                       ""messaging_product"": ""whatsapp"",
                                       ""recipient_type"": ""individual"",
@@ -85,7 +132,6 @@ namespace Chatbot.API.HttpMethods
                                         }
                                       }
                                     }";
-
                     /*dadosJson = string.Format(@"{{
                     ""messaging_product"": ""whatsapp"",
                     ""recipient_type"": ""individual"",
@@ -143,7 +189,7 @@ namespace Chatbot.API.HttpMethods
 
                 throw new Exception();
             }
-        
+
         }
 
         public string MensagemParaOBotResponder(dynamic Values)
@@ -241,7 +287,7 @@ namespace Chatbot.API.HttpMethods
             {
                 return false;
             }
-            
+
 
         }
     }

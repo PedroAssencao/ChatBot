@@ -1,4 +1,7 @@
+using Chatbot.API.DAL;
 using Chatbot.API.HttpMethods;
+using Chatbot.API.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MethodsPost>();
+builder.Services.AddScoped<CadastroRepository>();
+builder.Services.AddDbContext<chatbotContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Chinook"));
+
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
