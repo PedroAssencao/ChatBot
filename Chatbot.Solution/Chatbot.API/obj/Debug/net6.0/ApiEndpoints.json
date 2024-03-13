@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "Chatbot.API.Controllers.WebHookController",
+    "Method": "HandleWebhookAsync",
+    "RelativePath": "hook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestBody",
+        "Type": "System.Text.Json.JsonDocument",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

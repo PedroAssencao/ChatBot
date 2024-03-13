@@ -40,8 +40,10 @@ namespace Chatbot.API.HttpMethods
               .GetProperty("from")
               .GetString();
 
-                if (mensagem != null && mensagem != "" && mensagem != " ")
-                {
+            
+
+               if (mensagem != null && mensagem != "" && mensagem != " ")
+               {
                     dadosJson = @"{
                                       ""messaging_product"": ""whatsapp"",
                                       ""recipient_type"": ""individual"",
