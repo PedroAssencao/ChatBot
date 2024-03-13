@@ -12,6 +12,7 @@ namespace Chatbot.API.HttpMethods
         private readonly IConfiguration _configuration;
         private readonly HttpClient HttpClient;
         private readonly CadastroRepository _cadastroRepository;
+        private readonly BotRespostaRepository _botrespostarepository;
 
         public MethodsPost(IConfiguration configuration, CadastroRepository cadastroRepository)
         {
@@ -70,19 +71,19 @@ namespace Chatbot.API.HttpMethods
                 if (Item == null)
                 {
                     Cadastro NovoCadastro = new Cadastro();
-                    NovoCadastro.CatTimeStamp = timestamp;
+                    NovoCadastro.CatTimeStamp = mensagem;
                     NovoCadastro.CatWaId = waId;
                     await _cadastroRepository.Adicionar(NovoCadastro);
                 }
                 //era para cair aqui se a mensagem fosse repetida porem ele gera uma mensagem nova as vezes em vez de dar dup e isso ta fudendo o codigo
-                else if (Item.CatTimeStamp == timestamp)
+                else if (Item.CatTimeStamp == mensagem)
                 {
                     throw new Exception("Mensagem Repetida");
                 }
                 //por que ai essa porra cai aqui e nao adianta de nada essa verificacao
                 else
                 {
-                    Item.CatTimeStamp = timestamp;
+                    Item.CatTimeStamp = mensagem;
                     Item.CatWaId = waId;
                     await _cadastroRepository.Update(Item);
                 }
@@ -192,10 +193,11 @@ namespace Chatbot.API.HttpMethods
 
         }
 
-        public string MensagemParaOBotResponder(dynamic Values)
+        public async Task<string> MensagemParaOBotResponder(dynamic Values)
         {
             var descricaoDaMensagem = "";
             var dadosJson = "";
+            var waId = "";
             try
             {
                 descricaoDaMensagem = Values
@@ -207,6 +209,46 @@ namespace Chatbot.API.HttpMethods
                .GetProperty("list_reply")
                .GetProperty("description")
                .GetString();
+
+
+                waId = Values
+                .GetProperty("entry")[0]
+                .GetProperty("changes")[0]
+                .GetProperty("value")
+                .GetProperty("contacts")[0]
+                .GetProperty("wa_id")
+                .GetString();
+
+
+                var dados = await _botrespostarepository.GetAll();
+
+                dynamic Item = null;
+
+                if (dados !=null)
+                {
+                    Item = dados.FirstOrDefault(x => x.CatWaId == waId);
+
+                }
+             
+                if (Item == null)
+                {
+                    BoTrespostum NovoCadastro = new BoTrespostum();
+                    NovoCadastro.BotTimeStamp = descricaoDaMensagem;
+                    NovoCadastro.CatWaId = waId;
+                    await _botrespostarepository.Adicionar(NovoCadastro);
+                }
+                //era para cair aqui se a mensagem fosse repetida porem ele gera uma mensagem nova as vezes em vez de dar dup e isso ta fudendo o codigo
+                else if (Item.BotTimeStamp == descricaoDaMensagem)
+                {
+                    throw new Exception("Mensagem Repetida");
+                }
+                //por que ai essa porra cai aqui e nao adianta de nada essa verificacao
+                else
+                {
+                    Item.BotTimeStamp = descricaoDaMensagem;
+                    Item.CatWaId = waId;
+                    await _botrespostarepository.Update(Item);
+                }
 
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {

@@ -17,6 +17,7 @@ namespace Chatbot.API.DAL
         {
         }
 
+        public virtual DbSet<BoTrespostum> BoTresposta { get; set; } = null!;
         public virtual DbSet<Cadastro> Cadastros { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,6 +30,12 @@ namespace Chatbot.API.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BoTrespostum>(entity =>
+            {
+                entity.HasKey(e => e.BotId)
+                    .HasName("PK__BoTRespo__310884E0F06C7421");
+            });
+
             modelBuilder.Entity<Cadastro>(entity =>
             {
                 entity.HasKey(e => e.CadId)

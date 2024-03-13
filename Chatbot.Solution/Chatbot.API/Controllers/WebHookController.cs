@@ -27,8 +27,6 @@ namespace Chatbot.API.Controllers
         [HttpPost("/hook")]
         public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
         {
-            Thread.Sleep(4000);
-
             string dadosJson = "";
 
             try
@@ -37,7 +35,7 @@ namespace Chatbot.API.Controllers
             }
             catch (Exception)
             {
-                dadosJson = _methods.MensagemParaOBotResponder(requestBody.RootElement);
+                dadosJson = await _methods.MensagemParaOBotResponder(requestBody.RootElement);
             }
 
             var resposta = await _methods.MetodoPostParaAsMensagens(dadosJson);

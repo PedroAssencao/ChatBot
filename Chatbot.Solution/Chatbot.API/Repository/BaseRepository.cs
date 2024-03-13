@@ -11,7 +11,22 @@ namespace Chatbot.API.Repository
             _chatbotContext = chatbotContext;
         }
 
-        public async Task<List<T>> GetAll() => await _chatbotContext.Set<T>().ToListAsync();
+        public async Task<List<T>> GetAll() 
+        {
+            dynamic dados = null;
+
+            try
+            {
+                dados = await _chatbotContext.Set<T>().ToListAsync();
+            }
+            catch (Exception)
+            {
+                dados = null;
+            }
+
+            return dados;
+
+        }
 
         public async Task<T> Adicionar(T Model) 
         {

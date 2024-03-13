@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MethodsPost>();
 builder.Services.AddScoped<CadastroRepository>();
+builder.Services.AddScoped<BotRespostaRepository>();
 builder.Services.AddDbContext<chatbotContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Chinook"));
