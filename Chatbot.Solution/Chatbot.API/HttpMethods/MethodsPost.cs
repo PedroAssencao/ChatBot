@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.Models;
 using Chatbot.API.Repository;
+using Chatbot.API.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -11,14 +12,15 @@ namespace Chatbot.API.HttpMethods
     {
         private readonly IConfiguration _configuration;
         private readonly HttpClient HttpClient;
-        private readonly CadastroRepository _cadastroRepository;
-        private readonly BotRespostaRepository _botrespostarepository;
+        private readonly CadastroServies _cadastroRepository;
+        private readonly BotRespostaServices _botrespostarepository;
 
-        public MethodsPost(IConfiguration configuration, CadastroRepository cadastroRepository)
+        public MethodsPost(IConfiguration configuration, CadastroServies cadastroRepository, BotRespostaServices botrespostarepository)
         {
             _configuration = configuration;
             HttpClient = new HttpClient();
             _cadastroRepository = cadastroRepository;
+            _botrespostarepository = botrespostarepository;
         }
 
         public async Task<string> MensagemDeMenu(dynamic Values)
@@ -64,7 +66,7 @@ namespace Chatbot.API.HttpMethods
             .GetString();
 
 
-                var dados = await _cadastroRepository.GetAll();
+                /*var dados = await _cadastroRepository.GetAll();
 
                 var Item = dados.FirstOrDefault(x => x.CatWaId == waId);
 
@@ -86,7 +88,7 @@ namespace Chatbot.API.HttpMethods
                     Item.CatTimeStamp = mensagem;
                     Item.CatWaId = waId;
                     await _cadastroRepository.Update(Item);
-                }
+                }*/
 
 
 
@@ -220,7 +222,7 @@ namespace Chatbot.API.HttpMethods
                 .GetString();
 
 
-                var dados = await _botrespostarepository.GetAll();
+                /*var dados = await _botrespostarepository.GetAll();
 
                 dynamic Item = null;
 
@@ -248,7 +250,7 @@ namespace Chatbot.API.HttpMethods
                     Item.BotTimeStamp = descricaoDaMensagem;
                     Item.CatWaId = waId;
                     await _botrespostarepository.Update(Item);
-                }
+                }*/
 
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
@@ -316,6 +318,7 @@ namespace Chatbot.API.HttpMethods
 
                 var resposta = await HttpClient.PostAsync(_configuration.GetSection("security").GetSection("UrlAndAccessToken").Value, conteudo);
 
+
                 if (resposta.IsSuccessStatusCode)
                 {
                     return true;
@@ -331,6 +334,127 @@ namespace Chatbot.API.HttpMethods
             }
 
 
+        }
+
+        public async Task<dynamic> VerificaTipoDeRetorno(dynamic Values)
+        {
+            dynamic? type = "";
+
+            try
+            {
+
+                var mensagem = Values
+               .GetProperty("entry")[0]
+               .GetProperty("changes")[0]
+               .GetProperty("value")
+               .GetProperty("messages")[0]
+               .GetProperty("text")
+               .GetProperty("body")
+               .GetString();
+
+
+               var numeroDeEnvio = Values
+              .GetProperty("entry")[0]
+              .GetProperty("changes")[0]
+              .GetProperty("value")
+              .GetProperty("messages")[0]
+              .GetProperty("from")
+              .GetString();
+
+                 var   timestamp = Values
+                .GetProperty("entry")[0]
+                .GetProperty("changes")[0]
+                .GetProperty("value")
+                .GetProperty("messages")[0]
+                .GetProperty("timestamp")
+                .GetString();
+
+                 var waId = Values
+                .GetProperty("entry")[0]
+                .GetProperty("changes")[0]
+                .GetProperty("value")
+                .GetProperty("contacts")[0]
+                .GetProperty("wa_id")
+                .GetString();
+
+
+                if (mensagem == null)
+                {
+                    throw new Exception();
+                }
+
+                var dados = await _cadastroRepository.GetAll();
+
+                var Item = dados.FirstOrDefault(x => x.CatWaId == waId);
+
+                if (Item == null)
+                {
+                    Cadastro NovoCadastro = new Cadastro();
+                    NovoCadastro.CatTimeStamp = mensagem;
+                    NovoCadastro.CatWaId = waId;
+                    await _cadastroRepository.Adicionar(NovoCadastro);
+                }
+                //era para cair aqui se a mensagem fosse repetida porem ele gera uma mensagem nova as vezes em vez de dar dup e isso ta fudendo o codigo
+                else if (Item.CatTimeStamp == mensagem)
+                {
+                    throw new Exception("Mensagem Repetida");
+                }
+                //por que ai essa porra cai aqui e nao adianta de nada essa verificacao
+                else
+                {
+                    Item.CatTimeStamp = mensagem;
+                    Item.CatWaId = waId;
+                    await _cadastroRepository.Update(Item);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                try
+                {
+                    var descricaoDaMensagem = Values
+                    .GetProperty("entry")[0]
+                    .GetProperty("changes")[0]
+                    .GetProperty("value")
+                    .GetProperty("messages")[0]
+                    .GetProperty("interactive")
+                    .GetProperty("list_reply")
+                    .GetProperty("description")
+                    .GetString();
+
+                    if (descricaoDaMensagem == null)
+                    {
+                        throw new Exception();
+                    }
+
+                }
+                catch (Exception)
+                {
+                    try
+                    {
+                        var sent = Values
+                        .GetProperty("entry")[0]
+                        .GetProperty("changes")[0]
+                        .GetProperty("value")
+                        .GetProperty("statuses")[0]
+                        .GetProperty("status")
+                        .GetString();
+
+                        if (sent == null)
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+
+            }
+            return true;
         }
     }
 }

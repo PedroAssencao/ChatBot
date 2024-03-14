@@ -1,6 +1,7 @@
 using Chatbot.API.DAL;
 using Chatbot.API.HttpMethods;
 using Chatbot.API.Repository;
+using Chatbot.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MethodsPost>();
-builder.Services.AddScoped<CadastroRepository>();
-builder.Services.AddScoped<BotRespostaRepository>();
+builder.Services.AddScoped<CadastroServies>();
+builder.Services.AddScoped<BotRespostaServices>();
 builder.Services.AddDbContext<chatbotContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Chinook"));

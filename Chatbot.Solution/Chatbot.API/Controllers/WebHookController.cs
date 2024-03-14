@@ -14,19 +14,18 @@ namespace Chatbot.API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly MethodsPost _methods;
-        private readonly CadastroRepository _cadastrorepository;
 
-        public WebHookController(IConfiguration configuration, MethodsPost methods, CadastroRepository cadastrorepository)
+        public WebHookController(IConfiguration configuration, MethodsPost methods)
         {
             _configuration = configuration;
-            _methods = methods;
-            _cadastrorepository = cadastrorepository;
+            _methods = methods;            
         }
 
 
         [HttpPost("/hook")]
         public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
         {
+
             string dadosJson = "";
 
             try
@@ -42,19 +41,6 @@ namespace Chatbot.API.Controllers
 
             return resposta ? Ok() : BadRequest();
         }
-
-        //[HttpGet]
-        //[Route("getcategoriasTeste")]
-        //public async Task<IActionResult> PegarTodosCadastros() => Ok(await _cadastrorepository.GetAll());     
-
-        //[HttpPost]
-        //[Route("PostCadastro")]
-        //public async Task<IActionResult> Criatecadastro(Cadastro Model) => Ok(await _cadastrorepository.Adicionar(Model));     
-
-        //[HttpPut]
-        //[Route("UpdateCadastro")]
-        //public async Task<IActionResult> updateCadastro(Cadastro Model) => Ok(await _cadastrorepository.Update(Model));     
-
 
         //Usar Esse Codigo Na Validação para Não dar error
         //[HttpGet("/hook")]
