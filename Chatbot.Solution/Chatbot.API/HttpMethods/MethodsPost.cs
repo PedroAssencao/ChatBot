@@ -124,15 +124,49 @@ namespace Chatbot.API.HttpMethods
 
         }
 
-        public async Task<string> MensagemParaOBotResponder(string waId, string descricaoDaMensagem)
+        public async Task<dynamic> MensagemParaOBotResponder(string waId, string descricaoDaMensagem)
         {
+            List<menu> teste = new List<menu>();
+
+
+            menu menu1 = new menu
+            {
+                menu_id = 1,
+                menu_descricao = "Mensagem Referente A Assuntos Financeiros para Teste",
+                menu_title = "Tratar Assuntos Financeiros"
+
+            };
+
+            menu menu2 = new menu
+            {
+                menu_id = 2,
+                menu_descricao = "Mensagem Referente A Solicitar Ajuda Ao Atendente para Teste",
+                menu_title = "Solicitar Ajuda Ao Atendente"
+
+            };
+
+            menu menu3 = new menu
+            {
+                menu_id = 3,
+                menu_descricao = "Mensagem Referente A Solicitar 2 via para boleto para Teste",
+                menu_title = "Solicitar 2 via para boleto"
+
+            };
+
+            teste.Add(menu1);
+            teste.Add(menu2);
+            teste.Add(menu3);
+
             var dadosJson = "";
             try
             {
 
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
-                    if (descricaoDaMensagem == "Solicitar 2 via para boleto")
+
+                    var a = teste.FirstOrDefault(x => x.menu_title == descricaoDaMensagem);
+
+                    if (a != null)
                     {
                         dadosJson = @"{
                           ""messaging_product"": ""whatsapp"",
@@ -141,44 +175,55 @@ namespace Chatbot.API.HttpMethods
                           ""type"": ""text"",
                           ""text"": {
                             ""preview_url"": false,
-                            ""body"": ""Mensagem Referente A Solicitar 2 via para boleto para Teste""
+                            ""body"": ""DEU CERTO""
                             }
                     }
                     ";
+
                     }
-                    if (descricaoDaMensagem == "Solicitar Ajuda Ao Atendente")
-                    {
-                        dadosJson = @"{
-                          ""messaging_product"": ""whatsapp"",
-                          ""recipient_type"": ""individual"",
-                          ""to"": ""5579988132044"",
-                          ""type"": ""text"",
-                          ""text"": {
-                            ""preview_url"": false,
-                            ""body"": ""Mensagem Referente A Solicitar Ajuda Ao Atendente para Teste""
-                            }
-                    }
-                    ";
-                    }
-                    if (descricaoDaMensagem == "Tratar Assuntos Financeiros")
-                    {
-                        dadosJson = @"{
-                          ""messaging_product"": ""whatsapp"",
-                          ""recipient_type"": ""individual"",
-                          ""to"": ""5579988132044"",
-                          ""type"": ""text"",
-                          ""text"": {
-                            ""preview_url"": false,
-                            ""body"": ""Mensagem Referente A Assuntos Financeiros para Teste""
-                            }
-                    }
-                    ";
-                    }
+                    //if (descricaoDaMensagem == "Solicitar Ajuda Ao Atendente")
+                    //{
+                    //    dadosJson = @"{
+                    //      ""messaging_product"": ""whatsapp"",
+                    //      ""recipient_type"": ""individual"",
+                    //      ""to"": ""5579988132044"",
+                    //      ""type"": ""text"",
+                    //      ""text"": {
+                    //        ""preview_url"": false,
+                    //        ""body"": ""Mensagem Referente A Solicitar Ajuda Ao Atendente para Teste""
+                    //        }
+                    //}
+                    //";
+                    //}
+                    //if (descricaoDaMensagem == "Tratar Assuntos Financeiros")
+                    //{
+                    //    dadosJson = @"{
+                    //      ""messaging_product"": ""whatsapp"",
+                    //      ""recipient_type"": ""individual"",
+                    //      ""to"": ""5579988132044"",
+                    //      ""type"": ""text"",
+                    //      ""text"": {
+                    //        ""preview_url"": false,
+                    //        ""body"": ""Mensagem Referente A Assuntos Financeiros para Teste""
+                    //        }
+                    //}
+                    //";
+                    //}
 
                 }
                 else
                 {
-                    throw new Exception();
+                    dadosJson = @"{
+                          ""messaging_product"": ""whatsapp"",
+                          ""recipient_type"": ""individual"",
+                          ""to"": ""5579988132044"",
+                          ""type"": ""text"",
+                          ""text"": {
+                            ""preview_url"": false,
+                            ""body"": ""Porfavor Escolha Uma Das Opções Acima ""
+                            }
+                    }
+                    ";
                 }
                 return await MetodoPostParaAsMensagens(dadosJson);
             }
