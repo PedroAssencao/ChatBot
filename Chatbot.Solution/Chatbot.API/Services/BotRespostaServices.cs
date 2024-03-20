@@ -45,7 +45,7 @@ namespace Chatbot.API.Services
             }
         }
 
-        public async Task<BoTrespostum?> AtualizarBoTrespostum(BoTrespostum Model)
+        public async Task<BoTrespostum?> AtualizarBoTrespostum(BoTrespostum? Model)
         {
             try
             {
@@ -59,8 +59,10 @@ namespace Chatbot.API.Services
             }
             catch (Exception)
             {
+
                 throw;
             }
+
         }
     }
 }

@@ -220,7 +220,7 @@ namespace Chatbot.API.HttpMethods
                           ""type"": ""text"",
                           ""text"": {
                             ""preview_url"": false,
-                            ""body"": ""Porfavor Escolha Uma Das Opções Acima ""
+                            ""body"": ""Porfavor Escolha Uma Das Opções Acima""
                             }
                     }
                     ";
@@ -261,7 +261,6 @@ namespace Chatbot.API.HttpMethods
 
         public async Task<dynamic> VerificaTipoDeRetorno(dynamic Values)
         {
-            //Thread.Sleep(5000);
 
             try
             {
@@ -345,7 +344,7 @@ namespace Chatbot.API.HttpMethods
                 Item.CatTimeStamp = mensagem;
                 Item.CatWaId = waId;
                 await _cadastroRepository.Update(Item);
-                return MensagemDeMenu(waId, mensagem, numeroDeEnvio);
+                return await MensagemDeMenu(waId, mensagem, numeroDeEnvio);
             }
 
         }
@@ -389,14 +388,10 @@ namespace Chatbot.API.HttpMethods
                 }
                 else
                 {
-                    BoTrespostum boTrespostum = new BoTrespostum
-                    {
-                        BotId = item.BotId,
-                        BotTimeStamp = descricaoDaMensagem,
-                        CatWaId = waId,
-                    };
-                    _botrespostarepository?.AtualizarBoTrespostum(boTrespostum);
-                    return MensagemParaOBotResponder(waId, descricaoDaMensagem);
+                    item.BotTimeStamp = descricaoDaMensagem;
+                    item.CatWaId = waId;
+                    await _botrespostarepository.AtualizarBoTrespostum(item);
+                    return await MensagemParaOBotResponder(waId, descricaoDaMensagem);
                 }
             }
             else
@@ -406,8 +401,8 @@ namespace Chatbot.API.HttpMethods
                     BotTimeStamp = descricaoDaMensagem,
                     CatWaId = waId,
                 };
-                _botrespostarepository?.AdicionarBotResposta(boTrespostum);
-                return MensagemParaOBotResponder(waId, descricaoDaMensagem);
+                await _botrespostarepository.AdicionarBotResposta(boTrespostum);
+                return await MensagemParaOBotResponder(waId, descricaoDaMensagem);
             }
         }
 
