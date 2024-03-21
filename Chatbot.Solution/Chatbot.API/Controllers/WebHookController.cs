@@ -23,7 +23,18 @@ namespace Chatbot.API.Controllers
 
 
         [HttpPost("/hook")]
-        public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody) { await _methods.VerificaTipoDeRetorno(requestBody.RootElement); return Ok(); }
+        public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
+        {
+            try
+            {
+                await _methods.VerificaTipoDeRetorno(requestBody.RootElement); 
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return Ok();
+            } 
+        }
 
         //Usar Esse Codigo Na Validação para Não dar error
         //[HttpGet("/hook")]

@@ -168,17 +168,18 @@ namespace Chatbot.API.HttpMethods
 
                     if (a != null)
                     {
-                        dadosJson = @"{
-                          ""messaging_product"": ""whatsapp"",
-                          ""recipient_type"": ""individual"",
-                          ""to"": ""5579988132044"",
-                          ""type"": ""text"",
-                          ""text"": {
-                            ""preview_url"": false,
-                            ""body"": ""DEU CERTO""
-                            }
-                    }
-                    ";
+                        dadosJson = $@"
+                        {{
+                            ""messaging_product"": ""whatsapp"",
+                            ""recipient_type"": ""individual"",
+                            ""to"": ""5579988132044"",
+                            ""type"": ""text"",
+                            ""text"": {{
+                                ""preview_url"": false,
+                                ""body"": ""{a?.menu_descricao}""
+                            }}
+                        }}";
+
 
                     }
                     //if (descricaoDaMensagem == "Solicitar Ajuda Ao Atendente")
