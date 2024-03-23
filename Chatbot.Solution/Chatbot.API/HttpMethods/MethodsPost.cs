@@ -14,13 +14,15 @@ namespace Chatbot.API.HttpMethods
         private readonly HttpClient HttpClient;
         private readonly CadastroServies _cadastroRepository;
         private readonly BotRespostaServices _botrespostarepository;
+        private readonly MensagemRepository _mensagemRepository;
 
-        public MethodsPost(IConfiguration configuration, CadastroServies cadastroRepository, BotRespostaServices botrespostarepository)
+        public MethodsPost(IConfiguration configuration, CadastroServies cadastroRepository, BotRespostaServices botrespostarepository, MensagemRepository mensagemRepository)
         {
             _configuration = configuration;
             HttpClient = new HttpClient();
             _cadastroRepository = cadastroRepository;
             _botrespostarepository = botrespostarepository;
+            _mensagemRepository = mensagemRepository;
         }
 
         public async Task<string> MensagemDeMenu(string waId, string mensagem, string numeroDeEnvio)
@@ -69,50 +71,6 @@ namespace Chatbot.API.HttpMethods
                                         }
                                       }
                                     }";
-                /*dadosJson = string.Format(@"{{
-                ""messaging_product"": ""whatsapp"",
-                ""recipient_type"": ""individual"",
-                ""to"": ""{0}"",
-                ""type"": ""interactive"",
-                ""interactive"": {{
-                    ""type"": ""list"",
-                    ""header"": {{
-                        ""type"": ""text"",
-                        ""text"": ""Bem Vindo A Margi!""
-                    }},
-                    ""body"": {{
-                        ""text"": ""Selecione o Assunto a se tratar abaixo""
-                    }},
-                    ""footer"": {{
-                        ""text"": ""Obrigado Por Usar O Sistema Margi!""
-                    }},
-                    ""action"": {{
-                        ""button"": ""Menu de Opções"",
-                        ""sections"": [
-                            {{
-                                ""title"": ""Shorter Section Title"",
-                                ""rows"": [
-                                    {{
-                                        ""id"": ""unique-row-identifier"",
-                                        ""title"": ""Financeiro"",
-                                        ""description"": ""Tratar Assuntos Financeiros""
-                                    }},
-                                    {{
-                                        ""id"": ""unique-row-identifier2"",
-                                        ""title"": ""Ajuda"",
-                                        ""description"": ""Solicitar Ajuda Ao Atendente""
-                                    }},
-                                    {{
-                                        ""id"": ""unique-row-identifier3"",
-                                        ""title"": ""2 Via Boleto"",
-                                        ""description"": ""Solicitar 2 via para boleto""
-                                    }}
-                                ]
-                            }}
-                        ]
-                    }}
-                }}
-            }}", numeroDeEnvio);*/
                 return await MetodoPostParaAsMensagens(dadosJson);
 
             }
@@ -126,36 +84,8 @@ namespace Chatbot.API.HttpMethods
 
         public async Task<dynamic> MensagemParaOBotResponder(string waId, string descricaoDaMensagem)
         {
-            List<menu> teste = new List<menu>();
 
-
-            menu menu1 = new menu
-            {
-                menu_id = 1,
-                menu_descricao = "Mensagem Referente A Assuntos Financeiros para Teste",
-                menu_title = "Tratar Assuntos Financeiros"
-
-            };
-
-            menu menu2 = new menu
-            {
-                menu_id = 2,
-                menu_descricao = "Mensagem Referente A Solicitar Ajuda Ao Atendente para Teste",
-                menu_title = "Solicitar Ajuda Ao Atendente"
-
-            };
-
-            menu menu3 = new menu
-            {
-                menu_id = 3,
-                menu_descricao = "Mensagem Referente A Solicitar 2 via para boleto para Teste",
-                menu_title = "Solicitar 2 via para boleto"
-
-            };
-
-            teste.Add(menu1);
-            teste.Add(menu2);
-            teste.Add(menu3);
+            var MensagensTemplates = await _mensagemRepository.GetAll();
 
             var dadosJson = "";
             try
@@ -164,53 +94,31 @@ namespace Chatbot.API.HttpMethods
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
 
-                    var a = teste.FirstOrDefault(x => x.menu_title == descricaoDaMensagem);
+                    var ListaMensagem = MensagensTemplates.FirstOrDefault(x => x.MenDescricao == descricaoDaMensagem && x.LogId == 2);
 
-                    if (a != null)
+                    if (ListaMensagem != null)
                     {
+                        //apenas para testes isso aqui, pois o numero na lista da meta de teste esta com o 9 na frente
+
+                        if (waId == "557988132044")
+                        {
+                            waId = "5579988132044";
+                        }
+
                         dadosJson = $@"
                         {{
                             ""messaging_product"": ""whatsapp"",
                             ""recipient_type"": ""individual"",
-                            ""to"": ""5579988132044"",
+                            ""to"": ""{waId}"",
                             ""type"": ""text"",
                             ""text"": {{
                                 ""preview_url"": false,
-                                ""body"": ""{a?.menu_descricao}""
+                                ""body"": ""{ListaMensagem.MenResposta}""
                             }}
                         }}";
 
 
                     }
-                    //if (descricaoDaMensagem == "Solicitar Ajuda Ao Atendente")
-                    //{
-                    //    dadosJson = @"{
-                    //      ""messaging_product"": ""whatsapp"",
-                    //      ""recipient_type"": ""individual"",
-                    //      ""to"": ""5579988132044"",
-                    //      ""type"": ""text"",
-                    //      ""text"": {
-                    //        ""preview_url"": false,
-                    //        ""body"": ""Mensagem Referente A Solicitar Ajuda Ao Atendente para Teste""
-                    //        }
-                    //}
-                    //";
-                    //}
-                    //if (descricaoDaMensagem == "Tratar Assuntos Financeiros")
-                    //{
-                    //    dadosJson = @"{
-                    //      ""messaging_product"": ""whatsapp"",
-                    //      ""recipient_type"": ""individual"",
-                    //      ""to"": ""5579988132044"",
-                    //      ""type"": ""text"",
-                    //      ""text"": {
-                    //        ""preview_url"": false,
-                    //        ""body"": ""Mensagem Referente A Assuntos Financeiros para Teste""
-                    //        }
-                    //}
-                    //";
-                    //}
-
                 }
                 else
                 {
@@ -376,22 +284,22 @@ namespace Chatbot.API.HttpMethods
                 throw new Exception();
             }
 
-            var dados = await _botrespostarepository.GetAll();
+            var dados = await _mensagemRepository.GetAll();
 
-            var item = dados.FirstOrDefault(x => x.CatWaId == waId);
+            var item = dados.FirstOrDefault(x => x.Con.ConWaId == waId && x.LogId == 2);
 
             if (item != null)
             {
 
-                if (item?.BotTimeStamp == descricaoDaMensagem)
+                if (item?.MenDescricao == descricaoDaMensagem)
                 {
                     throw new Exception("Mensagem Repetida");
                 }
                 else
                 {
-                    item.BotTimeStamp = descricaoDaMensagem;
-                    item.CatWaId = waId;
-                    await _botrespostarepository.AtualizarBoTrespostum(item);
+                    item.MenDescricao = descricaoDaMensagem;
+                    item.Con.ConWaId = waId;
+                    await _mensagemRepository.Update(item);
                     return await MensagemParaOBotResponder(waId, descricaoDaMensagem);
                 }
             }

@@ -13,6 +13,8 @@ namespace Chatbot.API.Repository
 
         public async Task<List<T>> GetAll() => await _chatbotContext.Set<T>().ToListAsync();
 
+        public async Task<T?> GetPorID(int id) => await _chatbotContext.Set<T>().FindAsync(id);
+
         public async Task<T> Adicionar(T Model) 
         {
             await _chatbotContext.AddAsync(Model);

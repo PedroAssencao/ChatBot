@@ -1,4 +1,5 @@
 using Chatbot.API.DAL;
+using Chatbot.API.Dttos;
 using Chatbot.API.HttpMethods;
 using Chatbot.API.Repository;
 using Chatbot.API.Services;
@@ -15,6 +16,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MethodsPost>();
 builder.Services.AddScoped<CadastroServies>();
 builder.Services.AddScoped<BotRespostaServices>();
+builder.Services.AddScoped<MensagemRepository>();
+builder.Services.AddScoped<ContatoRepository>();
+builder.Services.AddScoped<LoginRepository>();
+builder.Services.AddScoped<Mensagem>();
 builder.Services.AddDbContext<chatbotContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Chinook"));
