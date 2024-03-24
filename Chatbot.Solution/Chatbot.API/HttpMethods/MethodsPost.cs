@@ -15,14 +15,16 @@ namespace Chatbot.API.HttpMethods
         private readonly CadastroServies _cadastroRepository;
         private readonly BotRespostaServices _botrespostarepository;
         private readonly MensagemRepository _mensagemRepository;
+        private readonly ContatoRepository _contatoRepostiroy;
 
-        public MethodsPost(IConfiguration configuration, CadastroServies cadastroRepository, BotRespostaServices botrespostarepository, MensagemRepository mensagemRepository)
+        public MethodsPost(IConfiguration configuration, CadastroServies cadastroRepository, BotRespostaServices botrespostarepository, MensagemRepository mensagemRepository, ContatoRepository contatoRepostiroy)
         {
             _configuration = configuration;
             HttpClient = new HttpClient();
             _cadastroRepository = cadastroRepository;
             _botrespostarepository = botrespostarepository;
             _mensagemRepository = mensagemRepository;
+            _contatoRepostiroy = contatoRepostiroy;
         }
 
         public async Task<string> MensagemDeMenu(string waId, string mensagem, string numeroDeEnvio)
@@ -214,6 +216,15 @@ namespace Chatbot.API.HttpMethods
            .GetProperty("value")
            .GetProperty("messages")[0]
            .GetProperty("from")
+           .GetString();  
+            
+            var Nome = Values
+           .GetProperty("entry")[0]
+           .GetProperty("changes")[0]
+           .GetProperty("value")
+           .GetProperty("contacts")[0]
+           .GetProperty("profile")
+           .GetProperty("name")
            .GetString();
 
             var waId = Values
@@ -230,29 +241,33 @@ namespace Chatbot.API.HttpMethods
                 throw new Exception();
             }
 
-            var dados = await _cadastroRepository.GetAll();
+            var dados = await _contatoRepostiroy.GetAll();
 
-            var Item = dados.FirstOrDefault(x => x.CatWaId == waId);
+            var Item = dados.FirstOrDefault(x => x.ConWaId == waId);
 
             if (Item == null)
             {
-                Cadastro NovoCadastro = new Cadastro
+                Contato NovoContato = new Contato
                 {
-                    CatTimeStamp = mensagem,
-                    CatWaId = waId,
+                    ConWaId = waId,
+                    ConNome = Nome,
+                    ConDataCadastro = DateTime.Now,
+                    ConBloqueadoStatus = false,
+                    LogId = 2
                 };
-                await _cadastroRepository.Adicionar(NovoCadastro);
+                await _contatoRepostiroy.Adicionar(NovoContato);
                 return MensagemDeMenu(waId, mensagem, numeroDeEnvio);
             }
-            else if (Item.CatTimeStamp == mensagem)
+            //else if (Item == mensagem)
+            //{
+            //    throw new Exception("Mensagem Repetida");
+            //}
+            else if (Item.ConBloqueadoStatus == true)
             {
-                throw new Exception("Mensagem Repetida");
+                throw new Exception("Numero Bloqueado");
             }
             else
             {
-                Item.CatTimeStamp = mensagem;
-                Item.CatWaId = waId;
-                await _cadastroRepository.Update(Item);
                 return await MensagemDeMenu(waId, mensagem, numeroDeEnvio);
             }
 
@@ -284,9 +299,9 @@ namespace Chatbot.API.HttpMethods
                 throw new Exception();
             }
 
-            var dados = await _mensagemRepository.GetAll();
+            var dados = await _mensagemRepository.ListaComObjetos();
 
-            var item = dados.FirstOrDefault(x => x.Con.ConWaId == waId && x.LogId == 2);
+            var item = dados.LastOrDefault(x => x.Con.ConWaId == waId && x.Log.LogId == 2 && x.MenTipo == "MensagenEnviada");
 
             if (item != null)
             {
@@ -297,20 +312,29 @@ namespace Chatbot.API.HttpMethods
                 }
                 else
                 {
-                    item.MenDescricao = descricaoDaMensagem;
-                    item.Con.ConWaId = waId;
-                    await _mensagemRepository.Update(item);
+                    Mensagen mensagen = new Mensagen
+                    {
+                        MenDescricao = descricaoDaMensagem,
+                        MenData = DateTime.Now,
+                        MenTipo = "MensagenEnviada",
+                        LogId = 2,
+                        ConId = 1,
+                    };
+                    await _mensagemRepository.Adicionar(mensagen);
                     return await MensagemParaOBotResponder(waId, descricaoDaMensagem);
                 }
             }
             else
             {
-                BoTrespostum boTrespostum = new BoTrespostum
+                Mensagen mensagen = new Mensagen
                 {
-                    BotTimeStamp = descricaoDaMensagem,
-                    CatWaId = waId,
+                    MenDescricao = descricaoDaMensagem,
+                    MenData = DateTime.Now,
+                    MenTipo = "MensagenEnviada",
+                    LogId = 2,
+                    ConId = 1,
                 };
-                await _botrespostarepository.AdicionarBotResposta(boTrespostum);
+                await _mensagemRepository.Adicionar(mensagen);
                 return await MensagemParaOBotResponder(waId, descricaoDaMensagem);
             }
         }

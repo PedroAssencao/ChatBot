@@ -42,34 +42,6 @@ namespace Chatbot.API.Controllers
                 return Ok();
             }
         }
-
-        [HttpGet]
-        public async Task<List<Mensagem>> teste()
-        {
-           
-                var listaMensagens = await _mensagemRepository.GetAll();
-                List<Mensagem> ListaComObjetos = new List<Mensagem>();
-
-                foreach (var item in listaMensagens)
-                {
-                    Mensagem teste2 = new Mensagem
-                    {
-                        menId = item.MenId,
-                        menDescricao = item.MenDescricao,
-                        menResposta = item.MenResposta,
-                        menTitle = item.MenTitle,
-                        menData = Convert.ToDateTime(item.MenData),
-                        menTipo = item.MenTipo,
-                        log = await _LoginRepository.GetPorID(Convert.ToInt32(item.LogId)),
-                        con = await _ContatoRepository.GetPorID(Convert.ToInt32(item.ConId))
-                    };
-                    ListaComObjetos.Add(teste2);
-                }
-
-                return ListaComObjetos;
-           
-        }
-
         //Usar Esse Codigo Na Validação para Não dar error
         //[HttpGet("/hook")]
         //public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge) => Ok(hubChallenge);
