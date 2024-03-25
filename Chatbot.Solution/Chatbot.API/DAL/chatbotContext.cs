@@ -17,8 +17,6 @@ namespace Chatbot.API.DAL
         {
         }
 
-        public virtual DbSet<BoTrespostum> BoTresposta { get; set; } = null!;
-        public virtual DbSet<Cadastro> Cadastros { get; set; } = null!;
         public virtual DbSet<Contato> Contatos { get; set; } = null!;
         public virtual DbSet<Login> Logins { get; set; } = null!;
         public virtual DbSet<Mensagen> Mensagens { get; set; } = null!;
@@ -33,18 +31,6 @@ namespace Chatbot.API.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BoTrespostum>(entity =>
-            {
-                entity.HasKey(e => e.BotId)
-                    .HasName("PK__BoTRespo__310884E0F06C7421");
-            });
-
-            modelBuilder.Entity<Cadastro>(entity =>
-            {
-                entity.HasKey(e => e.CadId)
-                    .HasName("PK__cadastro__39523F7CBD4EBC79");
-            });
-
             modelBuilder.Entity<Contato>(entity =>
             {
                 entity.HasKey(e => e.ConId)
@@ -70,14 +56,12 @@ namespace Chatbot.API.DAL
                 entity.HasOne(d => d.Con)
                     .WithMany(p => p.Mensagens)
                     .HasForeignKey(d => d.ConId)
-                    .HasConstraintName("FK__Mensagens__con_i__693CA210")
-                    .IsRequired();
+                    .HasConstraintName("FK__Mensagens__con_i__693CA210");
 
                 entity.HasOne(d => d.Log)
                     .WithMany(p => p.Mensagens)
                     .HasForeignKey(d => d.LogId)
-                    .HasConstraintName("FK__Mensagens__log_i__68487DD7")
-                    .IsRequired();
+                    .HasConstraintName("FK__Mensagens__log_i__68487DD7");
             });
 
             OnModelCreatingPartial(modelBuilder);

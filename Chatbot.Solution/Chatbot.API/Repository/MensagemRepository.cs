@@ -1,5 +1,4 @@
 ﻿using Chatbot.API.DAL;
-using Chatbot.API.Dttos;
 using Chatbot.API.Models;
 
 namespace Chatbot.API.Repository

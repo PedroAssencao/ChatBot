@@ -1,6 +1,6 @@
 ﻿using Chatbot.API.Models;
 using Chatbot.API.Repository;
-using Chatbot.API.Services;
+//using Chatbot.API.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -12,67 +12,73 @@ namespace Chatbot.API.HttpMethods
     {
         private readonly IConfiguration _configuration;
         private readonly HttpClient HttpClient;
-        private readonly CadastroServies _cadastroRepository;
-        private readonly BotRespostaServices _botrespostarepository;
         private readonly MensagemRepository _mensagemRepository;
         private readonly ContatoRepository _contatoRepostiroy;
 
-        public MethodsPost(IConfiguration configuration, CadastroServies cadastroRepository, BotRespostaServices botrespostarepository, MensagemRepository mensagemRepository, ContatoRepository contatoRepostiroy)
+        public MethodsPost(IConfiguration configuration, MensagemRepository mensagemRepository, ContatoRepository contatoRepostiroy)
         {
             _configuration = configuration;
             HttpClient = new HttpClient();
-            _cadastroRepository = cadastroRepository;
-            _botrespostarepository = botrespostarepository;
             _mensagemRepository = mensagemRepository;
             _contatoRepostiroy = contatoRepostiroy;
         }
 
-        public async Task<string> MensagemDeMenu(string waId, string mensagem, string numeroDeEnvio)
+        public async Task<dynamic> MensagemDeMenu(string waId, string mensagem, string numeroDeEnvio)
         {
+            if (waId == "557988132044")
+            {
+                waId = "5579988132044";
+            }
+
             var dadosJson = "";
             try
             {
-                dadosJson = @"{
-                                      ""messaging_product"": ""whatsapp"",
-                                      ""recipient_type"": ""individual"",
-                                      ""to"": ""5579988132044"",
-                                      ""type"": ""interactive"",
-                                      ""interactive"": {
-                                        ""type"": ""list"",
-                                        ""header"": {
-                                          ""type"": ""text"",
-                                          ""text"": ""Bem Vindo A Margi!""
-                                        },
-                                        ""body"": {
-                                          ""text"": ""Selecione o Assunto a se tratar abaixo""
-                                        },
-                                        ""footer"": {
-                                          ""text"": ""Obrigado Por Usar O Sistema Margi!""
-                                        },
-                                        ""action"": {
-                                          ""button"": ""Menu de Opções"",
-                                          ""sections"": [
-                                            {  ""title"": ""Shorter Section Title""  ,
-                                              ""rows"": [
-                                                {
-                                                  ""id"": ""unique-row-identifier"",
-                                                  ""title"": ""Financeiro"",
-                                                  ""description"": ""Tratar Assuntos Financeiros""
-                                                },{
-                                                  ""id"": ""unique-row-identifier2"",
-                                                  ""title"": ""Ajuda"",
-                                                  ""description"": ""Solicitar Ajuda Ao Atendente""
-                                                },{
-                                                  ""id"": ""unique-row-identifier3"",
-                                                  ""title"": ""2 Via Boleto"",
-                                                  ""description"": ""Solicitar 2 via para boleto""
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      }
-                                    }";
+                dadosJson = $@"
+                {{
+                    ""messaging_product"": ""whatsapp"",
+                    ""recipient_type"": ""individual"",
+                    ""to"": ""{waId}"",
+                    ""type"": ""interactive"",
+                    ""interactive"": {{
+                        ""type"": ""list"",
+                        ""header"": {{
+                            ""type"": ""text"",
+                            ""text"": """"
+                        }},
+                        ""body"": {{
+                            ""text"": ""Selecione o Assunto a se tratar abaixo""
+                        }},
+                        ""footer"": {{
+                            ""text"": """"
+                        }},
+                        ""action"": {{
+                            ""button"": ""Menu de Opções"",
+                            ""sections"": [
+                                {{
+                                    ""title"": ""Shorter Section Title"",
+                                    ""rows"": [
+                                        {{
+                                            ""id"": ""unique-row-identifier"",
+                                            ""title"": ""Financeiro"",
+                                            ""description"": ""Tratar Assuntos Financeiros""
+                                        }},
+                                        {{
+                                            ""id"": ""unique-row-identifier2"",
+                                            ""title"": ""Ajuda"",
+                                            ""description"": ""Solicitar Ajuda Ao Atendente""
+                                        }},
+                                        {{
+                                            ""id"": ""unique-row-identifier3"",
+                                            ""title"": ""2 Via Boleto"",
+                                            ""description"": ""Solicitar 2 via para boleto""
+                                        }}
+                                    ]
+                                }}
+                            ]
+                        }}
+                    }}
+                }}";
+
                 return await MetodoPostParaAsMensagens(dadosJson);
 
             }
@@ -216,8 +222,8 @@ namespace Chatbot.API.HttpMethods
            .GetProperty("value")
            .GetProperty("messages")[0]
            .GetProperty("from")
-           .GetString();  
-            
+           .GetString();
+
             var Nome = Values
            .GetProperty("entry")[0]
            .GetProperty("changes")[0]

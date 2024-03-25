@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.API.Models
@@ -38,10 +37,9 @@ namespace Chatbot.API.Models
         [StringLength(255)]
         [Unicode(false)]
         public string? LogUser { get; set; }
-        [JsonIgnore]
+
         [InverseProperty(nameof(Contato.Log))]
         public virtual ICollection<Contato> Contatos { get; set; }
-        [JsonIgnore]
         [InverseProperty(nameof(Mensagen.Log))]
         public virtual ICollection<Mensagen> Mensagens { get; set; }
     }
