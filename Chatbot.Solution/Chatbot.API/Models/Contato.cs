@@ -11,6 +11,7 @@ namespace Chatbot.API.Models
     {
         public Contato()
         {
+            Atendimentos = new HashSet<Atendimento>();
             Mensagens = new HashSet<Mensagen>();
         }
 
@@ -35,6 +36,8 @@ namespace Chatbot.API.Models
         [ForeignKey(nameof(LogId))]
         [InverseProperty(nameof(Login.Contatos))]
         public virtual Login? Log { get; set; }
+        [InverseProperty(nameof(Atendimento.Con))]
+        public virtual ICollection<Atendimento> Atendimentos { get; set; }
         [InverseProperty(nameof(Mensagen.Con))]
         public virtual ICollection<Mensagen> Mensagens { get; set; }
     }

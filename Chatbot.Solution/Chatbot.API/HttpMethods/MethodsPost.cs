@@ -14,17 +14,26 @@ namespace Chatbot.API.HttpMethods
         private readonly HttpClient HttpClient;
         private readonly MensagemRepository _mensagemRepository;
         private readonly ContatoRepository _contatoRepostiroy;
+        private readonly AtendimentoRepository _atendimentoRepository;
 
-        public MethodsPost(IConfiguration configuration, MensagemRepository mensagemRepository, ContatoRepository contatoRepostiroy)
+        public MethodsPost(IConfiguration configuration, MensagemRepository mensagemRepository, ContatoRepository contatoRepostiroy, AtendimentoRepository atendimentoRepository)
         {
             _configuration = configuration;
             HttpClient = new HttpClient();
             _mensagemRepository = mensagemRepository;
             _contatoRepostiroy = contatoRepostiroy;
+            _atendimentoRepository = atendimentoRepository;
         }
 
         public async Task<dynamic> MensagemDeMenu(string waId, string mensagem, string numeroDeEnvio)
         {
+
+            var dados = await _atendimentoRepository.AtendimentoComObjetos();
+
+
+            var Item = dados.FirstOrDefault(x => x?.Con?.ConWaId == waId);
+
+
             if (waId == "557988132044")
             {
                 waId = "5579988132044";
@@ -33,6 +42,8 @@ namespace Chatbot.API.HttpMethods
             var dadosJson = "";
             try
             {
+
+
                 dadosJson = $@"
                 {{
                     ""messaging_product"": ""whatsapp"",
@@ -247,7 +258,13 @@ namespace Chatbot.API.HttpMethods
                 throw new Exception();
             }
 
+     
+        
             var dados = await _contatoRepostiroy.GetAll();
+
+            var dadosMensagen = await _mensagemRepository.ListaComObjetos();
+
+            var itemMensagen = dadosMensagen.LastOrDefault(x => x?.Con?.ConWaId == waId && x?.Log?.LogId == 2 && x?.MenTipo == "MensagenEnviada");
 
             var Item = dados.FirstOrDefault(x => x.ConWaId == waId);
 
@@ -264,16 +281,25 @@ namespace Chatbot.API.HttpMethods
                 await _contatoRepostiroy.Adicionar(NovoContato);
                 return MensagemDeMenu(waId, mensagem, numeroDeEnvio);
             }
-            //else if (Item == mensagem)
-            //{
-            //    throw new Exception("Mensagem Repetida");
-            //}
+            else if (itemMensagen?.MenDescricao == mensagem)
+            {
+                throw new Exception("Mensagem Repetida");
+            }
             else if (Item.ConBloqueadoStatus == true)
             {
                 throw new Exception("Numero Bloqueado");
             }
             else
             {
+                Mensagen mensagen = new Mensagen
+                {
+                    MenDescricao = mensagem,
+                    MenData = DateTime.Now,
+                    MenTipo = "MensagenEnviada",
+                    LogId = 2,
+                    ConId = 1,
+                };
+                await _mensagemRepository.Adicionar(mensagen);
                 return await MensagemDeMenu(waId, mensagem, numeroDeEnvio);
             }
 

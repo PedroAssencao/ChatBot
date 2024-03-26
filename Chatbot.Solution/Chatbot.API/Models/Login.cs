@@ -11,7 +11,10 @@ namespace Chatbot.API.Models
     {
         public Login()
         {
+            Atendentes = new HashSet<Atendente>();
+            Atendimentos = new HashSet<Atendimento>();
             Contatos = new HashSet<Contato>();
+            Departamentos = new HashSet<Departamento>();
             Mensagens = new HashSet<Mensagen>();
         }
 
@@ -38,8 +41,14 @@ namespace Chatbot.API.Models
         [Unicode(false)]
         public string? LogUser { get; set; }
 
+        [InverseProperty(nameof(Atendente.Log))]
+        public virtual ICollection<Atendente> Atendentes { get; set; }
+        [InverseProperty(nameof(Atendimento.Log))]
+        public virtual ICollection<Atendimento> Atendimentos { get; set; }
         [InverseProperty(nameof(Contato.Log))]
         public virtual ICollection<Contato> Contatos { get; set; }
+        [InverseProperty(nameof(Departamento.Log))]
+        public virtual ICollection<Departamento> Departamentos { get; set; }
         [InverseProperty(nameof(Mensagen.Log))]
         public virtual ICollection<Mensagen> Mensagens { get; set; }
     }
