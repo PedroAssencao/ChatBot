@@ -8,5 +8,12 @@ namespace Chatbot.API.Repository
         public LoginRepository(chatbotContext chatbotContext) : base(chatbotContext)
         {
         }
+
+        public async Task<Login?> RetornarLogIdPorWaID(string waID)
+        {
+            var dados = await GetAll();
+            var LoginEntity = dados.FirstOrDefault(x => x.LogWaid == waID);
+            return LoginEntity;
+        }
     }
 }

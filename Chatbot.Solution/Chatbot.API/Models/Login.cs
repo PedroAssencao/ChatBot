@@ -16,6 +16,8 @@ namespace Chatbot.API.Models
             Contatos = new HashSet<Contato>();
             Departamentos = new HashSet<Departamento>();
             Mensagens = new HashSet<Mensagen>();
+            Menus = new HashSet<Menu>();
+            Options = new HashSet<Option>();
         }
 
         [Key]
@@ -40,6 +42,10 @@ namespace Chatbot.API.Models
         [StringLength(255)]
         [Unicode(false)]
         public string? LogUser { get; set; }
+        [Column("log_waid")]
+        [StringLength(255)]
+        [Unicode(false)]
+        public string? LogWaid { get; set; }
 
         [InverseProperty(nameof(Atendente.Log))]
         public virtual ICollection<Atendente> Atendentes { get; set; }
@@ -51,5 +57,9 @@ namespace Chatbot.API.Models
         public virtual ICollection<Departamento> Departamentos { get; set; }
         [InverseProperty(nameof(Mensagen.Log))]
         public virtual ICollection<Mensagen> Mensagens { get; set; }
+        [InverseProperty(nameof(Menu.Log))]
+        public virtual ICollection<Menu> Menus { get; set; }
+        [InverseProperty(nameof(Option.Log))]
+        public virtual ICollection<Option> Options { get; set; }
     }
 }

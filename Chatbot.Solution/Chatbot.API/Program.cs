@@ -20,6 +20,9 @@ builder.Services.AddScoped<LoginRepository>();
 builder.Services.AddScoped<AtendimentoRepository>();
 builder.Services.AddScoped<atendentesRepostiroy>();
 builder.Services.AddScoped<DepartamentoRepository>();
+builder.Services.AddScoped<optionsRepository>();
+builder.Services.AddScoped<menuRepository>();
+
 builder.Services.AddDbContext<chatbotContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Chinook"));

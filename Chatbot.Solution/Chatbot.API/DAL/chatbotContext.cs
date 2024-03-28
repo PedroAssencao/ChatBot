@@ -23,6 +23,8 @@ namespace Chatbot.API.DAL
         public virtual DbSet<Departamento> Departamentos { get; set; } = null!;
         public virtual DbSet<Login> Logins { get; set; } = null!;
         public virtual DbSet<Mensagen> Mensagens { get; set; } = null!;
+        public virtual DbSet<Menu> Menus { get; set; } = null!;
+        public virtual DbSet<Option> Options { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -118,6 +120,38 @@ namespace Chatbot.API.DAL
                     .WithMany(p => p.Mensagens)
                     .HasForeignKey(d => d.LogId)
                     .HasConstraintName("FK__Mensagens__log_i__68487DD7");
+            });
+
+            modelBuilder.Entity<Menu>(entity =>
+            {
+                entity.HasKey(e => e.MenId)
+                    .HasName("PK__menus__387DDE00793E0D6B");
+
+                entity.HasOne(d => d.Log)
+                    .WithMany(p => p.Menus)
+                    .HasForeignKey(d => d.LogId)
+                    .HasConstraintName("FK__menus__log_id__7D439ABD");
+            });
+
+            modelBuilder.Entity<Option>(entity =>
+            {
+                entity.HasKey(e => e.OptId)
+                    .HasName("PK__options__84DB9F9BE51F8316");
+
+                entity.HasOne(d => d.Log)
+                    .WithMany(p => p.Options)
+                    .HasForeignKey(d => d.LogId)
+                    .HasConstraintName("FK__options__log_id__09A971A2");
+
+                entity.HasOne(d => d.Men)
+                    .WithMany(p => p.Options)
+                    .HasForeignKey(d => d.MenId)
+                    .HasConstraintName("FK__options__men_id__07C12930");
+
+                entity.HasOne(d => d.Mens)
+                    .WithMany(p => p.Options)
+                    .HasForeignKey(d => d.MensId)
+                    .HasConstraintName("FK__options__mens_id__08B54D69");
             });
 
             OnModelCreatingPartial(modelBuilder);

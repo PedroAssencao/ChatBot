@@ -8,6 +8,11 @@ namespace Chatbot.API.Models
 {
     public partial class Mensagen
     {
+        public Mensagen()
+        {
+            Options = new HashSet<Option>();
+        }
+
         [Key]
         [Column("men_id")]
         public int MenId { get; set; }
@@ -40,5 +45,7 @@ namespace Chatbot.API.Models
         [ForeignKey(nameof(LogId))]
         [InverseProperty(nameof(Login.Mensagens))]
         public virtual Login? Log { get; set; }
+        [InverseProperty(nameof(Option.Mens))]
+        public virtual ICollection<Option> Options { get; set; }
     }
 }
