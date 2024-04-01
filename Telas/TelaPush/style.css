@@ -1,10 +1,10 @@
 :root {
     font-size: 16px;
     font-family: 'Open Sans';
-    --text-primary: #1f1f1f;
-    --text-secondary: #000000;
-    --bg-primary: #ffffff;
-    --bg-secondary: #e4e4e4;
+    --text-primary: #b6b6b64b;
+    --text-secondary: #ecececc5;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
     --transition-speed: 600ms;
   }
   
@@ -28,7 +28,7 @@
   }
   
   main {
-    margin-top: 6rem;
+    margin-top: 5rem;
     margin-left: 5rem;
     padding: 1rem;
   }
@@ -91,6 +91,19 @@
   .link-text {
     display: none;
     margin-left: 1rem;
+    transition: var(--transition-speed);
+    animation: fade-up 0.5s;
+  }
+
+  @keyframes fade-up{
+    0%{
+      opacity:0;
+      transform: translateY(30px) scale(0.9);
+    }
+    100%{
+      opacity:1;
+      transform: translateY(0px) scale(1);
+    }
   }
   
   .nav-link_ svg {
@@ -192,6 +205,10 @@
       left: 0px;
     }
 
+    .navbar_:hover .link-text
+    {
+      left: 0px;
+    }
     
   }
   
@@ -206,7 +223,7 @@
     --text-primary: #1f1f1f;
     --text-secondary: #000000;
     --bg-primary: #ffffff;
-    --bg-secondary: #e4e4e4;
+    --bg-secondary: #e4e4e4c2;
   }
   
   .theme-icon {
