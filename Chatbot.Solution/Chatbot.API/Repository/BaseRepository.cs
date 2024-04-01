@@ -17,9 +17,17 @@ namespace Chatbot.API.Repository
 
         public async Task<T> Adicionar(T Model) 
         {
-            await _chatbotContext.AddAsync(Model);
-            await _chatbotContext.SaveChangesAsync();
-            return Model;
+            try
+            {
+                await _chatbotContext.AddAsync(Model);
+                await _chatbotContext.SaveChangesAsync();
+                return Model;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<T> Update(T model)

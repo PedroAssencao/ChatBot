@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Chatbot.API.Models
 {
     [Table("menus")]
+    [Index(nameof(LogId), Name = "IX_menus_log_id")]
     public partial class Menu
     {
         public Menu()
@@ -31,6 +32,10 @@ namespace Chatbot.API.Models
         public string? MenBody { get; set; }
         [Column("log_id")]
         public int? LogId { get; set; }
+        [Column("men_tipo")]
+        [StringLength(255)]
+        [Unicode(false)]
+        public string? MenTipo { get; set; }
 
         [ForeignKey(nameof(LogId))]
         [InverseProperty(nameof(Login.Menus))]

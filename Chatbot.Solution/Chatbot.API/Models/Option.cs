@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Chatbot.API.Models
 {
     [Table("options")]
+    [Index(nameof(LogId), Name = "IX_options_log_id")]
+    [Index(nameof(MenId), Name = "IX_options_men_id")]
+    [Index(nameof(MensId), Name = "IX_options_mens_id")]
     public partial class Option
     {
         [Key]

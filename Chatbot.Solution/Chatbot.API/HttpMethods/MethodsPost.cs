@@ -31,20 +31,49 @@ namespace Chatbot.API.HttpMethods
             _menuRepository = menu;
         }
 
-        public async Task<dynamic> MensagemDeMenu(string waId, string mensagem, string LoginWaId)
+        public async Task<dynamic> MensagemDeMenu(string waId, string mensagem, string LoginWaId, dynamic Values)
         {
 
             try
             {
-                var dados = await _atendimentoRepository.AtendimentoComObjetos();
+                var contato = await _contatoRepostiroy.RetornarConIdPorWaID(waId);
 
-                var Item = dados.FirstOrDefault(x => x?.Con?.ConWaId == waId);
+                var login = await _loginRepostiory.RetornarLogIdPorWaID(LoginWaId);
+
+                var dadosAtendimento = await _atendimentoRepository.AtendimentoComObjetos();
+
+                var Item = dadosAtendimento.FirstOrDefault(x => x?.Con?.ConWaId == waId && x?.Log?.LogId == login?.LogId);
+
+                if (Item == null)
+                {
+                    Atendimento NovoAtendimento = new Atendimento
+                    {
+                        AtenEstado = "Bot",
+                        AtenData = DateTime.Now,
+                        LogId = login?.LogId,
+                        ConId = contato?.ConId,
+                    };
+
+                    await _atendimentoRepository.Adicionar(NovoAtendimento);
+                }
+                else if (Item.AtenEstado == "Bot")
+                {
+                    return TipoMensagemBot(Values);
+                }
+                else if (Item.AtenEstado == "Finalizado")
+                {
+                    Item.AtenEstado = "Bot";
+                    Item.AtenData = DateTime.Now;
+                    Item.DepId = null;
+                    await _atendimentoRepository.Update(Item);
+                }
+
 
                 var dadosOption = await _optionsRepository.RetonarOptionComMenu();
 
                 var dadosMenu = await _menuRepository.GetAll();
 
-                var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId).ToList();
+                var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId && x.Mens?.MenTipo == "PrimeiraMensagem").ToList();
 
                 var menuselecionado = dadosMenu.FirstOrDefault(x => x.MenId == selecionarOptions[0].Men?.MenId);
 
@@ -153,17 +182,18 @@ namespace Chatbot.API.HttpMethods
                 }
                 else
                 {
-                    dadosJson = @"{
-                          ""messaging_product"": ""whatsapp"",
-                          ""recipient_type"": ""individual"",
-                          ""to"": ""5579988132044"",
-                          ""type"": ""text"",
-                          ""text"": {
-                            ""preview_url"": false,
-                            ""body"": ""Porfavor Escolha Uma Das Opções Acima""
-                            }
-                    }
-                    ";
+
+                    dadosJson = $@"
+                        {{
+                            ""messaging_product"": ""whatsapp"",
+                            ""recipient_type"": ""individual"",
+                            ""to"": ""{waId}"",
+                            ""type"": ""text"",
+                            ""text"": {{
+                                ""preview_url"": false,
+                                ""body"": ""Porfavor Escolha Uma Das Opções Acima""
+                            }}
+                        }}";
                 }
                 return await MetodoPostParaAsMensagens(dadosJson);
             }
@@ -298,10 +328,10 @@ namespace Chatbot.API.HttpMethods
                     ConNome = Nome,
                     ConDataCadastro = DateTime.Now,
                     ConBloqueadoStatus = false,
-                    LogId = 2
+                    LogId = 1
                 };
                 await _contatoRepostiroy.Adicionar(NovoContato);
-                return MensagemDeMenu(waId, mensagem, LoginWaId);
+                return MensagemDeMenu(waId, mensagem, LoginWaId, Values);
             }
             else if (itemMensagen?.MenDescricao == mensagem)
             {
@@ -318,11 +348,11 @@ namespace Chatbot.API.HttpMethods
                     MenDescricao = mensagem,
                     MenData = DateTime.Now,
                     MenTipo = "MensagenEnviada",
-                    LogId = 2,
+                    LogId = 1,
                     ConId = 1,
                 };
                 await _mensagemRepository.Adicionar(mensagen);
-                return await MensagemDeMenu(waId, mensagem, LoginWaId);
+                return await MensagemDeMenu(waId, mensagem, LoginWaId, Values);
             }
 
         }
@@ -330,31 +360,77 @@ namespace Chatbot.API.HttpMethods
         public async Task<dynamic> TipoMensagemBot(dynamic Values)
         {
 
-            var descricaoDaMensagem = Values
-            .GetProperty("entry")[0]
-            .GetProperty("changes")[0]
-            .GetProperty("value")
-            .GetProperty("messages")[0]
-            .GetProperty("interactive")
-            .GetProperty("list_reply")
-            .GetProperty("description")
-            .GetString();
+            var descricaoDaMensagem = "";
 
-            var waId = Values
+            try
+            {
+                descricaoDaMensagem = Values
+                .GetProperty("entry")[0]
+                .GetProperty("changes")[0]
+                .GetProperty("value")
+                .GetProperty("messages")[0]
+                .GetProperty("interactive")
+                .GetProperty("list_reply")
+                .GetProperty("description")
+                .GetString();
+            }
+            catch (Exception)
+            {
+                descricaoDaMensagem = Values
              .GetProperty("entry")[0]
              .GetProperty("changes")[0]
              .GetProperty("value")
-             .GetProperty("contacts")[0]
-             .GetProperty("wa_id")
-             .GetString();
+             .GetProperty("messages")[0]
+             .GetProperty("text")
+             .GetProperty("body").GetString();
+            }
 
-            var LoginWaId = Values
-          .GetProperty("entry")[0]
-          .GetProperty("changes")[0]
-          .GetProperty("value")
-          .GetProperty("metadata")
-          .GetProperty("display_phone_number")
-          .GetString();
+
+            var waId = "";
+
+            try
+            {
+             waId = Values
+           .GetProperty("entry")[0]
+           .GetProperty("changes")[0]
+           .GetProperty("value")
+           .GetProperty("contacts")[0]
+           .GetProperty("wa_id")
+           .GetString();
+            }
+            catch (Exception)
+            {
+                waId = Values
+           .GetProperty("entry")[0]
+           .GetProperty("changes")[0]
+           .GetProperty("value")
+           .GetProperty("contacts")[0]
+           .GetProperty("wa_id")
+           .GetString();
+            }
+
+            var LoginWaId = "";
+
+            try
+            {
+                LoginWaId = Values
+                 .GetProperty("entry")[0]
+                 .GetProperty("changes")[0]
+                 .GetProperty("value")
+                 .GetProperty("metadata")
+                 .GetProperty("display_phone_number")
+                 .GetString();
+            }
+            catch (Exception)
+            {
+                LoginWaId = Values
+                  .GetProperty("entry")[0]
+                  .GetProperty("changes")[0]
+                  .GetProperty("value")
+                  .GetProperty("metadata")
+                  .GetProperty("display_phone_number")
+                  .GetString();
+            }   
 
             if (descricaoDaMensagem == null)
             {
@@ -365,12 +441,13 @@ namespace Chatbot.API.HttpMethods
 
             var LoginWaIdDados = await _loginRepostiory.RetornarLogIdPorWaID(LoginWaId);
 
-            var item = dados.LastOrDefault(x => x.Con?.ConWaId == waId && x.Log?.LogId == LoginWaIdDados.LogId && x.MenTipo == "MensagenEnviada");
+            var item = dados.LastOrDefault(x => x.Con?.ConWaId == waId && x.Log?.LogId == LoginWaIdDados?.LogId && x.MenTipo == "MensagenEnviada");
 
             if (item != null)
             {
 
-                if (item?.MenDescricao == descricaoDaMensagem)
+                //if (item?.MenDescricao == descricaoDaMensagem)
+                if (false)
                 {
                     throw new Exception("Mensagem Repetida");
                 }
@@ -381,7 +458,7 @@ namespace Chatbot.API.HttpMethods
                         MenDescricao = descricaoDaMensagem,
                         MenData = DateTime.Now,
                         MenTipo = "MensagenEnviada",
-                        LogId = 2,
+                        LogId = 1,
                         ConId = 1,
                     };
                     await _mensagemRepository.Adicionar(mensagen);
@@ -395,7 +472,7 @@ namespace Chatbot.API.HttpMethods
                     MenDescricao = descricaoDaMensagem,
                     MenData = DateTime.Now,
                     MenTipo = "MensagenEnviada",
-                    LogId = 2,
+                    LogId = 1,
                     ConId = 1,
                 };
                 await _mensagemRepository.Adicionar(mensagen);

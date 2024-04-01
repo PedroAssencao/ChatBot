@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.API.Models
 {
+    [Index(nameof(ConId), Name = "IX_Mensagens_con_id")]
+    [Index(nameof(LogId), Name = "IX_Mensagens_log_id")]
     public partial class Mensagen
     {
         public Mensagen()

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Chatbot.API.Models
 {
     [Table("contatos")]
+    [Index(nameof(LogId), Name = "IX_contatos_log_id")]
     public partial class Contato
     {
         public Contato()
