@@ -11,9 +11,17 @@ namespace Chatbot.API.Repository
 
         public async Task<Login?> RetornarLogIdPorWaID(string waID)
         {
-            var dados = await GetAll();
-            var LoginEntity = dados.FirstOrDefault(x => x.LogWaid == waID);
-            return LoginEntity;
+            try
+            {
+                var dados = await GetAll();
+                var LoginEntity = dados.FirstOrDefault(x => x.LogWaid == waID);
+                return LoginEntity;
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+   
         }
     }
 }

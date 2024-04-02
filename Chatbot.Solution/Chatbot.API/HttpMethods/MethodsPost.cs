@@ -58,13 +58,16 @@ namespace Chatbot.API.HttpMethods
                 }
                 else if (Item.AtenEstado == "Bot")
                 {
-                    return TipoMensagemBot(Values);
+                    return await MensagemParaOBotResponder(waId, mensagem, LoginWaId);
                 }
                 else if (Item.AtenEstado == "Finalizado")
                 {
                     Item.AtenEstado = "Bot";
                     Item.AtenData = DateTime.Now;
                     Item.DepId = null;
+                    Item.AteId = null;
+                    Item.ConId = Item.ConId;
+                    Item.LogId = Item.LogId;
                     await _atendimentoRepository.Update(Item);
                 }
 
@@ -73,7 +76,7 @@ namespace Chatbot.API.HttpMethods
 
                 var dadosMenu = await _menuRepository.GetAll();
 
-                var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId && x.Mens?.MenTipo == "PrimeiraMensagem").ToList();
+                var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId && x.Men?.MenTipo == "PrimeiraMensagem").ToList();
 
                 var menuselecionado = dadosMenu.FirstOrDefault(x => x.MenId == selecionarOptions[0].Men?.MenId);
 
@@ -154,7 +157,7 @@ namespace Chatbot.API.HttpMethods
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
 
-                    var ListaMensagem = MensagensTemplates.FirstOrDefault(x => x.MenDescricao == descricaoDaMensagem && x.LogId == LoginId?.LogId);
+                    var ListaMensagem = MensagensTemplates.FirstOrDefault(x => x.MenDescricao == descricaoDaMensagem && x.LogId == LoginId?.LogId && x.MenTipo == "MensagemDeResposta");
 
                     if (ListaMensagem != null)
                     {
@@ -179,11 +182,15 @@ namespace Chatbot.API.HttpMethods
 
 
                     }
-                }
-                else
-                {
+                    else
+                    {
 
-                    dadosJson = $@"
+                        if (waId == "557988132044")
+                        {
+                            waId = "5579988132044";
+                        }
+
+                        dadosJson = $@"
                         {{
                             ""messaging_product"": ""whatsapp"",
                             ""recipient_type"": ""individual"",
@@ -194,6 +201,8 @@ namespace Chatbot.API.HttpMethods
                                 ""body"": ""Porfavor Escolha Uma Das Opções Acima""
                             }}
                         }}";
+
+                    }
                 }
                 return await MetodoPostParaAsMensagens(dadosJson);
             }
@@ -205,7 +214,7 @@ namespace Chatbot.API.HttpMethods
 
         public async Task<dynamic> MetodoPostParaAsMensagens(string dadosJson)
         {
-            if (dadosJson != "" || dadosJson != " ")
+            if (dadosJson != "")
             {
                 var conteudo = new StringContent(dadosJson, Encoding.UTF8, "application/json");
 
