@@ -358,7 +358,19 @@ namespace Chatbot.API.HttpMethods
             }
             else if (Item.ConBloqueadoStatus == true)
             {
-                throw new Exception("Numero Bloqueado");
+               var dadosJson = $@"
+                        {{
+                            ""messaging_product"": ""whatsapp"",
+                            ""recipient_type"": ""individual"",
+                            ""to"": ""{waId}"",
+                            ""type"": ""text"",
+                            ""text"": {{
+                                ""preview_url"": false,
+                                ""body"": ""Seu Contato Esta Bloqueado""
+                            }}
+                        }}";
+
+                return await MetodoPostParaAsMensagens(dadosJson);
             }
             else
             {
