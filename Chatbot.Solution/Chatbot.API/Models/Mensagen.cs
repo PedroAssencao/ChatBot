@@ -40,6 +40,8 @@ namespace Chatbot.API.Models
         public int? LogId { get; set; }
         [Column("con_id")]
         public int? ConId { get; set; }
+        [Column("men_Finalizar")]
+        public bool? MenFinalizar { get; set; }
 
         [ForeignKey(nameof(ConId))]
         [InverseProperty(nameof(Contato.Mensagens))]

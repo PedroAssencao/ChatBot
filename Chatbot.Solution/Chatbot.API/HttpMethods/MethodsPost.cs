@@ -149,7 +149,7 @@ namespace Chatbot.API.HttpMethods
 
             var MensagensTemplates = await _mensagemRepository.GetAll();
             var LoginId = await _loginRepostiory.RetornarLogIdPorWaID(LoginWaId);
-
+            var dadosAtendimento = await _atendimentoRepository.AtendimentoComObjetos();
             var dadosJson = "";
             try
             {
@@ -162,6 +162,16 @@ namespace Chatbot.API.HttpMethods
                     if (ListaMensagem != null)
                     {
                         //apenas para testes isso aqui, pois o numero na lista da meta de teste esta com o 9 na frente
+
+                        if (ListaMensagem.MenFinalizar == true)
+                        {
+                            var Atendimento = dadosAtendimento.FirstOrDefault(x => x?.Con?.ConWaId == waId && x.Log?.LogId == LoginId?.LogId);
+                            Atendimento.AtenEstado = "Finalizado";
+                            Atendimento.AtenData = DateTime.Now;
+                            Atendimento.DepId = null;
+                            Atendimento.AteId = null;
+                            await _atendimentoRepository.Update(Atendimento);
+                        }
 
                         if (waId == "557988132044")
                         {
