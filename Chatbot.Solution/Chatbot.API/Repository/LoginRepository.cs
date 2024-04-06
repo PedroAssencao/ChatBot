@@ -13,9 +13,16 @@ namespace Chatbot.API.Repository
         {
             try
             {
-                var dados = await GetAll();
-                var LoginEntity = dados.FirstOrDefault(x => x.LogWaid == waID);
-                return LoginEntity;
+                if (waID == null)
+                {
+                    throw new Exception("Informe um Whatsapp Id");
+                }
+                else
+                {
+                    var dados = await GetAll();
+                    var LoginEntity = dados.FirstOrDefault(x => x.LogWaid == waID);
+                    return LoginEntity;
+                }
             }
             catch (Exception)
             {

@@ -13,21 +13,13 @@ namespace Chatbot.API.Controllers
     [ApiController]
     public class WebHookController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+  
         private readonly MethodsPost _methods;
-        private readonly MensagemRepository _mensagemRepository;
-        private readonly LoginRepository _LoginRepository;
-        private readonly ContatoRepository _ContatoRepository;
 
-        public WebHookController(IConfiguration configuration, MethodsPost methods, LoginRepository Login, ContatoRepository Contato, MensagemRepository mensagemRepository)
+        public WebHookController(MethodsPost methods)
         {
-            _configuration = configuration;
             _methods = methods;
-            _LoginRepository = Login;
-            _ContatoRepository = Contato;
-            _mensagemRepository = mensagemRepository;
         }
-
 
         [HttpPost("/hook")]
         public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)

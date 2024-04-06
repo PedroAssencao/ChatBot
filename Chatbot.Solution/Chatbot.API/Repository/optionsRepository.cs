@@ -17,21 +17,29 @@ namespace Chatbot.API.Repository
 
         public async Task<List<Option>> RetonarOptionComMenu()
         {
-            var dados = await GetAll();
-            List<Option> ListaComObjetos = new List<Option>();
-            foreach (var item in dados)
+            try
             {
-                Option option = new Option
+                var dados = await GetAll();
+                List<Option> ListaComObjetos = new List<Option>();
+                foreach (var item in dados)
                 {
-                    OptId = item.OptId,
-                    Mens = await _mensagenRepository.GetPorID(Convert.ToInt32(item.MensId)),
-                    Men = await _menuRepository.GetPorID(Convert.ToInt32(item.MenId)),
-                    Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
-                };
-                ListaComObjetos.Add(option);
-            }
+                    Option option = new Option
+                    {
+                        OptId = item.OptId,
+                        Mens = await _mensagenRepository.GetPorID(Convert.ToInt32(item.MensId)),
+                        Men = await _menuRepository.GetPorID(Convert.ToInt32(item.MenId)),
+                        Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
+                    };
+                    ListaComObjetos.Add(option);
+                }
 
-            return ListaComObjetos;
+                return ListaComObjetos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um error ao tentar formar lista error: " + ex); 
+            }
+         
         }
     }
 }

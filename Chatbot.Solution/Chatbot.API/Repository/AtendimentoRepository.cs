@@ -20,26 +20,34 @@ namespace Chatbot.API.Repository
 
         public async Task<List<Atendimento>> AtendimentoComObjetos()
         {
-            List<Atendimento> ListaComObjetos = new List<Atendimento>();
-
-            var BuscarTodos = await GetAll();
-
-            foreach (var item in BuscarTodos)
+            try
             {
-                Atendimento NovoAtendimento = new Atendimento
-                {
-                    AtenId = item.AtenId,
-                    AtenData = item.AtenData,
-                    AtenEstado = item.AtenEstado,
-                    Ate = await _atendentesRepostiroy.GetPorID(Convert.ToInt32(item.AteId)),
-                    Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
-                    Con = await _contatoRepository.GetPorID(Convert.ToInt32(item.ConId)),
-                    Dep = await _departamentoRepository.GetPorID(Convert.ToInt32(item.DepId)),
-                };
-                ListaComObjetos.Add(NovoAtendimento);
-            }
+                List<Atendimento> ListaComObjetos = new List<Atendimento>();
 
-            return ListaComObjetos;
+                var BuscarTodos = await GetAll();
+
+                foreach (var item in BuscarTodos)
+                {
+                    Atendimento NovoAtendimento = new Atendimento
+                    {
+                        AtenId = item.AtenId,
+                        AtenData = item.AtenData,
+                        AtenEstado = item.AtenEstado,
+                        Ate = await _atendentesRepostiroy.GetPorID(Convert.ToInt32(item.AteId)),
+                        Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
+                        Con = await _contatoRepository.GetPorID(Convert.ToInt32(item.ConId)),
+                        Dep = await _departamentoRepository.GetPorID(Convert.ToInt32(item.DepId)),
+                    };
+                    ListaComObjetos.Add(NovoAtendimento);
+                }
+
+                return ListaComObjetos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um error ao tentar buscar Atendimentos" + ex);
+            }
+       
         }
     }
 }

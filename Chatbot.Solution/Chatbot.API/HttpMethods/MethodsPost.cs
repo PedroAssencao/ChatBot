@@ -31,7 +31,7 @@ namespace Chatbot.API.HttpMethods
             _menuRepository = menu;
         }
 
-        public async Task<dynamic> MensagemDeMenu(string waId, string mensagem, string LoginWaId, dynamic Values)
+        public async Task<dynamic> MensagemDeMenu(string waId, string mensagem, string LoginWaId)
         {
 
             try
@@ -337,7 +337,7 @@ namespace Chatbot.API.HttpMethods
 
             var itemMensagen = dadosMensagen.LastOrDefault(x => x?.Con?.ConWaId == waId && x?.Log?.LogId == LoginWaIdDados.LogId && x?.MenTipo == "MensagenEnviada");
 
-            var Item = dados.FirstOrDefault(x => x.ConWaId == waId);
+            var Item = dados.FirstOrDefault(x => x.ConWaId == waId && x?.Log?.LogId == LoginWaIdDados.LogId);
 
             if (Item == null)
             {
@@ -347,10 +347,10 @@ namespace Chatbot.API.HttpMethods
                     ConNome = Nome,
                     ConDataCadastro = DateTime.Now,
                     ConBloqueadoStatus = false,
-                    LogId = 1
+                    LogId = LoginWaIdDados.LogId
                 };
                 await _contatoRepostiroy.Adicionar(NovoContato);
-                return MensagemDeMenu(waId, mensagem, LoginWaId, Values);
+                return await MensagemDeMenu(waId, mensagem, LoginWaId);
             }
             else if (itemMensagen?.MenDescricao == mensagem)
             {
@@ -369,7 +369,6 @@ namespace Chatbot.API.HttpMethods
                                 ""body"": ""Seu Contato Esta Bloqueado""
                             }}
                         }}";
-
                 return await MetodoPostParaAsMensagens(dadosJson);
             }
             else
@@ -379,11 +378,11 @@ namespace Chatbot.API.HttpMethods
                     MenDescricao = mensagem,
                     MenData = DateTime.Now,
                     MenTipo = "MensagenEnviada",
-                    LogId = 1,
-                    ConId = 1,
+                    LogId = LoginWaIdDados.LogId,
+                    ConId = Item.ConId,
                 };
                 await _mensagemRepository.Adicionar(mensagen);
-                return await MensagemDeMenu(waId, mensagem, LoginWaId, Values);
+                return await MensagemDeMenu(waId, mensagem, LoginWaId);
             }
 
         }
@@ -475,10 +474,8 @@ namespace Chatbot.API.HttpMethods
             var item = dados.LastOrDefault(x => x.Con?.ConWaId == waId && x.Log?.LogId == LoginWaIdDados?.LogId && x.MenTipo == "MensagenEnviada");
 
             if (item != null)
-            {
-
-                //if (item?.MenDescricao == descricaoDaMensagem)
-                if (false)
+            {                
+                if (item?.MenDescricao == descricaoDaMensagem)
                 {
                     throw new Exception("Mensagem Repetida");
                 }
@@ -489,8 +486,8 @@ namespace Chatbot.API.HttpMethods
                         MenDescricao = descricaoDaMensagem,
                         MenData = DateTime.Now,
                         MenTipo = "MensagenEnviada",
-                        LogId = 1,
-                        ConId = 1,
+                        LogId = item?.LogId,
+                        ConId = item?.ConId,
                     };
                     await _mensagemRepository.Adicionar(mensagen);
                     return await MensagemParaOBotResponder(waId, descricaoDaMensagem, LoginWaId);
@@ -498,13 +495,14 @@ namespace Chatbot.API.HttpMethods
             }
             else
             {
+                var Contato = await _contatoRepostiroy.RetornarConIdPorWaID(waId);
                 Mensagen mensagen = new Mensagen
                 {
                     MenDescricao = descricaoDaMensagem,
                     MenData = DateTime.Now,
                     MenTipo = "MensagenEnviada",
-                    LogId = 1,
-                    ConId = 1,
+                    LogId = LoginWaIdDados?.LogId,
+                    ConId = Contato?.ConId,
                 };
                 await _mensagemRepository.Adicionar(mensagen);
                 return await MensagemParaOBotResponder(waId, descricaoDaMensagem, LoginWaId);
