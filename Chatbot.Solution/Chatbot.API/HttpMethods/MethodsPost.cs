@@ -56,11 +56,11 @@ namespace Chatbot.API.HttpMethods
 
                     await _atendimentoRepository.Adicionar(NovoAtendimento);
                 }
-                else if (Item.AtenEstado == "Bot")
+                if (Item?.AtenEstado == "Bot")
                 {
                     return await MensagemParaOBotResponder(waId, mensagem, LoginWaId);
                 }
-                else if (Item.AtenEstado == "Finalizado")
+                if (Item?.AtenEstado == "Finalizado")
                 {
                     Item.AtenEstado = "Bot";
                     Item.AtenData = DateTime.Now;
@@ -157,7 +157,7 @@ namespace Chatbot.API.HttpMethods
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
 
-                    var ListaMensagem = MensagensTemplates.FirstOrDefault(x => x.MenDescricao == descricaoDaMensagem && x.LogId == LoginId?.LogId && x.MenTipo == "MensagemDeResposta");
+                    var ListaMensagem = MensagensTemplates.FirstOrDefault(x => x.MenDescricao == descricaoDaMensagem && x.LogId == LoginId?.LogId && x.MenTipo != "MensagenEnviada");
 
                     if (ListaMensagem != null)
                     {
@@ -166,11 +166,18 @@ namespace Chatbot.API.HttpMethods
                         if (ListaMensagem.MenFinalizar == true)
                         {
                             var Atendimento = dadosAtendimento.FirstOrDefault(x => x?.Con?.ConWaId == waId && x.Log?.LogId == LoginId?.LogId);
-                            Atendimento.AtenEstado = "Finalizado";
-                            Atendimento.AtenData = DateTime.Now;
-                            Atendimento.DepId = null;
-                            Atendimento.AteId = null;
-                            await _atendimentoRepository.Update(Atendimento);
+                            if (Atendimento != null)
+                            {
+                                Atendimento.AtenEstado = "Finalizado";
+                                Atendimento.AtenData = DateTime.Now;
+                                Atendimento.DepId = null;
+                                Atendimento.AteId = null;
+                                await _atendimentoRepository.Update(Atendimento);
+                            }
+                            else
+                            {
+                                throw new Exception("Não foi possivel finalizar o atendimento");
+                            }
                         }
 
                         if (waId == "557988132044")
@@ -178,7 +185,72 @@ namespace Chatbot.API.HttpMethods
                             waId = "5579988132044";
                         }
 
-                        dadosJson = $@"
+                        if (ListaMensagem.MenTipo == "MensagemDeRespostaInterativa")
+                        {
+                            var dadosOption = await _optionsRepository.RetonarOptionComMenu();
+
+                            var dadosMenu = await _menuRepository.GetAll();
+
+                            var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId && x.Men?.MenTipo == "MenuBot").ToList()
+                                .Where(x => x?.Men?.MenId == Convert.ToInt32(ListaMensagem.MenResposta)).ToList(); //Lembrar Quer MenResposta Esta Guardando o Id do Menu
+                            //esse select esta errado lembrar
+                            var menuselecionado = dadosMenu.FirstOrDefault(x => x.MenId == selecionarOptions[0].Men?.MenId);
+
+                            List<string> teste = new List<string>();
+
+                            foreach (var item in selecionarOptions)
+                            {
+                                string ItemSelecionado = $@"
+                                {{
+                                    ""id"": ""{item.OptId}"",
+                                    ""title"": ""{item.Mens?.MenTitle}"",
+                                    ""description"": ""{item.Mens?.MenDescricao}""
+                                }}";
+
+                                teste.Add(ItemSelecionado);
+                            }
+
+                            if (waId == "557988132044")
+                            {
+                                waId = "5579988132044";
+                            }
+
+                            dadosJson = $@"
+                            {{
+                                ""messaging_product"": ""whatsapp"",
+                                ""recipient_type"": ""individual"",
+                                ""to"": ""{waId}"",
+                                ""type"": ""interactive"",
+                                ""interactive"": {{
+                                    ""type"": ""list"",
+                                    ""header"": {{
+                                        ""type"": ""text"",
+                                        ""text"": ""{menuselecionado?.MenHeader}""
+                                    }},
+                                    ""body"": {{
+                                        ""text"": ""{menuselecionado?.MenBody}""
+                                    }},
+                                    ""footer"": {{
+                                        ""text"": ""{menuselecionado?.MenFooter}""
+                                    }},
+                                    ""action"": {{
+                                        ""button"": ""Menu de Opções"",
+                                        ""sections"": [
+                                            {{
+                                                ""title"": ""Shorter Section Title"",
+                                                ""rows"": [
+                                                    {string.Join(",", teste)}
+                                                ]
+                                            }}
+                                        ]
+                                    }}
+                                }}
+                            }}";
+
+                        }
+                        else
+                        {
+                            dadosJson = $@"
                         {{
                             ""messaging_product"": ""whatsapp"",
                             ""recipient_type"": ""individual"",
@@ -189,7 +261,7 @@ namespace Chatbot.API.HttpMethods
                                 ""body"": ""{ListaMensagem.MenResposta}""
                             }}
                         }}";
-
+                        }
 
                     }
                     else
@@ -277,7 +349,7 @@ namespace Chatbot.API.HttpMethods
         }
 
         public async Task<dynamic> TipoMensagem(dynamic Values)
-        {
+         {
             var mensagem = Values
              .GetProperty("entry")[0]
              .GetProperty("changes")[0]
@@ -337,7 +409,7 @@ namespace Chatbot.API.HttpMethods
 
             var itemMensagen = dadosMensagen.LastOrDefault(x => x?.Con?.ConWaId == waId && x?.Log?.LogId == LoginWaIdDados.LogId && x?.MenTipo == "MensagenEnviada");
 
-            var Item = dados.FirstOrDefault(x => x.ConWaId == waId && x?.Log?.LogId == LoginWaIdDados.LogId);
+            var Item = dados.FirstOrDefault(x => x.ConWaId == waId && x?.LogId == LoginWaIdDados.LogId);
 
             if (Item == null)
             {
@@ -509,7 +581,7 @@ namespace Chatbot.API.HttpMethods
             }
         }
 
-        public async Task<dynamic?> TipoMensagemStatus(dynamic Values)
+        public dynamic? TipoMensagemStatus(dynamic Values)
         {
             var sent = Values
                        .GetProperty("entry")[0]
