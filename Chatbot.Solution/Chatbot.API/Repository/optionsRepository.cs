@@ -26,6 +26,9 @@ namespace Chatbot.API.Repository
                     Option option = new Option
                     {
                         OptId = item.OptId,
+                        MenId = item.MenId,
+                        MensId = item.MensId,
+                        LogId = item.LogId,
                         Mens = await _mensagenRepository.GetPorID(Convert.ToInt32(item.MensId)),
                         Men = await _menuRepository.GetPorID(Convert.ToInt32(item.MenId)),
                         Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),

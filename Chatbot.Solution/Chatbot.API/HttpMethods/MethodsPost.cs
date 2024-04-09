@@ -73,12 +73,16 @@ namespace Chatbot.API.HttpMethods
 
 
                 var dadosOption = await _optionsRepository.RetonarOptionComMenu();
-
+                
                 var dadosMenu = await _menuRepository.GetAll();
 
-                var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId && x.Men?.MenTipo == "PrimeiraMensagem").ToList();
+                var menuselecionado = dadosMenu.FirstOrDefault(x => x.MenTipo == "PrimeiraMensagem" && x?.LogId == login?.LogId);
 
-                var menuselecionado = dadosMenu.FirstOrDefault(x => x.MenId == selecionarOptions[0].Men?.MenId);
+                var selecionarOptions = dadosOption.Where(x => x?.MenId == menuselecionado?.MenId).ToList();
+
+                //var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId && x.Men?.MenTipo == "PrimeiraMensagem").ToList();
+
+                //var menuselecionado = dadosMenu.FirstOrDefault(x => x.MenId == selecionarOptions[0].Men?.MenId);
 
                 List<string> teste = new List<string>();
 
@@ -185,7 +189,7 @@ namespace Chatbot.API.HttpMethods
                             waId = "5579988132044";
                         }
 
-                        if (ListaMensagem.MenTipo == "MensagemDeRespostaInterativa")
+                        if (ListaMensagem?.MenTipo?.Trim()?.ToLower() == "mensagemderespostainterativa")
                         {
                             var dadosOption = await _optionsRepository.RetonarOptionComMenu();
 
