@@ -160,7 +160,7 @@ namespace Chatbot.API.HttpMethods
 
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
-
+                    //lembrar de colocar para a men descricao nunca ser exatamente igual para ele selecionar a mensagem certa
                     var ListaMensagem = MensagensTemplates.FirstOrDefault(x => x.MenDescricao == descricaoDaMensagem && x.LogId == LoginId?.LogId && x.MenTipo != "MensagenEnviada");
 
                     if (ListaMensagem != null)
@@ -170,6 +170,7 @@ namespace Chatbot.API.HttpMethods
                         if (ListaMensagem.MenFinalizar == true)
                         {
                             var Atendimento = dadosAtendimento.FirstOrDefault(x => x?.Con?.ConWaId == waId && x.Log?.LogId == LoginId?.LogId);
+
                             if (Atendimento != null)
                             {
                                 Atendimento.AtenEstado = "Finalizado";
@@ -262,7 +263,7 @@ namespace Chatbot.API.HttpMethods
                             ""type"": ""text"",
                             ""text"": {{
                                 ""preview_url"": false,
-                                ""body"": ""{ListaMensagem.MenResposta}""
+                                ""body"": ""{ListaMensagem?.MenResposta}""
                             }}
                         }}";
                         }
