@@ -2,6 +2,7 @@ using Chatbot.API.DAL;
 
 using Chatbot.API.HttpMethods;
 using Chatbot.API.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 //using Chatbot.API.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Usuarios/Index";
+        options.Cookie.Name = "UsuarioDados";
+        options.LogoutPath = "/Usuarios/Logout";
+        options.AccessDeniedPath = "/Usuarios/Index";
+    });
 builder.Services.AddTransient<MethodsPost>();
 builder.Services.AddTransient<MensagemRepository>();
 builder.Services.AddTransient<ContatoRepository>();
@@ -21,6 +30,7 @@ builder.Services.AddTransient<AtendimentoRepository>();
 builder.Services.AddTransient<atendentesRepostiroy>();
 builder.Services.AddTransient<DepartamentoRepository>();
 builder.Services.AddTransient<optionsRepository>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<menuRepository>();
 
 builder.Services.AddDbContext<chatbotContext>(options =>

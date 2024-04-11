@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.API.Models
@@ -46,20 +48,43 @@ namespace Chatbot.API.Models
         [StringLength(255)]
         [Unicode(false)]
         public string? LogWaid { get; set; }
-
+        [JsonIgnore]
         [InverseProperty(nameof(Atendente.Log))]
         public virtual ICollection<Atendente> Atendentes { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Atendimento.Log))]
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Contato.Log))]
         public virtual ICollection<Contato> Contatos { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Departamento.Log))]
         public virtual ICollection<Departamento> Departamentos { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Mensagen.Log))]
         public virtual ICollection<Mensagen> Mensagens { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Menu.Log))]
         public virtual ICollection<Menu> Menus { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Option.Log))]
         public virtual ICollection<Option> Options { get; set; }
+
+        public string CriptografaSenha(string senha)
+        {
+            var a = Encoding.UTF8.GetBytes(senha);
+            var b = Convert.ToBase64String(a);
+            return b;
+        }
+
+        public string DescriptografaSenha(string senha)
+        {
+            var c = Convert.FromBase64String(senha);
+            var d = Encoding.UTF8.GetString(c);
+            return d;
+        }
+
     }
+
+
 }
