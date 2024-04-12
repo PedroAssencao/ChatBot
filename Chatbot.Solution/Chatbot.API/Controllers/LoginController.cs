@@ -22,7 +22,11 @@ namespace Chatbot.API.Controllers
         [HttpPost("/login/logar")]
         public async Task<IActionResult?> Logar(Login? Model) => Ok(await _loginepository.Logar(Model));
         [HttpPost("/login/Cadastrar")]
-        public async Task<IActionResult> Cadastrar(Login? model) => await _loginepository.Cadastrar(model) ? Ok() : BadRequest();
+        public async Task<IActionResult> Cadastrar(Login? model) => Ok(await _loginepository.Cadastrar(model));
+        [HttpPut("/login/Atualizar")]
+        public async Task<IActionResult> Atualizar(Login? Model) => Ok(await _loginepository.AtualizarCadastro(Model));
+        [HttpDelete]
+        public async Task<IActionResult> Apagar(int id) => Ok(await _loginepository.RemoverLogin(id));
 
         [HttpGet("/login")]
         public async Task<IActionResult> get() => Ok(await _loginepository.GetAll());

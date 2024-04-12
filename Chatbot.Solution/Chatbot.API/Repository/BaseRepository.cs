@@ -37,5 +37,30 @@ namespace Chatbot.API.Repository
             return model;
         }
 
+        public async Task<T?> Delete(int id)
+        {
+            
+            try
+            {
+                var Dados = await GetPorID(id);
+                if (Dados != null)
+                {
+                    _chatbotContext?.Remove(Dados);
+                    return Dados;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+             
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           
+         
+        }
+
     }
 }

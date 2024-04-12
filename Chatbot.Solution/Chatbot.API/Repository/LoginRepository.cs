@@ -34,7 +34,7 @@ namespace Chatbot.API.Repository
             {
                 throw new Exception();
             }
-   
+
         }
 
         public async Task<dynamic?> Logar(Login? Model)
@@ -71,24 +71,82 @@ namespace Chatbot.API.Repository
 
         }
 
-        public async Task<bool> Cadastrar(Login? Model)
+        public async Task<Login> Cadastrar(Login? Model)
         {
             try
             {
                 if (Model != null)
                 {
-                    Model.CriptografaSenha(Model?.LogSenha);
-                    await Adicionar(Model);
-                    return true;
+                    Login login = new Login
+                    {
+                        LogId = Model.LogId,
+                        LogEmail = Model.LogEmail,
+                        LogImg = Model.LogImg,
+                        LogPlano = Model.LogPlano,
+                        LogSenha = Model.CriptografaSenha(Model?.LogSenha),
+                        LogUser = Model.LogUser,
+                        LogWaid = Model.LogWaid,
+                };
+                    await Adicionar(login);
+                    return login;
                 }
                 else
                 {
-                    return false;
+                    throw new Exception("Não foi Possivel Cadastrar");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception("error " + ex);
+            }
+        }
+
+        public async Task<Login> AtualizarCadastro(Login Model)
+        {
+            try
+            {
+                if (Model != null)
+                {
+                    Login login = new Login
+                    {
+                        LogId = Model.LogId,
+                        LogEmail = Model.LogEmail,
+                        LogImg = Model.LogImg,
+                        LogPlano = Model.LogPlano,
+                        LogSenha = Model.CriptografaSenha(Model?.LogSenha),
+                        LogUser = Model.LogUser,
+                        LogWaid = Model.LogWaid,
+                    };
+                    await Update(login);
+                    return login;
+                }
+                else
+                {
+                    throw new Exception("Não foi Possivel Atualizar");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error " + ex);
+            }
+        }
+
+        public async Task<Login> RemoverLogin(int id)
+        {
+            try
+            {
+                if (id != 0)
+                {
+                    return await Delete(id);
+                }
+                else
+                {
+                    throw new Exception("Informe Um Codigo");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error " + ex);
             }
         }
 
