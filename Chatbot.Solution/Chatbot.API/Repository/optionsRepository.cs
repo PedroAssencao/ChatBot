@@ -44,5 +44,20 @@ namespace Chatbot.API.Repository
             }
          
         }
+
+        public async Task<List<Option>> RetornarTodasASOptionPorLOgId(int log)
+        {
+            try
+            {
+                var lista = await RetonarOptionComMenu();
+                var ListaFiltrada = lista.FindAll(x => x.LogId == log);
+                return ListaFiltrada;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.API.Models;
+using System.Linq;
 
 namespace Chatbot.API.Repository
 {
@@ -47,6 +48,21 @@ namespace Chatbot.API.Repository
        
 
         }
+
+        public async Task<List<Mensagen>> RetornarMensagensPorConIdELogId(int con, int log)
+        {
+            try
+            {
+                var listaMensagens = await ListaComObjetos();
+                var MensagensFiltradas = listaMensagens.Where(x => x.ConId == con && x.LogId == log && x.MenTipo == "MensagenEnviada").ToList();
+                return MensagensFiltradas;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
     
 

@@ -161,11 +161,12 @@ namespace Chatbot.API.HttpMethods
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
                     //lembrar de colocar para a men descricao nunca ser exatamente igual para ele selecionar a mensagem certa
+                    //ou pensar alguma forma melhor de selecionar mensagem
                     var ListaMensagem = MensagensTemplates.FirstOrDefault(x => x.MenDescricao == descricaoDaMensagem && x.LogId == LoginId?.LogId && x.MenTipo != "MensagenEnviada");
 
                     if (ListaMensagem != null)
                     {
-                        //apenas para testes isso aqui, pois o numero na lista da meta de teste esta com o 9 na frente
+                        
 
                         if (ListaMensagem.MenFinalizar == true)
                         {
@@ -184,7 +185,7 @@ namespace Chatbot.API.HttpMethods
                                 throw new Exception("Não foi possivel finalizar o atendimento");
                             }
                         }
-
+                        //apenas para testes isso aqui, pois o numero na lista da meta de teste esta com o 9 na frente
                         if (waId == "557988132044")
                         {
                             waId = "5579988132044";
@@ -198,7 +199,6 @@ namespace Chatbot.API.HttpMethods
 
                             var selecionarOptions = dadosOption.Where(x => x.Log?.LogWaid == LoginWaId && x.Men?.MenTipo == "MenuBot").ToList()
                                 .Where(x => x?.Men?.MenId == Convert.ToInt32(ListaMensagem.MenResposta)).ToList(); //Lembrar Quer MenResposta Esta Guardando o Id do Menu
-                            //esse select esta errado lembrar
                             var menuselecionado = dadosMenu.FirstOrDefault(x => x.MenId == selecionarOptions[0].Men?.MenId);
 
                             List<string> teste = new List<string>();

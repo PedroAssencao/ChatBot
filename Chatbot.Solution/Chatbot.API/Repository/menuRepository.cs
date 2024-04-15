@@ -8,5 +8,21 @@ namespace Chatbot.API.Repository
         public menuRepository(chatbotContext chatbotContext) : base(chatbotContext)
         {
         }
+
+        public async Task<List<Menu>> PegarTodosOsMenusPorLogID(int log)
+        {
+            try
+            {
+                var ListaMenus = await GetAll();
+                var ListaMenusFiltrada = ListaMenus.FindAll(x => x.LogId == log);
+                return ListaMenusFiltrada;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

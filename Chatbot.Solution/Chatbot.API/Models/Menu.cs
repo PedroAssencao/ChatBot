@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-
+using Newtonsoft.Json;
 namespace Chatbot.API.Models
 {
     [Table("menus")]
@@ -40,6 +41,7 @@ namespace Chatbot.API.Models
         [ForeignKey(nameof(LogId))]
         [InverseProperty(nameof(Login.Menus))]
         public virtual Login? Log { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
         [InverseProperty(nameof(Option.Men))]
         public virtual ICollection<Option> Options { get; set; }
     }
