@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatBot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <!-- esse row e responsavel pela estrutura basica do site -->
+    <div class="row">
+      <!-- essa linha aqui seria o cabecalho -->
+      <div class="col-12 p-3 bg-dark">
+        <h1 class="text-light h1">ChatBot Concept</h1>
+      </div>
+      <!--Linha para o menu de seleção de tipo e os menus-->
+      <div class="col-12 p-5" style="min-height: 100vh; background-color: #f8f8ff;">
+        <div class="row gap-3">
+
+          <!--Menu de Configurações bot-->
+          <div class="col-2 p-3 bg-success rounded-2" style="max-height: 11rem;">
+            <p>Inicial</p>
+            <hr>
+            <p>Menus</p>
+            <hr>
+            <p>Configuração</p>
+          </div>
+
+          <!--Menu de Flows-->
+          <div class="col rounded-2" style="background-color: white;">
+            <div>
+              <button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Adicionar Menu</button>
+            </div>
+            <!--Menus-->
+            <!--So para deixar anotado para discução, eu pensei em deixar os menus tendo seu flow independente, e em lugares onde a option fosse um
+            novo menu apenas colocaria esse menu la como opção e pronto, ficaria mais ou menos assim como exemplo, o cara configura o menu de suporte
+            inteiro com todas as opções ai como exemplo no menu inicial ele quer colocar ele como a resposta de uma option, seria apenas colocar,
+            que funcionaria numa boa, vou pensar mais sobre por hoje vou fazer apenas o esqueleto dessa tela-->
+            <div class="row row-cols-4 gap-5 justify-content-center align-items-center mt-4 ">
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+              <div class="col bg-dark p-5 rounded-2">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Modal Para Criação de Menu-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">  
+    <div class="modal-content">
+      <div class="modal-body">            
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
