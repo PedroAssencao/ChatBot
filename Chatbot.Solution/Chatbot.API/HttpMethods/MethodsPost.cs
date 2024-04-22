@@ -36,6 +36,9 @@ namespace Chatbot.API.HttpMethods
 
             try
             {
+
+                //Dar Uma olhada nessa options para ver se vai dar tudo certo com a nova logica
+
                 var contato = await _contatoRepostiroy.RetornarConIdPorWaID(waId);
 
                 var login = await _loginRepostiory.RetornarLogIdPorWaID(LoginWaId);
@@ -157,7 +160,7 @@ namespace Chatbot.API.HttpMethods
             var dadosJson = "";
             try
             {
-
+                //arrumar completamente tambem essa parte
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
                     //lembrar de colocar para a men descricao nunca ser exatamente igual para ele selecionar a mensagem certa
@@ -412,6 +415,8 @@ namespace Chatbot.API.HttpMethods
 
             var dadosMensagen = await _mensagemRepository.ListaComObjetos();
 
+            //Alterar essa select
+
             var itemMensagen = dadosMensagen.LastOrDefault(x => x?.Con?.ConWaId == waId && x?.Log?.LogId == LoginWaIdDados.LogId && x?.MenTipo == "MensagenEnviada");
 
             var Item = dados.FirstOrDefault(x => x.ConWaId == waId && x?.LogId == LoginWaIdDados.LogId);
@@ -450,6 +455,7 @@ namespace Chatbot.API.HttpMethods
             }
             else
             {
+                //Alterar essa parte para comportar a nova tabela de mensagem
                 Mensagen mensagen = new Mensagen
                 {
                     MenDescricao = mensagem,
@@ -558,6 +564,7 @@ namespace Chatbot.API.HttpMethods
                 }
                 else
                 {
+                    //Alterar essa parte para comportar a nova tabela de mensagem
                     Mensagen mensagen = new Mensagen
                     {
                         MenDescricao = descricaoDaMensagem,
@@ -573,6 +580,7 @@ namespace Chatbot.API.HttpMethods
             else
             {
                 var Contato = await _contatoRepostiroy.RetornarConIdPorWaID(waId);
+                //Alterar essa parte para comportar a nova tabela de mensagem
                 Mensagen mensagen = new Mensagen
                 {
                     MenDescricao = descricaoDaMensagem,

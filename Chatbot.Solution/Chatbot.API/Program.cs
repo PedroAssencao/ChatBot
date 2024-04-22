@@ -32,6 +32,7 @@ builder.Services.AddTransient<DepartamentoRepository>();
 builder.Services.AddTransient<optionsRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<menuRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
@@ -42,6 +43,7 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
+
 builder.Services.AddDbContext<chatbotContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Chinook"));

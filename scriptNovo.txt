@@ -1,0 +1,21 @@
+confirmar se vai ser isso mesmo amanha
+
+create table options(
+opt_id int primary key identity(1,1),
+opt_title varchar(24),
+opt_descricao varchar(500),
+opt_resposta varchar(500),
+opt_data datetime,
+opt_finalizar bit,
+log_id int FOREIGN KEY REFERENCES Login(log_id),
+men_id int FOREIGN KEY REFERENCES menus(men_id)
+)
+
+create table Mensagens(
+mens_id int primary key identity(1,1),
+mens_data datetime,
+mens_descricao varchar(max),
+men_tipo varchar(255),
+con_id int FOREIGN KEY REFERENCES contatos(con_id),
+log_id int FOREIGN KEY REFERENCES Login(log_id)
+)

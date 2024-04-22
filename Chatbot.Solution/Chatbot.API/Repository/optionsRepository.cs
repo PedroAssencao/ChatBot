@@ -15,6 +15,8 @@ namespace Chatbot.API.Repository
             _loginRepository = loginRepository;
         }
 
+
+        /*Arrumar o Repositorio de Options*/
         public async Task<List<Option>> RetonarOptionComMenu()
         {
             try
