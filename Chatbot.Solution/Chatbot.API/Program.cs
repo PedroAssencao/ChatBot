@@ -32,13 +32,23 @@ builder.Services.AddTransient<DepartamentoRepository>();
 builder.Services.AddTransient<optionsRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<menuRepository>();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://127.0.0.1:5501") // Permite apenas essa origem
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 builder.Services.AddDbContext<chatbotContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Chinook"));
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 var app = builder.Build();
+app.UseCors("AllowSpecificOrigin");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

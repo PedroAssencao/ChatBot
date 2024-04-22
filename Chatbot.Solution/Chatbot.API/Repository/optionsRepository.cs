@@ -59,5 +59,19 @@ namespace Chatbot.API.Repository
                 throw;
             }
         }
+
+        public async Task<Option> CriarOptionsPassandoMensagem(Mensagen Mensagem, Option Model)
+        {
+            try
+            {
+                await _mensagenRepository.Adicionar(Mensagem);
+                await Adicionar(Model);
+                return Model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

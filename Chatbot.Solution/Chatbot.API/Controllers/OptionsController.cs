@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.Models;
 using Chatbot.API.Repository;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +18,18 @@ namespace Chatbot.API.Controllers
         }
 
         [HttpGet("/options")]
-        public async Task<IActionResult> PegarTodasOptions() => Ok(await _optionsRepository.GetAll());
+        [EnableCors("AllowSpecificOrigin")]
+        public async Task<IActionResult> PegarTodasOptions() => Ok(await _optionsRepository.RetonarOptionComMenu());
 
         [HttpGet("/options/{log}")]
         public async Task<IActionResult> PegarTodasAsOptionsPorLogId(int log) => Ok(await _optionsRepository.RetornarTodasASOptionPorLOgId(log));
         [HttpPost("/options/Create")]
+        [EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> CriarNovasOpcoes(Option Model) => Ok(await _optionsRepository.Adicionar(Model));
+
+        [HttpPost("/options/CreateM")]
+        [EnableCors("AllowSpecificOrigin")]
+        public async Task<IActionResult> CriarNovasOpcoesComMensagem(Option Model, Mensagen mensagen) => Ok(await _optionsRepository.CriarOptionsPassandoMensagem(mensagen, Model));
         [HttpPut("/option/Update")]
         public async Task<IActionResult> AtualizarOpcoes(Option Model) => Ok(await _optionsRepository.Update(Model));
         [HttpDelete("/options/Delete")]
