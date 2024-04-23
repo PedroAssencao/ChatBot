@@ -28,11 +28,9 @@ namespace Chatbot.API.Repository
                 {
                     Mensagen teste2 = new Mensagen
                     {
-                        MenId = item.MenId,
-                        MenDescricao = item.MenDescricao,
-                        MenResposta = item.MenResposta,
-                        MenTitle = item.MenTitle,
-                        MenData = Convert.ToDateTime(item.MenData),
+                        MensId = item.MensId,
+                        MensDescricao = item.MensDescricao,
+                        MensData = Convert.ToDateTime(item.MensData),
                         MenTipo = item.MenTipo,
                         LogId = item.LogId,
                         ConId = item.ConId,

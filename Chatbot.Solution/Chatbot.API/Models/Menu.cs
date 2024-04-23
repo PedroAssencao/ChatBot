@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+
 namespace Chatbot.API.Models
 {
     [Table("menus")]
-    [Index(nameof(LogId), Name = "IX_menus_log_id")]
     public partial class Menu
     {
         public Menu()
@@ -19,6 +17,10 @@ namespace Chatbot.API.Models
         [Key]
         [Column("men_id")]
         public int MenId { get; set; }
+        [Column("men_title")]
+        [StringLength(255)]
+        [Unicode(false)]
+        public string? MenTitle { get; set; }
         [Column("men_header")]
         [StringLength(255)]
         [Unicode(false)]
@@ -41,7 +43,6 @@ namespace Chatbot.API.Models
         [ForeignKey(nameof(LogId))]
         [InverseProperty(nameof(Login.Menus))]
         public virtual Login? Log { get; set; }
-        [System.Text.Json.Serialization.JsonIgnore]
         [InverseProperty(nameof(Option.Men))]
         public virtual ICollection<Option> Options { get; set; }
     }

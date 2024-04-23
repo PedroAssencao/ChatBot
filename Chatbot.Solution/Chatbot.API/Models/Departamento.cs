@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Chatbot.API.Models
 {
     [Table("departamento")]
-    [Index(nameof(LogId), Name = "IX_departamento_log_id")]
     public partial class Departamento
     {
         public Departamento()

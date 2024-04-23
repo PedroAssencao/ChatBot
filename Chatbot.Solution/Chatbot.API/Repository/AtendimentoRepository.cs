@@ -49,5 +49,19 @@ namespace Chatbot.API.Repository
             }
        
         }
+
+        public async Task<List<Atendimento>> BuscarTodosAtendimentosPorLogId(int logid)
+        {
+            try
+            {
+                var TodosAtendimentos = await GetAll();
+                var AtendimentosFiltrados = TodosAtendimentos.Where(x => x?.Log?.LogId == logid).ToList();
+                return AtendimentosFiltrados;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

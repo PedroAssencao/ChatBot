@@ -29,9 +29,12 @@ namespace Chatbot.API.Repository
                     {
                         OptId = item.OptId,
                         MenId = item.MenId,
-                        MensId = item.MensId,
                         LogId = item.LogId,
-                        Mens = await _mensagenRepository.GetPorID(Convert.ToInt32(item.MensId)),
+                        OptTitle = item.OptTitle,
+                        OptDescricao = item.OptDescricao,
+                        OptData = item.OptData,
+                        OptFinalizar = item.OptFinalizar,
+                        OptResposta = item.OptResposta,
                         Men = await _menuRepository.GetPorID(Convert.ToInt32(item.MenId)),
                         Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
                     };
@@ -42,9 +45,9 @@ namespace Chatbot.API.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um error ao tentar formar lista error: " + ex); 
+                throw new Exception("Ocorreu um error ao tentar formar lista error: " + ex);
             }
-         
+
         }
 
         public async Task<List<Option>> RetornarTodasASOptionPorLOgId(int log)
@@ -52,7 +55,7 @@ namespace Chatbot.API.Repository
             try
             {
                 var lista = await RetonarOptionComMenu();
-                var ListaFiltrada = lista.FindAll(x => x.LogId == log);
+                var ListaFiltrada = lista.Where(x => x.LogId == log).ToList();
                 return ListaFiltrada;
             }
             catch (Exception)
