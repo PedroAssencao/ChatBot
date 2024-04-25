@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.API.Models
 {
+    [Index(nameof(ConId), Name = "IX_Mensagens_con_id")]
+    [Index(nameof(LogId), Name = "IX_Mensagens_log_id")]
     public partial class Mensagen
     {
         [Key]
@@ -13,17 +15,17 @@ namespace Chatbot.API.Models
         public int MensId { get; set; }
         [Column("mens_data", TypeName = "datetime")]
         public DateTime? MensData { get; set; }
-        [Column("mens_descricao")]
-        [Unicode(false)]
-        public string? MensDescricao { get; set; }
         [Column("men_tipo")]
         [StringLength(255)]
         [Unicode(false)]
         public string? MenTipo { get; set; }
-        [Column("con_id")]
-        public int? ConId { get; set; }
         [Column("log_id")]
         public int? LogId { get; set; }
+        [Column("con_id")]
+        public int? ConId { get; set; }
+        [Column("mens_descricao")]
+        [Unicode(false)]
+        public string? MensDescricao { get; set; }
 
         [ForeignKey(nameof(ConId))]
         [InverseProperty(nameof(Contato.Mensagens))]

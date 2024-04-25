@@ -34,6 +34,7 @@ namespace Chatbot.API.Controllers
                 return Ok();
             }
         }
+
         //Usar Esse Codigo Na Validação para Não dar error
         //[HttpGet("/hook")]
         //public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge) => Ok(hubChallenge);

@@ -35,6 +35,7 @@ namespace Chatbot.API.Repository
                         OptData = item.OptData,
                         OptFinalizar = item.OptFinalizar,
                         OptResposta = item.OptResposta,
+                        OptTipo = item.OptTipo,
                         Men = await _menuRepository.GetPorID(Convert.ToInt32(item.MenId)),
                         Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
                     };

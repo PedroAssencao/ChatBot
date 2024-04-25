@@ -159,10 +159,7 @@ namespace Chatbot.API.HttpMethods
             var dadosJson = "";
             try
             {
-                if (waId == "557988132044")
-                {
-                    waId = "5579988132044";
-                }
+                
 
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
@@ -211,6 +208,11 @@ namespace Chatbot.API.HttpMethods
                                 teste.Add(ItemSelecionado);
                             }
 
+                            if (waId == "557988132044")
+                            {
+                                waId = "5579988132044";
+                            }
+
 
                             dadosJson = $@"
                             {{
@@ -247,6 +249,12 @@ namespace Chatbot.API.HttpMethods
                         }
                         else
                         {
+
+                            if (waId == "557988132044")
+                            {
+                                waId = "5579988132044";
+                            }
+
                             dadosJson = $@"
                             {{
                                 ""messaging_product"": ""whatsapp"",
@@ -263,6 +271,11 @@ namespace Chatbot.API.HttpMethods
                     }
                     else
                     {
+                        if (waId == "557988132044")
+                        {
+                            waId = "5579988132044";
+                        }
+
                         dadosJson = $@"
                         {{
                             ""messaging_product"": ""whatsapp"",

@@ -54,7 +54,7 @@ namespace Chatbot.API.Repository
         {
             try
             {
-                var TodosAtendimentos = await GetAll();
+                var TodosAtendimentos = await AtendimentoComObjetos();
                 var AtendimentosFiltrados = TodosAtendimentos.Where(x => x?.Log?.LogId == logid).ToList();
                 return AtendimentosFiltrados;
             }

@@ -24,10 +24,6 @@ namespace Chatbot.API.Models
         [Key]
         [Column("log_id")]
         public int LogId { get; set; }
-        [Column("log_user")]
-        [StringLength(255)]
-        [Unicode(false)]
-        public string? LogUser { get; set; }
         [Column("log_email")]
         [StringLength(255)]
         [Unicode(false)]
@@ -43,6 +39,10 @@ namespace Chatbot.API.Models
         [StringLength(255)]
         [Unicode(false)]
         public string? LogPlano { get; set; }
+        [Column("log_user")]
+        [StringLength(255)]
+        [Unicode(false)]
+        public string? LogUser { get; set; }
         [Column("log_waid")]
         [StringLength(255)]
         [Unicode(false)]
@@ -62,6 +62,7 @@ namespace Chatbot.API.Models
         public virtual ICollection<Menu> Menus { get; set; }
         [InverseProperty(nameof(Option.Log))]
         public virtual ICollection<Option> Options { get; set; }
+
         public string CriptografaSenha(string senha)
         {
             var a = Encoding.UTF8.GetBytes(senha);
@@ -75,6 +76,5 @@ namespace Chatbot.API.Models
             var d = Encoding.UTF8.GetString(c);
             return d;
         }
-
     }
 }
