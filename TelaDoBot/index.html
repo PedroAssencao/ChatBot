@@ -7,7 +7,7 @@
   <title>ChatBot</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
+  <!-- <style>
       .div1 {
     width: 100px;
     height: 100px;
@@ -29,7 +29,7 @@
     border: none;
     float: left;
 }
-    </style>
+    </style> -->
 </head>
 
 <body>
@@ -54,9 +54,9 @@
             <p>Configuração</p>
           </div>
 
-          <div class="div1"></div>
+          <!-- <div class="div1"></div>
 <hr class="line">
-<div class="div2"></div>
+<div class="div2"></div> -->
 
           <!--Menu de Flows-->
           <div class="col rounded-2 p-5" style="background-color: white;">
@@ -116,30 +116,29 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-body">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="FinalizarAtendimento">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Finalizar Atendimento Apos A Resposta?
+            </label>
+          </div>
+          <select id="SelectTipoResposta" class="form-select" aria-label="Default select example">
+            <option value="MensagemDeResposta">Opção de Resposta Simples</option>
+            <option value="MensagemDeRespostaInterativa">Opção De Resposta Interativa</option>
+          </select>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Header</span>
-            <input type="text" class="form-control" id="header" maxlength="24" aria-label="Sizing example input"
+            <span class="input-group-text" id="inputGroup-sizing-default">Titulo</span>
+            <input type="text" class="form-control" id="TituloOptin" maxlength="24" aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Header</span>
-            <input type="text" class="form-control" id="header" maxlength="24" aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default">Descricao</span>
+            <input type="text" class="form-control" id="DescricaoOption" maxlength="24"
+              aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Header</span>
-            <input type="text" class="form-control" id="header" maxlength="24" aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Body</span>
-            <input type="text" class="form-control" id="body" aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Footer</span>
-            <input type="text" class="form-control" id="footer" maxlength="24" aria-label="Sizing example input"
+            <span class="input-group-text" id="inputGroup-sizing-default">Resposta</span>
+            <input type="text" class="form-control" id="RespostaOption" aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-default">
           </div>
         </div>
@@ -155,6 +154,20 @@
 
 
 
+    function EventListenerBotaoOption(option) {
+      const menuId = option.id;
+      localStorage.setItem("MenuId", menuId);
+    }
+    const meuSelect = document.getElementById('SelectTipoResposta');
+
+    meuSelect.addEventListener('change', function () {
+      
+      const valorSelecionado = meuSelect.value;
+
+      
+      localStorage.setItem("TipoMenu", valorSelecionado);
+    });
+
 
     function carregar() {
       //lembrar de colocar o endpoint para resgatar os menus por id especifico de login
@@ -169,9 +182,9 @@
                   <div class="row">
                     <!-- Primeira coluna -->
                     <div class="col-3 p-4 bg-success menu" >
-                      <p>Header: ${element.menHeader}</p>
+                      <p>Header: ${element.menTitle}</p>
                       <div>
-                          <button class="btn btn-warning mt-3" id=${element.menId} data-bs-toggle="modal" data-bs-target="#exampleModal1">Adicionar
+                          <button class="btn btn-warning mt-3 btnadicionarOption" onclick=(EventListenerBotaoOption(this)) id=${element.menId} data-bs-toggle="modal" data-bs-target="#exampleModal1">Adicionar
                             Options</button>
                         </div>
                     </div>
@@ -205,7 +218,7 @@
             lista.forEach((element, index) => {
               document.getElementById(`${element.men.menId}`).innerHTML += `
                     <!-- Segunda coluna com offset para criar o efeito de degrau -->
-                    <div class="col-3 offset-1 p-5 bg-danger mt-3">${element.mens.menDescricao}</div>
+                    <div class="col-3 offset-1 p-5 bg-danger mt-3">${element.optDescricao}</div>
                     <div class="w-100"></div>
             `
             });
@@ -258,31 +271,29 @@
     }
 
     function CriarOptions() {
-      const url = 'http://localhost:5182/options/CreateM';
+      const url = 'http://localhost:5182/options/Create';
 
-      // Dados a serem enviados no corpo da requisição, Lembrar que o LogId esta Fixo ne versão final tem que puxar o id logado dos cookies
-      const dados1 = {
-        "menId": 1,
-        "menDescricao": "Solicitar Ajuda com Finanças",
-        "menResposta": "2",
-        "menTitle": "Finanças",
-        "menData": new Date().toLocaleString(),
-        "menTipo": "MensagemDeRespostaInterativa",
-        "logId": 1,
-        "conId": null,
-        "menFinalizar": null,
-      };
-
-      const dados2 = {
-        menId: 1,
-        mensId: 1,
+      // Dados a serem enviados no corpo da requisição, Lembrar que o LogId esta Fixo, na versão final tem que puxar o id logado dos cookies
+      const data = {
+        optTitle: document.getElementById('TituloOptin').value,
+        optDescricao: document.getElementById('DescricaoOption').value,
+        optResposta: document.getElementById('RespostaOption').value,
+        optData: new Date(),
+        optFinalizar: document.getElementById('FinalizarAtendimento').checked,
         logId: 1,
+        menId: localStorage.getItem("MenuId"),
+        optTipo: localStorage.getItem("TipoMenu")
       };
 
-      // Objeto contendo múltiplos objetos como propriedades
-      const requestBody = {
-        mensagen: dados1,
-        Model: dados2
+      console.log(data)
+
+      // Configurações da requisição
+      const options = {
+        method: 'POST', // Método HTTP POST
+        headers: {
+          'Content-Type': 'application/json' // Tipo de conteúdo JSON
+        },
+        body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
       };
 
       // Realiza a requisição usando fetch
