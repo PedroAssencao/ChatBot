@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pedro Marcelo\\Downloads\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {}
+    "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pedro Marcelo\\Downloads\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {
+    "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Downloads\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
+        "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
         "projectName": "Chatbot.API",
-        "projectPath": "C:\\Users\\Pedro Marcelo\\Downloads\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
+        "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
         "packagesPath": "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pedro Marcelo\\Downloads\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\Chatbot.Solution\\Chatbot.API\\obj\\",
+        "outputPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Pedro Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",

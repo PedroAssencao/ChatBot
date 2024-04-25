@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hBxnCuJ7JZlIs+zCx+VJomlxgc2ZnL0hGj9/WYWqz3CsYobWL709Ue78GDKlV5tok4ja95KAkzCfUh8IUrSwYg==",
+  "dgSpecHash": "KPzq8G/Th79uFLvr7mwYodqMVokZZCy2VHrQ1gygFqNGNhV0JwGxhK5VuoON+kWfB6gNlcBBFsebx3uXTG++Xw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pedro Marcelo\\Downloads\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
+  "projectFilePath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

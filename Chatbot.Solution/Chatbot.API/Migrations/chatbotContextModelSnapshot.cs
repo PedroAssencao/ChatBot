@@ -69,9 +69,9 @@ namespace Chatbot.API.Migrations
                     b.HasKey("AteId")
                         .HasName("PK__atendent__895194D66F1FCCAC");
 
-                    b.HasIndex("DepId");
+                    b.HasIndex(new[] { "DepId" }, "IX_atendentes_dep_id");
 
-                    b.HasIndex("LogId");
+                    b.HasIndex(new[] { "LogId" }, "IX_atendentes_log_id");
 
                     b.ToTable("atendentes");
                 });
@@ -114,13 +114,13 @@ namespace Chatbot.API.Migrations
                     b.HasKey("AtenId")
                         .HasName("PK__Atendime__F4B66A40AF98F0D3");
 
-                    b.HasIndex("AteId");
+                    b.HasIndex(new[] { "AteId" }, "IX_Atendimento_ate_id");
 
-                    b.HasIndex("ConId");
+                    b.HasIndex(new[] { "ConId" }, "IX_Atendimento_con_id");
 
-                    b.HasIndex("DepId");
+                    b.HasIndex(new[] { "DepId" }, "IX_Atendimento_dep_id");
 
-                    b.HasIndex("LogId");
+                    b.HasIndex(new[] { "LogId" }, "IX_Atendimento_log_id");
 
                     b.ToTable("Atendimento");
                 });
@@ -161,7 +161,7 @@ namespace Chatbot.API.Migrations
                     b.HasKey("ConId")
                         .HasName("PK__contatos__081B0F1A19F19A4D");
 
-                    b.HasIndex("LogId");
+                    b.HasIndex(new[] { "LogId" }, "IX_contatos_log_id");
 
                     b.ToTable("contatos");
                 });
@@ -188,7 +188,7 @@ namespace Chatbot.API.Migrations
                     b.HasKey("DepId")
                         .HasName("PK__departam__BB4BD8F8671B8661");
 
-                    b.HasIndex("LogId");
+                    b.HasIndex(new[] { "LogId" }, "IX_departamento_log_id");
 
                     b.ToTable("departamento");
                 });
@@ -278,9 +278,9 @@ namespace Chatbot.API.Migrations
                     b.HasKey("MensId")
                         .HasName("PK__Mensagen__763E9E0A0EC79D0B");
 
-                    b.HasIndex("ConId");
+                    b.HasIndex(new[] { "ConId" }, "IX_Mensagens_con_id");
 
-                    b.HasIndex("LogId");
+                    b.HasIndex(new[] { "LogId" }, "IX_Mensagens_log_id");
 
                     b.ToTable("Mensagens");
                 });
@@ -331,7 +331,7 @@ namespace Chatbot.API.Migrations
                     b.HasKey("MenId")
                         .HasName("PK__menus__387DDE00860AE6CD");
 
-                    b.HasIndex("LogId");
+                    b.HasIndex(new[] { "LogId" }, "IX_menus_log_id");
 
                     b.ToTable("menus");
                 });
@@ -388,9 +388,9 @@ namespace Chatbot.API.Migrations
                     b.HasKey("OptId")
                         .HasName("PK__options__84DB9F9BC598D2A7");
 
-                    b.HasIndex("LogId");
+                    b.HasIndex(new[] { "LogId" }, "IX_options_log_id");
 
-                    b.HasIndex("MenId");
+                    b.HasIndex(new[] { "MenId" }, "IX_options_men_id");
 
                     b.ToTable("options");
                 });
