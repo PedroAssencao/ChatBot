@@ -86,6 +86,15 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-body">
+          <select id="SelecionarTipoMenu" class="form-select" aria-label="Default select example">
+            <option value="PrimeiraMensagem">Primeira Mensagem</option>
+            <option value="MenuBot">Menu de Resposta</option>
+          </select>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Titulo</span>
+            <input type="text" class="form-control" id="TituloMenu" aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default">
+          </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Header</span>
             <input type="text" class="form-control" id="header" maxlength="24" aria-label="Sizing example input"
@@ -136,10 +145,8 @@
             <input type="text" class="form-control" id="DescricaoOption" maxlength="24"
               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Resposta</span>
-            <input type="text" class="form-control" id="RespostaOption" aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default">
+          <div id="RespostaTipo">
+
           </div>
         </div>
         <div class="modal-footer">
@@ -150,25 +157,118 @@
     </div>
   </div>
 
+  <!--Modal Para Atualização de Options-->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="FinalizarAtendimentoAtualizacao">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Finalizar Atendimento Apos A Resposta?
+            </label>
+          </div>
+          <select id="SelectTipoRespostaAtualizacao" class="form-select" aria-label="Default select example">
+            <option value="MensagemDeResposta">Opção de Resposta Simples</option>
+            <option value="MensagemDeRespostaInterativa">Opção De Resposta Interativa</option>
+          </select>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Titulo</span>
+            <input type="text" class="form-control" id="TituloOptinAtualizacao" maxlength="24" aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Descricao</span>
+            <input type="text" class="form-control" id="DescricaoOptionAtualizacao" maxlength="24"
+              aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div id="RespostaTipoAtualizacao">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary buttonAtualizar" onclick="AtualizarOption()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
 
 
 
+
+    //Salvar o Valor dos Menus no LocalStorage
     function EventListenerBotaoOption(option) {
       const menuId = option.id;
       localStorage.setItem("MenuId", menuId);
+      TipoDeRespostaMenu()
     }
+    
+    //Salvar o Valor dos Selects nas Option
     const meuSelect = document.getElementById('SelectTipoResposta');
 
     meuSelect.addEventListener('change', function () {
-      
+      const valorSelecionado = meuSelect.value;
+      localStorage.setItem("TipoMenu", valorSelecionado);
+      TipoDeRespostaMenu()
+    });
+
+    //Salvar o Valor dos Selects nas Option
+    const SelectMenu = document.getElementById('SelecionarTipoMenu');
+
+    SelectMenu.addEventListener('change', function () {
+
       const valorSelecionado = meuSelect.value;
 
-      
-      localStorage.setItem("TipoMenu", valorSelecionado);
+
+      localStorage.setItem("TipoMenuSelecionado", valorSelecionado);
     });
 
 
+
+    //Função Para Selecionar o Tipo Da Resposta da Option
+    function TipoDeRespostaMenu() {
+      {
+        if (meuSelect.value == "MensagemDeResposta") {
+          document.getElementById('RespostaTipo').innerHTML = `
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Resposta</span>
+            <input type="text" class="form-control" id="RespostaOption" aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default">
+          </div>
+        `
+        } else {
+
+          fetch("http://localhost:5182/Menus")
+            .then((response) => response.json())
+            .then((responseJson) => {
+              document.getElementById("RespostaTipo").innerHTML = `
+            <select class="form-select" id="RespostaOption" aria-label="Default select example">
+            </select>
+              `
+              responseJson.forEach((element, index) => {
+                document.getElementById("RespostaOption").innerHTML += `
+              <option value="${index}">${element.menTitle}</option>
+            `
+              });
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+
+        }
+      }
+    }
+
+
+    function colocarIdDoMenuNaOption(ids) {
+      localStorage.setItem('IdDaOption', ids)
+    }
+
+    
+    //Função Para Carregar os Dados Tanto de Menus Quanto de Options
     function carregar() {
       //lembrar de colocar o endpoint para resgatar os menus por id especifico de login
       fetch("http://localhost:5182/Menus")
@@ -182,7 +282,7 @@
                   <div class="row">
                     <!-- Primeira coluna -->
                     <div class="col-3 p-4 bg-success menu" >
-                      <p>Header: ${element.menTitle}</p>
+                      <p>Titulo: ${element.menTitle}</p>
                       <div>
                           <button class="btn btn-warning mt-3 btnadicionarOption" onclick=(EventListenerBotaoOption(this)) id=${element.menId} data-bs-toggle="modal" data-bs-target="#exampleModal1">Adicionar
                             Options</button>
@@ -216,9 +316,13 @@
             var lista = responseJson.filter(x => x.men.menId == element.men.menId && entrarNaLista == true)
             listaDeIDs.push(element.men.menId)
             lista.forEach((element, index) => {
+              //se preferir o esquema de escadinha nas options e so colocar o index no lugar do 1 do offset no caso offset-${index+1}
               document.getElementById(`${element.men.menId}`).innerHTML += `
                     <!-- Segunda coluna com offset para criar o efeito de degrau -->
-                    <div class="col-3 offset-1 p-5 bg-danger mt-3">${element.optDescricao}</div>
+                    <div class="col-3 offset-1 p-5 bg-danger mt-3">${element.optDescricao}
+                      <button class="btn btn-success mt-3" data-bs-toggle="modal" onclick=(colocarIdDoMenuNaOption(element.men.menId)) data-bs-target="#exampleModal2">Atualizar
+                    Option</button>
+                      </div>
                     <div class="w-100"></div>
             `
             });
@@ -231,13 +335,16 @@
     carregar()
 
 
+    //Função Para Criar um Menu
     function CriarMenu() {
       const url = 'http://localhost:5182/Menus/Create';
 
       // Dados a serem enviados no corpo da requisição, Lembrar que o LogId esta Fixo ne versão final tem que puxar o id logado dos cookies
       const data = {
+        menTitle: document.getElementById('TituloMenu').value,
         menHeader: document.getElementById('header').value,
         menFooter: document.getElementById('footer').value,
+        menTipo: localStorage.getItem("TipoMenuSelecionado"),
         menBody: document.getElementById('body').value,
         logId: 1,
       };
@@ -261,7 +368,7 @@
         })
         .then(data => {
           console.log('Resposta do servidor:', data);
-          location.reload
+          location.reload()
 
         })
         .catch(error => {
@@ -270,6 +377,7 @@
         });
     }
 
+    //Função Para Criar Uma Opção
     function CriarOptions() {
       const url = 'http://localhost:5182/options/Create';
 
@@ -284,8 +392,6 @@
         menId: localStorage.getItem("MenuId"),
         optTipo: localStorage.getItem("TipoMenu")
       };
-
-      console.log(data)
 
       // Configurações da requisição
       const options = {
@@ -306,7 +412,52 @@
         })
         .then(data => {
           console.log('Resposta do servidor:', data);
-          location.reload
+          location.reload()
+
+        })
+        .catch(error => {
+          console.error('Ocorreu um erro:', error);
+
+        });
+    }
+
+    //Função Para Atualizar Uma Opção
+    function AtualizarOption() {
+      const url = 'http://localhost:5182/options/Update';
+
+      // Dados a serem enviados no corpo da requisição, Lembrar que o LogId esta Fixo, na versão final tem que puxar o id logado dos cookies
+      const data = {
+        optId: localStorage.getItem('IdDaOption'),
+        optTitle: document.getElementById('TituloOptinAtualizacao').value,
+        optDescricao: document.getElementById('DescricaoOptionAtualizacao').value,
+        optResposta: document.getElementById('RespostaOptionAtualizacao').value,
+        optData: new Date(),
+        optFinalizar: document.getElementById('FinalizarAtendimentoAtualizacao').checked,
+        logId: 1,
+        menId: localStorage.getItem("MenuId"),
+        optTipo: localStorage.getItem("TipoMenu")
+      };
+
+      // Configurações da requisição
+      const options = {
+        method: 'POST', // Método HTTP POST
+        headers: {
+          'Content-Type': 'application/json' // Tipo de conteúdo JSON
+        },
+        body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
+      };
+
+      // Realiza a requisição usando fetch
+      fetch(url, options)
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // Retorna os dados da resposta como JSON
+          }
+          throw new Error('Erro ao enviar os dados.'); // Lança um erro se a requisição falhar
+        })
+        .then(data => {
+          console.log('Resposta do servidor:', data);
+          location.reload()
 
         })
         .catch(error => {
