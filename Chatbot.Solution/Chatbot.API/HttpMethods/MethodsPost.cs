@@ -464,6 +464,7 @@ namespace Chatbot.API.HttpMethods
                     LogId = LoginWaIdDados.LogId,
                     ConId = Item.ConId,
                 };
+
                 await _mensagemRepository.Adicionar(mensagen);
                 return await MensagemDeMenu(waId, mensagem, LoginWaId);
             }

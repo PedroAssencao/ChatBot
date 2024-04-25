@@ -27,10 +27,8 @@ namespace Chatbot.API.Controllers
         [EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> CriarNovasOpcoes(Option Model) => Ok(await _optionsRepository.Adicionar(Model));
 
-        //[HttpPost("/options/CreateM")]
-        //[EnableCors("AllowSpecificOrigin")]
-        //public async Task<IActionResult> CriarNovasOpcoesComMensagem(Mensagen mensagen, Option Model) => Ok(await _optionsRepository.CriarOptionsPassandoMensagem(mensagen, Model));
         [HttpPut("/option/Update")]
+        [EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> AtualizarOpcoes(Option Model) => Ok(await _optionsRepository.Update(Model));
         [HttpDelete("/options/Delete")]
         public async Task<IActionResult> ApagarOption(int id) => Ok(await _optionsRepository.Delete(id));
