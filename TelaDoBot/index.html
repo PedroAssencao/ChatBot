@@ -174,8 +174,8 @@
           </select>
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Titulo</span>
-            <input type="text" class="form-control" id="TituloOptinAtualizacao" maxlength="24" aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control" id="TituloOptinAtualizacao" maxlength="24"
+              aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Descricao</span>
@@ -188,7 +188,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary buttonAtualizar" onclick="AtualizarOption()">Save changes</button>
+          <button type="button" class="btn btn-primary buttonAtualizar" onclick="AtualizarOption()">Save
+            changes</button>
         </div>
       </div>
     </div>
@@ -205,7 +206,7 @@
       localStorage.setItem("MenuId", menuId);
       TipoDeRespostaMenu()
     }
-    
+
     //Salvar o Valor dos Selects nas Option
     const meuSelect = document.getElementById('SelectTipoResposta');
 
@@ -214,6 +215,16 @@
       localStorage.setItem("TipoMenu", valorSelecionado);
       TipoDeRespostaMenu()
     });
+
+    //Salvar o Valor dos Selects nas Option
+    const meuSelectAtualizacao = document.getElementById('SelectTipoRespostaAtualizacao');
+
+    meuSelectAtualizacao.addEventListener('change', function () {
+      const valorSelecionado = meuSelectAtualizacao.value;
+      localStorage.setItem("TipoMenuAtualizacao", valorSelecionado);
+      TipoDeRespostaMenuAtualizacao()
+    });
+
 
     //Salvar o Valor dos Selects nas Option
     const SelectMenu = document.getElementById('SelecionarTipoMenu');
@@ -262,12 +273,50 @@
       }
     }
 
+    function TipoDeRespostaMenuAtualizacao() {
+      console.log('aa')
+        if (meuSelectAtualizacao.value == "MensagemDeResposta") {
+          document.getElementById('RespostaTipoAtualizacao').innerHTML = `
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Resposta</span>
+            <input type="text" class="form-control" id="RespostaOptionAtualizacao" aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default">
+          </div>
+        `
+        } else {
 
-    function colocarIdDoMenuNaOption(ids) {
-      localStorage.setItem('IdDaOption', ids)
+          fetch("http://localhost:5182/Menus")
+            .then((response) => response.json())
+            .then((responseJson) => {
+              document.getElementById("RespostaTipoAtualizacao").innerHTML = `
+            <select class="form-select" id="RespostaOptionAtualizacao" aria-label="Default select example">
+            </select>
+              `
+              responseJson.forEach((element, index) => {
+                document.getElementById("RespostaOptionAtualizacao").innerHTML += `
+              <option value="${index}">${element.menTitle}</option>
+            `
+              });
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+
+        }
+      
     }
 
-    
+
+
+    function colocarIdDoMenuNaOption(optid, menid) {
+      console.log('aa')
+      localStorage.setItem('IdDaOption', optid)
+      const menuId = menid;
+      localStorage.setItem("MenuIdAtualizacao", menuId);
+      TipoDeRespostaMenuAtualizacao()
+    }
+
+
     //Função Para Carregar os Dados Tanto de Menus Quanto de Options
     function carregar() {
       //lembrar de colocar o endpoint para resgatar os menus por id especifico de login
@@ -316,12 +365,12 @@
             var lista = responseJson.filter(x => x.men.menId == element.men.menId && entrarNaLista == true)
             listaDeIDs.push(element.men.menId)
             lista.forEach((element, index) => {
+              
               //se preferir o esquema de escadinha nas options e so colocar o index no lugar do 1 do offset no caso offset-${index+1}
               document.getElementById(`${element.men.menId}`).innerHTML += `
                     <!-- Segunda coluna com offset para criar o efeito de degrau -->
-                    <div class="col-3 offset-1 p-5 bg-danger mt-3">${element.optDescricao}
-                      <button class="btn btn-success mt-3" data-bs-toggle="modal" onclick=(colocarIdDoMenuNaOption(element.men.menId)) data-bs-target="#exampleModal2">Atualizar
-                    Option</button>
+                    <div class="col-3 offset-1 p-5 bg-danger mt-3">Titulo: ${element.optTitle}
+                      <button class="btn btn-success mt-3" data-bs-toggle="modal" onclick="colocarIdDoMenuNaOption(${element.optId}, ${element.men.menId})"" data-bs-target="#exampleModal2">Atualizar Option</button>
                       </div>
                     <div class="w-100"></div>
             `
@@ -344,7 +393,7 @@
         menTitle: document.getElementById('TituloMenu').value,
         menHeader: document.getElementById('header').value,
         menFooter: document.getElementById('footer').value,
-        menTipo: localStorage.getItem("TipoMenuSelecionado"),
+        menTipo: SelectMenu.value,
         menBody: document.getElementById('body').value,
         logId: 1,
       };
@@ -423,7 +472,7 @@
 
     //Função Para Atualizar Uma Opção
     function AtualizarOption() {
-      const url = 'http://localhost:5182/options/Update';
+      const url = 'http://localhost:5182/option/Update';
 
       // Dados a serem enviados no corpo da requisição, Lembrar que o LogId esta Fixo, na versão final tem que puxar o id logado dos cookies
       const data = {
@@ -434,13 +483,13 @@
         optData: new Date(),
         optFinalizar: document.getElementById('FinalizarAtendimentoAtualizacao').checked,
         logId: 1,
-        menId: localStorage.getItem("MenuId"),
-        optTipo: localStorage.getItem("TipoMenu")
+        menId: localStorage.getItem("MenuIdAtualizacao"),
+        optTipo: meuSelectAtualizacao.value
       };
 
       // Configurações da requisição
       const options = {
-        method: 'POST', // Método HTTP POST
+        method: 'PUT', // Método HTTP PUT
         headers: {
           'Content-Type': 'application/json' // Tipo de conteúdo JSON
         },
