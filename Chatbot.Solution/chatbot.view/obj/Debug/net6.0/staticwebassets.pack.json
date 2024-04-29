@@ -5,12 +5,24 @@
       "PackagePath": "staticwebassets\\chatbot.view.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\logar\\style.css",
+      "PackagePath": "staticwebassets\\css\\logar\\style.css"
+    },
+    {
       "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\image\\DazzleBot.png",
+      "PackagePath": "staticwebassets\\image\\DazzleBot.png"
+    },
+    {
+      "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\js\\logar\\app.js",
+      "PackagePath": "staticwebassets\\js\\logar\\app.js"
     },
     {
       "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\js\\site.js",

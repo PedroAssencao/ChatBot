@@ -10,6 +10,7 @@ namespace Chatbot.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
     public class LoginController : ControllerBase
     {
         protected readonly LoginRepository _loginepository;
@@ -24,6 +25,7 @@ namespace Chatbot.API.Controllers
 
         [HttpPost("/login/logar")]
         public async Task<IActionResult?> Logar(Login? Model) => Ok(await _loginepository.Logar(Model));
+
         [HttpPost("/login/Cadastrar")]
         public async Task<IActionResult> Cadastrar(Login? model) => Ok(await _loginepository.Cadastrar(model));
         [HttpPut("/login/Atualizar")]

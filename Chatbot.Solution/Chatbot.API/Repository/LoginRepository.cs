@@ -55,7 +55,7 @@ namespace Chatbot.API.Repository
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
 
-                    await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal); ;
+                    await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                     return true;
                 }
@@ -68,7 +68,6 @@ namespace Chatbot.API.Repository
             {
                 throw new Exception("error: " + ex);
             }
-
         }
 
         public async Task<Login> Cadastrar(Login? Model)

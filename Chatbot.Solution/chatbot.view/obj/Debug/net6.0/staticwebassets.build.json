@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3B4a55wYMiwdhGmAja7/58rx7j9cfUM6Pt3W0slWfZw=",
+  "Hash": "rZqXtMkiJ98+gNo51HxRt2Ho18kMFATldswAUBLsoLQ=",
   "Source": "chatbot.view",
   "BasePath": "_content/chatbot.view",
   "Mode": "Default",
@@ -63,6 +63,23 @@
       "OriginalItemSpec": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\chatbot.view.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\logar\\style.css",
+      "SourceId": "chatbot.view",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\",
+      "BasePath": "_content/chatbot.view",
+      "RelativePath": "css/logar/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\logar\\style.css"
+    },
+    {
       "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\site.css",
       "SourceId": "chatbot.view",
       "SourceType": "Discovered",
@@ -95,6 +112,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\image\\DazzleBot.png",
+      "SourceId": "chatbot.view",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\",
+      "BasePath": "_content/chatbot.view",
+      "RelativePath": "image/DazzleBot.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\DazzleBot.png"
+    },
+    {
+      "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\js\\logar\\app.js",
+      "SourceId": "chatbot.view",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\",
+      "BasePath": "_content/chatbot.view",
+      "RelativePath": "js/logar/app.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\logar\\app.js"
     },
     {
       "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\js\\site.js",
