@@ -386,3 +386,8 @@ C:\Users\Pedro Marcelo\Downloads\ChatBot-chatbot.api.atualizacaoOptions-Mensagen
 C:\Users\Pedro Marcelo\Downloads\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.pdb
 C:\Users\Pedro Marcelo\Downloads\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.genruntimeconfig.cache
 C:\Users\Pedro Marcelo\Downloads\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\ChatBot-chatbot.api.atualizacaoOptions-Mensagens\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\ref\Chatbot.API.dll
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.Chatbot.API.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.build.Chatbot.API.props
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Chatbot.API.props
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Chatbot.API.props
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets.pack.json

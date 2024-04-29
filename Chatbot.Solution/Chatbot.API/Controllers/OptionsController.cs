@@ -18,17 +18,17 @@ namespace Chatbot.API.Controllers
         }
 
         [HttpGet("/options")]
-        [EnableCors("AllowSpecificOrigin")]
+        //[EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> PegarTodasOptions() => Ok(await _optionsRepository.RetonarOptionComMenu());
 
         [HttpGet("/options/{log}")]
         public async Task<IActionResult> PegarTodasAsOptionsPorLogId(int log) => Ok(await _optionsRepository.RetornarTodasASOptionPorLOgId(log));
         [HttpPost("/options/Create")]
-        [EnableCors("AllowSpecificOrigin")]
+        //[EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> CriarNovasOpcoes(Option Model) => Ok(await _optionsRepository.Adicionar(Model));
 
         [HttpPut("/option/Update")]
-        [EnableCors("AllowSpecificOrigin")]
+        //[EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> AtualizarOpcoes(Option Model) => Ok(await _optionsRepository.Update(Model));
         [HttpDelete("/options/Delete")]
         public async Task<IActionResult> ApagarOption(int id) => Ok(await _optionsRepository.Delete(id));

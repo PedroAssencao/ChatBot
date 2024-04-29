@@ -40,6 +40,9 @@ builder.Services.AddCors(options =>
         {
             builder.WithOrigins("http://127.0.0.1:5501") // Permite apenas essa origem
                    .AllowAnyMethod()
+                   .AllowAnyHeader(); 
+            builder.WithOrigins("https://localhost:44395/") // Permite apenas essa origem
+                   .AllowAnyMethod()
                    .AllowAnyHeader();
         });
 });
