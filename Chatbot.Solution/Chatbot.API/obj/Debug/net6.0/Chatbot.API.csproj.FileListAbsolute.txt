@@ -84,7 +84,6 @@ C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.csproj.CoreCompileInputs.cache
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.sourcelink.json
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.Chatbot.API.Microsoft.AspNetCore.StaticWebAssets.props
@@ -93,7 +92,6 @@ C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Chatbot.API.props
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\scopedcss\bundle\Chatbot.API.styles.css
-C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot..B71881B4.Up2Date
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.dll
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\refint\Chatbot.API.dll
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.pdb
@@ -391,3 +389,4 @@ C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\
 C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Chatbot.API.props
 C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Chatbot.API.props
 C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net6.0\Chatbot.API.csproj.CopyComplete

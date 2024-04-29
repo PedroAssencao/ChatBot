@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+
+.principal{
+    border: 2px blue solid;
+}
