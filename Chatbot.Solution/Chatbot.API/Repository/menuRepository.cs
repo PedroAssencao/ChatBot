@@ -24,5 +24,22 @@ namespace Chatbot.API.Repository
             }
 
         }
+        public async Task<Menu> PegarMenuPorLogIDEMenuInicial(int log)
+        {
+            try
+            {
+                var ListaMenus = await GetAll();
+                var ListaMenusFiltrada = ListaMenus.FirstOrDefault(x => x.LogId == log && x.MenTipo == "PrimeiraMensagem");
+                return ListaMenusFiltrada;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
     }
 }

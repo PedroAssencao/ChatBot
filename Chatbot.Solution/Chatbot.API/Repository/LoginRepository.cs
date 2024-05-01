@@ -37,12 +37,12 @@ namespace Chatbot.API.Repository
 
         }
 
-        public async Task<dynamic?> Logar(Login? Model)
+        public async Task<dynamic?> Logar(Login? Model, bool IsCadastre)
         {
             try
             {
                 var usuarios = await GetAll();
-                var usuarioSelecionado = usuarios.FirstOrDefault(x => x.LogEmail == Model?.LogEmail && Model?.DescriptografaSenha(x?.LogSenha) == Model?.LogSenha);
+                var usuarioSelecionado = usuarios.FirstOrDefault(x => x.LogEmail == Model?.LogEmail && Model?.DescriptografaSenha(x?.LogSenha) == Model?.LogSenha || IsCadastre);
                 if (usuarioSelecionado != null)
                 {
                     var claims = new List<Claim>
@@ -62,6 +62,7 @@ namespace Chatbot.API.Repository
                 else
                 {
                     throw new Exception("Usuario Não Encontrado");
+
                 }
             }
             catch (Exception ex)
@@ -76,6 +77,7 @@ namespace Chatbot.API.Repository
             {
                 if (Model != null)
                 {
+
                     Login login = new Login
                     {
                         LogId = Model.LogId,
@@ -85,9 +87,20 @@ namespace Chatbot.API.Repository
                         LogSenha = Model.CriptografaSenha(Model?.LogSenha),
                         LogUser = Model.LogUser,
                         LogWaid = Model.LogWaid,
-                };
-                    await Adicionar(login);
-                    return login;
+                    };
+                    var dados = await GetAll();
+                    var checkEmailAndUser = dados.Where(x => x.LogEmail == login.LogEmail || x.LogUser == login.LogUser).ToList();
+                    if (checkEmailAndUser.Count == 0)
+                    {
+                        await Adicionar(login);
+                        await Logar(login, true);
+                        return login;
+                    }
+                    else
+                    {
+                        throw new Exception("Usuario ou Email Já Cadastrados");
+                    }
+                
                 }
                 else
                 {

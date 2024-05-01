@@ -24,7 +24,7 @@ namespace Chatbot.API.Controllers
         public async Task<IActionResult> BuscarTodos() => Ok(await _loginepository.GetAll());
 
         [HttpPost("/login/logar")]
-        public async Task<IActionResult?> Logar(Login? Model) => Ok(await _loginepository.Logar(Model));
+        public async Task<IActionResult?> Logar(Login? Model) => Ok(await _loginepository.Logar(Model,false));
 
         [HttpPost("/login/Cadastrar")]
         public async Task<IActionResult> Cadastrar(Login? model) => Ok(await _loginepository.Cadastrar(model));
@@ -32,6 +32,13 @@ namespace Chatbot.API.Controllers
         public async Task<IActionResult> Atualizar(Login? Model) => Ok(await _loginepository.AtualizarCadastro(Model));
         [HttpDelete("/login/Delete")]
         public async Task<IActionResult> Apagar(int id) => Ok(await _loginepository.RemoverLogin(id));
+
+        [HttpPost("/login/Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }

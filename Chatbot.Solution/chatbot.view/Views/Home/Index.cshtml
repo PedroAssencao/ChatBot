@@ -7,15 +7,27 @@
     @if (User.IsInRole("Logar"))
     {
         <h1 class="display-4">Logado</h1>
+        <form method="post" action="/Login/Logout" style="flex: 1;">
+            <div>
+                <button type="submit" class="btn btn-primary btn-lg btn-light logout-button" style="background:white; color:#002060; border-color:#002060;font-family: 'Poppins', sans-serif;">Logout</button>
+            </div>
+
+        </form>
     }
     else
     {
         <h1 class="display-4">Não Logado</h1>
     }
-    
+
     @if (User.Identity.Name == "1")
     {
         <h1 class="display-4">Logado</h1>
+        <form method="post" action="/Login/Logout" style="flex: 1;">
+            <div>
+                <button type="submit" class="btn btn-primary btn-lg btn-light logout-button" style="background:white; color:#002060; border-color:#002060;font-family: 'Poppins', sans-serif;">Logout</button>
+            </div>
+
+        </form>
     }
     else
     {

@@ -22,7 +22,9 @@ namespace Chatbot.API.Controllers
         public async Task<IActionResult> PegarTodosMenu() => Ok(await _menuRepository.GetAll());
 
         [HttpGet("/Menus/{id}")]
-        public async Task<IActionResult> PegarTodosMenusPorLogId(int id) => Ok(await _menuRepository.PegarTodosOsMenusPorLogID(id));
+        public async Task<IActionResult> PegarTodosMenusPorLogId(int id) => Ok(await _menuRepository.PegarTodosOsMenusPorLogID(id));   
+        [HttpGet("/Menus/MenuInicial/{id}")]
+        public async Task<IActionResult> PegarMenuInicialPorLodId(int id) => Ok(await _menuRepository.PegarMenuPorLogIDEMenuInicial(id));
         [HttpPost("/Menus/Create")]
         //[EnableCors("AllowSpecificOrigin")]
         public async Task<IActionResult> CriarNovoMenu(Menu Model) => Ok(await _menuRepository.Adicionar(Model));

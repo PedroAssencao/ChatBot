@@ -10,5 +10,9 @@ namespace chatbot.view.Controllers
         {
             return View();
         }
+        public IActionResult Inicial()
+        {
+            return View();
+        }
     }
 }
