@@ -16,7 +16,7 @@
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
+    <div class="container container-fluid">
         <div class="content first-content">
             <div class="first-column">
                 <h2 class="title title-primary">Seja bem vindo!</h2>
@@ -25,30 +25,34 @@
                 <button id="signin" class="btn btn-primary">sign in</button>
             </div>
             <div class="second-column">
-                <img src="./image/DazzleBot.png" />
+                <img class="imagem" src="./image/DazzleBot.png" />
                 <h2 class="title title-second">criar conta</h2>
                 <p class="description description-second">ou usar email para entrar:</p>
                 <div class="form" >
 
 
                     <p id="errorCadastro" style="display: none; color: red;">Usuario ou Email Repetido Verifique e Tente Criar Novamente</p>
-                    <label class="label-input" for="">
-                        <i class="far fa-user icon-modify"></i>
-                        <input id="inputNomeCadastrar" onkeypress="hideError()" type="text" placeholder="Nome">
-                    </label>
 
-                    <label class="label-input" for="">
-                        <i class="far fa-envelope icon-modify"></i>
-                        <input id="inputEmailCadastrar" onkeypress="hideError()" type="email" placeholder="Email">
-                    </label>
+                    <p id="errorCadastroSenha" style="display: none; color: red;">Senha Menor do que 8 Caracteres</p>
 
-                    <label class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
-                        <input id="inputSenhaCadastrar" onkeypress="hideError()" type="password" placeholder="Senha">
-                    </label>
+                        <label class="label-input" for="">
+                            <i class="far fa-user icon-modify"></i>
+                            <input id="inputNomeCadastrar" onkeypress="hideError()" type="text" placeholder="Nome">
+                        </label>
+
+                        <label class="label-input" for="">
+                            <i class="far fa-envelope icon-modify"></i>
+                            <input id="inputEmailCadastrar" onkeypress="hideError()" type="email" placeholder="Email">
+                        </label>
+
+                        <label class="label-input" for="">
+                            <i class="fas fa-lock icon-modify"></i>
+                            <input id="inputSenhaCadastrar" onkeypress="hideError()" type="password" minlength="8" placeholder="Senha">
+                        </label>
 
 
-                    <button id="buttonCadastrar" class="btn btn-second">entrar</button>
+                        <button id="buttonCadastrar" class="btn btn-second">entrar</button>
+
                 </div>
             </div><!-- second column -->
         </div><!-- first content -->
@@ -60,7 +64,7 @@
                 <button id="signup" class="btn btn-primary">entrar</button>
             </div>
             <div class="second-column">
-                <img src="./image/DazzleBot.png" />
+                <img class="imagem" src="./image/DazzleBot.png" />
                 <h2 class="title title-second">entrar com o developer</h2>
                 <p class="description description-second">ou use sua conta com email:</p>
                 <div class="form">
@@ -87,10 +91,14 @@
 
 <script>
 
+    var inputSenhaCadastro = document.getElementById("inputSenhaCadastrar")
     //function para tirar a mensagem de error quando o input e acionado
     const hideError = () => {
+        
         document.getElementById('errorLogin').style.display = 'none';
         document.getElementById('errorCadastro').style.display = 'none';
+        document.getElementById('errorCadastroSenha').style.display = 'none';
+
     }
 
     //function para enviar dados para efeturar login
@@ -137,44 +145,50 @@
 
     //function para enviar dados para cadastro
     document.getElementById('buttonCadastrar').addEventListener('click', () => {
-        const url = location.origin + '/login/Cadastrar';
+        if (inputSenhaCadastro.value.length > 6) {
+            const url = location.origin + '/login/Cadastrar';
 
-        // Dados a serem enviados no corpo da requisição
-        const data = {
-            logUser: document.getElementById('inputNomeCadastrar').value,
-            logEmail: document.getElementById('inputEmailCadastrar').value,
-            logSenha: document.getElementById('inputSenhaCadastrar').value,
-        };
+            // Dados a serem enviados no corpo da requisição
+            const data = {
+                logUser: document.getElementById('inputNomeCadastrar').value,
+                logEmail: document.getElementById('inputEmailCadastrar').value,
+                logSenha: document.getElementById('inputSenhaCadastrar').value,
+            };
 
-        // Configurações da requisição
-        const options = {
-            method: 'POST', // Método HTTP POST
-            headers: {
-                'Content-Type': 'application/json' // Tipo de conteúdo JSON
-            },
-            body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
-        };
+            // Configurações da requisição
+            const options = {
+                method: 'POST', // Método HTTP POST
+                headers: {
+                    'Content-Type': 'application/json' // Tipo de conteúdo JSON
+                },
+                body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
+            };
 
-        // Realiza a requisição usando fetch
-        fetch(url, options)
-            .then(response => {
-                if (response.ok) {
-                    location.replace(location.origin) //Redireciona Para a Tela Desejada
-                } else {
-                    document.getElementById('errorCadastro').style.display = "block"
-                    throw new Error('Erro ao enviar os dados.'); // Lança um erro se a requisição falhar
-                }
+            // Realiza a requisição usando fetch
+            fetch(url, options)
+                .then(response => {
+                    if (response.ok) {
+                        location.replace(location.origin) //Redireciona Para a Tela Desejada
+                    } else {
+                        document.getElementById('errorCadastro').style.display = "block"
+                        throw new Error('Erro ao enviar os dados.'); // Lança um erro se a requisição falhar
+                    }
 
-            })
-            // .then(data => {
-            //     console.log('Resposta do servidor:', data);
-            //     location.reload()
+                })
+                // .then(data => {
+                //     console.log('Resposta do servidor:', data);
+                //     location.reload()
 
-            // })
-            .catch(error => {
-                console.error('Ocorreu um erro:', error);
+                // })
+                .catch(error => {
+                    console.error('Ocorreu um erro:', error);
 
-            });
+                });
+        }
+        else {
+            document.getElementById('errorCadastroSenha').style.display = 'block';
+        }
+      
     })
 
 
