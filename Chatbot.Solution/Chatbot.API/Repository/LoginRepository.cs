@@ -47,9 +47,9 @@ namespace Chatbot.API.Repository
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, usuarioSelecionado.LogId.ToString()),
+                        new Claim(ClaimTypes.Name, Model.LogId.ToString()),
                         new Claim(ClaimTypes.Role, "Logar"),
-                        new Claim(ClaimTypes.NameIdentifier, usuarioSelecionado?.LogUser)
+                        new Claim(ClaimTypes.NameIdentifier, Model?.LogUser)
                     };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

@@ -25,7 +25,7 @@ namespace Chatbot.API.Controllers
         public async Task<IActionResult> PegarTodasAsOptionsPorLogId(int log) => Ok(await _optionsRepository.RetornarTodasASOptionPorLOgId(log));
         [HttpPost("/options/Create")]
         //[EnableCors("AllowSpecificOrigin")]
-        public async Task<IActionResult> CriarNovasOpcoes(Option Model) => Ok(await _optionsRepository.Adicionar(Model));
+        public async Task<IActionResult> CriarNovasOpcoes(Option Model) => Ok(await _optionsRepository.CriarOptions(Model));
 
         [HttpPut("/option/Update")]
         //[EnableCors("AllowSpecificOrigin")]

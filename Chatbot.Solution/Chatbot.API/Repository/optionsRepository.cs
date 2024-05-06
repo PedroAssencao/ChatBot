@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.API.Models;
+using System.Linq;
 
 namespace Chatbot.API.Repository
 {
@@ -66,18 +67,31 @@ namespace Chatbot.API.Repository
             }
         }
 
-        public async Task<Option> CriarOptionsPassandoMensagem(Mensagen Mensagem, Option Model)
+        public async Task<Option> CriarOptions(Option option)
         {
-            try
+
+            var options = await RetonarOptionComMenu();
+
+
+            var result = options.Where(x => x.Men.MenId == option.MenId).ToList();
+          if (result.Count < 10)
             {
-                await _mensagenRepository.Adicionar(Mensagem);
-                await Adicionar(Model);
-                return Model;
+                try
+                {
+                    await Adicionar(option);
+                    return option;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
-            catch (Exception)
+            else
             {
-                throw;
+
+                return null;
             }
+           
         }
     }
 }

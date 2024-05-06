@@ -19,8 +19,11 @@
         <h1 class="display-4">Não Logado</h1>
     }
 
-    @if (User.Identity.Name == "1")
+    @if (@User.Identity.Name == "1")
     {
+        <script>
+            console.log(@User.Identity.Name)
+        </script>
         <h1 class="display-4">Logado</h1>
         <form method="post" action="/Login/Logout" style="flex: 1;">
             <div>
@@ -31,6 +34,9 @@
     }
     else
     {
+        <script>
+            console.log(@User.Identity.Name)
+        </script>
         <h1 class="display-4">Não Logado</h1>
     }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
