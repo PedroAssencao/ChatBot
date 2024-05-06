@@ -1,0 +1,345 @@
+[
+  {
+    "ContainingType": "Chatbot.API.Controllers.WebHookController",
+    "Method": "HandleWebhookAsync",
+    "RelativePath": "hook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestBody",
+        "Type": "System.Text.Json.JsonDocument",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.LoginController",
+    "Method": "BuscarTodos",
+    "RelativePath": "login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.LoginController",
+    "Method": "Atualizar",
+    "RelativePath": "login/Atualizar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.LoginController",
+    "Method": "Cadastrar",
+    "RelativePath": "login/Cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Chatbot.API.Models.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.LoginController",
+    "Method": "Apagar",
+    "RelativePath": "login/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.LoginController",
+    "Method": "Logar",
+    "RelativePath": "login/logar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.LoginController",
+    "Method": "Logout",
+    "RelativePath": "login/Logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MensagensController",
+    "Method": "PegarTodasMensagens",
+    "RelativePath": "mensagens",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MensagensController",
+    "Method": "AtualizarMensagens",
+    "RelativePath": "mensagens/Atualizar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Mensagen",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MensagensController",
+    "Method": "PegarMensagensParaChat",
+    "RelativePath": "mensagens/chat",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "con",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "log",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MensagensController",
+    "Method": "CriarMensagem",
+    "RelativePath": "mensagens/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Mensagen",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MensagensController",
+    "Method": "ApagarMensagens",
+    "RelativePath": "mensagens/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MenusController",
+    "Method": "PegarTodosMenu",
+    "RelativePath": "Menus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MenusController",
+    "Method": "PegarTodosMenusPorLogId",
+    "RelativePath": "Menus/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MenusController",
+    "Method": "AtualizarMenu",
+    "RelativePath": "Menus/Atualizar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Menu",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MenusController",
+    "Method": "CriarNovoMenu",
+    "RelativePath": "Menus/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Menu",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MenusController",
+    "Method": "DeleteMenu",
+    "RelativePath": "Menus/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.MenusController",
+    "Method": "PegarMenuInicialPorLodId",
+    "RelativePath": "Menus/MenuInicial/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.OptionsController",
+    "Method": "AtualizarOpcoes",
+    "RelativePath": "option/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Option",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.OptionsController",
+    "Method": "PegarTodasOptions",
+    "RelativePath": "options",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.OptionsController",
+    "Method": "PegarTodasAsOptionsPorLogId",
+    "RelativePath": "options/{log}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "log",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.OptionsController",
+    "Method": "CriarNovasOpcoes",
+    "RelativePath": "options/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Model",
+        "Type": "Chatbot.API.Models.Option",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chatbot.API.Controllers.OptionsController",
+    "Method": "ApagarOption",
+    "RelativePath": "options/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
