@@ -7,124 +7,12 @@
     <title>Concept Tela Atendente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
 </head>
-<style>
-    .activeIcon,
-    .sideBarIcon:hover {
-        background-color: #182c5f;
-        cursor: pointer;
-    }
 
-    .activeOption {
-        background-color: #fff;
-        cursor: pointer;
-    }
-
-    .activeChat {
-        background-color: #ebeff9;
-        border: solid 3px #2095eb;
-        cursor: pointer;
-    }
-
-    .sideBarContainer {
-        background-color: #263a6d;
-        height: 5rem;
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1030;
-        justify-content: center;
-    }
-
-    .containerMensagens {
-        max-width: 35rem;
-    }
-
-    .btnAdicionar {
-        background-color: #b0dea5;
-        font-size: 13pt;
-        color: #324872;
-        width: 4rem;
-        height: 3.5rem;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .buttonplus {
-        font-size: 4rem;
-        font-weight: bold;
-    }
-
-    .leadImage {
-        width: 60px;
-    }
-
-    .espacamentoInicial {
-        margin-top: 1.5rem;
-    }
-
-    .conversaStatus:hover {
-        background-color: white;
-        border-radius: 0.5rem;
-        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    }
-
-
-
-    /* Media Querys */
-    @media (max-width: 360px) {
-        .espacamentoInicial {
-            margin-left: 5rem;
-        }
-
-    }
-
-    @media (max-width: 370px) {
-        .menuButtonStatus {
-            text-align: center;
-            margin-top: 1rem;
-        }
-    }
-
-    @media (max-width: 374px) {
-        .sideBarContainer {
-            overflow-y: auto;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .containerMensagens {
-            max-width: 100%;
-        }
-    }
-
-
-    @media (min-width: 992px) {
-        .sideBarContainer {
-            max-width: 5rem;
-            height: auto;
-            justify-content: start;
-            position: unset;
-        }
-
-        .MarginMedia {
-            margin-top: 2rem;
-            margin-left: 2rem;
-        }
-
-        .espacamentoInicial {
-            margin-top: 3rem;
-        }
-
-    }
-</style>
-
-<body class="bg-light overflow-y-hidden">
-    <div class="container-fluid">
-        <div class="row min-vh-100">
+<body class="bg-light">
+    <div class="container-fluid bg-warning min-vh-100">
+        <div class="row bg-success min-vh-100">
             <!--Menu Lateral-->
             <div class="col d-flex flex-lg-column sideBarContainer" id="sidebar">
 
@@ -194,12 +82,13 @@
             </div>
 
             <!--Container pai-->
-            <div class="col bg-dark containerPai p-0">
+            <div class="col bg-warning containerPai p-0 container-fluid d-flex flex-column">
 
                 <!--Navbar-->
                 <div class="col-12 p-4 bg-light" id="navbar">
                     <div class="row justify-content-between">
 
+                        <!--Header aqui fica o contato e a navbar-->
                         <div class="col mt-3" style="max-width: 35rem;">
                             <div class="d-flex gap-3">
                                 <h1 class="d-block" style="color: #263a6d; font-weight: bold; font-size: 2rem;">
@@ -207,8 +96,8 @@
                                 </h1>
 
                                 <!-- <button class="btn btnAdicionar">
-                                    <p class="buttonplus">+</p>
-                                </button> -->
+                                        <p class="buttonplus">+</p>
+                                    </button> -->
                             </div>
                         </div>
 
@@ -234,7 +123,8 @@
                     </div>
                 </div>
 
-                <div class="d-flex" style="height: 100%;">
+                <!--Essa div pegue o resto do height do container-->
+                <div class="flex-grow-1 d-flex bg-dark p-0"  >
 
                     <!--ContainerMensagens-->
                     <div class="col bg-light containerMensagens" id="containerMensagens">
@@ -253,7 +143,7 @@
                         </div>
 
                         <div
-                            class="d-flex justify-content-center align-items-center align-items-lg-start MarginMedia flex-column">
+                            class="d-flex justify-content-center align-items-center align-items-lg-start MarginMedia flex-column gap-3">
 
                             <h1 style="color: #263a6d; font-weight: bold;">Conversas</h1>
 
@@ -280,7 +170,7 @@
 
                         <div class="ListaContatos">
                             <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
-                                style="width: 96%;" onclick="verificarLargura()">
+                                style="width: 96%;" onclick="verificarLargura(true)">
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="d-flex">
@@ -305,8 +195,8 @@
                                 </div>
                             </div>
 
-                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 bg-light"
-                                style="width: 96%;" onclick="verificarLargura()">
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 bg-light unactiveChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="d-flex">
@@ -334,25 +224,47 @@
 
 
                     </div>
+
 
                     <!--ContainerChats ver como vai ficar esse overflow-y-->
-                    <div class="col p-0 d-lg-block containerChat" id="containerChats"
-                        style="display: none; background-color: #ebeff9;">
-                        <div class="ConteudoChat" style="height: 80%;">
+                    <div class="col p-0 d-lg-flex containerChat" id="containerChats"
+                        style="display: none; flex-direction: column; background-color: #EBEFF9;">
+                        <div class="ConteudoChat d-flex flex-grow-1" style="overflow-y: auto;">
+                            <!--Icone para voltar na versão mobile-->
                             <div class="p-3 d-lg-none" onclick="voltarChat()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                    class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
                                 </svg>
                             </div>
+                            <!--Texto da conversa-->
+                            <div class="text-dark">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis fugit facilis qui? Eum molestias accusamus minus, repudiandae libero, perspiciatis labore neque, laboriosam necessitatibus quaerat aliquid incidunt distinctio quam sed in. Ullam, eius doloremque! Voluptatum possimus illum eveniet mollitia? Magni eos recusandae enim nam autem labore quaerat amet quis expedita ducimus dignissimos sint distinctio libero ex nisi repellendus doloribus cupiditate quia ab quisquam, consectetur non. Mollitia, numquam esse eum corrupti quisquam iure. Id, labore? Ab, cupiditate, magni excepturi optio possimus numquam eum et, nihil non pariatur tenetur voluptatibus distinctio accusantium a quod culpa. Porro, debitis. Quam harum laudantium, expedita libero blanditiis obcaecati fuga soluta rerum illo ut veritatis doloremque reprehenderit totam corporis aliquam perspiciatis, assumenda, perferendis saepe autem itaque facilis quidem? Dolores ratione cupiditate harum commodi, eius laboriosam excepturi laborum odio incidunt neque inventore culpa animi fugit recusandae explicabo aliquam quae velit labore vitae qui eveniet tempora eos tempore? Quod a excepturi, minus fugiat maxime reprehenderit culpa quisquam similique quibusdam, voluptas pariatur voluptate nobis cumque, id necessitatibus eveniet. Commodi, et asperiores sint aspernatur eos id, necessitatibus nobis possimus provident reiciendis accusantium nihil vitae ut aliquid. Distinctio qui eveniet officiis. Veritatis asperiores distinctio, aperiam laudantium natus soluta assumenda vitae perferendis corrupti blanditiis ipsa iusto dicta, iste architecto explicabo amet fugit eligendi dolorem est quae corporis! Aperiam hic alias nemo molestiae nostrum eos iusto, suscipit atque. Eaque totam incidunt voluptatum voluptatibus sunt magnam dolorum, eius dolore tempore excepturi dignissimos ex, animi modi, quas perspiciatis aspernatur reprehenderit nemo praesentium adipisci consequuntur fugit architecto officia quod? Animi ex neque et dicta in vitae, recusandae ullam perferendis fugit aspernatur corrupti minima? Veritatis totam tenetur eos labore quo, numquam deserunt quidem aliquid, consectetur repellendus fuga nisi non distinctio et excepturi tempore, accusamus ea odio illo! Dolorem reprehenderit nemo voluptate voluptatibus aspernatur id fuga totam expedita ipsa quibusdam tempore maxime optio architecto vel quisquam molestiae sint, delectus minima eveniet ducimus beatae exercitationem possimus? Adipisci similique accusamus earum magnam recusandae. Maxime ipsa excepturi iure, ratione officiis aliquid! Quam maxime ex eveniet provident facilis quos sed. Eligendi voluptatibus tempora distinctio fugit, aliquam aspernatur architecto ut consectetur sit voluptas tenetur. Unde delectus doloremque quos voluptatem quaerat iste perferendis perspiciatis cumque! Temporibus sunt error placeat. Quas pariatur nobis illum inventore repudiandae nisi natus iusto facere quis eius a reiciendis hic impedit ipsa error aperiam sed voluptatibus libero, autem doloremque consectetur similique dignissimos molestias. Accusantium quaerat illum similique eos quibusdam, corporis fuga voluptas vitae dicta atque, eaque perferendis expedita itaque? Perspiciatis doloremque assumenda numquam neque, unde officia natus nisi, excepturi soluta iure a fuga expedita aliquam quos. Laborum fugit impedit asperiores vel pariatur magnam excepturi optio rem vitae earum. Eaque mollitia sed similique assumenda esse nesciunt hic consequatur explicabo ipsa voluptates error non repudiandae a numquam, fuga sunt vel facilis maiores nulla reprehenderit veritatis quibusdam labore. Itaque reiciendis explicabo dolor hic quas, voluptates corrupti rem modi fugit facere eaque repudiandae magnam ex quia sed officiis minus quisquam cupiditate totam saepe porro aliquam nemo. Dicta reiciendis suscipit ducimus quo at expedita veritatis tempore nisi fugit molestiae ipsum pariatur, nihil maxime illo quibusdam eaque, nesciunt consequuntur numquam iste quasi perspiciatis consectetur sapiente deserunt? Exercitationem consequatur at asperiores alias nulla, quia debitis eaque vel! Praesentium minus nobis obcaecati asperiores doloribus. Enim facilis consequatur quos, atque aut a, ab recusandae autem iusto hic, eius quasi impedit dolor nobis cum perferendis iste error possimus eos animi doloribus. Dolor dolore nesciunt assumenda debitis tempora exercitationem. Eveniet ipsum est, tempore similique vel id tempora delectus maxime unde necessitatibus eligendi excepturi. Doloribus suscipit, delectus totam molestiae ipsa, tenetur eius illum quasi fugit debitis quo corporis eos libero dolores vero et architecto aliquid saepe voluptatum nisi rem odio numquam. Est sequi itaque cum, quae officiis omnis fuga consequuntur distinctio? Rem, ut pariatur! Earum tenetur facere tempore repellat iure vel, itaque quasi, commodi, consequuntur debitis eius explicabo eos animi voluptatum facilis eligendi. Est voluptatibus, aut mollitia odit in doloremque tenetur ipsam nostrum quia provident dolore quis quibusdam error odio ab rem sequi, consequuntur animi! Dolores maxime quia fugit odio culpa, dignissimos est illo, ipsum dolore, doloremque dolorem? Eligendi id, alias iure ipsa similique voluptatum in doloribus a cupiditate non voluptas? Voluptas alias quo minima dolorem perspiciatis accusantium illo unde illum eos velit fugit recusandae, pariatur blanditiis ipsam facilis! Asperiores aut reiciendis debitis commodi numquam, unde placeat voluptate ducimus quibusdam quisquam perferendis veniam possimus! Repellat dignissimos impedit perspiciatis id ipsam non asperiores. Sunt non cum fugit eius velit ut placeat nam doloremque itaque ipsa consectetur laudantium atque unde magnam eum, officia consequuntur tenetur cupiditate, enim iusto corrupti dolore, distinctio praesentium! Officia porro magnam quis, fuga debitis consectetur amet tempora voluptatum sunt culpa nemo at laborum, distinctio obcaecati veniam ipsum cupiditate. Quidem consequuntur voluptatum eaque blanditiis sapiente quisquam recusandae, molestias quos earum numquam distinctio omnis cumque, officiis itaque possimus. Facilis modi accusamus asperiores non iure accusantium illum fugiat necessitatibus ipsa beatae enim nisi reprehenderit amet quaerat, sit obcaecati incidunt facere harum voluptas error. Sit ex alias aliquid recusandae maxime eius quo excepturi quasi omnis libero neque enim minus, voluptatem voluptatibus ut provident quaerat facere sapiente dolore et a illum? Ipsum repellendus eaque nam adipisci enim, delectus atque laborum minima. Unde aliquam, saepe pariatur sed aut sequi blanditiis suscipit quas aliquid consequatur numquam cupiditate quasi sunt placeat dolores voluptatem, ut quibusdam quo maiores, quis eaque. Aliquid eveniet perspiciatis adipisci placeat fugiat temporibus recusandae nemo laboriosam, ad aut, enim quaerat animi obcaecati quo modi similique asperiores, laborum eius quod veniam in culpa repellat! Minus quidem itaque error, eum voluptas veritatis. Ad temporibus ratione doloribus unde velit. Inventore unde nihil impedit, rerum similique quia sint velit voluptates sed excepturi omnis. Animi eos deleniti velit, hic assumenda atque iusto aperiam voluptate inventore eaque, adipisci in. A ducimus, sequi natus magni qui dolore deleniti quae magnam, incidunt perspiciatis dicta repellendus, quidem asperiores et. Cum consectetur ratione amet rerum earum quaerat obcaecati, iste facere voluptatum minus quo aliquid aut delectus, repellat maiores, architecto a laudantium magni? Vel, totam suscipit deserunt quia excepturi, eaque cum laudantium asperiores in, illum reprehenderit provident quisquam.
+                            </div>
                         </div>
-                        <div class="inputMensagen mx-auto" style="max-width: 97%;">
-                            <input class="form-control p-3 rounded-4" style="background-color: #c7cfe4;"
-                                placeholder="Mensagem" />
+                        
+                        
+                        <div class="d-flex gap-3 justify-content-center align-items-center">
+                            
+                            <div class="inputMensagen w-100" style="max-width: 90%;">
+                                <input class="form-control p-3 rounded-4" style="background-color: #c7cfe4;"
+                                    placeholder="Mensagem" />
+                            </div>
+
+                            <a class="btn p-3 rounded-4" style="background-color: #6276A842;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                    class="bi bi-send" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                                </svg>
+                            </a>
+
                         </div>
+
                     </div>
+
                 </div>
+
+
 
             </div>
         </div>
@@ -377,12 +289,13 @@
                     </svg>
                 </a>
             </div>
+
             <!--Fazer o contato buscado aparecer aqui e puxar a lista de contatos para aqui tambem-->
             <div class="container-fluid mt-4 d-flex justify-content-center align-items-center"
                 id="ListaContatosOffCanvas">
                 <div class="ListaContatosOffCanvas">
                     <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
-                        style="width: 96%;" onclick="verificarLargura()" data-bs-dismiss="offcanvas">
+                        style="width: 96%;" onclick="entrarChat()" data-bs-dismiss="offcanvas">
                         <div class="row">
                             <div class="col-3">
                                 <div class="d-flex">
@@ -391,14 +304,18 @@
                             </div>
                             <div class="col">
                                 <div class="d-flex flex-column">
+                                    <!--Inserir o Nome do Contato-->
                                     <p class="text-dark">
                                         Pedro Assenção
                                     </p>
+                                    <!--Ultima mensagem enviada-->
                                     <p class="text-secondary">
                                         Você: como posso ajudar?
                                     </p>
+
                                 </div>
                             </div>
+                            <!--data da Ultima mensagem enviada-->
                             <div class="col-2">
                                 <p style="font-weight: bold;">
                                     10:35
@@ -407,8 +324,8 @@
                         </div>
                     </div>
 
-                    <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 bg-light"
-                        style="width: 96%;" onclick="verificarLargura()" data-bs-dismiss="offcanvas">
+                    <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 bg-light unactiveChat"
+                        style="width: 96%;" onclick="entrarChat()" data-bs-dismiss="offcanvas">
                         <div class="row">
                             <div class="col-3">
                                 <div class="d-flex">
@@ -417,14 +334,18 @@
                             </div>
                             <div class="col">
                                 <div class="d-flex flex-column">
+                                    <!--Inserir o Nome do Contato-->
                                     <p class="text-dark">
                                         Pedro Assenção
                                     </p>
+                                    <!--Ultima mensagem enviada-->
                                     <p class="text-secondary">
                                         Você: como posso ajudar?
                                     </p>
+
                                 </div>
                             </div>
+                            <!--data da Ultima mensagem enviada-->
                             <div class="col-2">
                                 <p style="font-weight: bold;">
                                     10:35
@@ -439,56 +360,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
-
-    <script>
-        //função feita apenas para demonstração de como funcionaria os chats no celular
-        function entrarChat() {
-            document.getElementById('navbar').style.display = 'none'
-            document.getElementById('sidebar').style.display = 'none'
-            document.getElementById('containerMensagens').style.display = 'none'
-            document.getElementById('containerChats').style.display = 'block'
-        }
-
-        function voltarChat() {
-            document.getElementById('navbar').style.display = 'block'
-            document.getElementById('sidebar').style.display = 'block'
-            document.getElementById('containerMensagens').style.display = 'block'
-            document.getElementById('containerChats').style.display = 'none'
-        }
-
-
-        // Defina a função que você deseja condicionar à largura da tela
-        function minhaFuncao() {
-            console.log("Minha função está sendo executada!");
-            // Coloque o código da sua função aqui
-        }
-
-        // Verifique a largura da janela quando a página é carregada e redimensionada
-        function verificarLargura() {
-            // Obtenha a largura atual da janela
-            var larguraJanela = window.innerWidth;
-
-            // Verifique se a largura da janela é maior ou igual a 991px
-            if (larguraJanela < 992) {
-                // Se for maior ou igual a 991px, permita o uso da sua função
-                entrarChat()
-            } else {
-                // Caso contrário, a largura da tela é menor que 991px
-                // Neste exemplo, não fazemos nada ou podemos desativar a função
-                console.log("A largura da tela é menor que 991px. A função não será executada.");
-            }
-        }
-
-        // Registre um ouvinte de evento para verificar a largura da tela quando a janela é redimensionada
-        window.addEventListener('resize', verificarLargura);
-
-        // Verifique a largura da tela quando a página é carregada pela primeira vez
-        verificarLargura();
-
-
-
-    </script>
+    <script src="./index.js"></script>
 </body>
 
 </html>
