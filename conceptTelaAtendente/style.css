@@ -9,7 +9,8 @@
     cursor: pointer;
 }
 
-.unactiveChat{
+
+.unactiveChat {
     cursor: pointer;
 }
 
@@ -29,7 +30,6 @@
     z-index: 1030;
     justify-content: center;
 }
-
 
 
 .containerMensagens {
@@ -67,7 +67,7 @@
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 5px;
     height: 5px;
     color: #6276A842;
@@ -106,7 +106,8 @@
 
 
 .ConteudoChat {
-    max-height: 75vh; /* Defina a altura máxima desejada para a div */
+    overflow: auto;
+    max-height: 77vh;
 }
 
 
@@ -118,7 +119,7 @@
         position: unset;
     }
 
-  
+
 
     .MarginMedia {
         margin-top: 2rem;
