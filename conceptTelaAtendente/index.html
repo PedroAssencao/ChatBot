@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-light" id="bodyContainer">
     <div class="container-fluid bg-warning min-vh-100">
         <div class="row bg-success min-vh-100">
+
             <!--Menu Lateral-->
+
             <div class="col flex-lg-column sideBarContainer" style="display: flex;" id="sidebar">
 
                 <!--Icon Menu-->
@@ -147,9 +149,9 @@
 
                             <h1 style="color: #263a6d; font-weight: bold;">Conversas</h1>
 
-                            <div class="mt-2 d-flex justify-content-center align-items-center rounded-3"
+                            <div class="mt-2 d-flex  justify-content-center align-items-center rounded-3"
                                 style="width: 97%; padding: 0.6rem; background-color: #b0dea5;">
-                                <div class="row justify-content-center align-items-center ">
+                                <div class="row gap-2 justify-content-center align-items-center ">
                                     <div class="col conversaStatus activeOption rounded-2 p-1 text-center"
                                         style="min-width: 10rem;">
                                         Ativo</div>
@@ -168,7 +170,332 @@
 
                         </div>
 
-                        <div class="ListaContatos">
+                        <div class="ListaContatos overflow-y-auto" style="max-height: 63vh;">
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
+                                style="width: 96%;" onclick="verificarLargura(true)">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-flex">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column">
+                                            <p class="text-dark">
+                                                Pedro Assenção
+                                            </p>
+                                            <p class="text-secondary">
+                                                Você: como posso ajudar?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p style="font-weight: bold;">
+                                            10:35
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
                                 style="width: 96%;" onclick="verificarLargura(true)">
                                 <div class="row">
@@ -196,163 +523,106 @@
                             </div>
 
                             <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 bg-light unactiveChat"
-                                style="width: 96%;" onclick="verificarLargura(true)">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="d-flex">
-                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
-                                        </div>
+                            style="width: 96%;" onclick="verificarLargura(true)">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="d-flex">
+                                        <img class="leadImage rounded-circle" src="./img/file.jpg" />
                                     </div>
-                                    <div class="col">
-                                        <div class="d-flex flex-column">
-                                            <p class="text-dark">
-                                                Pedro Assenção
-                                            </p>
-                                            <p class="text-secondary">
-                                                Você: como posso ajudar?
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <p style="font-weight: bold;">
-                                            10:35
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex flex-column">
+                                        <p class="text-dark">
+                                            Pedro Assenção
+                                        </p>
+                                        <p class="text-secondary">
+                                            Você: como posso ajudar?
                                         </p>
                                     </div>
+                                </div>
+                                <div class="col-2">
+                                    <p style="font-weight: bold;">
+                                        10:35
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
+                        <div style="min-height: 10rem;">
+
+                        </div>
+
+                        </div>
+
+                      
 
                     </div>
 
 
                     <!--ContainerChats ver como vai ficar esse overflow-y-->
                     <div class="col p-0 d-lg-flex containerChat" id="containerChats"
-                        style="display: none; flex-direction: column; background-color: #EBEFF9; ">
-                        <!--Icone para voltar na versão mobile-->
-                        <div class="p-3 d-lg-none" onclick="voltarChat()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-                            </svg>
+                        style="display: none; flex-direction: column; background-color: #EBEFF9;">
+
+
+
+                        <!--Navbar-->
+                        <div class="col-12 p-2 d-lg-none" style="background-color: #EBEFF9;" id="navbar">
+                            <div class="row justify-content-between">
+
+
+
+                                <!--Contato, Ver Como Vai ficar isso aqui depois, acho massa fazer algo como whastapp que so aparece os chat quando clicka aqui-->
+                                <div class="col mt-3 d-flex ">
+                                    <!--Icone para voltar na versão mobile-->
+                                    <div class="p-3 d-lg-none" onclick="voltarChat()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                                        </svg>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <div class="d-flex align-items-end gap-3">
+                                            <img class="leadImage rounded-circle" src="./img/file.jpg" />
+                                            <p style="font-family: Arial, Helvetica, sans-serif;">Pedro Assenção</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="ConteudoChat d-flex" >
+
+
+                        <div class="ConteudoChat d-flex flex-column">
                             <!--Texto da conversa-->
-                            <div class="text-dark">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis fugit facilis qui?
-                                Eum molestias accusamus minus, repudiandae libero, perspiciatis labore neque, laboriosam
-                                necessitatibus quaerat aliquid incidunt distinctio quam sed in. Ullam, eius doloremque!
-                                Voluptatum possimus illum eveniet mollitia? Magni eos recusandae enim nam autem labore
-                                quaerat amet quis expedita ducimus dignissimos sint distinctio libero ex nisi
-                                repellendus doloribus cupiditate quia ab quisquam, consectetur non. Mollitia, numquam
-                                esse eum corrupti quisquam iure. Id, labore? Ab, cupiditate, magni excepturi optio
-                                possimus numquam eum et, nihil non pariatur tenetur voluptatibus distinctio accusantium
-                                a quod culpa. Porro, debitis. Quam harum laudantium, expedita libero blanditiis
-                                obcaecati fuga soluta rerum illo ut veritatis doloremque reprehenderit totam corporis
-                                aliquam perspiciatis, assumenda, perferendis saepe autem itaque facilis quidem? Dolores
-                                ratione cupiditate harum commodi, eius laboriosam excepturi laborum odio incidunt neque
-                                inventore culpa animi fugit recusandae explicabo aliquam quae velit labore vitae qui
-                                eveniet tempora eos tempore? Quod a excepturi, minus fugiat maxime reprehenderit culpa
-                                quisquam similique quibusdam, voluptas pariatur voluptate nobis cumque, id
-                                necessitatibus eveniet. Commodi, et asperiores sint aspernatur eos id, necessitatibus
-                                nobis possimus provident reiciendis accusantium nihil vitae ut aliquid. Distinctio qui
-                                eveniet officiis. Veritatis asperiores distinctio, aperiam laudantium natus soluta
-                                assumenda vitae perferendis corrupti blanditiis ipsa iusto dicta, iste architecto
-                                explicabo amet fugit eligendi dolorem est quae corporis! Aperiam hic alias nemo
-                                molestiae nostrum eos iusto, suscipit atque. Eaque totam incidunt voluptatum
-                                voluptatibus sunt magnam dolorum, eius dolore tempore excepturi dignissimos ex, animi
-                                modi, quas perspiciatis aspernatur reprehenderit nemo praesentium adipisci consequuntur
-                                fugit architecto officia quod? Animi ex neque et dicta in vitae, recusandae ullam
-                                perferendis fugit aspernatur corrupti minima? Veritatis totam tenetur eos labore quo,
-                                numquam deserunt quidem aliquid, consectetur repellendus fuga nisi non distinctio et
-                                excepturi tempore, accusamus ea odio illo! Dolorem reprehenderit nemo voluptate
-                                voluptatibus aspernatur id fuga totam expedita ipsa quibusdam tempore maxime optio
-                                architecto vel quisquam molestiae sint, delectus minima eveniet ducimus beatae
-                                exercitationem possimus? Adipisci similique accusamus earum magnam recusandae. Maxime
-                                ipsa excepturi iure, ratione officiis aliquid! Quam maxime ex eveniet provident facilis
-                                quos sed. Eligendi voluptatibus tempora distinctio fugit, aliquam aspernatur architecto
-                                ut consectetur sit voluptas tenetur. Unde delectus doloremque quos voluptatem quaerat
-                                iste perferendis perspiciatis cumque! Temporibus sunt error placeat. Quas pariatur nobis
-                                illum inventore repudiandae nisi natus iusto facere quis eius a reiciendis hic impedit
-                                ipsa error aperiam sed voluptatibus libero, autem doloremque consectetur similique
-                                dignissimos molestias. Accusantium quaerat illum similique eos quibusdam, corporis fuga
-                                voluptas vitae dicta atque, eaque perferendis expedita itaque? Perspiciatis doloremque
-                                assumenda numquam neque, unde officia natus nisi, excepturi soluta iure a fuga expedita
-                                aliquam quos. Laborum fugit impedit asperiores vel pariatur magnam excepturi optio rem
-                                vitae earum. Eaque mollitia sed similique assumenda esse nesciunt hic consequatur
-                                explicabo ipsa voluptates error non repudiandae a numquam, fuga sunt vel facilis maiores
-                                nulla reprehenderit veritatis quibusdam labore. Itaque reiciendis explicabo dolor hic
-                                quas, voluptates corrupti rem modi fugit facere eaque repudiandae magnam ex quia sed
-                                officiis minus quisquam cupiditate totam saepe porro aliquam nemo. Dicta reiciendis
-                                suscipit ducimus quo at expedita veritatis tempore nisi fugit molestiae ipsum pariatur,
-                                nihil maxime illo quibusdam eaque, nesciunt consequuntur numquam iste quasi perspiciatis
-                                consectetur sapiente deserunt? Exercitationem consequatur at asperiores alias nulla,
-                                quia debitis eaque vel! Praesentium minus nobis obcaecati asperiores doloribus. Enim
-                                facilis consequatur quos, atque aut a, ab recusandae autem iusto hic, eius quasi impedit
-                                dolor nobis cum perferendis iste error possimus eos animi doloribus. Dolor dolore
-                                nesciunt assumenda debitis tempora exercitationem. Eveniet ipsum est, tempore similique
-                                vel id tempora delectus maxime unde necessitatibus eligendi excepturi. Doloribus
-                                suscipit, delectus totam molestiae ipsa, tenetur eius illum quasi fugit debitis quo
-                                corporis eos libero dolores vero et architecto aliquid saepe voluptatum nisi rem odio
-                                numquam. Est sequi itaque cum, quae officiis omnis fuga consequuntur distinctio? Rem, ut
-                                pariatur! Earum tenetur facere tempore repellat iure vel, itaque quasi, commodi,
-                                consequuntur debitis eius explicabo eos animi voluptatum facilis eligendi. Est
-                                voluptatibus, aut mollitia odit in doloremque tenetur ipsam nostrum quia provident
-                                dolore quis quibusdam error odio ab rem sequi, consequuntur animi! Dolores maxime quia
-                                fugit odio culpa, dignissimos est illo, ipsum dolore, doloremque dolorem? Eligendi id,
-                                alias iure ipsa similique voluptatum in doloribus a cupiditate non voluptas? Voluptas
-                                alias quo minima dolorem perspiciatis accusantium illo unde illum eos velit fugit
-                                recusandae, pariatur blanditiis ipsam facilis! Asperiores aut reiciendis debitis commodi
-                                numquam, unde placeat voluptate ducimus quibusdam quisquam perferendis veniam possimus!
-                                Repellat dignissimos impedit perspiciatis id ipsam non asperiores. Sunt non cum fugit
-                                eius velit ut placeat nam doloremque itaque ipsa consectetur laudantium atque unde
-                                magnam eum, officia consequuntur tenetur cupiditate, enim iusto corrupti dolore,
-                                distinctio praesentium! Officia porro magnam quis, fuga debitis consectetur amet tempora
-                                voluptatum sunt culpa nemo at laborum, distinctio obcaecati veniam ipsum cupiditate.
-                                Quidem consequuntur voluptatum eaque blanditiis sapiente quisquam recusandae, molestias
-                                quos earum numquam distinctio omnis cumque, officiis itaque possimus. Facilis modi
-                                accusamus asperiores non iure accusantium illum fugiat necessitatibus ipsa beatae enim
-                                nisi reprehenderit amet quaerat, sit obcaecati incidunt facere harum voluptas error. Sit
-                                ex alias aliquid recusandae maxime eius quo excepturi quasi omnis libero neque enim
-                                minus, voluptatem voluptatibus ut provident quaerat facere sapiente dolore et a illum?
-                                Ipsum repellendus eaque nam adipisci enim, delectus atque laborum minima. Unde aliquam,
-                                saepe pariatur sed aut sequi blanditiis suscipit quas aliquid consequatur numquam
-                                cupiditate quasi sunt placeat dolores voluptatem, ut quibusdam quo maiores, quis eaque.
-                                Aliquid eveniet perspiciatis adipisci placeat fugiat temporibus recusandae nemo
-                                laboriosam, ad aut, enim quaerat animi obcaecati quo modi similique asperiores, laborum
-                                eius quod veniam in culpa repellat! Minus quidem itaque error, eum voluptas veritatis.
-                                Ad temporibus ratione doloribus unde velit. Inventore unde nihil impedit, rerum
-                                similique quia sint velit voluptates sed excepturi omnis. Animi eos deleniti velit, hic
-                                assumenda atque iusto aperiam voluptate inventore eaque, adipisci in. A ducimus, sequi
-                                natus magni qui dolore deleniti quae magnam, incidunt perspiciatis dicta repellendus,
-                                quidem asperiores et. Cum consectetur ratione amet rerum earum quaerat obcaecati, iste
-                                facere voluptatum minus quo aliquid aut delectus, repellat maiores, architecto a
-                                laudantium magni? Vel, totam suscipit deserunt quia excepturi, eaque cum laudantium
-                                asperiores in, illum reprehenderit provident quisquam.
+                            <div class="rounded-3 bg-light p-3 mt-3" style="max-width: 20rem;">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ut porro cum excepturi, ipsum officiis est minima dignissimos? Ea neque est maiores architecto itaque minus nesciunt nulla enim suscipit ab.
+                            </div>
+                            <div class="rounded-3 p-3 mt-3 align-self-end" style="max-width: 20rem; background-color: #a3adc4;">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ut porro cum excepturi, ipsum officiis est minima dignissimos? Ea neque est maiores architecto itaque minus nesciunt nulla enim suscipit ab.
                             </div>
                         </div>
 
                         <div class="flex-grow-1">
-                            
-                        </div>
 
-                        <div class="d-flex gap-3 mensagens mt-3 justify-content-center align-items-center">
+                            <div class="d-flex gap-3 mensagens mt-3 justify-content-center align-items-center">
 
-                            <div class="inputMensagen w-100" style="max-width: 90%;">
-                                <input class="form-control p-3 rounded-4" style="background-color: #c7cfe4;"
-                                    placeholder="Mensagem" />
+                                <div class="inputMensagen w-100" style="max-width: 90%;">
+                                    <input class="form-control p-3 rounded-4" style="background-color: #c7cfe4;"
+                                        placeholder="Mensagem" />
+                                </div>
+
+                                <a class="btn p-3 rounded-4 " style="background-color: #6276A842;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                        class="bi bi-send" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                                    </svg>
+                                </a>
+
                             </div>
-
-                            <a class="btn p-3 rounded-4 " style="background-color: #6276A842;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-send" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
-                                </svg>
-                            </a>
-
                         </div>
+
 
                     </div>
 
@@ -387,7 +657,7 @@
             <!--Fazer o contato buscado aparecer aqui e puxar a lista de contatos para aqui tambem-->
             <div class="container-fluid mt-4 d-flex justify-content-center align-items-center"
                 id="ListaContatosOffCanvas">
-                <div class="ListaContatosOffCanvas">
+                <div class="ListaContatosOffCanvas w-100">
                     <div class="mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"
                         style="width: 96%;" onclick="entrarChat()" data-bs-dismiss="offcanvas">
                         <div class="row">
@@ -454,7 +724,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="./index.js"></script>
+    <script src="./index.js" defer></script>
 </body>
 
 </html>

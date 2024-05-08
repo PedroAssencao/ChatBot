@@ -9,6 +9,11 @@
     cursor: pointer;
 }
 
+body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
 
 .unactiveChat {
     cursor: pointer;
@@ -104,10 +109,9 @@
 }
 
 
-
 .ConteudoChat {
     overflow: auto;
-    max-height: 77vh;
+    padding: 2rem;
 }
 
 
