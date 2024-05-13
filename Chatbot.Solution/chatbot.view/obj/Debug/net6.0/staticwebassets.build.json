@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rZqXtMkiJ98+gNo51HxRt2Ho18kMFATldswAUBLsoLQ=",
+  "Hash": "irTTFYaffpMwDnQQ3utsyQqgT1+UUppgv18w8a511H0=",
   "Source": "chatbot.view",
   "BasePath": "_content/chatbot.view",
   "Mode": "Default",
@@ -61,6 +61,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\chatbot.view.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\atendente\\style.css",
+      "SourceId": "chatbot.view",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\",
+      "BasePath": "_content/chatbot.view",
+      "RelativePath": "css/atendente/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\atendente\\style.css"
     },
     {
       "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\logar\\style.css",
@@ -129,6 +146,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\image\\DazzleBot.png"
+    },
+    {
+      "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\img\\bye-bye-looksmaxxing.webp",
+      "SourceId": "chatbot.view",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\",
+      "BasePath": "_content/chatbot.view",
+      "RelativePath": "img/bye-bye-looksmaxxing.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\bye-bye-looksmaxxing.webp"
     },
     {
       "Identity": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\js\\logar\\app.js",

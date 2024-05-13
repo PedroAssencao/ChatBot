@@ -14,6 +14,7 @@ namespace Chatbot.API.Models
         public Atendente()
         {
             Atendimentos = new HashSet<Atendimento>();
+            Chats = new HashSet<Chat>();
         }
 
         [Key]
@@ -49,5 +50,7 @@ namespace Chatbot.API.Models
         public virtual Login? Log { get; set; }
         [InverseProperty(nameof(Atendimento.Ate))]
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
+        [InverseProperty(nameof(Chat.Ate))]
+        public virtual ICollection<Chat> Chats { get; set; }
     }
 }

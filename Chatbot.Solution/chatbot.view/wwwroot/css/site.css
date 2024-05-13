@@ -1,18 +1,138 @@
-html {
-  font-size: 14px;
+.activeIcon,
+.sideBarIcon:hover {
+    background-color: #182c5f;
+    cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+.activeOption {
+    background-color: #fff;
+    cursor: pointer;
 }
 
 body {
-  margin-bottom: 60px;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
+
+
+.unactiveChat {
+    cursor: pointer;
+}
+
+.activeChat {
+    background-color: #ebeff9;
+    border: solid 3px #2095eb;
+    cursor: pointer;
+}
+
+.sideBarContainer {
+    background-color: #263a6d;
+    height: 5rem;
+    width: 5rem;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    justify-content: center;
+}
+
+
+.containerMensagens {
+    max-width: 35rem;
+}
+
+.btnAdicionar {
+    background-color: #b0dea5;
+    font-size: 13pt;
+    color: #324872;
+    width: 4rem;
+    height: 3.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonplus {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.leadImage {
+    width: 60px;
+    height:60px;
+}
+
+.espacamentoInicial {
+    margin-top: 1.5rem;
+}
+
+.conversaStatus:hover {
+    background-color: white;
+    border-radius: 0.5rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    color: #6276A842;
+    border-radius: 70px;
+    background-color: #6276A842;
+}
+
+
+/* Media Querys */
+@media (max-width: 360px) {
+    .espacamentoInicial {
+        margin-left: 5rem;
+    }
+}
+
+@media (max-width: 370px) {
+    .menuButtonStatus {
+        text-align: center;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 374px) {
+    .sideBarContainer {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    .containerMensagens {
+        max-width: 100%;
+    }
+}
+
+
+.ConteudoChat {
+    overflow: auto;
+    padding: 2rem;
+}
+
+
+@media (min-width: 992px) {
+    .sideBarContainer {
+        max-width: 5rem;
+        height: auto;
+        justify-content: start;
+        position: unset;
+    }
+
+
+
+    .MarginMedia {
+        margin-top: 2rem;
+        margin-left: 2rem;
+    }
+
+    .espacamentoInicial {
+        margin-top: 3rem;
+    }
+}
+

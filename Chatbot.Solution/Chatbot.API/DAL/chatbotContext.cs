@@ -19,6 +19,7 @@ namespace Chatbot.API.DAL
 
         public virtual DbSet<Atendente> Atendentes { get; set; } = null!;
         public virtual DbSet<Atendimento> Atendimentos { get; set; } = null!;
+        public virtual DbSet<Chat> Chats { get; set; } = null!;
         public virtual DbSet<Contato> Contatos { get; set; } = null!;
         public virtual DbSet<Departamento> Departamentos { get; set; } = null!;
         public virtual DbSet<Login> Logins { get; set; } = null!;
@@ -76,6 +77,22 @@ namespace Chatbot.API.DAL
                     .WithMany(p => p.Atendimentos)
                     .HasForeignKey(d => d.LogId)
                     .HasConstraintName("FK__Atendimen__log_i__5BE2A6F2");
+            });
+
+            modelBuilder.Entity<Chat>(entity =>
+            {
+                entity.HasKey(e => e.ChaId)
+                    .HasName("PK__chat__5AF8FDEA08FBB41E");
+
+                entity.HasOne(d => d.Ate)
+                    .WithMany(p => p.Chats)
+                    .HasForeignKey(d => d.AteId)
+                    .HasConstraintName("FK__chat__ate_id__02FC7413");
+
+                entity.HasOne(d => d.Con)
+                    .WithMany(p => p.Chats)
+                    .HasForeignKey(d => d.ConId)
+                    .HasConstraintName("FK__chat__con_id__03F0984C");
             });
 
             modelBuilder.Entity<Contato>(entity =>

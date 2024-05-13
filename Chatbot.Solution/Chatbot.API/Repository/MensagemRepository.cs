@@ -46,7 +46,6 @@ namespace Chatbot.API.Repository
             {
                 throw new Exception("Error ao carregar a lista de mensagens error: " + ex);
             }
-       
 
         }
 

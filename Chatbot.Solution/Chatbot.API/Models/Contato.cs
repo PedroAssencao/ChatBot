@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.API.Models
@@ -13,6 +14,7 @@ namespace Chatbot.API.Models
         public Contato()
         {
             Atendimentos = new HashSet<Atendimento>();
+            Chats = new HashSet<Chat>();
             Mensagens = new HashSet<Mensagen>();
         }
 
@@ -39,6 +41,9 @@ namespace Chatbot.API.Models
         public virtual Login? Log { get; set; }
         [InverseProperty(nameof(Atendimento.Con))]
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
+        [InverseProperty(nameof(Chat.Con))]
+        public virtual ICollection<Chat> Chats { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Mensagen.Con))]
         public virtual ICollection<Mensagen> Mensagens { get; set; }
     }

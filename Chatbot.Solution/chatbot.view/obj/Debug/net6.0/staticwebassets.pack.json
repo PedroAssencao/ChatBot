@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\chatbot.view.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\atendente\\style.css",
+      "PackagePath": "staticwebassets\\css\\atendente\\style.css"
+    },
+    {
       "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\css\\logar\\style.css",
       "PackagePath": "staticwebassets\\css\\logar\\style.css"
     },
@@ -19,6 +23,10 @@
     {
       "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\image\\DazzleBot.png",
       "PackagePath": "staticwebassets\\image\\DazzleBot.png"
+    },
+    {
+      "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\img\\bye-bye-looksmaxxing.webp",
+      "PackagePath": "staticwebassets\\img\\bye-bye-looksmaxxing.webp"
     },
     {
       "Id": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\wwwroot\\js\\logar\\app.js",
