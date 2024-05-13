@@ -7,6 +7,11 @@ function entrarChat() {
     document.getElementById('containerChats').style.display = 'flex'
 }
 
+window.onload = function() {
+    var element = document.querySelector(".ConteudoChat");
+    element.scrollTop = element.scrollHeight;
+};
+
 function voltarChat() {
     document.getElementById('navbar').style.display = 'block'
     document.getElementById('sidebar').style.display = 'flex'
@@ -59,3 +64,24 @@ function VerficarAltura() {
 
 window.addEventListener('resize', VerficarAltura);
 VerficarAltura();
+
+
+
+
+function aumentarMargin() {
+    var larguraJanela = window.innerHeight;
+    console.log(larguraJanela)
+    if(larguraJanela > 900){
+        var containerMensagens = document.getElementById("pai");
+        containerMensagens.style.marginLeft = '5.5rem'; // Ajuste o valor conforme necessário
+    }
+}
+
+function diminuirMargin() {
+    var larguraJanela = window.innerHeight;
+    if(larguraJanela > 600){
+        console.log(larguraJanela)
+        var containerMensagens = document.getElementById("pai");
+        containerMensagens.style.marginLeft = '0';
+    }
+}

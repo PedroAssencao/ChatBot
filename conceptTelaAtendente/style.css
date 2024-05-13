@@ -15,6 +15,7 @@ body{
 }
 
 
+
 .unactiveChat {
     cursor: pointer;
 }
@@ -23,19 +24,32 @@ body{
     background-color: #ebeff9;
     border: solid 3px #2095eb;
     cursor: pointer;
+    
 }
 
 .sideBarContainer {
     background-color: #263a6d;
     height: 5rem;
-    position: fixed;
+    min-width: 5%;
     right: 0;
     bottom: 0;
     left: 0;
+    position: fixed;
     z-index: 1030;
-    justify-content: center;
 }
 
+svg{
+    width: 30px;
+    height: 30px;
+}
+
+.divSubistituta{
+    display: none;
+}
+
+.TextoMassa{
+    display: none;
+}
 
 .containerMensagens {
     max-width: 35rem;
@@ -108,9 +122,11 @@ body{
     }
 }
 
-
+/*se quiser colocar animação so tirar os comentarios dessa classe*/
 .ConteudoChat {
-    overflow: auto;
+    overflow-y: scroll;
+    /* scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;   */
     padding: 2rem;
 }
 
@@ -121,9 +137,39 @@ body{
         height: auto;
         justify-content: start;
         position: unset;
+        transition: 0.4s ease-out;
     }
 
+    .sideBarContainer:hover{
+        min-width: 15%;
+        position: fixed;
+        z-index: 9999;
+        height: 100%;
+    }
 
+    .sideBarContainer:hover .containerPai{
+    margin-left: 5rem;
+    padding-left: 100rem;
+        
+    }
+    
+    .sideBarContainer:hover .sideBarIcon  {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+    }
+    
+    .sideBarContainer:hover .divSubistituta{
+        display: block;
+        max-width: 5%;
+    }
+    
+    .sideBarContainer:hover .TextoMassa  {
+        display: block;
+    }
 
     .MarginMedia {
         margin-top: 2rem;
@@ -134,4 +180,8 @@ body{
         margin-top: 3rem;
     }
 
+}
+
+#pai{
+    transition: margin-left 2s ease-out;
 }
