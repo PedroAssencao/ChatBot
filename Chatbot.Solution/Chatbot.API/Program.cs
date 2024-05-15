@@ -24,6 +24,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 builder.Services.AddTransient<MethodsPost>();
 builder.Services.AddTransient<MensagemRepository>();
+builder.Services.AddTransient<ChatRepository>();
 builder.Services.AddTransient<ContatoRepository>();
 builder.Services.AddTransient<LoginRepository>();
 builder.Services.AddTransient<AtendimentoRepository>();

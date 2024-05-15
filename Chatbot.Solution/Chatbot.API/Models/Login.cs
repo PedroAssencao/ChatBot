@@ -15,6 +15,7 @@ namespace Chatbot.API.Models
         {
             Atendentes = new HashSet<Atendente>();
             Atendimentos = new HashSet<Atendimento>();
+            Chats = new HashSet<Chat>();
             Contatos = new HashSet<Contato>();
             Departamentos = new HashSet<Departamento>();
             Mensagens = new HashSet<Mensagen>();
@@ -49,12 +50,14 @@ namespace Chatbot.API.Models
         [Unicode(false)]
         public string? LogWaid { get; set; }
         [JsonIgnore]
-
         [InverseProperty(nameof(Atendente.Log))]
         public virtual ICollection<Atendente> Atendentes { get; set; }
         [JsonIgnore]
         [InverseProperty(nameof(Atendimento.Log))]
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
+        [JsonIgnore]
+        [InverseProperty(nameof(Chat.Log))]
+        public virtual ICollection<Chat> Chats { get; set; }
         [JsonIgnore]
         [InverseProperty(nameof(Contato.Log))]
         public virtual ICollection<Contato> Contatos { get; set; }
@@ -70,7 +73,6 @@ namespace Chatbot.API.Models
         [JsonIgnore]
         [InverseProperty(nameof(Option.Log))]
         public virtual ICollection<Option> Options { get; set; }
-
         public string CriptografaSenha(string senha)
         {
             var a = Encoding.UTF8.GetBytes(senha);
@@ -84,6 +86,7 @@ namespace Chatbot.API.Models
             var d = Encoding.UTF8.GetString(c);
             return d;
         }
+
+
     }
 }
-

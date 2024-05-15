@@ -142,12 +142,18 @@ namespace Chatbot.API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("con_id");
 
+                    b.Property<int?>("LogId")
+                        .HasColumnType("int")
+                        .HasColumnName("log_id");
+
                     b.HasKey("ChaId")
-                        .HasName("PK__chat__5AF8FDEA08FBB41E");
+                        .HasName("PK__chat__5AF8FDEA98C97753");
 
                     b.HasIndex("AteId");
 
                     b.HasIndex("ConId");
+
+                    b.HasIndex("LogId");
 
                     b.ToTable("chat");
                 });
@@ -279,6 +285,10 @@ namespace Chatbot.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MensId"), 1L, 1);
 
+                    b.Property<int?>("ChaId")
+                        .HasColumnType("int")
+                        .HasColumnName("cha_id");
+
                     b.Property<int?>("ConId")
                         .HasColumnType("int")
                         .HasColumnName("con_id");
@@ -303,11 +313,13 @@ namespace Chatbot.API.Migrations
                         .HasColumnName("mens_descricao");
 
                     b.HasKey("MensId")
-                        .HasName("PK__Mensagen__763E9E0A0EC79D0B");
+                        .HasName("PK__Mensagen__763E9E0AF88E2D22");
 
-                    b.HasIndex(new[] { "ConId" }, "IX_Mensagens_con_id");
+                    b.HasIndex("ChaId");
 
-                    b.HasIndex(new[] { "LogId" }, "IX_Mensagens_log_id");
+                    b.HasIndex("ConId");
+
+                    b.HasIndex("LogId");
 
                     b.ToTable("Mensagens");
                 });
@@ -475,16 +487,23 @@ namespace Chatbot.API.Migrations
                     b.HasOne("Chatbot.API.Models.Atendente", "Ate")
                         .WithMany("Chats")
                         .HasForeignKey("AteId")
-                        .HasConstraintName("FK__chat__ate_id__02FC7413");
+                        .HasConstraintName("FK__chat__ate_id__5DCAEF64");
 
                     b.HasOne("Chatbot.API.Models.Contato", "Con")
                         .WithMany("Chats")
                         .HasForeignKey("ConId")
-                        .HasConstraintName("FK__chat__con_id__03F0984C");
+                        .HasConstraintName("FK__chat__con_id__5FB337D6");
+
+                    b.HasOne("Chatbot.API.Models.Login", "Log")
+                        .WithMany("Chats")
+                        .HasForeignKey("LogId")
+                        .HasConstraintName("FK__chat__log_id__5EBF139D");
 
                     b.Navigation("Ate");
 
                     b.Navigation("Con");
+
+                    b.Navigation("Log");
                 });
 
             modelBuilder.Entity("Chatbot.API.Models.Contato", b =>
@@ -509,15 +528,22 @@ namespace Chatbot.API.Migrations
 
             modelBuilder.Entity("Chatbot.API.Models.Mensagen", b =>
                 {
+                    b.HasOne("Chatbot.API.Models.Chat", "Cha")
+                        .WithMany("Mensagens")
+                        .HasForeignKey("ChaId")
+                        .HasConstraintName("FK__Mensagens__cha_i__6477ECF3");
+
                     b.HasOne("Chatbot.API.Models.Contato", "Con")
                         .WithMany("Mensagens")
                         .HasForeignKey("ConId")
-                        .HasConstraintName("FK__Mensagens__con_i__4E88ABD4");
+                        .HasConstraintName("FK__Mensagens__con_i__628FA481");
 
                     b.HasOne("Chatbot.API.Models.Login", "Log")
                         .WithMany("Mensagens")
                         .HasForeignKey("LogId")
-                        .HasConstraintName("FK__Mensagens__log_i__4F7CD00D");
+                        .HasConstraintName("FK__Mensagens__log_i__6383C8BA");
+
+                    b.Navigation("Cha");
 
                     b.Navigation("Con");
 
@@ -558,6 +584,11 @@ namespace Chatbot.API.Migrations
                     b.Navigation("Chats");
                 });
 
+            modelBuilder.Entity("Chatbot.API.Models.Chat", b =>
+                {
+                    b.Navigation("Mensagens");
+                });
+
             modelBuilder.Entity("Chatbot.API.Models.Contato", b =>
                 {
                     b.Navigation("Atendimentos");
@@ -579,6 +610,8 @@ namespace Chatbot.API.Migrations
                     b.Navigation("Atendentes");
 
                     b.Navigation("Atendimentos");
+
+                    b.Navigation("Chats");
 
                     b.Navigation("Contatos");
 

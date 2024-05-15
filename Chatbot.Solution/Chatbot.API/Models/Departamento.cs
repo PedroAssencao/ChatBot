@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.API.Models
@@ -29,8 +30,10 @@ namespace Chatbot.API.Models
         [ForeignKey(nameof(LogId))]
         [InverseProperty(nameof(Login.Departamentos))]
         public virtual Login? Log { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Atendente.Dep))]
         public virtual ICollection<Atendente> Atendentes { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Atendimento.Dep))]
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
     }

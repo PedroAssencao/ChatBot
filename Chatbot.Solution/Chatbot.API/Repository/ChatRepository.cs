@@ -9,26 +9,33 @@ namespace Chatbot.API.Repository
         protected readonly MensagemRepository _mensagemRepository;
         protected readonly atendentesRepostiroy _atendentesRepository;
         protected readonly ContatoRepository _contatoRepository;
-        public ChatRepository(chatbotContext chatbotContext, MensagemRepository mensagemRepository, atendentesRepostiroy atendentesRepository, ContatoRepository contatoRepository) : base(chatbotContext)
+        protected readonly LoginRepository _loginRepository;
+        public ChatRepository(chatbotContext chatbotContext, MensagemRepository mensagemRepository, atendentesRepostiroy atendentesRepository, ContatoRepository contatoRepository, LoginRepository loginRepository) : base(chatbotContext)
         {
             _mensagemRepository = mensagemRepository;
             _atendentesRepository = atendentesRepository;
             _contatoRepository = contatoRepository;
+            _loginRepository = loginRepository;
         }
 
-        public async Task<List<ChatDttoGet>> BuscarChatsComObjetos()
+        public async Task<List<Chat>> BuscarChatsComObjetos()
         {
             var dados = await GetAll();
-            List<ChatDttoGet> Lista = new List<ChatDttoGet>();
+            List<Chat> Lista = new List<Chat>();
             foreach (var item in dados)
             {
-                ChatDttoGet Model = new ChatDttoGet
+                Chat Model = new Chat
                 {
-                    cha_id = item.ChaId,
-                    Atendente = await _atendentesRepository.GetPorID(Convert.ToInt32(item.AteId)),
-                    Contato = await _contatoRepository.GetPorID(Convert.ToInt32(item.ConId)),
-                    Mensagens = await _mensagemRepository.GetAll()
+                    ChaId = item.ChaId,
+                    AteId = item.AteId,
+                    ConId = item.ConId,
+                    LogId = item.LogId,
+                    Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
+                    Ate = await _atendentesRepository.GetPorID(Convert.ToInt32(item.AteId)),
+                    Con = await _contatoRepository.GetPorID(Convert.ToInt32(item.ConId)),
+                    Mensagens = await _mensagemRepository.RetornarMensagensPorChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
                 };
+                Lista.Add(Model);
             }
             return Lista;
         }

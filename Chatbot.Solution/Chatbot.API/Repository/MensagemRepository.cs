@@ -34,6 +34,7 @@ namespace Chatbot.API.Repository
                         MenTipo = item.MenTipo,
                         LogId = item.LogId,
                         ConId = item.ConId,
+                        ChaId = item.ChaId,
                         Log = await _LoginRepository.GetPorID(Convert.ToInt32(item.LogId)),
                         Con = await _ContatoRepository.GetPorID(Convert.ToInt32(item.ConId))
                     };
@@ -55,6 +56,20 @@ namespace Chatbot.API.Repository
             {
                 var listaMensagens = await ListaComObjetos();
                 var MensagensFiltradas = listaMensagens.Where(x => x.ConId == con && x.LogId == log && x.MenTipo == "MensagenEnviada").ToList();
+                return MensagensFiltradas;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Mensagen>> RetornarMensagensPorChat(int cha, int log)
+        {
+            try
+            {
+                var listaMensagens = await ListaComObjetos();
+                var MensagensFiltradas = listaMensagens.Where(x => x.ChaId == cha && x.LogId == log && x.MenTipo == "MensagenEnviada").ToList();
                 return MensagensFiltradas;
             }
             catch (Exception)

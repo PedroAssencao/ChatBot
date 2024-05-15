@@ -7,6 +7,7 @@ namespace Chatbot.API.Dtto
         public int cha_id { get; set; }
         public Contato? Contato { get; set; }
         public Atendente? Atendente { get; set; }
+        public Login? Login { get; set; }
         public List<Mensagen>? Mensagens { get; set; }
     }
 }

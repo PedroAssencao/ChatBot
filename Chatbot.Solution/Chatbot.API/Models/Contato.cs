@@ -39,8 +39,10 @@ namespace Chatbot.API.Models
         [ForeignKey(nameof(LogId))]
         [InverseProperty(nameof(Login.Contatos))]
         public virtual Login? Log { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Atendimento.Con))]
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
+        [JsonIgnore]
         [InverseProperty(nameof(Chat.Con))]
         public virtual ICollection<Chat> Chats { get; set; }
         [JsonIgnore]

@@ -82,17 +82,22 @@ namespace Chatbot.API.DAL
             modelBuilder.Entity<Chat>(entity =>
             {
                 entity.HasKey(e => e.ChaId)
-                    .HasName("PK__chat__5AF8FDEA08FBB41E");
+                    .HasName("PK__chat__5AF8FDEA98C97753");
 
                 entity.HasOne(d => d.Ate)
                     .WithMany(p => p.Chats)
                     .HasForeignKey(d => d.AteId)
-                    .HasConstraintName("FK__chat__ate_id__02FC7413");
+                    .HasConstraintName("FK__chat__ate_id__5DCAEF64");
 
                 entity.HasOne(d => d.Con)
                     .WithMany(p => p.Chats)
                     .HasForeignKey(d => d.ConId)
-                    .HasConstraintName("FK__chat__con_id__03F0984C");
+                    .HasConstraintName("FK__chat__con_id__5FB337D6");
+
+                entity.HasOne(d => d.Log)
+                    .WithMany(p => p.Chats)
+                    .HasForeignKey(d => d.LogId)
+                    .HasConstraintName("FK__chat__log_id__5EBF139D");
             });
 
             modelBuilder.Entity<Contato>(entity =>
@@ -126,17 +131,22 @@ namespace Chatbot.API.DAL
             modelBuilder.Entity<Mensagen>(entity =>
             {
                 entity.HasKey(e => e.MensId)
-                    .HasName("PK__Mensagen__763E9E0A0EC79D0B");
+                    .HasName("PK__Mensagen__763E9E0AF88E2D22");
+
+                entity.HasOne(d => d.Cha)
+                    .WithMany(p => p.Mensagens)
+                    .HasForeignKey(d => d.ChaId)
+                    .HasConstraintName("FK__Mensagens__cha_i__6477ECF3");
 
                 entity.HasOne(d => d.Con)
                     .WithMany(p => p.Mensagens)
                     .HasForeignKey(d => d.ConId)
-                    .HasConstraintName("FK__Mensagens__con_i__4E88ABD4");
+                    .HasConstraintName("FK__Mensagens__con_i__628FA481");
 
                 entity.HasOne(d => d.Log)
                     .WithMany(p => p.Mensagens)
                     .HasForeignKey(d => d.LogId)
-                    .HasConstraintName("FK__Mensagens__log_i__4F7CD00D");
+                    .HasConstraintName("FK__Mensagens__log_i__6383C8BA");
             });
 
             modelBuilder.Entity<Menu>(entity =>
