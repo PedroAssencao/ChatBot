@@ -73,7 +73,7 @@ function aumentarMargin() {
     console.log(larguraJanela)
     if(larguraJanela > 900){
         var containerMensagens = document.getElementById("pai");
-        containerMensagens.style.marginLeft = '5.5rem'; // Ajuste o valor conforme necessário
+        containerMensagens.style.marginLeft = '5.8rem'; // Ajuste o valor conforme necessário
     }
 }
 

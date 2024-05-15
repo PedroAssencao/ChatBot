@@ -137,7 +137,7 @@ svg{
         height: auto;
         justify-content: start;
         position: unset;
-        transition: 0.4s ease-out;
+        transition: 0.8s ease;
     }
 
     .sideBarContainer:hover{
@@ -182,6 +182,6 @@ svg{
 
 }
 
-#pai{
-    transition: margin-left 2s ease-out;
-}
+/* #pai{
+  transition: 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+} */
