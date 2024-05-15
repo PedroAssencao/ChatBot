@@ -4,6 +4,15 @@
     cursor: pointer;
 }
 
+.sideBarIcon{
+margin-top: 2.3rem;
+}
+
+.enviar:hover{
+    transform: scale(1.1);
+    background-color: #3b73ff73;
+}
+
 .activeOption {
     background-color: #fff;
     cursor: pointer;
@@ -14,7 +23,13 @@ body{
     overflow-x: hidden;
 }
 
+.bi-three-dots-vertical{
+    cursor: pointer;
+}
 
+.bar:hover{
+    transform: scale(1.1);
+}
 
 .unactiveChat {
     cursor: pointer;
@@ -49,7 +64,23 @@ svg{
 
 .TextoMassa{
     display: none;
+    padding-top: 1rem;
+    transition: var(--transition-speed);
+    animation: fade-up 0.4s;
 }
+
+
+@keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+  }
 
 .containerMensagens {
     max-width: 35rem;
@@ -157,6 +188,7 @@ svg{
         display: flex;
         align-items: center;
         gap: 1rem;
+        margin-top: 1rem;
         font-family: "Poppins", sans-serif;
         font-weight: 500;
         font-style: normal;

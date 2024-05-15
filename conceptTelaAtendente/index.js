@@ -85,3 +85,30 @@ function diminuirMargin() {
         containerMensagens.style.marginLeft = '0';
     }
 }
+
+function pesquisar(){
+    var contato = document.getElementById("inputContatos").value;
+    console.log(contato)
+    var listacontatos = document.getElementById("ListaContatos");
+    const itens = document.querySelectorAll(".itemcontato");
+    document.getElementById("ListaContatos").innerHTML = ""
+    console.log(itens)
+    
+    itens.forEach(element => {
+        console.log(element)
+        var titulo = element.querySelector(".titulo").innerHTML;
+        console.log(titulo)
+
+
+        if (titulo.includes(contato)) {
+            document.getElementById("ListaContatos").innerHTML += element.innerHTML
+        }
+        else{
+            console.log("nao tem nenhume que inclui sua pesquisa")
+        }
+    });
+
+   
+
+    contato.includes(contato); // retorna false
+}
