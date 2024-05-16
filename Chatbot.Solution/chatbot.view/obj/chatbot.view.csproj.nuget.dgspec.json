@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj": {}
+    "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {
+    "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
+        "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
         "projectName": "Chatbot.API",
-        "projectPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
-        "packagesPath": "C:\\Users\\fusion\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\obj\\",
+        "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
+        "packagesPath": "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fusion\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pedro Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -78,21 +78,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj": {
+    "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj",
+        "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj",
         "projectName": "chatbot.view",
-        "projectPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj",
-        "packagesPath": "C:\\Users\\fusion\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\obj\\",
+        "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\chatbot.view.csproj",
+        "packagesPath": "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\chatbot.view\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fusion\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pedro Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -106,8 +106,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {
-                "projectPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj"
+              "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj": {
+                "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj"
               }
             }
           }
@@ -152,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -40,6 +40,12 @@ namespace Chatbot.API.Repository
             return Lista;
         }
 
+        public async Task<Chat?> BuscarChatPorId(int id)
+        {
+            var dados = await BuscarChatsComObjetos();
+            var listaFiltrada = dados.FirstOrDefault(x => x.ChaId == id);
+            return listaFiltrada;
+        }
 
     }
 }
