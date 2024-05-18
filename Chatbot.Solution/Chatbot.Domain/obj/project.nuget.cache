@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JOk495iejze+fW7GU7HA0gX8AADR2J1eKWcH5M7542x1vIbx3tEBPZ5kzi4WUotcW9tMbYh2rNUeNQ373BBOXQ==",
+  "dgSpecHash": "hgJ3k7p0kQSnnvHJX17vS52ByrC1Y/vXzO5OMFm7hpi39TxTnVMTviOClGCqu8s1dImatZV6cowO/cqUDps07w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj",
   "expectedPackageFiles": [
@@ -14,7 +14,8 @@
     "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
     "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
-    "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+    "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

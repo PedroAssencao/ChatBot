@@ -4,7 +4,7 @@ using Chatbot.Infrastructure.Interfaces;
 
 namespace Chatbot.API.Repository
 {
-    public class ChatRepository : BaseRepository<Chat>, IChatsInterface
+    public class ChatRepository : BaseRepository<Chat>
     {
         protected readonly MensagemRepository _mensagemRepository;
         protected readonly atendentesRepostiroy _atendentesRepository;
@@ -18,42 +18,27 @@ namespace Chatbot.API.Repository
             _loginRepository = loginRepository;
         }
 
-        public Task<Chat> Create(Chat Model)
+        public async Task<List<Chat>> BuscarChatsComObjetos()
         {
-            throw new NotImplementedException();
+            var dados = await GetAll();
+            List<Chat> Lista = new List<Chat>();
+            foreach (var item in dados)
+            {
+                Chat Model = new Chat
+                {
+                    ChaId = item.ChaId,
+                    AteId = item.AteId,
+                    ConId = item.ConId,
+                    LogId = item.LogId,
+                    Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
+                    Ate = await _atendentesRepository.GetPorID(Convert.ToInt32(item.AteId)),
+                    Con = await _contatoRepository.GetPorID(Convert.ToInt32(item.ConId)),
+                    Mensagens = await _mensagemRepository.RetornarMensagensPorChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
+                };
+                Lista.Add(Model);
+            }
+            return Lista;
         }
-
-        public Task<List<Chat>> GetALl()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Chat> GetPorId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public async Task<List<Chat>> BuscarChatsComObjetos()
-        //{
-        //    var dados = await GetAll();
-        //    List<Chat> Lista = new List<Chat>();
-        //    foreach (var item in dados)
-        //    {
-        //        Chat Model = new Chat
-        //        {
-        //            ChaId = item.ChaId,
-        //            AteId = item.AteId,
-        //            ConId = item.ConId,
-        //            LogId = item.LogId,
-        //            Log = await _loginRepository.GetPorID(Convert.ToInt32(item.LogId)),
-        //            Ate = await _atendentesRepository.GetPorID(Convert.ToInt32(item.AteId)),
-        //            Con = await _contatoRepository.GetPorID(Convert.ToInt32(item.ConId)),
-        //            Mensagens = await _mensagemRepository.RetornarMensagensPorChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
-        //        };
-        //        Lista.Add(Model);
-        //    }
-        //    return Lista;
-        //}
 
         //public async Task<Chat?> BuscarChatPorId(int id)
         //{
