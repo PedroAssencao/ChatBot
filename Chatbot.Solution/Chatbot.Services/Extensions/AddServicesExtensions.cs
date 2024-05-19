@@ -33,7 +33,7 @@ namespace Chatbot.Services.Extensions
             //services.AddScoped<IContatosInterface, ContatoRepository>();
             //services.AddScoped<IMensagemInterface, MensagemRepository>();
             //services.AddScoped<IMenuInterface, menuRepository>();
-            //services.AddScoped<IOptionsInterface, optionsRepository>();
+            services.AddScoped<IOptionInterfaceServices, OptionServices>();
             services.AddScoped<IDepartamentoInterfaceServices, DepartamentoServices>();
             services.AddTransient<ILoginInterfaceServices, LoginServices>();
             services.AddScoped<IAtendenteInterfaceServices, AtendenteServices>();
