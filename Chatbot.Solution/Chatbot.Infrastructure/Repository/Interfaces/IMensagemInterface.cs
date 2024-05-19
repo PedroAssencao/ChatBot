@@ -1,4 +1,4 @@
-﻿using Chatbot.API.Models;
+﻿using Chatbot.Domain.Models;
 using Chatbot.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;

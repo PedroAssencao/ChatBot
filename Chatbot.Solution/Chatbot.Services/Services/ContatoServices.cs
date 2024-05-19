@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
-using Chatbot.API.Models;
 using Chatbot.API.Repository;
+using Chatbot.Domain.Models;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;

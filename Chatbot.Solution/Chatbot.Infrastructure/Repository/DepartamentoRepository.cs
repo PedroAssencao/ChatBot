@@ -1,5 +1,5 @@
 ﻿using Chatbot.API.DAL;
-using Chatbot.API.Models;
+using Chatbot.Domain.Models;
 using Chatbot.Infrastructure.Repository.Interfaces;
 
 namespace Chatbot.API.Repository

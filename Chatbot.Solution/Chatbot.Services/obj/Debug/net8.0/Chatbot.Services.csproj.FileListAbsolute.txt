@@ -1,9 +1,3 @@
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.csproj.AssemblyReference.cache
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.AssemblyInfoInputs.cache
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.AssemblyInfo.cs
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.csproj.CoreCompileInputs.cache
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.sourcelink.json
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\Chatbot.Services.deps.json
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\Chatbot.Services.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\Chatbot.Services.pdb
@@ -11,6 +5,12 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Service
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\Chatbot.Infrastructure.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\Chatbot.Infrastructure.pdb
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\Chatbot.Domain.pdb
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.csproj.AssemblyReference.cache
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.AssemblyInfoInputs.cache
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.AssemblyInfo.cs
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.csproj.CoreCompileInputs.cache
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.sourcelink.json
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.csproj.CopyComplete
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\refint\Chatbot.Services.dll
