@@ -24,9 +24,9 @@ namespace Chatbot.Infrastructure.Dtto
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
         public string? TipoDaMensagem { get; set; }
-        public ContatoDttoGet? Contato { get; set; }
-        public LoginDttoGet? Login { get; set; }
-        public ChatsDttoGet? Chat { get; set; }
+        public ContatoDttoGetForView? Contato { get; set; }
+        public LoginDttoGetForView? Login { get; set; }
+        public ChatsDttoGetForMensagens? Chat { get; set; }
     }
 
 }

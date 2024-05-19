@@ -18,4 +18,13 @@ namespace Chatbot.Infrastructure.Dtto
         public List<MensagensDttoGetForView>? Mensagens { get; set; }
 
     }
+
+    public class ChatsDttoGetForMensagens
+    {
+        public int Codigo { get; set; }
+        public AtendenteDttoForView? Atendente { get; set; }
+        public AtendimentoDttoForView? Atendimento { get; set; }
+        public ContatoDttoGetForView? Contato { get; set; }
+
+    }
 }

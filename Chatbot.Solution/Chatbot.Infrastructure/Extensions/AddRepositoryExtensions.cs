@@ -27,18 +27,12 @@ namespace Chatbot.Infrastructure.Extensions
             services.AddTransient<IMensagemInterface, MensagemRepository>();
             //services.AddTransient<IChatsInterface, ChatRepository>();
             services.AddTransient<IContatosInterface, ContatoRepository>();
-            //services.AddTransient<ILoginInterface, LoginRepository>();
+            services.AddTransient<ILoginInterface, LoginRepository>();
             //services.AddTransient<IAtendimentoInterface, AtendimentoRepository>();
             //services.AddTransient<IAtendeteInterface, atendentesRepostiroy>();
             //services.AddTransient<IDepartamentoInterface, DepartamentoRepository>();
             //services.AddTransient<IOptionsInterface, optionsRepository>();
-            //services.AddTransient<IMenuInterface, menuRepository>();
-
-
-  
-
-            //services.AddHttpContextAccessor();
-
+            //services.AddTransient<IMenuInterface, menuRepository>()
         }
     }
 }

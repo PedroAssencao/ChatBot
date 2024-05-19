@@ -35,7 +35,7 @@ namespace Chatbot.Services.Services
                         Data = item.MensData,
                         TipoDaMensagem = item.MenTipo,
                         Descricao = item.MensDescricao,
-                        Contato = await _contatoRepository.GetPorId(Convert.ToInt32(item.ConId)),
+                        Contato = await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     };
                     list.Add(Model);
                 }

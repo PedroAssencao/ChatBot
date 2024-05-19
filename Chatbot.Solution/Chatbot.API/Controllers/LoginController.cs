@@ -1,0 +1,111 @@
+﻿using Chatbot.Infrastructure.Dtto;
+using Chatbot.Services.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Chatbot.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class LoginController : ControllerBase
+    {
+        protected readonly ILoginInterfaceServices _repository;
+
+        public LoginController(ILoginInterfaceServices repository)
+        {
+            _repository = repository;
+        }
+        [HttpGet("/login")]
+        public async Task<IActionResult> BuscarTodosLogin()
+        {
+            try
+            {
+                return Ok(await _repository.GetALl());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Exception("error: " + ex.Message));
+            }
+        }
+
+        [HttpGet("/login/{id}")]
+        public async Task<IActionResult> BuscarTodosLoginPorId(int id)
+        {
+            try
+            {
+                return Ok(await _repository.GetPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Exception("error: " + ex.Message));
+            }
+        }
+
+        [HttpPost("/login/Cadastrar")]
+        public async Task<IActionResult> Cadastrar(LoginDttoGet Model)
+        {
+            try
+            {
+                return Ok(await _repository.Cadastrar(Model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Exception("error: " + ex.Message));
+            }
+        }
+
+
+        [HttpPost("/login/logar")]
+        public async Task<IActionResult> Logar(LoginDttoPost Model, bool Iscadastrate)
+        {
+            try
+            {
+                 await _repository.Logar(Model, Iscadastrate);
+                return Ok("Logado Com sucesso");
+            }
+            catch (Exception ex)
+            {
+               return BadRequest(new Exception("error: " + ex.Message));
+            }
+        }
+
+        [HttpPut("/login/Atualizar")]
+        public async Task<IActionResult> AtualizarLogin(LoginDttoGet Model)
+        {
+            try
+            {
+                return Ok(await _repository.Update(Model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Exception("error: " + ex.Message));
+            }
+        }
+
+        [HttpDelete("/login/Delete")]
+        public async Task<IActionResult> ApagarLogin(int id)
+        {
+            try
+            {
+                return Ok(await _repository.Delete(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Exception("error: " + ex.Message));
+            }
+        }
+
+        [HttpPost("/login/Logout")]
+        public async Task<IActionResult> logout()
+        {
+            try
+            {
+                return Ok(await _repository.Logout());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Exception("error: " + ex.Message));
+            }
+        }
+    }
+}

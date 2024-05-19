@@ -154,5 +154,24 @@ namespace Chatbot.Infrastructure.Services
             }
 
         }
+
+        public async Task<ContatoDttoGetForView> GetContatoForViewPorId(int id)
+        {
+            try
+            {
+                var Model = await _contatoRepository.GetPorId(id);
+                ContatoDttoGetForView NewModel = new ContatoDttoGetForView
+                {
+                    Codigo = Model.ConId,
+                    Nome = Model.ConNome,
+                    CodigoWhatsapp = Model.ConWaId,
+                };
+                return NewModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
