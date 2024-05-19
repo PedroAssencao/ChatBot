@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Chatbot.Infrastructure.Meta.Services
 {
-    internal class MetaClientServices : IMetaClientServices
+    public class MetaClientServices : IMetaClientServices
     {
         protected readonly MetaRepository _metaRepository;
 

@@ -12,8 +12,8 @@ namespace Chatbot.Infrastructure.Dtto
     public class ChatsDttoGet
     {
         public int Codigo { get; set; }
-        public AtendenteDttoForView? Atendente { get; set; }
-        public AtendimentoDttoForView? Atendimento { get; set; }
+        public AtendenteDttoGet? Atendente { get; set; }
+        public AtendimentoDttoGet? Atendimento { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
         public List<MensagensDttoGetForView>? Mensagens { get; set; }
 
@@ -22,8 +22,8 @@ namespace Chatbot.Infrastructure.Dtto
     public class ChatsDttoGetForMensagens
     {
         public int Codigo { get; set; }
-        public AtendenteDttoForView? Atendente { get; set; }
-        public AtendimentoDttoForView? Atendimento { get; set; }
+        public AtendimentoDttoGet? Atendente { get; set; }
+        public AtendimentoDttoGet? Atendimento { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
 
     }

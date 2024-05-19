@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Chatbot.Services.Services.Interfaces
 {
-    public interface IAtendenteInterfaceServices : IBaseInterfaceServices<AtendenteDttoForView>
+    public interface IAtendenteInterfaceServices : IBaseInterfaceServices<AtendenteDttoGet>
     {
-        Task<AtendenteDttoForView> AdicionarPost(AtendenteDttoForPost Model);
-        Task<AtendenteDttoForView> UpdatePost(AtendenteDttoForPut Model);
+        Task<AtendenteDttoGet> AdicionarPost(AtendenteDttoForPost Model);
+        Task<AtendenteDttoGet> UpdatePost(AtendenteDttoForPut Model);
     }
 }

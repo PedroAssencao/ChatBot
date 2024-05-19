@@ -23,15 +23,15 @@ namespace Chatbot.Services.Services
             _login = login;
         }
 
-        public async Task<List<AtendenteDttoForView>> GetALl()
+        public async Task<List<AtendenteDttoGet>> GetALl()
         {
             try
             {
                 var dados = await _repository.GetALl();
-                List<AtendenteDttoForView> List = new List<AtendenteDttoForView>();
+                List<AtendenteDttoGet> List = new List<AtendenteDttoGet>();
                 foreach (var item in dados)
                 {
-                    AtendenteDttoForView Model = new AtendenteDttoForView
+                    AtendenteDttoGet Model = new AtendenteDttoGet
                     {
                         Codigo = item.AteId,
                         Nome = item.AteNome,
@@ -49,13 +49,13 @@ namespace Chatbot.Services.Services
             }
         }
 
-        public async Task<AtendenteDttoForView> GetPorId(int id)
+        public async Task<AtendenteDttoGet> GetPorId(int id)
         {
             try
             {
                 var dados = await _repository.GetPorId(id);
 
-                AtendenteDttoForView Model = new AtendenteDttoForView
+                AtendenteDttoGet Model = new AtendenteDttoGet
                 {
                     Codigo = dados.AteId,
                     Nome = dados.AteNome,
@@ -73,7 +73,7 @@ namespace Chatbot.Services.Services
 
         }
         
-        public async Task<AtendenteDttoForView> AdicionarPost(AtendenteDttoForPost Model)
+        public async Task<AtendenteDttoGet> AdicionarPost(AtendenteDttoForPost Model)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace Chatbot.Services.Services
                     LogId = Model.CodigoLogin
                 };
                 var dados = await _repository.Adicionar(NewModel);
-                AtendenteDttoForView ViewModel = new AtendenteDttoForView
+                AtendenteDttoGet ViewModel = new AtendenteDttoGet
                 {
                     Codigo = dados.AteId,
                     Nome = dados.AteNome,
@@ -104,7 +104,7 @@ namespace Chatbot.Services.Services
             }
         }
 
-        public async Task<AtendenteDttoForView> UpdatePost(AtendenteDttoForPut Model)
+        public async Task<AtendenteDttoGet> UpdatePost(AtendenteDttoForPut Model)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace Chatbot.Services.Services
                     LogId = Model.CodigoLogin
                 };
                 var dados = await _repository.update(NewModel);
-                AtendenteDttoForView ViewModel = new AtendenteDttoForView
+                AtendenteDttoGet ViewModel = new AtendenteDttoGet
                 {
                     Codigo = dados.AteId,
                     Nome = dados.AteNome,
@@ -136,12 +136,12 @@ namespace Chatbot.Services.Services
             }
         }
 
-        public async Task<AtendenteDttoForView> Delete(int id)
+        public async Task<AtendenteDttoGet> Delete(int id)
         {
             try
             {
                 var dados = await _repository.delete(id);
-                AtendenteDttoForView model = new AtendenteDttoForView
+                AtendenteDttoGet model = new AtendenteDttoGet
                 {
                     Codigo = dados.AteId,
                     Nome = dados.AteNome,
@@ -158,12 +158,12 @@ namespace Chatbot.Services.Services
         }
 
         //ver oque fazer depois com esses metodos que ficaramSobrando
-        public Task<AtendenteDttoForView> Create(AtendenteDttoForView Model)
+        public Task<AtendenteDttoGet> Create(AtendenteDttoGet Model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AtendenteDttoForView> Update(AtendenteDttoForView Model)
+        public Task<AtendenteDttoGet> Update(AtendenteDttoGet Model)
         {
             throw new NotImplementedException();
         }

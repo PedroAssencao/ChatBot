@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Chatbot.Infrastructure.Dtto
 {
-    public class AtendenteDttoForView
+    public class AtendenteDttoGet
     {
         public int Codigo { get; set; }
         public string? Nome { get; set; }

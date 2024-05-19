@@ -8,7 +8,7 @@ using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using Newtonsoft.Json;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
-    internal class MetaRepository : IMetaClient
+    public class MetaRepository : IMetaClient
     {
         private static readonly HttpClient _httpClient = new HttpClient();
 
