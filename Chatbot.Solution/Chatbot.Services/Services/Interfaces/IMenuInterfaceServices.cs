@@ -10,6 +10,9 @@ namespace Chatbot.Services.Services.Interfaces
 {
     public interface IMenuInterfaceServices : IBaseInterfaceServices<MenuDttoGet>
     {
-
+        Task<List<MenuDttoGet>> PegarTodosOsMenusPorLogID(int id);
+        Task<MenuDttoGet> PegarMenuPorLogIDEMenuInicial(int id);
+        Task<MenuDttoGet> AdicionarPost(MenuDttoPost menu);
+        Task<MenuDttoGet> AtualizarPut(MenuDttoPut menu);
     }
 }

@@ -11,7 +11,7 @@ namespace Chatbot.Services.Services.Interfaces
 {
     public interface IOptionInterfaceServices : IBaseInterfaceServices<OptionDttoGet>
     {
-        Task<OptionDttoGetForMenu> GetPorIdForMenu(int id);
+        Task<List<OptionDttoGetForMenu>> GetPorIdForMenu(int id);
         Task<OptionDttoGet> AdicionarPost (OptionDttoPost post);
         Task<OptionDttoGet> AtualizarPost (OptionDttoPut post);
     }

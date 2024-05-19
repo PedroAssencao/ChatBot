@@ -39,7 +39,7 @@ namespace Chatbot.Services.Services
                         Descricao = item.OptDescricao,
                         Resposta = item.OptResposta,
                         Finalizar = item.OptFinalizar,
-                        Login = await _loginService.GetPorIdLoginView(item.OptId)
+                        Login = await _loginService.GetPorIdLoginView(Convert.ToInt32(item.LogId))
                     };
                     List.Add(Model);
                 }
@@ -75,22 +75,28 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
-        public async Task<OptionDttoGetForMenu> GetPorIdForMenu(int id)
+        public async Task<List<OptionDttoGetForMenu>> GetPorIdForMenu(int id)
         {
             try
             {
-                var item = await _repository.GetPorId(id);
-                OptionDttoGetForMenu Model = new OptionDttoGetForMenu
+                var Model = await _repository.GetALl();
+                var Lista = Model.Where(x => x.MenId == id).ToList();
+                List<OptionDttoGetForMenu> List = new List<OptionDttoGetForMenu>();
+                foreach (var item in Lista)
                 {
-                    Codigo = item.OptId,
-                    CodigoMenu = item.MenId,
-                    Titulo = item.OptTitle,
-                    Tipo = item.OptTipo,
-                    Descricao = item.OptDescricao,
-                    Resposta = item.OptResposta,
-                    Finalizar = item.OptFinalizar,
-                };
-                return Model;
+                    OptionDttoGetForMenu NewModel = new OptionDttoGetForMenu
+                    {
+                        Codigo = item.OptId,
+                        CodigoMenu = item.MenId,
+                        Titulo = item.OptTitle,
+                        Tipo = item.OptTipo,
+                        Descricao = item.OptDescricao,
+                        Resposta = item.OptResposta,
+                        Finalizar = item.OptFinalizar,
+                    };
+                    List.Add(NewModel);
+                }
+                return List;
             }
             catch (Exception)
             {
