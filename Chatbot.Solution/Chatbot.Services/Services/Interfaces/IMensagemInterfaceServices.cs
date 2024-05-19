@@ -11,5 +11,7 @@ namespace Chatbot.Services.Services.Interfaces
     public interface IMensagemInterfaceServices : IBaseInterfaceServices<MensagensDttoGet>
     {
         Task<List<MensagensDttoGetForView>> BuscarMensagensDeUmChat(int con, int log);
+        Task<MensagensDttoGet> AdicionarPost(MensagensDttoPost Model);
+        Task<MensagensDttoGet> AtualizarPut(MensagensDttoPut Model);
     }
 }

@@ -15,7 +15,7 @@ namespace Chatbot.Infrastructure.Dtto
         public int Codigo { get; set; }
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
-        public ContatoDttoGet? Contato { get; set; }
+        public ContatoDttoGetForView? Contato { get; set; }
     }
 
     public class MensagensDttoGet
@@ -24,9 +24,31 @@ namespace Chatbot.Infrastructure.Dtto
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
         public string? TipoDaMensagem { get; set; }
+        public int CodigoChat { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
         public LoginDttoGetForView? Login { get; set; }
-        public ChatsDttoGetForMensagens? Chat { get; set; }
     }
+    public class MensagensDttoPost
+    {        
+        public DateTime? Data { get; set; }
+        public string? Descricao { get; set; }
+        public string? TipoDaMensagem { get; set; }
+        public int? CodigoContato { get; set; }
+        public int? CodigoLogin { get; set; }
+        public int? CodigoChat { get; set; }
+    }
+
+    public class MensagensDttoPut
+    {
+        public int Codigo { get; set; }
+        public DateTime? Data { get; set; }
+        public string? Descricao { get; set; }
+        public string? TipoDaMensagem { get; set; }
+        public int? CodigoContato { get; set; }
+        public int? CodigoLogin { get; set; }
+        public int? CodigoChat { get; set; }
+    }
+
+
 
 }

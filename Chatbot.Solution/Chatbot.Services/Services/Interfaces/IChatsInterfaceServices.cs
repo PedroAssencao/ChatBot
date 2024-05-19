@@ -10,5 +10,8 @@ namespace Chatbot.Infrastructure.Services.Interfaces
 {
     public interface IChatsInterfaceServices : IBaseInterfaceServices<ChatsDttoGet>
     {
+        Task<ChatsDttoGetForMensagens> BuscarChatParaMensagen(int id);
+        Task<ChatsDttoGet> AdicionarPost(ChatsDttoPost Model);
+        Task<ChatsDttoGet> AtualziarPut(ChatsDttoPut Model);
     }
 }
