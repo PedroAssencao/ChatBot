@@ -44,7 +44,7 @@ namespace Chatbot.API.Repository
 
         public async Task<List<Menu>> GetALl() => await GetAll();
         public async Task<Menu> GetPorId(int id) => await GetPorID(id);
-        public async Task<Menu> Create(Menu Model) => await Create(Model);
+        public async Task<Menu> Create(Menu Model) => await Adicionar(Model);
         public async Task<Menu> update(Menu Model) => await Update(Model);
         public async Task<Menu> delete(int id) => await Delete(id);
     }

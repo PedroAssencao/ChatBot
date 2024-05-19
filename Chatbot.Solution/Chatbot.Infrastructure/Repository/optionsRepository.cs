@@ -97,7 +97,7 @@ namespace Chatbot.API.Repository
 
         public async Task<List<Option>> GetALl() => await GetAll();
         public async Task<Option> GetPorId(int id) => await GetPorID(id);
-        public async Task<Option> Create(Option Model) => await Create(Model);
+        public async Task<Option> Create(Option Model) => await Adicionar(Model);
         public async Task<Option> update(Option Model) => await Update(Model);
         public async Task<Option> delete(int id) => await Delete(id);
     }

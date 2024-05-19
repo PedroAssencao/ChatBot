@@ -17,5 +17,7 @@ namespace Chatbot.Services.Services.Interfaces
         Task<bool> Logar(LoginDttoPost Model, bool IsCadastre);
         Task<LoginDttoGet> Cadastrar(LoginDttoGet Model);
         Task<HttpStatusCode> Logout();
+
+        Task<LoginDttoGetForView> GetPorIdLoginView(int id);
     }
 }

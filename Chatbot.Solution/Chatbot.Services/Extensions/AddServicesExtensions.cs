@@ -36,7 +36,7 @@ namespace Chatbot.Services.Extensions
             //services.AddScoped<IOptionsInterface, optionsRepository>();
             services.AddScoped<IDepartamentoInterfaceServices, DepartamentoServices>();
             services.AddTransient<ILoginInterfaceServices, LoginServices>();
-            //services.AddScoped<IAtendeteInterface, atendentesRepostiroy>();
+            services.AddScoped<IAtendenteInterfaceServices, AtendenteServices>();
             //services.AddScoped<IAtendimentoInterface, AtendimentoRepository>();
             services.AddHttpContextAccessor();
         }

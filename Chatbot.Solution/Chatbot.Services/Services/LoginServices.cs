@@ -273,5 +273,24 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
+
+        public async Task<LoginDttoGetForView> GetPorIdLoginView(int id)
+        {
+            try
+            {
+                var dados = await _repository.GetPorId(id);
+                LoginDttoGetForView NewModel = new LoginDttoGetForView
+                {
+                    Codigo = dados.LogId,
+                    CodigoWhatsapp = dados.LogWaid,
+                    Usuario = dados.LogUser,
+                };
+                return NewModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
