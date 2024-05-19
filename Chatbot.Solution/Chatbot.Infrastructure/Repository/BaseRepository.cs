@@ -45,7 +45,8 @@ namespace Chatbot.API.Repository
                 var Dados = await GetPorID(id);
                 if (Dados != null)
                 {
-                    _chatbotContext?.Remove(Dados);
+                    _chatbotContext.Remove(Dados);
+                    await _chatbotContext.SaveChangesAsync();
                     return Dados;
                 }
                 else

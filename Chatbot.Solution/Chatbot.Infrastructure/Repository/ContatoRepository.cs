@@ -12,7 +12,7 @@ namespace Chatbot.API.Repository
 
         public async Task<List<Contato>> GetALl() => await GetAll();
         public async Task<Contato> GetPorId(int id) => await GetPorID(id);
-        public async Task<Contato> Create(Contato Model) => await Create(Model);
+        public async Task<Contato> Create(Contato Model) => await Adicionar(Model);
         public async Task<Contato> update(Contato Model) => await Update(Model);
         public async Task<Contato> delete(int id) => await Delete(id);
     }

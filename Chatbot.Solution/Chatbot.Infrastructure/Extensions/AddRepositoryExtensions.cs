@@ -20,11 +20,11 @@ namespace Chatbot.Infrastructure.Extensions
 
             services.AddDbContext<chatbotContext>(options =>
             {
-                options.UseSqlServer("Data Source=DESKTOP-02BUU56;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
+                options.UseSqlServer(configuration.GetConnectionString("Chinook"));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 
-            //services.AddTransient<IMensagemInterface, MensagemRepository>();
+            services.AddTransient<IMensagemInterface, MensagemRepository>();
             //services.AddTransient<IChatsInterface, ChatRepository>();
             services.AddTransient<IContatosInterface, ContatoRepository>();
             //services.AddTransient<ILoginInterface, LoginRepository>();

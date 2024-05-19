@@ -17,6 +17,82 @@ namespace Chatbot.API.Controllers
             _contatoServices = contatoServices;
         }
         [HttpGet("/Contatos/Get")]
-        public async Task<IActionResult> BuscarTodosContato() => Ok(await _contatoServices.GetALl());
+        public async Task<IActionResult> BuscarTodosContato()
+        {
+            try
+            {
+                return Ok(await _contatoServices.GetALl());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+        [HttpGet("/Contatos/Get/{id}")]
+        public async Task<IActionResult> BuscarContatoPorId(int id)
+        {
+            try
+            {
+                return Ok(await _contatoServices.GetPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
+        [HttpGet("/Contatos/Get/waID/{id}")]
+        public async Task<IActionResult> BuscaContatoPorWaId(string id)
+        {
+            try
+            {
+                return Ok(await _contatoServices.RetornarConIdPorWaID(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
+
+        [HttpPost("/Contatos/Create")]
+        public async Task<IActionResult> CriarNovoContato(ContatoDttoGet Model)
+        {
+            try
+            {
+                return Ok(await _contatoServices.Create(Model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
+        [HttpPut("/Contatos/Update")]
+        public async Task<IActionResult> AtualizarContato(ContatoDttoGet Model)
+        {
+            try
+            {
+                return Ok(await _contatoServices.Update(Model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
+        [HttpDelete("/Contatos/Delete")]
+        public async Task<IActionResult> ApagarContato(int id)
+        {
+            try
+            {
+                return Ok(await _contatoServices.Delete(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
     }
 }

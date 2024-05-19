@@ -15,6 +15,7 @@ namespace Chatbot.Infrastructure.Dtto
         public int Codigo { get; set; }
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
+        public ContatoDttoGet? Contato { get; set; }
     }
 
     public class MensagensDttoGet
