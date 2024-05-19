@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chatbot.Infrastructure.Interfaces
 {
-    internal interface IChatsInterface : IBaseInterface<Chat>
+    public interface IChatsInterface : IBaseInterface<Chat>
     {
 
     }

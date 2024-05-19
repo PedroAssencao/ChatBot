@@ -1,10 +1,11 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.API.Models;
+using Chatbot.Infrastructure.Repository.Interfaces;
 using System.Linq;
 
 namespace Chatbot.API.Repository
 {
-    public class optionsRepository : BaseRepository<Option>
+    public class optionsRepository : BaseRepository<Option>, IOptionsInterface
     {
         protected readonly menuRepository _menuRepository;
         protected readonly MensagemRepository _mensagenRepository;
@@ -93,5 +94,11 @@ namespace Chatbot.API.Repository
             }
            
         }
+
+        public async Task<List<Option>> GetALl() => await GetAll();
+        public async Task<Option> GetPorId(int id) => await GetPorID(id);
+        public async Task<Option> Create(Option Model) => await Create(Model);
+        public async Task<Option> update(Option Model) => await Update(Model);
+        public async Task<Option> delete(int id) => await Delete(id);
     }
 }

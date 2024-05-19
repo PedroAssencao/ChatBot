@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.API.Models;
+using Chatbot.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Chatbot.API.Repository
 {
-    public class LoginRepository : BaseRepository<Login>
+    public class LoginRepository : BaseRepository<Login>, ILoginInterface
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         public LoginRepository(chatbotContext chatbotContext, IHttpContextAccessor content) : base(chatbotContext)
@@ -163,5 +164,10 @@ namespace Chatbot.API.Repository
             }
         }
 
+        public async Task<List<Login>> GetALl() => await GetAll();
+        public async Task<Login> GetPorId(int id) => await GetPorID(id);
+        public async Task<Login> Create(Login Model) => await Create(Model);
+        public async Task<Login> update(Login Model) => await Update(Model);
+        public async Task<Login> delete(int id) => await Delete(id);
     }
 }

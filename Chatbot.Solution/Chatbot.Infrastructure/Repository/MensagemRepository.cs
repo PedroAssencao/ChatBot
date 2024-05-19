@@ -1,10 +1,11 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.API.Models;
+using Chatbot.Infrastructure.Repository.Interfaces;
 using System.Linq;
 
 namespace Chatbot.API.Repository
 {
-    public class MensagemRepository : BaseRepository<Mensagen>
+    public class MensagemRepository : BaseRepository<Mensagen>, IMensagemInterface
     {
         protected readonly LoginRepository _LoginRepository;
         protected readonly ContatoRepository _ContatoRepository;
@@ -78,6 +79,12 @@ namespace Chatbot.API.Repository
             }
         }
 
+
+        public async Task<List<Mensagen>> GetALl() => await GetAll();
+        public async Task<Mensagen> GetPorId(int id) => await GetPorID(id);
+        public async Task<Mensagen> Create(Mensagen Model) => await Create(Model);
+        public async Task<Mensagen> update(Mensagen Model) => await Update(Model);
+        public async Task<Mensagen> delete(int id) => await Delete(id);
     }
     
 

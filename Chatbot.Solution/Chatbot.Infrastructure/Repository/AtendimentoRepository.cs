@@ -1,16 +1,17 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.API.Models;
+using Chatbot.Infrastructure.Repository.Interfaces;
 
 namespace Chatbot.API.Repository
 {
-    public class AtendimentoRepository : BaseRepository<Atendimento>
+    public class AtendimentoRepository : BaseRepository<Atendimento>, IAtendimentoInterface
     {
         protected readonly LoginRepository _loginRepository;
         protected readonly ContatoRepository _contatoRepository;
         protected readonly DepartamentoRepository _departamentoRepository;
         protected readonly atendentesRepostiroy _atendentesRepostiroy;
 
-        public AtendimentoRepository(chatbotContext chatbotContext,LoginRepository loginRepository, ContatoRepository contatoRepository, DepartamentoRepository departamentoRepository, atendentesRepostiroy atendentesRepostiroy) : base(chatbotContext)
+        public AtendimentoRepository(chatbotContext chatbotContext, LoginRepository loginRepository, ContatoRepository contatoRepository, DepartamentoRepository departamentoRepository, atendentesRepostiroy atendentesRepostiroy) : base(chatbotContext)
         {
             _loginRepository = loginRepository;
             _contatoRepository = contatoRepository;
@@ -63,5 +64,12 @@ namespace Chatbot.API.Repository
                 throw;
             }
         }
+
+
+        public async Task<List<Atendimento>> GetALl() => await GetAll();
+        public async Task<Atendimento> GetPorId(int id) => await GetPorID(id);
+        public async Task<Atendimento> Create(Atendimento Model) => await Create(Model);
+        public async Task<Atendimento> update(Atendimento Model) => await Update(Model);
+        public async Task<Atendimento> delete(int id) => await Delete(id);
     }
 }
