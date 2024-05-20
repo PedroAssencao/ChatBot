@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Chatbot.Services.Meta\Chatbot.Services.Meta.csproj" />
     <ProjectReference Include="..\Chatbot.Services\Chatbot.Services.csproj" />
   </ItemGroup>
 

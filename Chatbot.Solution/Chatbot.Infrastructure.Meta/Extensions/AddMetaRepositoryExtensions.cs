@@ -1,5 +1,6 @@
 ﻿using Chatbot.Infrastructure.Meta.Repository;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,10 @@ namespace Chatbot.Infrastructure.Meta.Extensions
 
     public static class AddMetaRepositoryExtensions
     {
-        //public static void AddRepositoryStartUp(this IServiceCollection services, IConfiguration configuration)
-        //{
-
-     
-        //    services.AddTransient<IMetaClient, IMeta>();
-        //}
+        public static void AddRepositoryMetaStartUp(this IServiceCollection services)
+        {
+            services.AddScoped<IMetodoCheck,MetodoCheckRepository>();
+        }
     }
 
 }

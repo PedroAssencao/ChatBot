@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatbot.Services", "Chatbot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatbot.API", "Chatbot.API\Chatbot.API.csproj", "{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatbot.Infrastructure.Meta", "Chatbot.Infrastructure.Meta\Chatbot.Infrastructure.Meta.csproj", "{114DD292-D747-4A96-8841-B4F250F7E05B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatbot.Infrastructure.Meta", "Chatbot.Infrastructure.Meta\Chatbot.Infrastructure.Meta.csproj", "{114DD292-D747-4A96-8841-B4F250F7E05B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatbot.Services.Meta", "Chatbot.Services.Meta\Chatbot.Services.Meta.csproj", "{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{114DD292-D747-4A96-8841-B4F250F7E05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{114DD292-D747-4A96-8841-B4F250F7E05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{114DD292-D747-4A96-8841-B4F250F7E05B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{347233CD-8704-4817-948C-340F631FD4A1} = {C2C1C1E1-A019-496D-B1DA-20B05CA604AD}
 		{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289} = {D5E61312-FEC7-4EDE-B74D-928A86F71B61}
 		{114DD292-D747-4A96-8841-B4F250F7E05B} = {7B87311E-6698-4CD2-A505-A5129E417AB9}
+		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA} = {C2C1C1E1-A019-496D-B1DA-20B05CA604AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92A2F642-AE3D-4213-88D6-90C673B45085}

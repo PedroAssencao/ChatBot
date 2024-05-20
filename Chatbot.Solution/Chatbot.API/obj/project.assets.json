@@ -2025,6 +2025,20 @@
           "bin/placeholder/Chatbot.Infrastructure.dll": {}
         }
       },
+      "Chatbot.Infrastructure.Meta/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Chatbot.Domain": "1.0.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "bin/placeholder/Chatbot.Infrastructure.Meta.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chatbot.Infrastructure.Meta.dll": {}
+        }
+      },
       "Chatbot.Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -2037,6 +2051,19 @@
         },
         "runtime": {
           "bin/placeholder/Chatbot.Services.dll": {}
+        }
+      },
+      "Chatbot.Services.Meta/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Chatbot.Infrastructure.Meta": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Chatbot.Services.Meta.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chatbot.Services.Meta.dll": {}
         }
       }
     }
@@ -5322,15 +5349,26 @@
       "path": "../Chatbot.Infrastructure/Chatbot.Infrastructure.csproj",
       "msbuildProject": "../Chatbot.Infrastructure/Chatbot.Infrastructure.csproj"
     },
+    "Chatbot.Infrastructure.Meta/1.0.0": {
+      "type": "project",
+      "path": "../Chatbot.Infrastructure.Meta/Chatbot.Infrastructure.Meta.csproj",
+      "msbuildProject": "../Chatbot.Infrastructure.Meta/Chatbot.Infrastructure.Meta.csproj"
+    },
     "Chatbot.Services/1.0.0": {
       "type": "project",
       "path": "../Chatbot.Services/Chatbot.Services.csproj",
       "msbuildProject": "../Chatbot.Services/Chatbot.Services.csproj"
+    },
+    "Chatbot.Services.Meta/1.0.0": {
+      "type": "project",
+      "path": "../Chatbot.Services.Meta/Chatbot.Services.Meta.csproj",
+      "msbuildProject": "../Chatbot.Services.Meta/Chatbot.Services.Meta.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Chatbot.Services >= 1.0.0",
+      "Chatbot.Services.Meta >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -5362,6 +5400,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+            "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj": {
+              "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj"
+            },
             "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Chatbot.Services.csproj": {
               "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Chatbot.Services.csproj"
             }

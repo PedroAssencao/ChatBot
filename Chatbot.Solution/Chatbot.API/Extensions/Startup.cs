@@ -1,5 +1,7 @@
 ﻿using Chatbot.Services.Extensions;
 using Chatbot.Infrastructure.Extensions;
+using Chatbot.Services.Meta.Extensions;
+using Chatbot.Infrastructure.Meta.Extensions;
 namespace Chatbot.API.Extensions
 {
     public static class Startup
@@ -14,7 +16,14 @@ namespace Chatbot.API.Extensions
         {
             services.StartConfiguration();
             services.AddRepositoryStartUp(configuration);
+            services.ConfigureServicesMeta();
             services.AddServicesSetup();
+        }
+
+        public static void ConfigureServicesMeta(this IServiceCollection services)
+        {
+            services.AddServicesMetaExtension();
+            services.AddRepositoryMetaStartUp();
         }
 
         public static void Configure(this WebApplication app)

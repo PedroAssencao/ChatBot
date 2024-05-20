@@ -9,6 +9,7 @@
       "Chatbot.API/1.0.0": {
         "dependencies": {
           "Chatbot.Services": "1.0.0",
+          "Chatbot.Services.Meta": "1.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
@@ -1073,6 +1074,15 @@
           "Chatbot.Infrastructure.dll": {}
         }
       },
+      "Chatbot.Infrastructure.Meta/1.0.0": {
+        "dependencies": {
+          "Chatbot.Domain": "1.0.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "Chatbot.Infrastructure.Meta.dll": {}
+        }
+      },
       "Chatbot.Services/1.0.0": {
         "dependencies": {
           "AutoMapper": "13.0.1",
@@ -1080,6 +1090,14 @@
         },
         "runtime": {
           "Chatbot.Services.dll": {}
+        }
+      },
+      "Chatbot.Services.Meta/1.0.0": {
+        "dependencies": {
+          "Chatbot.Infrastructure.Meta": "1.0.0"
+        },
+        "runtime": {
+          "Chatbot.Services.Meta.dll": {}
         }
       }
     }
@@ -1842,7 +1860,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Chatbot.Infrastructure.Meta/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Chatbot.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chatbot.Services.Meta/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
