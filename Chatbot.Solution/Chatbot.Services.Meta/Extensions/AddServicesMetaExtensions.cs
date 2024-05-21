@@ -1,4 +1,6 @@
-﻿using Chatbot.Services.Meta.Services;
+﻿using Chatbot.Infrastructure.Meta.Repository.Interfaces;
+using Chatbot.Infrastructure.Meta.Services;
+using Chatbot.Services.Meta.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace Chatbot.Services.Meta.Extensions
         public static void AddServicesMetaExtension(this IServiceCollection services)
         {
             services.AddScoped<MetodoCheckServices>();
+            services.AddScoped<IMetaClientServices, MetaClientServices>();
         }
     }
 }

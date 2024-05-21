@@ -15,6 +15,7 @@ namespace Chatbot.Infrastructure.Meta.Extensions
         public static void AddRepositoryMetaStartUp(this IServiceCollection services)
         {
             services.AddScoped<IMetodoCheck,MetodoCheckRepository>();
+            services.AddScoped<IMetaClient,MetaRepository>();
         }
     }
 

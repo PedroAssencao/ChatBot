@@ -12,6 +12,7 @@ namespace Chatbot.API.Extensions
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }
+
         public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.StartConfiguration();

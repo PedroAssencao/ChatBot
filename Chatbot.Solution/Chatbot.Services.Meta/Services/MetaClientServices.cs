@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Chatbot.Infrastructure.Meta.Services
@@ -28,6 +29,8 @@ namespace Chatbot.Infrastructure.Meta.Services
                 throw;
             }
         }
+
+        public async Task<dynamic> MAIN(JsonElement Values) => await _metaRepository.ChamarMetodo(Values);
 
         public Task<string> PostAsyncServices(string url, string token, dynamic data)
         {

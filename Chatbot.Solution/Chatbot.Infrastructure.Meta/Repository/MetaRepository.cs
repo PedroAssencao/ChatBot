@@ -173,40 +173,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
             var login = await _loginInterfaceServices.RetornarLogIdPorWaID(dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
 
-            var dadosAtendimento = await _atendimentoInterfaceServices.GetALl();
-
-            var Item = dadosAtendimento.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == dados?.entry[0].changes[0].value.contacts[0].wa_id && x?.Login?.Codigo == login?.Codigo);
-
-            if (Item == null)
-            {
-                AtendimentoDttoPost NovoAtendimento = new AtendimentoDttoPost
-                {
-                    EstadoAtendimento = "Bot",
-                    Data = DateTime.Now,
-                    CodigoLogin = login?.Codigo,
-                    CodigoContato = contato?.Codigo,
-                };
-                await _atendimentoInterfaceServices.AdicionarPost(NovoAtendimento);
-            }
-            if (Item?.EstadoAtendimento == "Bot")
-            {
-                return await BotResposta(Model);
-            }
-            if (Item?.EstadoAtendimento == "Finalizado")
-            {
-                AtendimentoDttoPut NewModel = new AtendimentoDttoPut
-                {
-                    Codigo = Item.Codigo,
-                    EstadoAtendimento = Item.EstadoAtendimento,
-                    Data = DateTime.Now,
-                    CodigoAtendente = Convert.ToInt32(Item.Atendente),
-                    CodigoDepartamento = Convert.ToInt32(Item?.Departamento?.Codigo),
-                    CodigoLogin = Convert.ToInt32(Item?.Login?.Codigo),
-                    CodigoContato = Convert.ToInt32(Item?.Contato?.Codigo),
-                };
-                await _atendimentoInterfaceServices.AtualizarPut(NewModel);
-            }
-
             var dadosMenu = await _menuInterfaceServices.GetALl();
 
             var menuselecionado = dadosMenu.FirstOrDefault(x => x.Tipo == nameof(ETipos.PrimeiraMensagem) && x?.Login?.Codigo == login?.Codigo);

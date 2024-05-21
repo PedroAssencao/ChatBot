@@ -1,4 +1,5 @@
-﻿using Chatbot.Domain.Models.Enums;
+﻿using Chatbot.Domain.Models;
+using Chatbot.Domain.Models.Enums;
 using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
@@ -19,12 +20,15 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly IMensagemInterfaceServices _MensagemInterfaceServices;
         protected readonly ILoginInterfaceServices _LoginInterfaceServices;
         protected readonly IAtendimentoInterfaceServices _AtendimentoInterfaceServices;
-        public MetodoCheckRepository(IContatoInterfaceServices contatoInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices, ILoginInterfaceServices loginInterfaceServices, IAtendimentoInterfaceServices atendimentoInterfaceServices)
+        private readonly IChatsInterfaceServices _ChatsInterfaceServices;
+        public MetodoCheckRepository(IContatoInterfaceServices contatoInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices, ILoginInterfaceServices loginInterfaceServices, 
+            IAtendimentoInterfaceServices atendimentoInterfaceServices, IChatsInterfaceServices chatsInterfaceServices)
         {
             _contatoInterfaceServices = contatoInterfaceServices;
             _MensagemInterfaceServices = mensagemInterfaceServices;
             _LoginInterfaceServices = loginInterfaceServices;
             _AtendimentoInterfaceServices = atendimentoInterfaceServices;
+            _ChatsInterfaceServices = chatsInterfaceServices;
         }
 
         public async Task<DataAndType> VerificarTipoDeRetorno(dynamic Values)
@@ -86,7 +90,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     Tipo = ETipoRetornoJson.TipoMultiplaEscolhas,
                     Dados = dados
                 };
-                return Model;
+                return await VerificaçõesIniciais(Model);
             }
             catch (Exception)
             {
@@ -103,23 +107,90 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 {
                     throw new Exception("Metodo errado");
                 }
-                var contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
-                var Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
+
+                DataAndType Model = new DataAndType
+                {
+                    Tipo = ETipoRetornoJson.TipoSimples,
+                    Dados = dados
+                };
+                return await VerificaçõesIniciais(Model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataAndType> VerificaçõesIniciais(DataAndType dados)
+        {
+
+            try
+            {
+                //transformar em metodo - start
+
+                var contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados.Dados.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
+                var Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados.Dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
                 var Mensagens = await _MensagemInterfaceServices.GetALl();
+                var dadosAtendimento = await _AtendimentoInterfaceServices.GetALl();
+                var Item = dadosAtendimento.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == dados.Dados?.entry[0].changes[0].value.contacts[0].wa_id && x?.Login?.Codigo == Login?.Codigo);
+                var AtenItem = new object();
                 if (contato == null)
                 {
                     ContatoDttoGet newModel = new ContatoDttoGet
                     {
-                        CodigoWhatsapp = dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
+                        CodigoWhatsapp = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
                         DataCadastro = DateTime.Now,
                         BloqueadoStatus = false,
-                        Nome = dados?.entry[0]?.changes[0]?.value?.contacts[0].profile[0].name,
+                        Nome = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].profile[0].name,
                         Codigologin = Login.Codigo
 
                     };
-                    contato = newModel;
                     await _contatoInterfaceServices.Create(newModel);
+                    contato = newModel;
                 }
+
+                if (Item == null)
+                {
+                    AtendimentoDttoPost NovoAtendimento = new AtendimentoDttoPost
+                    {
+                        EstadoAtendimento = "Bot",
+                        Data = DateTime.Now,
+                        CodigoLogin = Login?.Codigo,
+                        CodigoContato = contato?.Codigo,
+                    };
+                    await _AtendimentoInterfaceServices.AdicionarPost(NovoAtendimento);
+                }
+                if (Item?.EstadoAtendimento == "Bot")
+                {
+                    return dados;
+                }
+                if (Item?.EstadoAtendimento == "Finalizado")
+                {
+                    AtendimentoDttoPut NewModel = new AtendimentoDttoPut
+                    {
+                        Codigo = Item.Codigo,
+                        EstadoAtendimento = "Bot",
+                        Data = DateTime.Now,
+                        CodigoAtendente = null,
+                        CodigoDepartamento = null,
+                        CodigoLogin = Convert.ToInt32(Item?.Login?.Codigo),
+                        CodigoContato = Convert.ToInt32(Item?.Contato?.Codigo),
+                    };
+                    await _AtendimentoInterfaceServices.AtualizarPut(NewModel);
+                }
+
+                ChatsDttoPost ChatModel = new ChatsDttoPost
+                {
+                    CodigoAtendente = Item.Atendente.Codigo,
+                    CodigoAtendimento = Item.Codigo,
+                    CodigoContato = Item.Contato?.Codigo,
+                    CodigoLogin = Item.Login.Codigo
+                };
+
+                var ChatPostModel = await _ChatsInterfaceServices.AdicionarPost(ChatModel);
+
+                var mensagenPorContato = Mensagens.LastOrDefault(x => x.Contato.CodigoWhatsapp == dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id &&
+                x?.Login.Codigo == Login.CodigoWhatsapp && x?.TipoDaMensagem == nameof(ETipos.MensagemEnviada));
 
                 if (contato.BloqueadoStatus == true)
                 {
@@ -127,7 +198,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         messaging_product = "whatsapp",
                         recipient_type = "individual",
-                        to = dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
+                        to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
                         type = "text",
                         text = new { preview_url = false, body = "Seu Contato Esta Bloqueado" }
                     };
@@ -138,9 +209,22 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     };
                     return newmodel;
                 }
-                if (Mensagens.LastOrDefault(x => x.Descricao == dados.entry[0].changes[0].value.messages[0].text).Descricao == dados.entry[0].changes[0].value.messages[0].text)
+                if (mensagenPorContato.Descricao == dados.Dados.entry[0].changes[0].value.messages[0].text || mensagenPorContato.Descricao == dados.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description)
                 {
-                    throw new Exception("Mensagem Repetida");
+                    var responseObject = new
+                    {
+                        messaging_product = "whatsapp",
+                        recipient_type = "individual",
+                        to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
+                        type = "text",
+                        text = new { preview_url = false, body = "Mensagem Repetida" }
+                    };
+                    DataAndType newmodel = new DataAndType
+                    {
+                        Tipo = ETipoRetornoJson.TipoPost,
+                        Dados = responseObject
+                    };
+                    return newmodel;
                 }
                 else
                 {
@@ -148,20 +232,17 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         CodigoLogin = Login.Codigo,
                         CodigoContato = contato.Codigo,
-                        CodigoChat = 1,
+                        CodigoChat = ChatPostModel.Codigo,
                         Data = DateTime.Now,
-                        Descricao = dados.entry[0].changes[0].value.messages[0].text,
+                        Descricao = dados.Dados.entry[0].changes[0].value.messages[0].text,
                         TipoDaMensagem = "MensagemEnviada"
                     };
                     await _MensagemInterfaceServices.AdicionarPost(NewModel);
                 }
-                var mensagen = await _MensagemInterfaceServices.GetALl();
-                DataAndType Model = new DataAndType
-                {
-                    Tipo = ETipoRetornoJson.TipoSimples,
-                    Dados = dados
-                };
-                return Model;
+
+                return dados;
+
+                //transformar em metodo - end
             }
             catch (Exception)
             {

@@ -15,5 +15,6 @@ namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
         Task<DataAndType> TipoMensagemSimples(dynamic Values);
         Task<DataAndType> TipoMensagemMultiplaEscolha(dynamic Values);
         DataAndType TipomensagemDeStatus(dynamic Model);
+        Task<DataAndType> VerificaçõesIniciais(DataAndType model);
     }
 }

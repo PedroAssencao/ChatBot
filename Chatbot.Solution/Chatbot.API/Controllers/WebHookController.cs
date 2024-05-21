@@ -1,4 +1,5 @@
 ﻿using Chatbot.Infrastructure.Meta.Repository.Interfaces;
+using Chatbot.Infrastructure.Meta.Services;
 using Chatbot.Services.Meta.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace Chatbot.API.Controllers
     [ApiController]
     public class WebHookController : ControllerBase
     {
-        protected readonly MetodoCheckServices _services;
+        protected readonly MetaClientServices _services;
 
-        public WebHookController(MetodoCheckServices services)
+        public WebHookController(MetaClientServices services)
         {
             _services = services;
         }
@@ -22,7 +23,7 @@ namespace Chatbot.API.Controllers
         {
             try
             {
-                var dados = _services.ababa(requestBody.RootElement);
+                var dados = _services.MAIN(requestBody.RootElement);
                 return Ok();
             }
             catch (Exception)
@@ -32,7 +33,7 @@ namespace Chatbot.API.Controllers
         }
 
         //Usar Esse Codigo Na Validação para Não dar error
-        [HttpGet("/hook")]
-        public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge) => Ok(hubChallenge);
+        //[HttpGet("/hook")]
+        //public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge) => Ok(hubChallenge);
     }
 }
