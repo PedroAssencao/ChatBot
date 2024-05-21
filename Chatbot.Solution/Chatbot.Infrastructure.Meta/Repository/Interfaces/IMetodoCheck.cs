@@ -11,9 +11,9 @@ namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
 {
     public interface IMetodoCheck
     {
-        DataAndType VerificarTipoDeRetorno(dynamic Values);
-        DataAndType TipoMensagemSimples(dynamic Values);
-        DataAndType TipoMensagemMultiplaEscolha(dynamic Values);
+        Task<DataAndType> VerificarTipoDeRetorno(dynamic Values);
+        Task<DataAndType> TipoMensagemSimples(dynamic Values);
+        Task<DataAndType> TipoMensagemMultiplaEscolha(dynamic Values);
         DataAndType TipomensagemDeStatus(dynamic Model);
     }
 }

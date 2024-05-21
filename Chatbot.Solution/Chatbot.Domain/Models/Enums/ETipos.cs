@@ -10,6 +10,7 @@ namespace Chatbot.Domain.Models.Enums
     {
         PrimeiraMensagem,
         MensagemDeResposta,
-        MensagemEnviada
+        MensagemEnviada,
+        mensagemderespostainterativa
     }
 }

@@ -73,7 +73,8 @@ namespace Chatbot.Infrastructure.Services
                     ConNome = Model.Nome,
                     ConDataCadastro = Model.DataCadastro,
                     ConWaId = Model.CodigoWhatsapp,
-                    ConBloqueadoStatus = Model.BloqueadoStatus
+                    ConBloqueadoStatus = Model.BloqueadoStatus,
+                    LogId = Model.Codigologin
                 };
                 await _contatoRepository.Adicionar(NewModel);
                 return Model;
@@ -94,7 +95,8 @@ namespace Chatbot.Infrastructure.Services
                     ConNome = Model.Nome,
                     ConDataCadastro = Model.DataCadastro,
                     ConWaId = Model.CodigoWhatsapp,
-                    ConBloqueadoStatus = Model.BloqueadoStatus
+                    ConBloqueadoStatus = Model.BloqueadoStatus,
+                    LogId = Model.Codigologin
                 };
                 await _contatoRepository.update(NewModel);
                 return Model;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chatbot.Domain.Models.JsonMetaApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,8 @@ namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
     {
         public HttpClient ConfigurarClient(string token, string url);
         public Task<string> PostAsync(string url, string token, dynamic data);
-        public Task<dynamic> MensagemInicial(string waId, string mensagem, string LoginWaId);
-        public Task<dynamic> BotResposta(string waId, string descricaoDaMensagem, string LoginWaId);
-        public Task<dynamic> TipoMetodo(JsonProperty Values);
+        public Task<dynamic> MensagemInicial(DataAndType Model);
+        public Task<dynamic> BotResposta(DataAndType Model);
+        public Task<dynamic> ChamarMetodo(dynamic Values);
     }
 }

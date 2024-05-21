@@ -177,7 +177,7 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
-        public async Task<bool> Logar(LoginDttoPost Model, bool IsCadastre)
+        public async Task<List<Claim>> Logar(LoginDttoPost Model, bool IsCadastre)
         {
             try
             {
@@ -197,7 +197,7 @@ namespace Chatbot.Services.Services
 
                     await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                    return true;
+                    return claims;
                 }
                 else
                 {

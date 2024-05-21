@@ -23,6 +23,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Nome { get; set; }
         public DateTime? DataCadastro { get; set; }
         public bool? BloqueadoStatus { get; set; }
+        public int Codigologin { get; set; }
 
     }
 

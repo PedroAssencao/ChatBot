@@ -10,6 +10,7 @@ namespace Chatbot.Domain.Models.Enums
     {
         TipoSimples,
         TipoMultiplaEscolhas,
-        TipoStatus
+        TipoStatus,
+        TipoPost
     }
 }

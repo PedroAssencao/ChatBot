@@ -172,6 +172,9 @@
             "projectReferences": {
               "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj": {
                 "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj"
+              },
+              "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Chatbot.Services.csproj": {
+                "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Chatbot.Services.csproj"
               }
             }
           }

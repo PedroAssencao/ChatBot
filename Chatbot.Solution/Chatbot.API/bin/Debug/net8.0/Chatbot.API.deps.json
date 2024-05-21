@@ -1077,6 +1077,7 @@
       "Chatbot.Infrastructure.Meta/1.0.0": {
         "dependencies": {
           "Chatbot.Domain": "1.0.0",
+          "Chatbot.Services": "1.0.0",
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {

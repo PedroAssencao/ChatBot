@@ -14,3 +14,7 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrast
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\bin\Debug\net8.0\Chatbot.Domain.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\bin\Debug\net8.0\Chatbot.Domain.pdb
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.csproj.CopyComplete
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\bin\Debug\net8.0\Chatbot.Infrastructure.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\bin\Debug\net8.0\Chatbot.Services.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\bin\Debug\net8.0\Chatbot.Services.pdb
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\bin\Debug\net8.0\Chatbot.Infrastructure.pdb
