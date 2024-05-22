@@ -1,18 +1,18 @@
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.csproj.AssemblyReference.cache
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.AssemblyInfo.cs
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.sourcelink.json
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.deps.json
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.runtimeconfig.json
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.dll
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.pdb
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Domain.dll
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Domain.pdb
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.csproj.CopyComplete
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.dll
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\refint\Chatbot.Infrastructure.dll
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.pdb
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.genruntimeconfig.cache
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\ref\Chatbot.Infrastructure.dll
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.deps.json
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.runtimeconfig.json
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.dll
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Infrastructure.pdb
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Domain.dll
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\bin\Debug\net8.0\Chatbot.Domain.pdb
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.AssemblyInfo.cs
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.sourcelink.json
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot..D8A64371.Up2Date
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.dll
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\refint\Chatbot.Infrastructure.dll
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.pdb
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\Chatbot.Infrastructure.genruntimeconfig.cache
+C:\Users\fusion\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure\obj\Debug\net8.0\ref\Chatbot.Infrastructure.dll

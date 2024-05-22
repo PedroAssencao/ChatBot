@@ -67,9 +67,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
-                    //nunca deixar a optDescricao Ser Igual a Outra ou arrumar alguma outra forma de selecionar a option correta
-                    //var MenuSelecionadoOption = Menus.FirstOrDefault(x => x?.Options?.First(x => x.Descricao == descricaoDaMensagem).Descricao == descricaoDaMensagem);
-                    //var optionSelecionada = await _optionInterfaceServices.GetPorId((Menus.FirstOrDefault(x => x?.Options?.First(x => x.Descricao == descricaoDaMensagem).Descricao == descricaoDaMensagem)));
 
                     var OptionSelecionada = option.Where(x => x?.Login?.Codigo == Login?.Codigo).ToList().FirstOrDefault(x => x.Codigo == codigoMensagem  || x.Descricao == descricaoDaMensagem);
                     var MenuSelecionadoOption = Menus.FirstOrDefault(x => x.Codigo == OptionSelecionada?.CodigoMenu);
@@ -151,7 +148,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
                         dadosJson = JsonConvert.SerializeObject(responseObject);
                     }
-                    return await PostAsync(_configuration.GetConnectionString("Chinook"), _configuration["Token"], JsonConvert.SerializeObject(dadosJson));
+                    return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(dadosJson));
                 }
                 else
                 {
@@ -169,9 +166,9 @@ namespace Chatbot.Infrastructure.Meta.Repository
         {
             recaiveMensagem.Root dados = Model.Dados;
 
-            var contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
-
             var login = await _loginInterfaceServices.RetornarLogIdPorWaID(dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
+
+            var contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
 
             var dadosMenu = await _menuInterfaceServices.GetALl();
 
@@ -205,13 +202,12 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
             };
 
-
-            return await PostAsync(_configuration.GetConnectionString("Chinook"), _configuration["Token"], JsonConvert.SerializeObject(responseObject));
+            return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(responseObject));
         }
 
         public async Task<dynamic> ChamarMetodo(dynamic Values)
         {
-            DataAndType dados = _metodoCheck.VerificarTipoDeRetorno(Values);
+            DataAndType dados = await _metodoCheck.VerificarTipoDeRetorno(Values);
             if (dados.Tipo == ETipoRetornoJson.TipoSimples)
             {
                 return await MensagemInicial(dados);

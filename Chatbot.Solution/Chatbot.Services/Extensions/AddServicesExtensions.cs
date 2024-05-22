@@ -30,15 +30,15 @@ namespace Chatbot.Services.Extensions
                 options.AccessDeniedPath = "/Usuarios/Index";
             });
 
-            services.AddScoped<IContatoInterfaceServices, ContatoServices>();
-            services.AddScoped<IMensagemInterfaceServices, MensagemServices>();
-            services.AddScoped<IMenuInterfaceServices, MenuServices>();
-            services.AddScoped<IOptionInterfaceServices, OptionServices>();
-            services.AddScoped<IDepartamentoInterfaceServices, DepartamentoServices>();
-            services.AddScoped<ILoginInterfaceServices, LoginServices>();
-            services.AddScoped<IAtendenteInterfaceServices, AtendenteServices>();
-            services.AddScoped<IChatsInterfaceServices, ChatsServices>();
-            services.AddScoped<IAtendimentoInterfaceServices, AtendimentoServices>();
+            services.AddTransient<IContatoInterfaceServices, ContatoServices>();
+            services.AddTransient<IMensagemInterfaceServices, MensagemServices>();
+            services.AddTransient<IMenuInterfaceServices, MenuServices>();
+            services.AddTransient<IOptionInterfaceServices, OptionServices>();
+            services.AddTransient<IDepartamentoInterfaceServices, DepartamentoServices>();
+            services.AddTransient<ILoginInterfaceServices, LoginServices>();
+            services.AddTransient<IAtendenteInterfaceServices, AtendenteServices>();
+            services.AddTransient<IChatsInterfaceServices, ChatsServices>();
+            services.AddTransient<IAtendimentoInterfaceServices, AtendimentoServices>();
             services.AddHttpContextAccessor();
         }
     }

@@ -14,8 +14,8 @@ namespace Chatbot.Services.Meta.Extensions
     {
         public static void AddServicesMetaExtension(this IServiceCollection services)
         {
-            services.AddScoped<MetodoCheckServices>();
             services.AddScoped<IMetaClientServices, MetaClientServices>();
+            services.AddScoped<MetodoCheckServices>();
         }
     }
 }

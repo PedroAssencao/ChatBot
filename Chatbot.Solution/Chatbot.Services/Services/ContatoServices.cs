@@ -32,6 +32,7 @@ namespace Chatbot.Infrastructure.Services
                         Nome = item.ConNome,
                         DataCadastro = item.ConDataCadastro,
                         BloqueadoStatus = item.ConBloqueadoStatus,
+                        Codigologin = Convert.ToInt32(item.LogId),
                     };
                     List.Add(NewModel);
                 }

@@ -11,9 +11,9 @@ namespace Chatbot.Infrastructure.Meta.Services
 {
     public class MetaClientServices : IMetaClientServices
     {
-        protected readonly MetaRepository _metaRepository;
+        protected readonly IMetaClient _metaRepository;
 
-        public MetaClientServices(MetaRepository metaRepository)
+        public MetaClientServices(IMetaClient metaRepository)
         {
             _metaRepository = metaRepository;
         }

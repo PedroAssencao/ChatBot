@@ -23,16 +23,15 @@ namespace Chatbot.Infrastructure.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("Chinook"));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
-
-            services.AddTransient<IMensagemInterface, MensagemRepository>();
             services.AddTransient<IContatosInterface, ContatoRepository>();
-            services.AddTransient<ILoginInterface, LoginRepository>();
-            services.AddTransient<IAtendimentoInterface, AtendimentoRepository>();
-            services.AddTransient<IAtendeteInterface, atendentesRepostiroy>();
-            services.AddTransient<IDepartamentoInterface, DepartamentoRepository>();
-            services.AddTransient<IOptionsInterface, optionsRepository>();
-            services.AddTransient<IChatsInterface, ChatRepository>();
-            services.AddTransient<IMenuInterface, menuRepository>();
+            services.AddScoped<IMensagemInterface, MensagemRepository>();            
+            services.AddScoped<ILoginInterface, LoginRepository>();
+            services.AddScoped<IAtendimentoInterface, AtendimentoRepository>();
+            services.AddScoped<IAtendeteInterface, atendentesRepostiroy>();
+            services.AddScoped<IDepartamentoInterface, DepartamentoRepository>();
+            services.AddScoped<IOptionsInterface, optionsRepository>();
+            services.AddScoped<IChatsInterface, ChatRepository>();
+            services.AddScoped<IMenuInterface, menuRepository>();
         }
     }
 }

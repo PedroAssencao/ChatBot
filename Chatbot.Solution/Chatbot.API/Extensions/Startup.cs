@@ -17,8 +17,8 @@ namespace Chatbot.API.Extensions
         {
             services.StartConfiguration();
             services.AddRepositoryStartUp(configuration);
-            services.ConfigureServicesMeta();
             services.AddServicesSetup();
+            services.ConfigureServicesMeta();
         }
 
         public static void ConfigureServicesMeta(this IServiceCollection services)

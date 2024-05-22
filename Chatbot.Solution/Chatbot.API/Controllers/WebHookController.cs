@@ -11,19 +11,19 @@ namespace Chatbot.API.Controllers
     [ApiController]
     public class WebHookController : ControllerBase
     {
-        protected readonly MetaClientServices _services;
+        protected readonly IMetaClientServices _services;
 
-        public WebHookController(MetaClientServices services)
+        public WebHookController(IMetaClientServices services)
         {
             _services = services;
         }
 
         [HttpPost("/hook")]
-        public IActionResult HandleWebhookAsync(JsonDocument requestBody)
+        public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
         {
             try
             {
-                var dados = _services.MAIN(requestBody.RootElement);
+                var dados = await _services.MAIN(requestBody.RootElement);
                 return Ok();
             }
             catch (Exception)
@@ -34,6 +34,10 @@ namespace Chatbot.API.Controllers
 
         //Usar Esse Codigo Na Validação para Não dar error
         //[HttpGet("/hook")]
-        //public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge) => Ok(hubChallenge);
+        //public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge)
+        //{
+        //    return Ok(hubChallenge);
+        //}
+
     }
 }

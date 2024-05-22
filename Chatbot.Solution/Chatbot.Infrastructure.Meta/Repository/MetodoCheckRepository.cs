@@ -5,8 +5,10 @@ using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -21,7 +23,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly ILoginInterfaceServices _LoginInterfaceServices;
         protected readonly IAtendimentoInterfaceServices _AtendimentoInterfaceServices;
         private readonly IChatsInterfaceServices _ChatsInterfaceServices;
-        public MetodoCheckRepository(IContatoInterfaceServices contatoInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices, ILoginInterfaceServices loginInterfaceServices, 
+        public MetodoCheckRepository(IContatoInterfaceServices contatoInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices, ILoginInterfaceServices loginInterfaceServices,
             IAtendimentoInterfaceServices atendimentoInterfaceServices, IChatsInterfaceServices chatsInterfaceServices)
         {
             _contatoInterfaceServices = contatoInterfaceServices;
@@ -127,13 +129,12 @@ namespace Chatbot.Infrastructure.Meta.Repository
             try
             {
                 //transformar em metodo - start
-
-                var contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados.Dados.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
-                var Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados.Dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
+                var contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
+                var Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
                 var Mensagens = await _MensagemInterfaceServices.GetALl();
                 var dadosAtendimento = await _AtendimentoInterfaceServices.GetALl();
                 var Item = dadosAtendimento.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == dados.Dados?.entry[0].changes[0].value.contacts[0].wa_id && x?.Login?.Codigo == Login?.Codigo);
-                var AtenItem = new object();
+
                 if (contato == null)
                 {
                     ContatoDttoGet newModel = new ContatoDttoGet
@@ -155,10 +156,23 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         EstadoAtendimento = "Bot",
                         Data = DateTime.Now,
+                        CodigoAtendente = 0,
+                        CodigoDepartamento = 0,
                         CodigoLogin = Login?.Codigo,
                         CodigoContato = contato?.Codigo,
                     };
-                    await _AtendimentoInterfaceServices.AdicionarPost(NovoAtendimento);
+                    var viewmodel = await _AtendimentoInterfaceServices.AdicionarPost(NovoAtendimento);
+                    AtendimentoDttoGet bababa = new AtendimentoDttoGet
+                    {
+                        Codigo = viewmodel.Codigo,
+                        Contato = viewmodel.Contato,
+                        Atendente = viewmodel.Atendente,
+                        Data = viewmodel.Data,
+                        Departamento = viewmodel.Departamento,
+                        EstadoAtendimento = viewmodel.EstadoAtendimento,
+                        Login = viewmodel.Login
+                    };
+                    Item = bababa;
                 }
                 if (Item?.EstadoAtendimento == "Bot")
                 {
@@ -176,7 +190,18 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         CodigoLogin = Convert.ToInt32(Item?.Login?.Codigo),
                         CodigoContato = Convert.ToInt32(Item?.Contato?.Codigo),
                     };
-                    await _AtendimentoInterfaceServices.AtualizarPut(NewModel);
+                    var viewmodel = await _AtendimentoInterfaceServices.AtualizarPut(NewModel);
+                    AtendimentoDttoGet bababa = new AtendimentoDttoGet
+                    {
+                        Codigo = viewmodel.Codigo,
+                        Contato = viewmodel.Contato,
+                        Atendente = viewmodel.Atendente,
+                        Data = viewmodel.Data,
+                        Departamento = viewmodel.Departamento,
+                        EstadoAtendimento = viewmodel.EstadoAtendimento,
+                        Login = viewmodel.Login
+                    };
+                    Item = bababa;
                 }
 
                 ChatsDttoPost ChatModel = new ChatsDttoPost
