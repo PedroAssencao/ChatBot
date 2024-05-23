@@ -115,10 +115,10 @@ namespace Chatbot.Infrastructure.Services
                 ChatsDttoGet ViewModel = new ChatsDttoGet
                 {
                     Codigo = item.ChaId,
-                    Atendente = await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
-                    Atendimento = await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
-                    Contato = await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Mensagens = await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
+                    Atendente = item.AteId == null ? null : await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
+                    Atendimento = item.AtenId == null ? null : await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
+                    Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Mensagens = item?.ChaId == null && item?.LogId == null ? null : await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
                 };
                 return ViewModel;
             }
@@ -144,10 +144,10 @@ namespace Chatbot.Infrastructure.Services
                 ChatsDttoGet ViewModel = new ChatsDttoGet
                 {
                     Codigo = item.ChaId,
-                    Atendente = await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
-                    Atendimento = await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
-                    Contato = await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Mensagens = await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
+                    Atendente = item.AteId == null ? null : await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
+                    Atendimento = item.AtenId == null ? null : await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
+                    Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Mensagens = item?.ChaId == null && item?.LogId == null ? null : await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
                 };
                 return ViewModel;
             }
@@ -165,10 +165,10 @@ namespace Chatbot.Infrastructure.Services
                 ChatsDttoGet ViewModel = new ChatsDttoGet
                 {
                     Codigo = item.ChaId,
-                    Atendente = await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
-                    Atendimento = await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
-                    Contato = await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Mensagens = await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
+                    Atendente = item.AteId == null ? null : await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
+                    Atendimento = item.AtenId == null ? null : await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
+                    Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Mensagens = item?.ChaId == null && item?.LogId == null ? null : await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
                 };
                 return ViewModel;
             }

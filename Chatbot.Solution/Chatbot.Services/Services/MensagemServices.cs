@@ -42,8 +42,8 @@ namespace Chatbot.Services.Services
                         TipoDaMensagem = item.MenTipo,
                         Descricao = item.MensDescricao,
                         CodigoChat = Convert.ToInt32(item.ChaId),
-                        Contato = await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                        Login = await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
+                        Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                        Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                     };
                     list.Add(Model);
                 }
@@ -67,8 +67,8 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoChat = Convert.ToInt32(item.ChaId),
-                    Contato = await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Login = await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId))
+                    Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
                 return Model;
             }
@@ -92,7 +92,7 @@ namespace Chatbot.Services.Services
                         Codigo = item.MensId,
                         Data = item.MensData,
                         Descricao = item.MensDescricao,
-                        Contato = await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId))
+                        Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId))
                     };
                     list.Add(Model);
                 }
@@ -124,9 +124,8 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoChat = Convert.ToInt32(item.ChaId),
-                    Contato = await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Login = await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId))
-           
+                    Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
                 return ViewModel;
             }
@@ -159,8 +158,8 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoChat = Convert.ToInt32(item.ChaId),
-                    Contato = await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Login = await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
+                    Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
                 return ViewModel;
             }
@@ -183,8 +182,8 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoChat = Convert.ToInt32(item.ChaId),
-                    Contato = await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Login = await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
+                    Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
                 return ViewModel;
             }

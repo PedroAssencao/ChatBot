@@ -2,6 +2,7 @@
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Services.Services.Interfaces;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,8 +94,8 @@ namespace Chatbot.Services.Services
                     Codigo = dados.AteId,
                     Nome = dados.AteNome,
                     EstadoAtendente = dados.AteEstado,
-                    Departamento = await _departamento.GetPorId(Convert.ToInt32(dados.DepId)),
-                    Login = await _login.GetPorIdLoginView(Convert.ToInt32(dados.LogId))
+                    Departamento = dados.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(dados.DepId)),
+                    Login = dados.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(dados.LogId))
                 };
                 return ViewModel;
             }
@@ -125,8 +126,8 @@ namespace Chatbot.Services.Services
                     Codigo = dados.AteId,
                     Nome = dados.AteNome,
                     EstadoAtendente = dados.AteEstado,
-                    Departamento = await _departamento.GetPorId(Convert.ToInt32(dados.DepId)),
-                    Login = await _login.GetPorIdLoginView(Convert.ToInt32(dados.LogId))
+                    Departamento = dados.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(dados.DepId)),
+                    Login = dados.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(dados.LogId))
                 };
                 return ViewModel;
             }
@@ -141,15 +142,15 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await _repository.delete(id);
-                AtendenteDttoGet model = new AtendenteDttoGet
+                AtendenteDttoGet ViewModel = new AtendenteDttoGet
                 {
                     Codigo = dados.AteId,
                     Nome = dados.AteNome,
                     EstadoAtendente = dados.AteEstado,
-                    Departamento = await _departamento.GetPorId(id),
-                    Login = await _login.GetPorIdLoginView(id)
+                    Departamento = dados.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(dados.DepId)),
+                    Login = dados.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(dados.LogId))
                 };
-                return model;
+                return ViewModel;
             }
             catch (Exception)
             {
