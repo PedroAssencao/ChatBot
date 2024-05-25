@@ -103,7 +103,7 @@ namespace Chatbot.Services.Services
                     }
                     else
                     {
-                        throw new Exception("Login não Encontrado");
+                        return null;
                     }
                 }
             }

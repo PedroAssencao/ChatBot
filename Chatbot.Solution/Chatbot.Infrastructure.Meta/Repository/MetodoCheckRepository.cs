@@ -129,12 +129,14 @@ namespace Chatbot.Infrastructure.Meta.Repository
             try
             {
                 //transformar em metodo - start
-                var contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
-                var Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
-                var Mensagens = await _MensagemInterfaceServices.GetALl();
-                var dadosAtendimento = await _AtendimentoInterfaceServices.GetALl();
-                var Item = dadosAtendimento.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == dados.Dados?.entry[0].changes[0].value.contacts[0].wa_id && x?.Login?.Codigo == Login?.Codigo);
-
+                ContatoDttoGet contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
+                LoginDttoGet Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
+                List<MensagensDttoGet> Mensagens = await _MensagemInterfaceServices.GetALl();
+                List<AtendimentoDttoGet> dadosAtendimento = await _AtendimentoInterfaceServices.GetALl();
+                List<ChatsDttoGet> Chats = await _ChatsInterfaceServices.GetALl();
+                AtendimentoDttoGet Item = dadosAtendimento.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == dados.Dados?.entry[0].changes[0].value.contacts[0].wa_id && x?.Login?.Codigo == Login?.Codigo);
+                AtendimentoDttoGet newItem = new AtendimentoDttoGet();
+                ChatsDttoGet newChat = new ChatsDttoGet();
                 if (contato == null)
                 {
                     ContatoDttoGet newModel = new ContatoDttoGet
@@ -142,12 +144,21 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         CodigoWhatsapp = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
                         DataCadastro = DateTime.Now,
                         BloqueadoStatus = false,
-                        Nome = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].profile[0].name,
+                        Nome = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].profile.name,
                         Codigologin = Login.Codigo
 
                     };
-                    await _contatoInterfaceServices.Create(newModel);
-                    contato = newModel;
+                    var viewmodel = await _contatoInterfaceServices.Create(newModel);
+                    ContatoDttoGet bababa = new ContatoDttoGet
+                    {
+                        Codigo = viewmodel.Codigo,
+                        Codigologin = viewmodel.Codigologin,
+                        CodigoWhatsapp = viewmodel.CodigoWhatsapp,
+                        BloqueadoStatus = viewmodel.BloqueadoStatus,
+                        DataCadastro = viewmodel.DataCadastro,
+                        Nome = viewmodel.Nome,
+                    };
+                    contato = bababa;
                 }
 
                 if (Item == null)
@@ -156,8 +167,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         EstadoAtendimento = "Bot",
                         Data = DateTime.Now,
-                        CodigoAtendente = 0,
-                        CodigoDepartamento = 0,
+                        CodigoAtendente = null,
+                        CodigoDepartamento = null,
                         CodigoLogin = Login?.Codigo,
                         CodigoContato = contato?.Codigo,
                     };
@@ -172,12 +183,106 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         EstadoAtendimento = viewmodel.EstadoAtendimento,
                         Login = viewmodel.Login
                     };
-                    Item = bababa;
+                    newItem = bababa;
+
                 }
+
+                var chatExiste = Chats.FirstOrDefault(x => x?.Atendimento?.Codigo == newItem.Codigo);
+
+                if (chatExiste == null)
+                {
+                    if (Item == null)
+                    {
+                        Item = newItem;
+                    }
+                    ChatsDttoPost ChatModel = new ChatsDttoPost
+                    {
+                        CodigoAtendente = Item.Atendente == null ? null : Item.Atendente.Codigo,
+                        CodigoAtendimento = Item.Codigo == null ? null : Item.Codigo,
+                        CodigoContato = Item.Contato == null ? null : Item.Contato.Codigo,
+                        CodigoLogin = Item.Login == null ? null : Item.Login.Codigo
+                    };
+                    var ChatPostModel = await _ChatsInterfaceServices.AdicionarPost(ChatModel);
+                    newChat = ChatPostModel;
+                }
+                else
+                {
+                    newChat = chatExiste;
+                }
+
+                var mensagenPorContato = Mensagens.LastOrDefault(x => x.Contato?.CodigoWhatsapp == Convert.ToString(dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id) &&
+                    x?.Login?.CodigoWhatsapp == Login?.CodigoWhatsap && x?.TipoDaMensagem == nameof(ETipos.MensagemEnviada));
+
+                if (contato.BloqueadoStatus == true)
+                {
+                    var responseObject = new
+                    {
+                        messaging_product = "whatsapp",
+                        recipient_type = "individual",
+                        to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
+                        type = "text",
+                        text = new { preview_url = false, body = "Seu Contato Esta Bloqueado" }
+                    };
+                    DataAndType newmodel = new DataAndType
+                    {
+                        Tipo = ETipoRetornoJson.TipoPost,
+                        Dados = responseObject
+                    };
+                    return newmodel;
+                }
+                if (mensagenPorContato != null)
+                {
+                    var descricao = dados.Tipo == ETipoRetornoJson.TipoSimples ? Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].text.body) : Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description);
+                    if (mensagenPorContato.Descricao == descricao)
+                    {
+                        var responseObject = new
+                        {
+                            messaging_product = "whatsapp",
+                            recipient_type = "individual",
+                            to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
+                            type = "text",
+                            text = new { preview_url = false, body = "Mensagem Repetida" }
+                        };
+                        DataAndType newmodel = new DataAndType
+                        {
+                            Tipo = ETipoRetornoJson.TipoPost,
+                            Dados = responseObject
+                        };
+                        return newmodel;
+                    }
+                    else
+                    {
+                        MensagensDttoPost NewModel = new MensagensDttoPost
+                        {
+                            CodigoLogin = Login.Codigo,
+                            CodigoContato = contato.Codigo,
+                            CodigoChat = newChat.Codigo,
+                            Data = DateTime.Now,
+                            Descricao = descricao,
+                            TipoDaMensagem = "MensagemEnviada"
+                        };
+                        await _MensagemInterfaceServices.AdicionarPost(NewModel);
+                    }
+                }
+                else
+                {
+                    MensagensDttoPost NewModel = new MensagensDttoPost
+                    {
+                        CodigoLogin = Login.Codigo,
+                        CodigoContato = contato.Codigo,
+                        CodigoChat = newChat.Codigo,
+                        Data = DateTime.Now,
+                        Descricao = Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].text.body),
+                        TipoDaMensagem = "MensagemEnviada"
+                    };
+                    await _MensagemInterfaceServices.AdicionarPost(NewModel);
+                }
+
                 if (Item?.EstadoAtendimento == "Bot")
                 {
                     return dados;
                 }
+
                 if (Item?.EstadoAtendimento == "Finalizado")
                 {
                     AtendimentoDttoPut NewModel = new AtendimentoDttoPut
@@ -201,68 +306,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         EstadoAtendimento = viewmodel.EstadoAtendimento,
                         Login = viewmodel.Login
                     };
-                    Item = bababa;
-                }
-
-                ChatsDttoPost ChatModel = new ChatsDttoPost
-                {
-                    CodigoAtendente = Item.Atendente.Codigo,
-                    CodigoAtendimento = Item.Codigo,
-                    CodigoContato = Item.Contato?.Codigo,
-                    CodigoLogin = Item.Login.Codigo
-                };
-
-                var ChatPostModel = await _ChatsInterfaceServices.AdicionarPost(ChatModel);
-
-                var mensagenPorContato = Mensagens.LastOrDefault(x => x.Contato.CodigoWhatsapp == dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id &&
-                x?.Login.Codigo == Login.CodigoWhatsapp && x?.TipoDaMensagem == nameof(ETipos.MensagemEnviada));
-
-                if (contato.BloqueadoStatus == true)
-                {
-                    var responseObject = new
-                    {
-                        messaging_product = "whatsapp",
-                        recipient_type = "individual",
-                        to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
-                        type = "text",
-                        text = new { preview_url = false, body = "Seu Contato Esta Bloqueado" }
-                    };
-                    DataAndType newmodel = new DataAndType
-                    {
-                        Tipo = ETipoRetornoJson.TipoPost,
-                        Dados = responseObject
-                    };
-                    return newmodel;
-                }
-                if (mensagenPorContato.Descricao == dados.Dados.entry[0].changes[0].value.messages[0].text || mensagenPorContato.Descricao == dados.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description)
-                {
-                    var responseObject = new
-                    {
-                        messaging_product = "whatsapp",
-                        recipient_type = "individual",
-                        to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
-                        type = "text",
-                        text = new { preview_url = false, body = "Mensagem Repetida" }
-                    };
-                    DataAndType newmodel = new DataAndType
-                    {
-                        Tipo = ETipoRetornoJson.TipoPost,
-                        Dados = responseObject
-                    };
-                    return newmodel;
-                }
-                else
-                {
-                    MensagensDttoPost NewModel = new MensagensDttoPost
-                    {
-                        CodigoLogin = Login.Codigo,
-                        CodigoContato = contato.Codigo,
-                        CodigoChat = ChatPostModel.Codigo,
-                        Data = DateTime.Now,
-                        Descricao = dados.Dados.entry[0].changes[0].value.messages[0].text,
-                        TipoDaMensagem = "MensagemEnviada"
-                    };
-                    await _MensagemInterfaceServices.AdicionarPost(NewModel);
                 }
 
                 return dados;

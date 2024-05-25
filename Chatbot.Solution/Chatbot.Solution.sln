@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatbot.API", "Chatbot.API\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatbot.Infrastructure.Meta", "Chatbot.Infrastructure.Meta\Chatbot.Infrastructure.Meta.csproj", "{114DD292-D747-4A96-8841-B4F250F7E05B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatbot.Services.Meta", "Chatbot.Services.Meta\Chatbot.Services.Meta.csproj", "{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatbot.Services.Meta", "Chatbot.Services.Meta\Chatbot.Services.Meta.csproj", "{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Chatbot.View", "Chatbot.View\Chatbot.View.esproj", "{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,12 @@ Global
 		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289} = {D5E61312-FEC7-4EDE-B74D-928A86F71B61}
 		{114DD292-D747-4A96-8841-B4F250F7E05B} = {7B87311E-6698-4CD2-A505-A5129E417AB9}
 		{ECEFFE10-CD66-468C-B8CC-2D399BC738DA} = {C2C1C1E1-A019-496D-B1DA-20B05CA604AD}
+		{DB0F5D1A-DAC6-4E98-9247-73CE5A89DE09} = {D5E61312-FEC7-4EDE-B74D-928A86F71B61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92A2F642-AE3D-4213-88D6-90C673B45085}

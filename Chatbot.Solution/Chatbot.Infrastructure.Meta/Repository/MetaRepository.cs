@@ -17,6 +17,7 @@ using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
     public class MetaRepository : IMetaClient
@@ -44,23 +45,30 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
         public HttpClient ConfigurarClient(string token, string url)
         {
-            _httpClient.DefaultRequestHeaders.Clear();
-            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-            _httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
-            _httpClient.BaseAddress = new Uri(url);
-            return _httpClient;
+            try
+            {
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                _httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
+                return _httpClient;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public async Task<dynamic> BotResposta(DataAndType Model)
         {
 
-            var descricaoDaMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description ?? Model.Dados.entry[0].changes[0].value.messages[0].text;
+            var descricaoDaMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description ?? Model.Dados.entry[0].changes[0].value.messages[0].text.body;
             var codigoMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.id ?? null;
             string name = Model.Dados.entry[0].changes[0].value.metadata.display_phone_number;
             var Login = await _loginInterfaceServices.RetornarLogIdPorWaID(name);
             var Menus = await _menuInterfaceServices.PegarTodosOsMenusPorLogID(Convert.ToInt32(Login?.Codigo));
             var option = await _optionInterfaceServices.GetALl();
             var dadosAtendimento = await _atendimentoInterfaceServices.RetornarTodosAtendimentosPorLogId(Convert.ToInt32(Login?.Codigo));
+            var numero = Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id;
             var dadosJson = "";
             try
             {
@@ -68,10 +76,19 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
 
-                    var OptionSelecionada = option.Where(x => x?.Login?.Codigo == Login?.Codigo).ToList().FirstOrDefault(x => x.Codigo == codigoMensagem  || x.Descricao == descricaoDaMensagem);
-                    var MenuSelecionadoOption = Menus.FirstOrDefault(x => x.Codigo == OptionSelecionada?.CodigoMenu);
+                    var OptionSelecionada = option.Where(x => x?.Login?.Codigo == Login?.Codigo).ToList().FirstOrDefault(x => x.Codigo == Convert.ToInt32(codigoMensagem) || x.Descricao == descricaoDaMensagem);
+                    MenuDttoGet MenuSelecionadoOption = null;
+                    var optionValida = Menus.FirstOrDefault(x => x.Codigo == OptionSelecionada.CodigoMenu);
+                    try
+                    {
+                        MenuSelecionadoOption = Menus.FirstOrDefault(x => x.Codigo == Convert.ToInt32(OptionSelecionada?.Resposta));
+                    }
+                    catch (Exception)
+                    {
+                        MenuSelecionadoOption = null;
+                    }
 
-                    if (MenuSelecionadoOption != null)
+                    if (optionValida != null)
                     {
                         if (OptionSelecionada?.Finalizar == true)
                         {
@@ -99,42 +116,57 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
                         }
 
-                        if (Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id == "5579988132044")
+                        if (numero == "557988132044")
                         {
-                            Model.Dados.entry[0].changes[0].value.contacts[0].wa_id = "55799988132044";
+                            numero = "5579988132044";
                         }
 
-                        var responseObject = new
+                        if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa))
                         {
-                            messaging_product = "whatsapp",
-                            recipient_type = "individual",
-                            to = Model.Dados.entry[0].changes[0].value.contacts[0].wa_id,
-                            type = OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa) ? "interactive" : "text",
-                            text = OptionSelecionada?.Tipo?.Trim()?.ToLower() != nameof(ETipos.mensagemderespostainterativa) ? new { preview_url = false, body = OptionSelecionada?.Resposta } : null,
-                            interactive = OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa) ? new
+                            var responseObject = new
                             {
-                                type = "list",
-                                header = new { type = "text", text = MenuSelecionadoOption?.Header },
-                                body = new { text = MenuSelecionadoOption?.Body },
-                                footer = new { text = MenuSelecionadoOption?.Footer },
-                                action = new
+                                messaging_product = "whatsapp",
+                                recipient_type = "individual",
+                                to = numero,
+                                type = "interactive",
+                                interactive = new
                                 {
-                                    button = "Menu de Opções",
-                                    sections = new[]
+                                    type = "list",
+                                    header = new { type = "text", text = MenuSelecionadoOption?.Header },
+                                    body = new { text = MenuSelecionadoOption?.Body },
+                                    footer = new { text = MenuSelecionadoOption?.Footer },
+                                    action = new
                                     {
-                                        new { title = "Shorter Section Title", rows = MenuSelecionadoOption?.Options.Select(item => new { id = item.Codigo, title = item.Titulo, description = item.Descricao }).ToArray() }
+                                        button = "Menu de Opções",
+                                        sections = new[]
+                                        {
+                                            new { title = "Shorter Section Title", rows = MenuSelecionadoOption?.Options?.Select(item => new { id = item.Codigo, title = item.Titulo, description = item.Descricao }).ToArray() }
+                                        }
                                     }
-                                }
-                            } : null
-                        };
 
-                        dadosJson = JsonConvert.SerializeObject(responseObject);
+                                }
+                            };
+                            dadosJson = JsonConvert.SerializeObject(responseObject);
+                        }
+                        else
+                        {
+                            var responseObject = new
+                            {
+                                messaging_product = "whatsapp",
+                                recipient_type = "individual",
+                                to = numero,
+                                type = "text",
+                                text = new { preview_url = false, body = OptionSelecionada?.Resposta },
+                            };
+                            dadosJson = JsonConvert.SerializeObject(responseObject);
+                        }
+
                     }
                     else
                     {
-                        if (Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id == "5579988132044")
+                        if (numero == "5579988132044")
                         {
-                            Model.Dados.entry[0].changes[0].value.contacts[0].wa_id = "55799988132044";
+                            numero = "55799988132044";
                         }
 
                         var responseObject = new
@@ -148,7 +180,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
                         dadosJson = JsonConvert.SerializeObject(responseObject);
                     }
-                    return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(dadosJson));
+                    return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
                 }
                 else
                 {
@@ -215,9 +247,10 @@ namespace Chatbot.Infrastructure.Meta.Repository
             else if (dados.Tipo == ETipoRetornoJson.TipoMultiplaEscolhas)
             {
                 return await BotResposta(dados);
-            }else if (dados.Tipo == ETipoRetornoJson.TipoPost)
+            }
+            else if (dados.Tipo == ETipoRetornoJson.TipoPost)
             {
-                return await PostAsync(_configuration.GetConnectionString("Chinook"), _configuration["Token"], JsonConvert.SerializeObject(dados.Dados));
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(dados.Dados));
             }
             else
             {
@@ -228,10 +261,19 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
         public async Task<string> PostAsync(string url, string token, dynamic data)
         {
-            var client = ConfigurarClient(token, url);
-            var response = await client.PostAsync(client.BaseAddress, data);
-            string content = await response.Content.ReadAsStringAsync();
-            return content;
+            try
+            {
+                var client = ConfigurarClient(token, url);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
+                string responseContent = await response.Content.ReadAsStringAsync();
+                return responseContent;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }

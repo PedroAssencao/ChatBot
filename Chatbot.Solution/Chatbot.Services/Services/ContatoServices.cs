@@ -146,7 +146,7 @@ namespace Chatbot.Infrastructure.Services
                     }
                     else
                     {
-                        throw new Exception("Id Não Encontrado");
+                        return null;
                     }
 
                 }

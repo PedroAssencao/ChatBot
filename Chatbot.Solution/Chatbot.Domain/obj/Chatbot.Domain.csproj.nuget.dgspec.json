@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj": {}
+    "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj": {
+    "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj",
         "projectName": "Chatbot.Domain",
-        "projectPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj",
-        "packagesPath": "C:\\Users\\fusion\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Chatbot.Domain.csproj",
+        "packagesPath": "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fusion\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pedro Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -35,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -71,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

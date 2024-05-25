@@ -129,7 +129,7 @@ namespace Chatbot.Services.Services
                     Descricao = item.OptDescricao,
                     Resposta = item.OptResposta,
                     Finalizar = item.OptFinalizar,
-                    Login = await _loginService.GetPorIdLoginView(item.OptId)
+                    Login = item.LogId == null ? null : await _loginService.GetPorIdLoginView(Convert.ToInt32(item.LogId))
                 };
                 return ViewModel;
             }

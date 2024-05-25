@@ -123,7 +123,7 @@ namespace Chatbot.Services.Services
                     Data = item.MensData,
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
-                    CodigoChat = Convert.ToInt32(item.ChaId),
+                    CodigoChat = item.ChaId == null ? 0 : Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };

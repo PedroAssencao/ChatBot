@@ -32,15 +32,15 @@ namespace Chatbot.Services.Services
                 List<AtendenteDttoGet> List = new List<AtendenteDttoGet>();
                 foreach (var item in dados)
                 {
-                    AtendenteDttoGet Model = new AtendenteDttoGet
+                    AtendenteDttoGet ViewModel = new AtendenteDttoGet
                     {
                         Codigo = item.AteId,
                         Nome = item.AteNome,
                         EstadoAtendente = item.AteEstado,
-                        Login = await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
-                        Departamento = await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
+                        Departamento = item.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
+                        Login = item.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
                     };
-                    List.Add(Model);
+                    List.Add(ViewModel);
                 }
                 return List;
             }

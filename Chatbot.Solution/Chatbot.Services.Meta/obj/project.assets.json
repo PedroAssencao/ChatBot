@@ -3584,19 +3584,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fusion\\.nuget\\packages\\": {}
+    "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
+      "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
       "projectName": "Chatbot.Services.Meta",
-      "projectPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
-      "packagesPath": "C:\\Users\\fusion\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\obj\\",
+      "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
+      "packagesPath": "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\fusion\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pedro Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3604,15 +3604,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj": {
-              "projectPath": "C:\\Users\\fusion\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj"
+            "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj": {
+              "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj"
             }
           }
         }
@@ -3621,11 +3620,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3647,7 +3641,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

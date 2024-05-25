@@ -35,17 +35,17 @@ namespace Chatbot.Services.Services
                 List<AtendimentoDttoGet> List = new List<AtendimentoDttoGet>();
                 foreach (var item in dados)
                 {
-                    AtendimentoDttoGet Model = new AtendimentoDttoGet
+                    AtendimentoDttoGet ViewModel = new AtendimentoDttoGet
                     {
                         Codigo = item.AtenId,
                         Data = item.AtenData,
                         EstadoAtendimento = item.AtenEstado,
-                        Atendente = await _Atendente.GetPorId(Convert.ToInt32(item.AteId)),
-                        Contato = await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                        Departamento = await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
-                        Login = await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
+                        Atendente = item.AteId == null ? null : await _Atendente.GetPorId(Convert.ToInt32(item.AteId)),
+                        Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                        Departamento = item.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
+                        Login = item.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
                     };
-                    List.Add(Model);
+                    List.Add(ViewModel);
                 }
                 return List;
             }
@@ -60,17 +60,17 @@ namespace Chatbot.Services.Services
             try
             {
                 var item = await _repository.GetPorId(id);
-                AtendimentoDttoGet Model = new AtendimentoDttoGet
+                AtendimentoDttoGet ViewModel = new AtendimentoDttoGet
                 {
                     Codigo = item.AtenId,
                     Data = item.AtenData,
                     EstadoAtendimento = item.AtenEstado,
-                    Atendente = await _Atendente.GetPorId(Convert.ToInt32(item.AteId)),
-                    Contato = await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                    Departamento = await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
-                    Login = await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
+                    Atendente = item.AteId == null ? null : await _Atendente.GetPorId(Convert.ToInt32(item.AteId)),
+                    Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Departamento = item.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
+                    Login = item.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
                 };
-                return Model;
+                return ViewModel;
             }
             catch (Exception)
             {
@@ -87,17 +87,17 @@ namespace Chatbot.Services.Services
                 List<AtendimentoDttoGet> List = new List<AtendimentoDttoGet>();
                 foreach (var item in dadosFiltrados)
                 {
-                    AtendimentoDttoGet Model = new AtendimentoDttoGet
+                    AtendimentoDttoGet ViewModel = new AtendimentoDttoGet
                     {
                         Codigo = item.AtenId,
                         Data = item.AtenData,
                         EstadoAtendimento = item.AtenEstado,
-                        Atendente = await _Atendente.GetPorId(Convert.ToInt32(item.AteId)),
-                        Contato = await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
-                        Departamento = await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
-                        Login = await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
+                        Atendente = item.AteId == null ? null : await _Atendente.GetPorId(Convert.ToInt32(item.AteId)),
+                        Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                        Departamento = item.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
+                        Login = item.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
                     };
-                    List.Add(Model);
+                    List.Add(ViewModel);
                 }
                 return List;
             }
@@ -153,7 +153,7 @@ namespace Chatbot.Services.Services
                     LogId = Model.CodigoLogin,
                     ConId = Model.CodigoContato,
                     DepId = Model.CodigoDepartamento,
-                    AteId = Convert.ToInt32(Model.CodigoAtendente)
+                    AteId = Model.CodigoAtendente == null ? null : Convert.ToInt32(Model.CodigoAtendente)
                 };
                 var item = await _repository.update(NewModel);
                 AtendimentoDttoGet ViewModel = new AtendimentoDttoGet
@@ -173,6 +173,8 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
+
+        
 
         public async Task<AtendimentoDttoGet> Delete(int id)
         {
