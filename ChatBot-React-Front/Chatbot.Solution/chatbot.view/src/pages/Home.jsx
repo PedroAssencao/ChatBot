@@ -1,10 +1,7 @@
-import Header from '../components/Header'
-
-export default function Home(){
+export default function home(){
     return(
-        <>
-        <Header/>
-        <h2>Home Page</h2>
-        </>
+        <div className="col">
+            <h1>Home</h1>
+        </div>
     )
 }

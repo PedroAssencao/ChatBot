@@ -1,21 +1,40 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from './pages/Home'
 import NoPage from './pages/NoPage';
 import './App.css';
+import SideBar from './components/sideBar';
 
 export default function App() {
-  return(
+
+  const searchLocation = window.location.pathname;
+
+  const urlQueteramSideBarENavBar = ['/', '/home'];
+  
+  function isNoPage(urlIndex, LocationIndex) {
+    for (let i = 0; i < urlIndex.length; i++) {
+      if (urlIndex[i] === LocationIndex) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const IsTrue = isNoPage(urlQueteramSideBarENavBar, searchLocation);
+
+  return (
     <BrowserRouter>
-    <Routes>
-        <Route index element={<Home/>}/>
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/contact" element={<Contact/>}/>
-        <Route path="*" element={<NoPage/>}/>
-    </Routes>
+      <div className="container-fluid bg-warning min-vh-100">
+        <div className="row bg-success min-vh-100">
+          {IsTrue ? <SideBar/> : null}
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="*" element={<NoPage />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   )
+
 }
 
