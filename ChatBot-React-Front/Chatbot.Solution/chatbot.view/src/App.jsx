@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NoPage from './pages/NoPage';
+import Registro from './pages/Registrar/Registro';
 import './App.css';
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/home" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/contact" element={<Contact/>}/>
+        <Route path="/registro" element={<Registro/>}/>
         <Route path="*" element={<NoPage/>}/>
     </Routes>
     </BrowserRouter>
