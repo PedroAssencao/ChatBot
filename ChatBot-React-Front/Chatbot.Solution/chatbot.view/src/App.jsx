@@ -2,13 +2,12 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from './pages/Home'
 import NoPage from './pages/NoPage';
 import './App.css';
-import SideBar from './components/sideBar';
-
+import Atendimento from './pages/AtendentePage'
 export default function App() {
 
   const searchLocation = window.location.pathname;
 
-  const urlQueteramSideBarENavBar = ['/', '/home'];
+  const urlQueteramSideBarENavBar = ['/', '/home', '/Atendimento'];
   
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {
@@ -29,6 +28,7 @@ export default function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/Atendimento" element={<Atendimento />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </div>

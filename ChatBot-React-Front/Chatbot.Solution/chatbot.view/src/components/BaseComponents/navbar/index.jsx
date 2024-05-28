@@ -4,6 +4,8 @@ import A from '../a'
 export default function Navbar() {
     return (
         // navbar
+
+        //colocar os ifs para atender condições de renderização aqui depois
         <div className="col-12 p-4 bg-light" id="navbar">
             <div className="row justify-content-between">
 
@@ -21,7 +23,7 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                <A classNameName={"col mt-3 d-flex d-lg-none justify-content-end"} data-bs-toggle={"offcanvas"} href={"#offcanvasExample"} Icon={
+                <A classNameName={"col mt-3 d-flex d-lg-none justify-content-end"} bootsrapAction={"offcanvas"} href={"#offcanvasExample"} Icon={
                     <svg xmlns="http://www.w3.org/2000/svg" style="color:#182c5f;" width="36" height="36"
                         fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                         <path
