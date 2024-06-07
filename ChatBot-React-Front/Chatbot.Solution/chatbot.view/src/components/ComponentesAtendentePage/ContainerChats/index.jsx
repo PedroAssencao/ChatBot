@@ -1,9 +1,10 @@
-import conteudoChat from "../conteudoChat"
+import ConteudoChat from "../conteudoChat"
+import '../ContainerChats/style.css'
 export default function ContainerChats(props) {
     return (
-        <div class="col p-0 d-lg-flex containerChat" id="containerChats"
-            style="display: none; flex-direction: column; background-color: #EBEFF9;">
-            <conteudoChat/>
+        <div className="col p-0 d-lg-flex containerChat" id="containerChats"
+            style={{ display: "none", flexDirection: "column", backgroundColor: "#EBEFF9" }}>
+            <ConteudoChat />
         </div>
     )
 }

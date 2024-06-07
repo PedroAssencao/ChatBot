@@ -1,6 +1,6 @@
 export default function conversaCard(props) {
     return(
-        <div class="rounded-3 bg-light p-3 mt-3" style="max-width: 20rem;">
+        <div className="rounded-3 bg-light p-3 mt-3" style={{maxWidth: "20rem"}}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ut porro cum excepturi, ipsum officiis est minima dignissimos? Ea neque est maiores architecto itaque minus nesciunt nulla enim suscipit ab.
         </div>
         

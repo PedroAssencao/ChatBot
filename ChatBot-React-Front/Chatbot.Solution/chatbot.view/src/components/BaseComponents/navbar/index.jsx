@@ -23,19 +23,19 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                <A classNameName={"col mt-3 d-flex d-lg-none justify-content-end"} bootsrapAction={"offcanvas"} href={"#offcanvasExample"} Icon={
+                {/* <A classNameName={"col mt-3 d-flex d-lg-none justify-content-end"} bootsrapAction={"offcanvas"} href={"#offcanvasExample"} Icon={
                     <svg xmlns="http://www.w3.org/2000/svg" style="color:#182c5f;" width="36" height="36"
                         fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
-                } />
+                } /> */}
 
                 {/* Contato, Ver Como Vai ficar isso aqui depois, acho massa fazer algo como whastapp que so aparece os chat quando clicka aqui */}
                 <div className="col mt-3 d-none d-lg-block">
                     <div className="d-flex gap-3">
                         <div className="d-flex align-items-end gap-3">
-                            <img className="leadImage rounded-circle" src="~/img/bye-bye-looksmaxxing.webp" />
+                            <img className="leadImage rounded-circle"  />
                             <p style={{fontFamily: "Arial, Helvetica, sans-serif"}}>Pedro Assenção</p>
                         </div>
                     </div>

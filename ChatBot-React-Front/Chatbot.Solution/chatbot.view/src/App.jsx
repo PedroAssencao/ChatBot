@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import NoPage from './pages/NoPage';
 import './App.css';
 import Atendimento from './pages/AtendentePage'
+import Sidebar from './components/BaseComponents/sideBar'
 export default function App() {
 
   const searchLocation = window.location.pathname;
@@ -24,7 +25,7 @@ export default function App() {
     <BrowserRouter>
       <div className="container-fluid bg-warning min-vh-100">
         <div className="row bg-success min-vh-100">
-          {IsTrue ? <SideBar/> : null}
+          {IsTrue ? <Sidebar/> : null}
           <Routes>
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />

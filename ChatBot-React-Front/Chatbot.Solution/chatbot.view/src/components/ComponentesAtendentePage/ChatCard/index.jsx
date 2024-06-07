@@ -24,7 +24,7 @@ export default function ChatCard(props) {
                 </div>
                 {/* data da Ultima mensagem enviada */}
                 <div className="col-2">
-                    <p style="font-weight: bold;">
+                    <p style={{fontWeight: "bold"}}>
                         10:35
                     </p>
                 </div>

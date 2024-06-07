@@ -4,7 +4,7 @@ export default function StatusAtendimento(props) {
         <div
             className="d-flex justify-content-center align-items-center align-items-lg-start MarginMedia flex-column gap-3">
 
-            <h1 style="color: #263a6d; font-weight: bold;">Conversas</h1>
+            <h1 style={{color: "#263a6d", fontWeight: "bold"}}>Conversas</h1>
 
             <div className="mt-2 d-flex  justify-content-center align-items-center rounded-3"
                 style={{width: "97%", padding: "0.6rem", backgroundColor: "#b0dea5"}}>
