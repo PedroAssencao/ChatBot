@@ -2,7 +2,7 @@ import './style.css'
 import image from '../../../img/file.jpg'
 export default function ChatCard(props) {
     return (
-        <div className={props.className}
+        <div onClick={props.onClick} className={props.className}
             style={{ width: "96%", minHeight: "8vh" }} data-bs-dismiss="offcanvas">
             <div className="row justify-content-between">
                 <div className="col-3 d-flex align-items-center gap-3">

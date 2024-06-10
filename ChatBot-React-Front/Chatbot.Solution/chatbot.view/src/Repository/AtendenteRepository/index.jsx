@@ -18,3 +18,21 @@ export function VerficarAltura() {
         document.querySelector('.ConteudoChat').style.height = "77vh";
     }
 }
+
+export function entrarChat() {
+    document.getElementById('TituloNavbar').style.display = 'none'
+    document.getElementById('setarVoltar').style.display = 'flex'
+    document.querySelector('#NavbarSearch').style.display = 'none'
+    document.getElementById('sidebar').style.display = 'none'
+    document.getElementById('containerMensagens').style.display = 'none'
+    document.getElementById('containerChats').style.display = 'flex'
+}
+
+export function voltarChat() {
+    document.getElementById('TituloNavbar').style.display = 'block'
+    document.getElementById('setarVoltar').style.display = 'none'
+    document.querySelector('#NavbarSearch').style.display = 'block'
+    document.getElementById('sidebar').style.display = 'flex'
+    document.getElementById('containerMensagens').style.display = 'block'
+    document.getElementById('containerChats').style.display = 'none'
+}
