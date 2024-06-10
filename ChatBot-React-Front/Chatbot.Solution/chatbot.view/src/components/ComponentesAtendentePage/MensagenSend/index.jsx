@@ -3,7 +3,7 @@ export default function MensagemSend(props) {
     return (
         <div className="flex-grow-1">
 
-            <div className="d-flex gap-3 mensagens mt-3 justify-content-center align-items-center">
+            <div className="d-flex gap-3 p-2 mensagens mt-3 justify-content-center align-items-center">
 
                 <div className="inputMensagen w-100" style={{maxWidth: "90%"}}>
                     <input className="form-control p-3 rounded-4" style={{backgroundColor: "#c7cfe4"}}

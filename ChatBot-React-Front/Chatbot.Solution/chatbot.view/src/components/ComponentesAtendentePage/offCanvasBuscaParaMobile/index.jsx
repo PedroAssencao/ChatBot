@@ -1,9 +1,9 @@
-import ChatCard from "../../../ComponentesAtendentePage/ChatCard"
-import searchBar from "../../searchBar"
+import ChatCard from "../ChatCard"
+import SearchBar from "../../BaseComponents/searchBar"
 export default function offCanvasBuscaMobile(props) {
     return (
         // Off Canvas para Busca em mobile mode
-        <div className="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasExample"
+        <div className="offcanvas offcanvas-end w-100" tabIndex="-1" id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel">
             <div className="offcanvas-header">
                 <h1 className="offcanvas-title" id="offcanvasExampleLabel">Buscar</h1>
@@ -12,7 +12,7 @@ export default function offCanvasBuscaMobile(props) {
 
             <div className="offcanvas-body">
 
-                <searchBar />
+                <SearchBar />
                 
                 {/* Fazer o contato buscado aparecer aqui e puxar a lista de contatos para aqui tambem */}
 
