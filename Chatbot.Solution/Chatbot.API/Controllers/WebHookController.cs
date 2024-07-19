@@ -18,26 +18,26 @@ namespace Chatbot.API.Controllers
             _services = services;
         }
 
-        [HttpPost("/hook")]
-        public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
-        {
-            try
-            {
-                var dados = await _services.MAIN(requestBody.RootElement);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return Ok();
-            }
-        }
+        //[HttpPost("/hook")]
+        //public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
+        //{
+        //    try
+        //    {
+        //        var dados = await _services.MAIN(requestBody.RootElement);
+        //        return Ok();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return Ok();
+        //    }
+        //}
 
         //Usar Esse Codigo Na Validação para Não dar error
-        //[HttpGet("/hook")]
-        //public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge)
-        //{
-        //    return Ok(hubChallenge);
-        //}
+        [HttpGet("/hook")]
+        public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge)
+        {
+            return Ok(hubChallenge);
+        }
 
     }
 }

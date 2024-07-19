@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Chatbot.API.Repository;
-using Chatbot.Domain.Models;
+﻿using System.Text;
 using Chatbot.Domain.Models.Enums;
 using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
-using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
     public class MetaRepository : IMetaClient
@@ -254,7 +243,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
             }
             else
             {
-                //colocar metodo para Colocar Status da Mensagem Aqui
                 throw new NotImplementedException();
             }
         }
