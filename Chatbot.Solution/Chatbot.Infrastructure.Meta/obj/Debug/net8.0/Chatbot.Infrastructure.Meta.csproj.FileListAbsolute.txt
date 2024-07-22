@@ -33,7 +33,6 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrast
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.AssemblyInfo.cs
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.csproj.CoreCompileInputs.cache
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.sourcelink.json
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.csproj.CopyComplete
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\refint\Chatbot.Infrastructure.Meta.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.pdb
@@ -58,3 +57,4 @@ C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrast
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\refint\Chatbot.Infrastructure.Meta.dll
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot.Infrastructure.Meta.pdb
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\ref\Chatbot.Infrastructure.Meta.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Infrastructure.Meta\obj\Debug\net8.0\Chatbot..CB05AA63.Up2Date

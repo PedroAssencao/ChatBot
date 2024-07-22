@@ -290,7 +290,6 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Chatbot.API.props
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\scopedcss\bundle\Chatbot.API.styles.css
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.csproj.CopyComplete
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\refint\Chatbot.API.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.pdb
@@ -445,3 +444,4 @@ C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.pdb
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.genruntimeconfig.cache
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\ref\Chatbot.API.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot..B71881B4.Up2Date

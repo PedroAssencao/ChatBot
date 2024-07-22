@@ -29,7 +29,6 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Service
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.AssemblyInfo.cs
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.csproj.CoreCompileInputs.cache
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.sourcelink.json
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.csproj.CopyComplete
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\refint\Chatbot.Services.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.pdb
@@ -52,3 +51,4 @@ C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Service
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\refint\Chatbot.Services.dll
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.pdb
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\ref\Chatbot.Services.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot..D7D97938.Up2Date

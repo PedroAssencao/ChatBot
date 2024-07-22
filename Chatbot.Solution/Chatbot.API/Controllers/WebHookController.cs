@@ -1,7 +1,4 @@
 ﻿using Chatbot.Infrastructure.Meta.Repository.Interfaces;
-using Chatbot.Infrastructure.Meta.Services;
-using Chatbot.Services.Meta.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -18,26 +15,22 @@ namespace Chatbot.API.Controllers
             _services = services;
         }
 
-        //[HttpPost("/hook")]
-        //public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
-        //{
-        //    try
-        //    {
-        //        var dados = await _services.MAIN(requestBody.RootElement);
-        //        return Ok();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return Ok();
-        //    }
-        //}
-
-        //Usar Esse Codigo Na Validação para Não dar error
-        [HttpGet("/hook")]
-        public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge)
+        [HttpPost("hook")]
+        public async Task<IActionResult> HandleWebhookAsync(JsonDocument requestBody)
         {
-            return Ok(hubChallenge);
+            try
+            {
+                var dados = await _services.MAIN(requestBody.RootElement);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return Ok();
+            }
         }
+
+        [HttpGet("hook")]
+        public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge) => Ok(hubChallenge);
 
     }
 }

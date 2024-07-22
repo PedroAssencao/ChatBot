@@ -11,6 +11,16 @@ namespace Chatbot.API.Extensions
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
         }
 
         public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
@@ -34,6 +44,8 @@ namespace Chatbot.API.Extensions
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors("AllowAllOrigins");
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
