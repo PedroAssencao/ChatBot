@@ -165,7 +165,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 {
                     AtendimentoDttoPost NovoAtendimento = new AtendimentoDttoPost
                     {
-                        EstadoAtendimento = "Bot",
+                        EstadoAtendimento = null,
                         Data = DateTime.Now,
                         CodigoAtendente = null,
                         CodigoDepartamento = null,
@@ -283,30 +283,30 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     return dados;
                 }
 
-                if (Item?.EstadoAtendimento == "Finalizado")
-                {
-                    AtendimentoDttoPut NewModel = new AtendimentoDttoPut
-                    {
-                        Codigo = Item.Codigo,
-                        EstadoAtendimento = "Bot",
-                        Data = DateTime.Now,
-                        CodigoAtendente = null,
-                        CodigoDepartamento = null,
-                        CodigoLogin = Convert.ToInt32(Item?.Login?.Codigo),
-                        CodigoContato = Convert.ToInt32(Item?.Contato?.Codigo),
-                    };
-                    var viewmodel = await _AtendimentoInterfaceServices.AtualizarPut(NewModel);
-                    AtendimentoDttoGet bababa = new AtendimentoDttoGet
-                    {
-                        Codigo = viewmodel.Codigo,
-                        Contato = viewmodel.Contato,
-                        Atendente = viewmodel.Atendente,
-                        Data = viewmodel.Data,
-                        Departamento = viewmodel.Departamento,
-                        EstadoAtendimento = viewmodel.EstadoAtendimento,
-                        Login = viewmodel.Login
-                    };
-                }
+                //if (Item?.EstadoAtendimento == "Finalizado")
+                //{
+                //    AtendimentoDttoPut NewModel = new AtendimentoDttoPut
+                //    {
+                //        Codigo = Item.Codigo,
+                //        EstadoAtendimento = "Bot",
+                //        Data = DateTime.Now,
+                //        CodigoAtendente = null,
+                //        CodigoDepartamento = null,
+                //        CodigoLogin = Convert.ToInt32(Item?.Login?.Codigo),
+                //        CodigoContato = Convert.ToInt32(Item?.Contato?.Codigo),
+                //    };
+                //    var viewmodel = await _AtendimentoInterfaceServices.AtualizarPut(NewModel);
+                //    AtendimentoDttoGet bababa = new AtendimentoDttoGet
+                //    {
+                //        Codigo = viewmodel.Codigo,
+                //        Contato = viewmodel.Contato,
+                //        Atendente = viewmodel.Atendente,
+                //        Data = viewmodel.Data,
+                //        Departamento = viewmodel.Departamento,
+                //        EstadoAtendimento = viewmodel.EstadoAtendimento,
+                //        Login = viewmodel.Login
+                //    };
+                //}
 
                 return dados;
 
