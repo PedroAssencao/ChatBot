@@ -148,7 +148,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         Codigologin = Login.Codigo
 
                     };
-                    var viewmodel = await _contatoInterfaceServices.Create(newModel);
+                    var viewmodel = await _contatoInterfaceServices.CreateComCodigo(newModel);
                     ContatoDttoGet bababa = new ContatoDttoGet
                     {
                         Codigo = viewmodel.Codigo,

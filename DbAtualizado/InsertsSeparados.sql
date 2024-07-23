@@ -1,4 +1,4 @@
-﻿insert into login (log_user, log_email, log_senha, log_img, log_plano, log_waid) values ('Master','master.123@123','c2VuYWkuMTIz','img-placeholder','master','15550882003')
+﻿insert into login (log_user, log_email, log_senha, log_img, log_plano, log_waid) values ('Master2','master.123@1232','c2VuYWkuMTIz','img-placeholder2','master2','557999411293')
 insert into contatos (con_WaId, con_nome, con_DataCadastro, con_BloqueadoStatus, log_id) values ('557988132044','Pedro🤠',GETDATE(), 0,1)
 insert into atendentes (ate_email,ate_estado,ate_img,ate_Nome,ate_senha) values ('emailTeste@gmail.com',1,'placeholder.img','AtendenteTeste','atendente@123')
 
@@ -13,8 +13,8 @@ select * from menus
 --Exemplo de uma option com resposta de menu lembrando que a resposta guarda o id no caso da resposta ser um menu
 --Options do Menu de Primeira Mensagem
 --quando a option for do tipo de resposta interativa voce coloca o id do menu que e para ela responder no campo opt_resposta e no opt_tipo colocar MensagemDeRespostaInterativa
-insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(1,1,GETDATE(), 'Referente a Financeiro',0,'2','MensagemDeRespostaInterativa','Financeiro')
-insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(1,1,GETDATE(), 'Referente a Suporte',0,'3','MensagemDeRespostaInterativa','Suporte')
+insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(6,1,GETDATE(), 'Referente a Financeiro',0,'2','MensagemDeRespostaInterativa','Financeiro')
+insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(6,1,GETDATE(), 'Referente a Suporte',0,'3','MensagemDeRespostaInterativa','Suporte')
 
 --Exemplo de uma option com uma resposta simples + o finalizar atendimento
 
@@ -38,3 +38,30 @@ insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt
 insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(3,1,GETDATE(), 'Finalizar Atendimento',1,'Muito Obrigado Por Interagir Volte Sempre','MensagemDeResposta','Finalizar')
 
 select * from options
+
+select * from Atendimento
+
+select * from contatos
+
+select * from login
+
+delete Atendimento where aten_id = 6
+
+select * from chat
+
+delete chat where aten_id = 6
+
+
+
+update Atendimento set aten_estado = null where aten_id = 2
+
+select * from menus
+
+update menus set log_id =2 where log_id = 1
+
+update options set log_id=2 where log_id=1
+
+select * from contatos
+
+delete contatos where con_id = 12
+

@@ -11,5 +11,6 @@ namespace Chatbot.Infrastructure.Services.Interfaces
     {
         public Task<ContatoDttoGet> RetornarConIdPorWaID(string waid);
         public Task<ContatoDttoGetForView> GetContatoForViewPorId(int id);
+        public Task<ContatoDttoGet> CreateComCodigo(ContatoDttoGet Model);
     }
 }

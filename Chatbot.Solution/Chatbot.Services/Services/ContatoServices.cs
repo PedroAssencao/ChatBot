@@ -64,25 +64,31 @@ namespace Chatbot.Infrastructure.Services
                 throw;
             }
         }
-        public async Task<ContatoDttoGet> Create(ContatoDttoGet Model)
+        public async Task<ContatoDttoGet> CreateComCodigo(ContatoDttoGet Model)
         {
             try
             {
                 Contato NewModel = new Contato
                 {
-                    ConId = Model.Codigo,
                     ConNome = Model.Nome,
                     ConDataCadastro = Model.DataCadastro,
                     ConWaId = Model.CodigoWhatsapp,
                     ConBloqueadoStatus = Model.BloqueadoStatus,
                     LogId = Model.Codigologin
                 };
-                await _contatoRepository.Adicionar(NewModel);
-                return Model;
+                var result = await _contatoRepository.Adicionar(NewModel);
+                ContatoDttoGet viewModel = new ContatoDttoGet{ 
+                    Codigo = result.ConId,
+                    Codigologin = Convert.ToInt32(result.LogId),
+                    CodigoWhatsapp= result.ConWaId,
+                    DataCadastro= result.ConDataCadastro,
+                    BloqueadoStatus = result.ConBloqueadoStatus,
+                    Nome = result.ConNome,
+                };
+                return viewModel;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -175,6 +181,11 @@ namespace Chatbot.Infrastructure.Services
             {
                 throw;
             }
+        }
+
+        public Task<ContatoDttoGet> Create(ContatoDttoGet Model)
+        {
+            throw new NotImplementedException();
         }
     }
 }
