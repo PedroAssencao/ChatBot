@@ -18,11 +18,11 @@ namespace Chatbot.Infrastructure.Extensions
         public static void AddRepositoryStartUp(this IServiceCollection services, IConfiguration configuration)
         {
 
-            services.AddDbContext<chatbotContext>(options =>
-            {
-                options.UseSqlServer(configuration.GetConnectionString("Chinook"));
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            });
+                services.AddDbContext<chatbotContext>(options =>
+                {
+                    options.UseSqlServer(configuration.GetConnectionString("Chinook"));
+                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                });
             services.AddTransient<IContatosInterface, ContatoRepository>();
             services.AddScoped<IMensagemInterface, MensagemRepository>();            
             services.AddScoped<ILoginInterface, LoginRepository>();

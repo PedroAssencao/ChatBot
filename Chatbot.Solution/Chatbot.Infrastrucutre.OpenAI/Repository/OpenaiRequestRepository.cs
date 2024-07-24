@@ -38,7 +38,7 @@ namespace Chatbot.Infrastrucutre.OpenAI.Repository
                         new { role = "system", content = "Você é um Assistente" },
                         new { role = "user", content = Comando }
                     },
-                    max_tokens = 350,
+                    max_tokens = 1000,
                     temperature = 0.5
                 };
 

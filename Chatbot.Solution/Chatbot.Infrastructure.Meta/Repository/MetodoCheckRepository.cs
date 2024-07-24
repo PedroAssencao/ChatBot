@@ -235,20 +235,21 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     var descricao = dados.Tipo == ETipoRetornoJson.TipoSimples ? Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].text.body) : Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description);
                     if (mensagenPorContato.Descricao == descricao)
                     {
-                        var responseObject = new
-                        {
-                            messaging_product = "whatsapp",
-                            recipient_type = "individual",
-                            to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
-                            type = "text",
-                            text = new { preview_url = false, body = "Mensagem Repetida" }
-                        };
-                        DataAndType newmodel = new DataAndType
-                        {
-                            Tipo = ETipoRetornoJson.TipoPost,
-                            Dados = responseObject
-                        };
-                        return newmodel;
+                        //var responseObject = new
+                        //{
+                        //    messaging_product = "whatsapp",
+                        //    recipient_type = "individual",
+                        //    to = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
+                        //    type = "text",
+                        //    text = new { preview_url = false, body = "Mensagem Repetida" }
+                        //};
+                        //DataAndType newmodel = new DataAndType
+                        //{
+                        //    Tipo = ETipoRetornoJson.TipoPost,
+                        //    Dados = responseObject
+                        //};
+                        //return newmodel;
+                        throw new Exception("mensagem repetida");
                     }
                     else
                     {
