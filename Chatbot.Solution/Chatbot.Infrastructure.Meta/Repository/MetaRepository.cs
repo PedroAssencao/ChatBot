@@ -5,6 +5,7 @@ using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
+using Chatbot.Infrastrucutre.OpenAI.Repository.Interface;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -20,9 +21,10 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly IMenuInterfaceServices _menuInterfaceServices;
         protected readonly IOptionInterfaceServices _optionInterfaceServices;
         protected readonly IConfiguration _configuration;
+        protected readonly IOpenaiRequest _openAiRequest;
         public MetaRepository(IMetodoCheck metodoCheck, IContatoInterfaceServices contatoInterfaceServices,
             IAtendimentoInterfaceServices atendimentoInterfaceServices, ILoginInterfaceServices
-            loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config)
+            loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config, IOpenaiRequest openai)
         {
             _metodoCheck = metodoCheck;
             _contatoInterfaceServices = contatoInterfaceServices;
@@ -31,6 +33,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
             _menuInterfaceServices = menuInterfaceServices;
             _configuration = config;
             _optionInterfaceServices = Option;
+            _openAiRequest = openai;
         }
 
         public HttpClient ConfigurarClient(string token, string url)
@@ -144,7 +147,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                             };
                             dadosJson = JsonConvert.SerializeObject(responseObject);
                         }
-                        else
+
+                        if(OptionSelecionada.Tipo == nameof(ETipos.MensagemDeResposta))
                         {
                             var responseObject = new
                             {
@@ -153,6 +157,20 @@ namespace Chatbot.Infrastructure.Meta.Repository
                                 to = numero,
                                 type = "text",
                                 text = new { preview_url = false, body = OptionSelecionada?.Resposta },
+                            };
+                            dadosJson = JsonConvert.SerializeObject(responseObject);
+                        }
+
+                        if (OptionSelecionada.Tipo == nameof(ETipos.MensagemPorIA))
+                        {
+                            var resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value);
+                            var responseObject = new
+                            {
+                                messaging_product = "whatsapp",
+                                recipient_type = "individual",
+                                to = numero,
+                                type = "text",
+                                text = new { preview_url = false, body = resposta },
                             };
                             dadosJson = JsonConvert.SerializeObject(responseObject);
                         }

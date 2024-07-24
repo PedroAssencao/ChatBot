@@ -2,6 +2,7 @@
 using Chatbot.Infrastructure.Extensions;
 using Chatbot.Services.Meta.Extensions;
 using Chatbot.Infrastructure.Meta.Extensions;
+using Chatbot.Infrastrucutre.OpenAI.Extensions;
 namespace Chatbot.API.Extensions
 {
     public static class Startup
@@ -29,12 +30,18 @@ namespace Chatbot.API.Extensions
             services.AddRepositoryStartUp(configuration);
             services.AddServicesSetup();
             services.ConfigureServicesMeta();
+            services.ConfigureServicesOpenAi();
         }
 
         public static void ConfigureServicesMeta(this IServiceCollection services)
         {
             services.AddServicesMetaExtension();
             services.AddRepositoryMetaStartUp();
+        }
+
+        public static void ConfigureServicesOpenAi(this IServiceCollection services)
+        {
+            services.AddInfraOpenAiExtension();
         }
 
         public static void Configure(this WebApplication app)

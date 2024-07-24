@@ -13,8 +13,9 @@ select * from menus
 --Exemplo de uma option com resposta de menu lembrando que a resposta guarda o id no caso da resposta ser um menu
 --Options do Menu de Primeira Mensagem
 --quando a option for do tipo de resposta interativa voce coloca o id do menu que e para ela responder no campo opt_resposta e no opt_tipo colocar MensagemDeRespostaInterativa
-insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(6,1,GETDATE(), 'Referente a Financeiro',0,'2','MensagemDeRespostaInterativa','Financeiro')
-insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(6,1,GETDATE(), 'Referente a Suporte',0,'3','MensagemDeRespostaInterativa','Suporte')
+insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(1,1,GETDATE(), 'Referente a Financeiro',0,'2','MensagemDeRespostaInterativa','Financeiro')
+insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(1,1,GETDATE(), 'Referente a Suporte',0,'3','MensagemDeRespostaInterativa','Suporte')
+insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(1,1,GETDATE(), 'Historia do Senai Contada Pela IA',1,null,'MensagemPorIA','Historia Senai')
 
 --Exemplo de uma option com uma resposta simples + o finalizar atendimento
 
@@ -32,6 +33,7 @@ insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt
 insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(2,1,GETDATE(), 'Dificuldades no Pagamento',0,'5','MensagemDeRespostaInterativa','Pagamento')
 insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(2,1,GETDATE(), 'Finalizar Atendimento',1,'Muito Obrigado Por Interagir','MensagemDeResposta','Finalizar2')
 
+create database chatbot
 
 --Options do Menu de Suporte
 insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta,opt_tipo, opt_title) values(3,1,GETDATE(), 'Instabilidade no Geral',0,'4','MensagemDeRespostaInterativa','DificuldadesSistemas')
@@ -53,7 +55,7 @@ delete chat where aten_id = 6
 
 
 
-update Atendimento set aten_estado = null where aten_id = 2
+update Atendimento set aten_estado = null where aten_id = 3
 
 select * from menus
 
