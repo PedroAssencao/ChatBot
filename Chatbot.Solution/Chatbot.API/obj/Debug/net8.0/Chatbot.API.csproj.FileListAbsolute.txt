@@ -447,3 +447,5 @@ C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot..B71881B4.Up2Date
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Chatbot.Infrastrucutre.OpenAI.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Chatbot.Infrastrucutre.OpenAI.pdb
+C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Chatbot.Infrastrucutre.OpenAI.dll
+C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Chatbot.Infrastrucutre.OpenAI.pdb

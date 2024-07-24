@@ -19,7 +19,7 @@ namespace Chatbot.Infrastrucutre.OpenAI.Repository
             _configurationClient = configurationClient;
         }
 
-        public async Task<string> PostAsync(string authorization)
+        public async Task<string> PostAsync(string Authorization, string Comando)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace Chatbot.Infrastrucutre.OpenAI.Repository
 
                 _configurationClient.AddHeaders(new Dictionary<string, string>
                 {
-                    {"Authorization", $"Bearer {authorization}"}
+                    {nameof(Authorization), $"Bearer {Authorization}"}
                 });
 
                 var requestBody = new
@@ -35,8 +35,8 @@ namespace Chatbot.Infrastrucutre.OpenAI.Repository
                     model = "gpt-4",
                     messages = new[]
                     {
-                        new { role = "system", content = "Você é um historiador brasileiro" },
-                        new { role = "user", content = "Me fale um pouco sobre a hisotira do senai no brasil" }
+                        new { role = "system", content = "Você é um Assistente" },
+                        new { role = "user", content = Comando }
                     },
                     max_tokens = 350,
                     temperature = 0.5

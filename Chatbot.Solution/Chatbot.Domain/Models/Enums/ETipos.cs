@@ -12,6 +12,7 @@ namespace Chatbot.Domain.Models.Enums
         MensagemDeResposta,
         MensagemEnviada,
         mensagemderespostainterativa,
-        MensagemPorIA
+        MensagemPorIA,
+        MenuDaIA
     }
 }

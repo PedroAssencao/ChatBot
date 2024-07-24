@@ -8,6 +8,6 @@ namespace Chatbot.Infrastrucutre.OpenAI.Repository.Interface
 {
     public interface IOpenaiRequest
     {
-        Task<string> PostAsync(string Authorization);
+        Task<string> PostAsync(string Authorization, string comando);
     }
 }

@@ -15,17 +15,17 @@ namespace Chatbot.API.Controllers
             _repository = repository;
             _configuration = configuration;
         }
-        [HttpGet]
-        public async Task<IActionResult> teste()
-        {
-            try
-            {
-                return Ok(await _repository.PostAsync(_configuration.GetSection("AES").Value));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> teste()
+        //{
+        //    try
+        //    {
+        //        return Ok(await _repository.PostAsync(_configuration.GetSection("AES").Value));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

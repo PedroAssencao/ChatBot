@@ -51,11 +51,99 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
+
+        public async Task<dynamic> RespostaGpt(AtendimentoDttoGet Atendimento, string Conteudo, string numero, DataAndType Model)
+        {
+            try
+            {
+                var dadosJson = "";
+
+                if (Conteudo.Trim().ToLower() == "sim")
+                {
+                    AtendimentoDttoPut NewModel = new AtendimentoDttoPut
+                    {
+                        Codigo = Atendimento.Codigo,
+                        CodigoAtendente = null,
+                        CodigoDepartamento = null,
+                        Data = DateTime.Now,
+                        EstadoAtendimento = null,
+                        CodigoContato = Atendimento.Contato.Codigo,
+                        CodigoLogin = Atendimento.Login.Codigo
+                    };
+                    await _atendimentoInterfaceServices.AtualizarPut(NewModel);
+                    return await MensagemInicial(Model);
+                }
+
+                var responseObject = new
+                {
+                    messaging_product = "whatsapp",
+                    recipient_type = "individual",
+                    to = numero,
+                    type = "text",
+                    text = new { preview_url = false, body = "Aguardando Resposta..." },
+                };
+                dadosJson = JsonConvert.SerializeObject(responseObject);
+                await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+
+                var resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, Conteudo);
+                var NewresponseObject = new
+                {
+                    messaging_product = "whatsapp",
+                    recipient_type = "individual",
+                    to = numero,
+                    type = "text",
+                    text = new { preview_url = false, body = resposta },
+                };
+                dadosJson = JsonConvert.SerializeObject(NewresponseObject);
+                await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+
+                var dadosMenu = await _menuInterfaceServices.GetALl();
+                var menuselecionado = dadosMenu.FirstOrDefault(x => x.Tipo == nameof(ETipos.MenuDaIA) && x?.Login?.Codigo == Atendimento?.Login.Codigo);
+                var contato = Atendimento.Contato;
+                if (contato?.CodigoWhatsapp == "557988132044")
+                {
+                    contato.CodigoWhatsapp = "5579988132044";
+                }
+
+                if (contato?.CodigoWhatsapp == "557998468046")
+                {
+                    contato.CodigoWhatsapp = "5579998468046";
+                }
+                var responseObject2 = new
+                {
+                    messaging_product = "whatsapp",
+                    recipient_type = "individual",
+                    to = contato,
+                    type = "interactive",
+                    interactive = new
+                    {
+                        type = "list",
+                        header = new { type = "text", text = menuselecionado?.Header },
+                        body = new { text = menuselecionado?.Body },
+                        footer = new { text = menuselecionado?.Footer },
+                        action = new
+                        {
+                            button = "Menu de Opções",
+                            sections = new[]
+                        {
+                            new { title = "Shorter Section Title", rows = menuselecionado?.Options?.Select(item => new { id = item.Codigo, title = item.Titulo, description = item.Descricao }).ToArray() }
+                        }
+                        }
+                    }
+                };
+
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(responseObject2));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<dynamic> BotResposta(DataAndType Model)
         {
-
             var descricaoDaMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description ?? Model.Dados.entry[0].changes[0].value.messages[0].text.body;
-            var codigoMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.id ?? null;
+            var codigoMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.id;
             string name = Model.Dados.entry[0].changes[0].value.metadata.display_phone_number;
             var Login = await _loginInterfaceServices.RetornarLogIdPorWaID(name);
             var Menus = await _menuInterfaceServices.PegarTodosOsMenusPorLogID(Convert.ToInt32(Login?.Codigo));
@@ -64,12 +152,13 @@ namespace Chatbot.Infrastructure.Meta.Repository
             var numero = Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id;
             var dadosJson = "";
             var isFinalizar = false;
+            var isBotAtendimento = false;
+            var Atendimento = dadosAtendimento.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id && x.Login?.Codigo == Convert.ToInt32(Login?.Codigo));
             try
             {
 
                 if (descricaoDaMensagem != null && descricaoDaMensagem != "" && descricaoDaMensagem != " ")
                 {
-
                     var OptionSelecionada = option.Where(x => x?.Login?.Codigo == Login?.Codigo).ToList().FirstOrDefault(x => x.Codigo == Convert.ToInt32(codigoMensagem) || x.Descricao == descricaoDaMensagem);
                     MenuDttoGet MenuSelecionadoOption = null;
                     var optionValida = Menus.FirstOrDefault(x => x.Codigo == OptionSelecionada.CodigoMenu);
@@ -82,127 +171,148 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         MenuSelecionadoOption = null;
                     }
 
-                    if (optionValida != null)
+                    if (OptionSelecionada?.Finalizar == true)
                     {
-                        if (OptionSelecionada?.Finalizar == true)
+                        if (Atendimento != null)
                         {
-                            var Atendimento = dadosAtendimento.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id && x.Login?.Codigo == Convert.ToInt32(Login?.Codigo));
-
-                            if (Atendimento != null)
+                            AtendimentoDttoPut NewModel = new AtendimentoDttoPut
                             {
-                                AtendimentoDttoPut NewModel = new AtendimentoDttoPut
-                                {
-                                    Codigo = Atendimento.Codigo,
-                                    CodigoAtendente = null,
-                                    CodigoDepartamento = null,
-                                    Data = DateTime.Now,
-                                    EstadoAtendimento = "Finalizado",
-                                    CodigoContato = Atendimento.Contato.Codigo,
-                                    CodigoLogin = Atendimento.Login.Codigo
-                                };
-                                isFinalizar = true;
-                                await _atendimentoInterfaceServices.AtualizarPut(NewModel);
-                            }
-                            else
-                            {
-                                throw new Exception("Não foi possivel finalizar o atendimento");
-                            }
-
-                        }
-
-                        if (numero == "557988132044")
-                        {
-                            numero = "5579988132044";
-                        }
-
-                        if (numero == "557998468046")
-                        {
-                            numero = "5579998468046";
-                        }
-
-                        if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa))
-                        {
-                            var responseObject = new
-                            {
-                                messaging_product = "whatsapp",
-                                recipient_type = "individual",
-                                to = numero,
-                                type = "interactive",
-                                interactive = new
-                                {
-                                    type = "list",
-                                    header = new { type = "text", text = MenuSelecionadoOption?.Header },
-                                    body = new { text = MenuSelecionadoOption?.Body },
-                                    footer = new { text = MenuSelecionadoOption?.Footer },
-                                    action = new
-                                    {
-                                        button = "Menu de Opções",
-                                        sections = new[]
-                                        {
-                                            new { title = "Shorter Section Title", rows = MenuSelecionadoOption?.Options?.Select(item => new { id = item.Codigo, title = item.Titulo, description = item.Descricao }).ToArray() }
-                                        }
-                                    }
-
-                                }
+                                Codigo = Atendimento.Codigo,
+                                CodigoAtendente = null,
+                                CodigoDepartamento = null,
+                                Data = DateTime.Now,
+                                EstadoAtendimento = "Finalizado",
+                                CodigoContato = Atendimento.Contato.Codigo,
+                                CodigoLogin = Atendimento.Login.Codigo
                             };
-                            dadosJson = JsonConvert.SerializeObject(responseObject);
+                            isFinalizar = true;
+                            await _atendimentoInterfaceServices.AtualizarPut(NewModel);
                         }
-
-                        if(OptionSelecionada.Tipo == nameof(ETipos.MensagemDeResposta))
+                        else
                         {
-                            var responseObject = new
-                            {
-                                messaging_product = "whatsapp",
-                                recipient_type = "individual",
-                                to = numero,
-                                type = "text",
-                                text = new { preview_url = false, body = OptionSelecionada?.Resposta },
-                            };
-                            dadosJson = JsonConvert.SerializeObject(responseObject);
-                        }
-
-                        if (OptionSelecionada.Tipo == nameof(ETipos.MensagemPorIA))
-                        {
-                            var resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value);
-                            var responseObject = new
-                            {
-                                messaging_product = "whatsapp",
-                                recipient_type = "individual",
-                                to = numero,
-                                type = "text",
-                                text = new { preview_url = false, body = resposta },
-                            };
-                            dadosJson = JsonConvert.SerializeObject(responseObject);
+                            throw new Exception("Não foi possivel finalizar o atendimento");
                         }
 
                     }
-                    else
+
+                  
+                    if (OptionSelecionada?.Resposta == null)
                     {
-                        if (numero == "5579988132044")
+                        if (Atendimento != null)
                         {
-                            numero = "55799988132044";
+                            AtendimentoDttoPut NewModel = new AtendimentoDttoPut
+                            {
+                                Codigo = Atendimento.Codigo,
+                                CodigoAtendente = null,
+                                CodigoDepartamento = null,
+                                Data = DateTime.Now,
+                                EstadoAtendimento = "GPT",
+                                CodigoContato = Atendimento.Contato.Codigo,
+                                CodigoLogin = Atendimento.Login.Codigo
+                            };
+                            await _atendimentoInterfaceServices.AtualizarPut(NewModel);
+                        }
+                        else
+                        {
+                            throw new Exception("Não foi possivel Atualizar o atendimento");
                         }
 
+                    }
 
-                        if (numero == "557998468046")
-                        {
-                            numero = "5579998468046";
-                        }
+                    if (numero == "557988132044")
+                    {
+                        numero = "5579988132044";
+                    }
 
+                    if (numero == "557998468046")
+                    {
+                        numero = "5579998468046";
+                    }
+
+                    if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa))
+                    {
                         var responseObject = new
                         {
                             messaging_product = "whatsapp",
                             recipient_type = "individual",
-                            to = Model.Dados.entry[0].changes[0].value.contacts[0].wa_id,
+                            to = numero,
+                            type = "interactive",
+                            interactive = new
+                            {
+                                type = "list",
+                                header = new { type = "text", text = MenuSelecionadoOption?.Header },
+                                body = new { text = MenuSelecionadoOption?.Body },
+                                footer = new { text = MenuSelecionadoOption?.Footer },
+                                action = new
+                                {
+                                    button = "Menu de Opções",
+                                    sections = new[]
+                                    {
+                                            new { title = "Shorter Section Title", rows = MenuSelecionadoOption?.Options?.Select(item => new { id = item.Codigo, title = item.Titulo, description = item.Descricao }).ToArray() }
+                                        }
+                                }
+
+                            }
+                        };
+                        dadosJson = JsonConvert.SerializeObject(responseObject);
+                    }
+
+                    if (OptionSelecionada.Tipo == nameof(ETipos.MensagemDeResposta))
+                    {
+                        var responseObject = new
+                        {
+                            messaging_product = "whatsapp",
+                            recipient_type = "individual",
+                            to = numero,
                             type = "text",
-                            text = new { preview_url = false, body = "Não entendi, Lembresse de Escolher a opção no Menu Acima!" }
+                            text = new { preview_url = false, body = OptionSelecionada?.Resposta },
+                        };
+                        dadosJson = JsonConvert.SerializeObject(responseObject);
+                    }
+
+                    if (OptionSelecionada.Tipo == nameof(ETipos.MensagemPorIA))
+                    {
+                        var NewresponseObject = new
+                        {
+                            messaging_product = "whatsapp",
+                            recipient_type = "individual",
+                            to = numero,
+                            type = "text",
+                            text = new { preview_url = false, body = "Aguardando Resposta..." },
                         };
 
+                        dadosJson = JsonConvert.SerializeObject(NewresponseObject);
+                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+
+                        var resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, descricaoDaMensagem);
+                        var responseObject = new
+                        {
+                            messaging_product = "whatsapp",
+                            recipient_type = "individual",
+                            to = numero,
+                            type = "text",
+                            text = new { preview_url = false, body = resposta },
+                        };
                         dadosJson = JsonConvert.SerializeObject(responseObject);
                     }
 
                     if (!isFinalizar)
                     {
+                        return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                    }
+                    if (!isBotAtendimento)
+                    {
+                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                        var NewresponseObject = new
+                        {
+                            messaging_product = "whatsapp",
+                            recipient_type = "individual",
+                            to = numero,
+                            type = "text",
+                            text = new { preview_url = false, body = "Voce entrou no modo de Interação com a IA Faça Uma Pergunta que ela ira te responder!" },
+                        };
+
+                        dadosJson = JsonConvert.SerializeObject(NewresponseObject);
                         return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
                     }
                     else
@@ -216,7 +326,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
                             type = "text",
                             text = new { preview_url = false, body = "O Atendimento foi Finalizado Se Tiver Mais Alguma Questão Apenas Intereja Novamente!" }
                         };
-
                         dadosJson = JsonConvert.SerializeObject(responseObject);
                         return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
                     }
@@ -247,6 +356,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
             var menuselecionado = dadosMenu.FirstOrDefault(x => x.Tipo == nameof(ETipos.PrimeiraMensagem) && x?.Login?.Codigo == login?.Codigo);
 
+            var conteudo = dados.entry[0].changes[0].value.messages[0].text.body;
+
             if (contato?.CodigoWhatsapp == "557988132044")
             {
                 contato.CodigoWhatsapp = "5579988132044";
@@ -257,7 +368,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 contato.CodigoWhatsapp = "5579998468046";
             }
 
-            var IsAtendimentoGoing = dadosAtendimento.Where(x => x.EstadoAtendimento == null || x.EstadoAtendimento == "Finalizado").FirstOrDefault(x => x.Contato.Codigo == contato.Codigo);
+            var IsAtendimentoGoing = dadosAtendimento.Where(x => x.EstadoAtendimento == null || x.EstadoAtendimento == "Finalizado" || x.EstadoAtendimento == "GPT").FirstOrDefault(x => x.Contato.Codigo == contato.Codigo);
 
             if (IsAtendimentoGoing == null)
             {
@@ -275,6 +386,11 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 dadosJson = JsonConvert.SerializeObject(teste);
                 return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
             }
+
+            if (IsAtendimentoGoing.EstadoAtendimento == "GPT")
+            {
+                return await RespostaGpt(IsAtendimentoGoing, conteudo, contato.CodigoWhatsapp, Model);
+            }
             else
             {
                 IsAtendimentoGoing.EstadoAtendimento = "Bot";
@@ -284,8 +400,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     EstadoAtendimento = IsAtendimentoGoing.EstadoAtendimento,
                     Data = DateTime.Now,
                     CodigoAtendente = IsAtendimentoGoing.Atendente?.Codigo,
-                    CodigoDepartamento = IsAtendimentoGoing.Departamento?.Codigo, 
-                    CodigoLogin = IsAtendimentoGoing.Login?.Codigo, 
+                    CodigoDepartamento = IsAtendimentoGoing.Departamento?.Codigo,
+                    CodigoLogin = IsAtendimentoGoing.Login?.Codigo,
                     CodigoContato = IsAtendimentoGoing.Contato?.Codigo,
                 };
                 await _atendimentoInterfaceServices.AtualizarPut(NovoAtendimento);
