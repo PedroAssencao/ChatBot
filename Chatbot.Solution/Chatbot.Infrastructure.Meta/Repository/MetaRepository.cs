@@ -221,9 +221,9 @@ namespace Chatbot.Infrastructure.Meta.Repository
                                     {
                                         button = "Menu de Opções",
                                         sections = new[]
-                            {
-                                new { title = "Shorter Section Title", rows = menuselecionado?.Options?.Select(item => new { id = item.Codigo, title = item.Titulo, description = item.Descricao }).ToArray() }
-                            }
+                                            {
+                                                new { title = "Shorter Section Title", rows = menuselecionado?.Options?.Select(item => new { id = item.Codigo, title = item.Titulo, description = item.Descricao }).ToArray() }
+                                            }
                                     }
                                 }
                             };

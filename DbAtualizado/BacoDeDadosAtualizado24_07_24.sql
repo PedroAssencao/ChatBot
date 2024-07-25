@@ -1,5 +1,6 @@
-
 use master
+go
+drop database chatbot
 go
 create database chatbot
 go

@@ -36,7 +36,7 @@ namespace Chatbot.API.DAL
         public virtual DbSet<Option> Options { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer("Data Source=DESKTOP-02BUU56;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
+            => optionsBuilder.UseSqlServer("Data Source=PC03LAB2267\\SQLEXPRESS;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

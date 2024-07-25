@@ -60,6 +60,113 @@ namespace Chatbot.Infrastructure.Services
             }
         }
 
+        public async Task<dynamic> CompararData()
+        {           
+            var chat2 = new ChatsDttoGet
+            {
+                Codigo = 2,
+                Atendente = null,
+                Atendimento = new AtendimentoDttoGet
+                {
+                    Codigo = 1,
+                    EstadoAtendimento = "Finalizado",
+                    Data = DateTime.Parse("2024-07-25T02:12:07.183"),
+                    Atendente = null,
+                    Departamento = null,
+                    Contato = new ContatoDttoGetForView
+                    {
+                        Codigo = 1,
+                        CodigoWhatsapp = "557988132044",
+                        Nome = "Pedro Assenção"
+                    },
+                    Login = new LoginDttoGetForView
+                    {
+                        Codigo = 1,
+                        Usuario = "Master",
+                        CodigoWhatsapp = "557999411293"
+                    }
+                },
+                Contato = new ContatoDttoGetForView
+                {
+                    Codigo = 1,
+                    CodigoWhatsapp = "557988132044",
+                    Nome = "Pedro Assenção"
+                },
+                Mensagens = new List<MensagensDttoGetForView>
+                    {
+                        new MensagensDttoGetForView
+                        {
+                            Codigo = 2,
+                            Data = DateTime.Parse("2024-07-24T16:27:23.003"),
+                            Descricao = "Referente a Financeiro",
+                            Contato = new ContatoDttoGetForView
+                            {
+                                Codigo = 1,
+                                CodigoWhatsapp = "557988132044",
+                                Nome = "Pedro Assenção"
+                            }
+                        },
+                        new MensagensDttoGetForView
+                        {
+                            Codigo = 2,
+                            Data = DateTime.Parse("2024-07-25T11:35:23.003"),
+                            Descricao = "Referente a Financeiro",
+                            Contato = new ContatoDttoGetForView
+                            {
+                                Codigo = 1,
+                                CodigoWhatsapp = "557988132044",
+                                Nome = "Pedro Assenção"
+                            }
+                        }
+                    }
+            };
+
+
+            try
+            {
+                var dados = new List<ChatsDttoGet>();
+                dados.Add(chat2);
+                dados.Add(chat2);
+                dados.Add(chat2);
+                dados.Add(chat2);
+                dados.Add(chat2);
+                dados.Add(chat2);
+                dados.Add(chat2);
+                var listString = new List<string>();    
+                foreach (var item in dados)
+                {
+
+                    var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
+                    var dataAtual = DateTime.Now;
+                    var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
+
+                    if (dataAtual < dataMensagem)
+                    {
+                        diferenca -= diferenca * 2;
+
+                    }
+
+                    if (diferenca >= 5)
+                    {
+                        listString.Add("Entrou");
+                    }
+                    else
+                    {
+                        listString.Add("nãoentrou");
+                    }
+
+
+                }
+                return listString;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public async Task<ChatsDttoGetForMensagens> BuscarChatParaMensagen(int id)
         {
             try

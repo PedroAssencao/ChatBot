@@ -16,6 +16,8 @@ namespace Chatbot.API.Controllers
         {
             _repository = repository;
         }
+        [HttpGet("/comparardata")]
+        public async Task<IActionResult> Buscar() => Ok(await _repository.CompararData());
 
         [HttpGet("/chats")]
         public async Task<IActionResult> BuscarTodos() => Ok(await _repository.GetALl());
