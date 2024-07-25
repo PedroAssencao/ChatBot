@@ -443,8 +443,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw new Exception("Menssagem Vazia Ou Feita Por Bot");
             }
         }
-
-
+        
         public async Task<dynamic> MensagemInicial(DataAndType Model)
         {
             try
