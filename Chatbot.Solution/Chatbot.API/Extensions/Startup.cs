@@ -3,6 +3,7 @@ using Chatbot.Infrastructure.Extensions;
 using Chatbot.Services.Meta.Extensions;
 using Chatbot.Infrastructure.Meta.Extensions;
 using Chatbot.Infrastrucutre.OpenAI.Extensions;
+using Chatbot.API.Controllers;
 namespace Chatbot.API.Extensions
 {
     public static class Startup
@@ -31,6 +32,7 @@ namespace Chatbot.API.Extensions
             services.AddServicesSetup();
             services.ConfigureServicesMeta();
             services.ConfigureServicesOpenAi();
+            services.AddHostedService<VerificarAtendimentoService>();
         }
 
         public static void ConfigureServicesMeta(this IServiceCollection services)

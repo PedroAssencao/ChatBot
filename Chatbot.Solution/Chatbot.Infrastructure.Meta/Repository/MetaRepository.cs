@@ -10,6 +10,7 @@ using Chatbot.Infrastrucutre.OpenAI.Repository.Interface;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
     public class MetaRepository : IMetaClient
@@ -20,12 +21,13 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly IAtendimentoInterfaceServices _atendimentoInterfaceServices;
         protected readonly ILoginInterfaceServices _loginInterfaceServices;
         protected readonly IMenuInterfaceServices _menuInterfaceServices;
+        protected readonly IChatsInterfaceServices _chatsInterfaceServices;
         protected readonly IOptionInterfaceServices _optionInterfaceServices;
         protected readonly IConfiguration _configuration;
         protected readonly IOpenaiRequest _openAiRequest;
         public MetaRepository(IMetodoCheck metodoCheck, IContatoInterfaceServices contatoInterfaceServices,
             IAtendimentoInterfaceServices atendimentoInterfaceServices, ILoginInterfaceServices
-            loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config, IOpenaiRequest openai)
+            loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config, IOpenaiRequest openai, IChatsInterfaceServices chatsInterfaceServices)
         {
             _metodoCheck = metodoCheck;
             _contatoInterfaceServices = contatoInterfaceServices;
@@ -35,6 +37,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
             _configuration = config;
             _optionInterfaceServices = Option;
             _openAiRequest = openai;
+            _chatsInterfaceServices = chatsInterfaceServices;
         }
 
         public HttpClient ConfigurarClient(string token, string url)
@@ -49,6 +52,75 @@ namespace Chatbot.Infrastructure.Meta.Repository
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        public async void CompararData()
+        {
+            try
+            {
+                var dados = await _chatsInterfaceServices.GetALl();
+                var dadosJson = "";
+                foreach (var item in dados)
+                {
+                    if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim())
+                    {
+                        var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
+                        var dataAtual = DateTime.Now;
+                        var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
+
+                        if (dataAtual < dataMensagem)
+                        {
+                            diferenca -= diferenca * 2;
+                        }
+
+                        if (diferenca >= 5 && diferenca <= 9)
+                        {
+                            var responseObject = new
+                            {
+                                messaging_product = "whatsapp",
+                                recipient_type = "individual",
+                                to = item.Contato.Codigo,
+                                type = "text",
+                                text = new { preview_url = false, body = "Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!" },
+                            };
+                            dadosJson = JsonConvert.SerializeObject(responseObject);
+                            await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                        }
+
+                        if (diferenca >= 10)
+                        {
+                            Atendimento NovoAtendimento = new Atendimento
+                            {
+                                AtenId = item.Atendimento.Codigo,
+                                AtenEstado = "Finalizado",
+                                AtenData = DateTime.Now,
+                                AteId = item?.Atendimento?.Atendente?.Codigo,
+                                DepId = item?.Atendimento?.Departamento?.Codigo,
+                                LogId = item?.Atendimento?.Login?.Codigo,
+                                ConId = item?.Atendimento?.Contato?.Codigo,
+                            };
+                            using (var newContext = new chatbotContext())
+                            {
+                                newContext.Atendimentos.Update(NovoAtendimento);
+                                await newContext.SaveChangesAsync();
+                            }
+                            var responseObject = new
+                            {
+                                messaging_product = "whatsapp",
+                                recipient_type = "individual",
+                                to = item.Contato.Codigo,
+                                type = "text",
+                                text = new { preview_url = false, body = "O atendimento foi finalizado por inatividade." },
+                            };
+                            dadosJson = JsonConvert.SerializeObject(responseObject);
+                            await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

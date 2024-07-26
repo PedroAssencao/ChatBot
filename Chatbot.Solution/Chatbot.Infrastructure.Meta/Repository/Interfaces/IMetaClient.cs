@@ -15,5 +15,6 @@ namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
         public Task<dynamic> MensagemInicial(DataAndType Model);
         public Task<dynamic> BotResposta(DataAndType Model);
         public Task<dynamic> ChamarMetodo(dynamic Values);
+        void CompararData();
     }
 }
