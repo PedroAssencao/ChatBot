@@ -186,15 +186,15 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     newItem = bababa;
 
                 }
-
-                var chatExiste = Chats.FirstOrDefault(x => x?.Atendimento?.Codigo == newItem.Codigo);
+                if (Item == null)
+                {
+                    Item = newItem;
+                }
+                var chatExiste = Chats.FirstOrDefault(x => x?.Atendimento?.Codigo == Item.Codigo);
 
                 if (chatExiste == null)
                 {
-                    if (Item == null)
-                    {
-                        Item = newItem;
-                    }
+                  
                     ChatsDttoPost ChatModel = new ChatsDttoPost
                     {
                         CodigoAtendente = Item.Atendente == null ? null : Item.Atendente.Codigo,
