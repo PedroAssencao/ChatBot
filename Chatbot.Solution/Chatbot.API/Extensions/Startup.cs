@@ -32,7 +32,6 @@ namespace Chatbot.API.Extensions
             services.AddServicesSetup();
             services.ConfigureServicesMeta();
             services.ConfigureServicesOpenAi();
-            services.AddHostedService<VerificarAtendimentoService>();
         }
 
         public static void ConfigureServicesMeta(this IServiceCollection services)

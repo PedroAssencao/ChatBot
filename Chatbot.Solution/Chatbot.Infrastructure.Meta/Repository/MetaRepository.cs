@@ -55,7 +55,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-        public async void CompararData()
+        public async Task CompararData()
         {
             try
             {
@@ -68,19 +68,28 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
                         var dataAtual = DateTime.Now;
                         var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
+                        string numero = item.Contato.CodigoWhatsapp;
+                        if (numero == "557988132044")
+                        {
+                            numero = "5579988132044";
+                        }
 
+                        if (numero == "557998468046")
+                        {
+                            numero = "5579998468046";
+                        }
                         if (dataAtual < dataMensagem)
                         {
                             diferenca -= diferenca * 2;
                         }
 
-                        if (diferenca >= 5 && diferenca <= 9)
+                        if (diferenca >= 5 && diferenca <= 10)
                         {
                             var responseObject = new
                             {
                                 messaging_product = "whatsapp",
                                 recipient_type = "individual",
-                                to = item.Contato.Codigo,
+                                to = numero,
                                 type = "text",
                                 text = new { preview_url = false, body = "Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!" },
                             };
@@ -88,7 +97,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                             await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
                         }
 
-                        if (diferenca >= 10)
+                        if (diferenca > 10)
                         {
                             Atendimento NovoAtendimento = new Atendimento
                             {
@@ -109,7 +118,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                             {
                                 messaging_product = "whatsapp",
                                 recipient_type = "individual",
-                                to = item.Contato.Codigo,
+                                to = numero,
                                 type = "text",
                                 text = new { preview_url = false, body = "O atendimento foi finalizado por inatividade." },
                             };
