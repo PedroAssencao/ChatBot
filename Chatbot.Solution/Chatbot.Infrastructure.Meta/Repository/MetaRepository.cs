@@ -10,7 +10,6 @@ using Chatbot.Infrastrucutre.OpenAI.Repository.Interface;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
     public class MetaRepository : IMetaClient
