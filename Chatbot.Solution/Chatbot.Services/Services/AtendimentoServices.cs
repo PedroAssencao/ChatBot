@@ -122,7 +122,7 @@ namespace Chatbot.Services.Services
                 };
 
                 var item = await _repository.Adicionar(NewModel);
-                
+
                 AtendimentoDttoGet ViewModel = new AtendimentoDttoGet
                 {
                     Codigo = item.AtenId,
@@ -167,6 +167,20 @@ namespace Chatbot.Services.Services
                     Login = item.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))
                 };
                 return ViewModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<AtendimentoDttoGet?> ResgatarAtendimentoPorLogIdEContatoWaId(string ConWaId, int LogId)
+        {
+            try
+            {
+                var TodosAtendimentosPorLogin = await RetornarTodosAtendimentosPorLogId(LogId);
+                var item = TodosAtendimentosPorLogin.FirstOrDefault(x => x?.Contato?.CodigoWhatsapp == ConWaId && x?.Login?.Codigo == LogId);
+                return item;
             }
             catch (Exception)
             {

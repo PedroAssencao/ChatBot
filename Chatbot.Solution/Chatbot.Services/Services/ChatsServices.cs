@@ -60,45 +60,19 @@ namespace Chatbot.Infrastructure.Services
             }
         }
 
-        public async Task<dynamic> CompararData()
-        {           
+        public async Task<ChatsDttoGet?> RetornarChatPorAtenId(int atenId)
+        {
             try
             {
                 var dados = await GetALl();
-                var listString = new List<string>();    
-                foreach (var item in dados)
-                {
-                    if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim())
-                    {
-                        var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
-                        var dataAtual = DateTime.Now;
-                        var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
-
-                        if (dataAtual < dataMensagem)
-                        {
-                            diferenca -= diferenca * 2;
-                        }
-
-                        if (diferenca >= 5)
-                        {
-                            listString.Add("Entrou");
-                        }
-                        else
-                        {
-                            listString.Add("nãoentrou");
-                        }
-                    }
-                }
-                return listString;
+                var itens = dados.FirstOrDefault(x => x?.Atendimento?.Codigo == atenId);
+                return itens;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-
-
         public async Task<ChatsDttoGetForMensagens> BuscarChatParaMensagen(int id)
         {
             try

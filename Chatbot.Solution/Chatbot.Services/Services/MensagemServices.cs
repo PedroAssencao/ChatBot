@@ -18,7 +18,7 @@ namespace Chatbot.Services.Services
     {
         protected readonly IMensagemInterface _repository;
         protected readonly IContatoInterfaceServices _contatoRepository;
-        protected readonly ILoginInterfaceServices _loginInterfaceRepository;        
+        protected readonly ILoginInterfaceServices _loginInterfaceRepository;
 
         public MensagemServices(IMensagemInterface repository, IContatoInterfaceServices contatoRepository, ILoginInterfaceServices loginInterfaceRepository)
         {
@@ -103,6 +103,21 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
+
+        public async Task<MensagensDttoGet?> PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(string ConWaID, string LogConWaID)
+        {
+            try
+            {
+                var dados = await GetALl();
+                var item = dados.LastOrDefault(x => x?.Contato?.CodigoWhatsapp == ConWaID && x?.Login?.CodigoWhatsapp == LogConWaID && x.TipoDaMensagem == nameof(ETipos.MensagemEnviada));
+                return item;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<MensagensDttoGet> AdicionarPost(MensagensDttoPost Model)
         {
             try

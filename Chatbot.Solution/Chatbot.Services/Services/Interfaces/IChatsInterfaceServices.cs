@@ -13,6 +13,6 @@ namespace Chatbot.Infrastructure.Services.Interfaces
         Task<ChatsDttoGetForMensagens> BuscarChatParaMensagen(int id);
         Task<ChatsDttoGet> AdicionarPost(ChatsDttoPost Model);
         Task<ChatsDttoGet> AtualziarPut(ChatsDttoPut Model);
-         Task<dynamic> CompararData();
+        public Task<ChatsDttoGet?> RetornarChatPorAtenId(int atenId);
     }
 }

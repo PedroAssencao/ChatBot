@@ -13,5 +13,6 @@ namespace Chatbot.Services.Services.Interfaces
         Task<List<MensagensDttoGetForView>> BuscarMensagensDeUmChat(int con, int log);
         Task<MensagensDttoGet> AdicionarPost(MensagensDttoPost Model);
         Task<MensagensDttoGet> AtualizarPut(MensagensDttoPut Model);
+        public Task<MensagensDttoGet?> PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(string ConWaID, string LogConWaID);
     }
 }
