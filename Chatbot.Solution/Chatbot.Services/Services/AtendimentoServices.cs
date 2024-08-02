@@ -55,6 +55,28 @@ namespace Chatbot.Services.Services
             }
         }
 
+        public async Task AtualizarAtendimentoComDttoDeGet(AtendimentoDttoGet Atendimento)
+        {
+            try
+            {
+                AtendimentoDttoPut NewModel = new AtendimentoDttoPut
+                {
+                    Codigo = Atendimento.Codigo,
+                    CodigoAtendente = null,
+                    CodigoDepartamento = null,
+                    Data = DateTime.Now,
+                    EstadoAtendimento = null,
+                    CodigoContato = Atendimento.Contato.Codigo,
+                    CodigoLogin = Atendimento.Login.Codigo
+                };
+                await AtualizarPut(NewModel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<AtendimentoDttoGet> GetPorId(int id)
         {
             try
@@ -103,6 +125,20 @@ namespace Chatbot.Services.Services
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public async Task<AtendimentoDttoGet> AtendimentoExiste(LoginDttoGet login, ContatoDttoGet contato)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.Where(x => x.EstadoAtendimento == null || x.EstadoAtendimento == "Finalizado" || x.EstadoAtendimento == "GPT").FirstOrDefault(x => x.Contato.Codigo == contato.Codigo && x.Login.Codigo == login.Codigo);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

@@ -34,6 +34,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
             _ChatsInterfaceServices = chatsInterfaceServices;
         }
 
+        //ver maneira melhor de fazer esse metodo fica muito dificil de ler com esse monte de try aninhado porem por enquanto funciona
         public async Task<DataAndType> VerificarTipoDeRetorno(dynamic Values)
         {
             try
@@ -64,6 +65,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public DataAndType TipomensagemDeStatus(dynamic Values)
         {
+            //mensagem que atualiza o status de uma mensagem porem como ainda não foi implementado ele vai para analise ainda
             try
             {
                 var dados = JsonSerializer.Deserialize<recaiveStatusMensagem.Root>(Values.ToString());
@@ -81,6 +83,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task<DataAndType> TipoMensagemMultiplaEscolha(dynamic Values)
         {
+            //metodo feito para identificar se o objeto recebido e uma resposta a um menu ou seja uma mensagem de multipla escolha
             try
             {
                 var dados = JsonSerializer.Deserialize<recaiveMensagemWithMultipleOption.Root>(Values.ToString());
@@ -102,6 +105,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task<DataAndType> TipoMensagemSimples(dynamic Values)
         {
+            //metodo feito para verificar se o tipo da mensagem recebida e apenas um texto
             try
             {
                 var dados = JsonSerializer.Deserialize<recaiveMensagem.Root>(Values.ToString());
@@ -124,6 +128,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task<ContatoDttoGet> ContatoIsNull(DataAndType dados, LoginDttoGet Login)
         {
+            //se o contato não existir esse metodo vai crialo
             try
             {
                 ContatoDttoGet newModel = new ContatoDttoGet
@@ -154,6 +159,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task<AtendimentoDttoGet> AtendimentoIsNull(DataAndType dados, ContatoDttoGet contato, LoginDttoGet Login)
         {
+            //caso o atendimento não exista esse metodo vai crialo
             try
             {
                 AtendimentoDttoPost NovoAtendimento = new AtendimentoDttoPost
@@ -186,6 +192,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task<ChatsDttoGet> ChatIsNull(DataAndType dados, AtendimentoDttoGet Item)
         {
+            //se o chat da pessoa não existir no sistema esse metodo criara ele
             try
             {
                 ChatsDttoPost ChatModel = new ChatsDttoPost
@@ -204,6 +211,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task<DataAndType?> ContatoIsBlock(DataAndType dados)
         {
+            //metodo para enviar um alerta ao lead caso seu contato tenha sido bloqueado pelo client
             try
             {
                 var responseObject = new
@@ -229,6 +237,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task<DataAndType> MensageIsRepetead(DataAndType dados)
         {
+            //metodo para analise feito para enviar um alarme em caso da mensagem ser repetida
             try
             {
                 var responseObject = new
@@ -254,6 +263,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task SaveMensage(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao)
         {
+            //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
             try
             {
                 MensagensDttoPost NewModel = new MensagensDttoPost
@@ -278,35 +288,40 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
             try
             {
+                //Pegando informações iniciais
                 ContatoDttoGet contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
                 LoginDttoGet Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
                 AtendimentoDttoGet Item = await _AtendimentoInterfaceServices.ResgatarAtendimentoPorLogIdEContatoWaId(dados?.Dados?.entry[0].changes[0].value.contacts[0].wa_id, Login.Codigo);
                 MensagensDttoGet mensagenPorContato = await _MensagemInterfaceServices.PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(dados?.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id, Login?.CodigoWhatsap);
-                ChatsDttoGet chat = await _ChatsInterfaceServices.RetornarChatPorAtenId(Item.Codigo);
+                ChatsDttoGet chat = await _ChatsInterfaceServices.RetornarChatPorAtenId(Item != null ? Item.Codigo : 0);
+                
+                //checkando para ver se e necessario criar alguma dessas informações
                 contato = contato == null ? contato = await ContatoIsNull(dados, Login) : contato;
                 Item = Item == null ? await AtendimentoIsNull(dados, contato, Login) : Item;
                 chat = chat == null ? await ChatIsNull(dados, Item) : chat;
                 string descricao = dados.Tipo == ETipoRetornoJson.TipoSimples ? Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].text.body) : Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description);
-
+                
+                //verificar se o contato esta bloqueado antes de enviar alguma mensagem
                 if (contato.BloqueadoStatus == true)
                 {
                     return await ContatoIsBlock(dados);
                 }
-
+                
+                //verficar se a mensagem e repetida 
                 if (mensagenPorContato != null && mensagenPorContato.Descricao == descricao)
                 {
                     //desabilitei a funcao pela instablidade da meta depois vou ver tambem uma maneira melhor de identificar se a mensagem e repetida esse jeito e meio paia
                     //return await MensageIsRepetead(dados);
                     throw new Exception("mensagem repetida");
                 }
-
+                //se tudo ocorrer bem salvar a mensagem e continuar
                 await SaveMensage(Login, contato, chat, descricao);
 
                 return dados;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception($"Ocorreu Algum Erro ao enviar a mensagem {ex.Message}");
             }
         }
     }

@@ -53,6 +53,59 @@ namespace Chatbot.Services.Services
             }
         }
 
+        public async Task<MenuDttoGet?> PegarMenuInicialPorLogId(int logId)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.FirstOrDefault(x => x.Tipo == nameof(ETipos.PrimeiraMensagem) && x?.Login?.Codigo == logId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<MenuDttoGet> PegarMenuDeIaPorLogId(int logId)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.FirstOrDefault(x => x.Tipo == nameof(ETipos.MenuDaIA) && x?.Login?.Codigo == logId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<MenuDttoGet> PegarMenuPorOptionId(int OptId)
+        {
+            try
+            {
+                var option = await _optionService.GetPorId(OptId);
+                if (option == null)
+                {
+                    return null;
+                }
+                var dados = await PegarTodosOsMenusPorLogID(option.Login.Codigo);
+                int menId = 0;
+                try
+                {
+                    menId = Convert.ToInt32(option.Resposta);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+                return dados.FirstOrDefault(x => x.Codigo == menId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<MenuDttoGet> GetPorId(int id)
         {
             try

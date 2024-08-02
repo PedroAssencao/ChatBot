@@ -64,6 +64,10 @@ namespace Chatbot.Infrastructure.Services
         {
             try
             {
+                if (atenId == 0 || atenId == null)
+                {
+                    return null;    
+                }
                 var dados = await GetALl();
                 var itens = dados.FirstOrDefault(x => x?.Atendimento?.Codigo == atenId);
                 return itens;

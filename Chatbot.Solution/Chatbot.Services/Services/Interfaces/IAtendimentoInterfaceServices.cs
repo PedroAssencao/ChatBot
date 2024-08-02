@@ -14,5 +14,7 @@ namespace Chatbot.Services.Services.Interfaces
         public Task<AtendimentoDttoGet> AdicionarPost(AtendimentoDttoPost Model);
         public Task<AtendimentoDttoGet> AtualizarPut(AtendimentoDttoPut Model);
         public Task<AtendimentoDttoGet?> ResgatarAtendimentoPorLogIdEContatoWaId(string ConWaId, int LogWaId);
+        public Task<AtendimentoDttoGet> AtendimentoExiste(LoginDttoGet login, ContatoDttoGet contato);
+        public Task AtualizarAtendimentoComDttoDeGet(AtendimentoDttoGet Atendimento);
     }
 }

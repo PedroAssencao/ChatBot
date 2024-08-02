@@ -14,5 +14,8 @@ namespace Chatbot.Services.Services.Interfaces
         Task<MenuDttoGet> PegarMenuPorLogIDEMenuInicial(int id);
         Task<MenuDttoGet> AdicionarPost(MenuDttoPost menu);
         Task<MenuDttoGet> AtualizarPut(MenuDttoPut menu);
+        Task<MenuDttoGet> PegarMenuInicialPorLogId(int logId);
+        Task<MenuDttoGet> PegarMenuDeIaPorLogId(int logId);
+        Task<MenuDttoGet> PegarMenuPorOptionId(int OptId);
     }
 }
