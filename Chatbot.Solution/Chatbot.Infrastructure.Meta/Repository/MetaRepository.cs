@@ -68,62 +68,33 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
                         var dataAtual = DateTime.Now;
                         var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
-                        string numero = item.Contato.CodigoWhatsapp;
-                        if (numero == "557988132044")
-                        {
-                            numero = "5579988132044";
-                        }
+                        string numero = item.Contato.CodigoWhatsapp == "557988132044" || item.Contato.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.Contato.CodigoWhatsapp) : item.Contato.CodigoWhatsapp;
 
-                        if (numero == "557998468046")
-                        {
-                            numero = "5579998468046";
-                        }
                         if (dataAtual < dataMensagem)
                         {
                             diferenca -= diferenca * 2;
                         }
 
-                        if (diferenca >= 5 && diferenca <= 10)
-                        {
-                            var responseObject = new
-                            {
-                                messaging_product = "whatsapp",
-                                recipient_type = "individual",
-                                to = numero,
-                                type = "text",
-                                text = new { preview_url = false, body = "Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!" },
-                            };
-                            dadosJson = JsonConvert.SerializeObject(responseObject);
-                            await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
-                        }
+                        //ver se tem uma opção melhor para enviar a mensagem por que fica paia essa não sendo enviada de vez em quando
+                        //if (diferenca >= 5 && diferenca <= 10)
+                        //{
+                        //    await EnviarMensagemDoTipoSimples("Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!", numero);
+                        //}
 
-                        if (diferenca > 10)
+                        if (diferenca >= 10)
                         {
-                            Atendimento NovoAtendimento = new Atendimento
+                            AtendimentoDttoGet Atendimento = new AtendimentoDttoGet
                             {
-                                AtenId = item.Atendimento.Codigo,
-                                AtenEstado = "Finalizado",
-                                AtenData = DateTime.Now,
-                                AteId = item?.Atendimento?.Atendente?.Codigo,
-                                DepId = item?.Atendimento?.Departamento?.Codigo,
-                                LogId = item?.Atendimento?.Login?.Codigo,
-                                ConId = item?.Atendimento?.Contato?.Codigo,
+                                Codigo = item.Atendimento.Codigo,
+                                EstadoAtendimento = "Finalizado",
+                                Data = DateTime.Now,
+                                Atendente = item?.Atendimento?.Atendente,
+                                Departamento = item?.Atendimento?.Departamento,
+                                Login = item?.Atendimento?.Login,
+                                Contato = item?.Atendimento?.Contato,
                             };
-                            using (var newContext = new chatbotContext())
-                            {
-                                newContext.Atendimentos.Update(NovoAtendimento);
-                                await newContext.SaveChangesAsync();
-                            }
-                            var responseObject = new
-                            {
-                                messaging_product = "whatsapp",
-                                recipient_type = "individual",
-                                to = numero,
-                                type = "text",
-                                text = new { preview_url = false, body = "O atendimento foi finalizado por inatividade." },
-                            };
-                            dadosJson = JsonConvert.SerializeObject(responseObject);
-                            await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                            await AtualizarEstadoAtendimento(Atendimento, "Finalizado");
+                            await EnviarMensagemDoTipoSimples("O atendimento foi finalizado por inatividade.", numero);
                         }
                     }
                 }
