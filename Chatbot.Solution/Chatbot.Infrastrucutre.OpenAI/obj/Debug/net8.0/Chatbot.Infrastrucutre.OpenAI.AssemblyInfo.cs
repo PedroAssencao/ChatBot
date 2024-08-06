@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chatbot.Infrastrucutre.OpenAI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42132b9802c76ffd0a0e7830ce94f0a51ac71446")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48c5cffaf617ccc218cb32f6356a201bd0c00511")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chatbot.Infrastrucutre.OpenAI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chatbot.Infrastrucutre.OpenAI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -63,38 +63,41 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 var dadosJson = "";
                 foreach (var item in dados)
                 {
-                    if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim())
+                    if (item.Atendimento != null)
                     {
-                        var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
-                        var dataAtual = DateTime.Now;
-                        var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
-                        string numero = item.Contato.CodigoWhatsapp == "557988132044" || item.Contato.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.Contato.CodigoWhatsapp) : item.Contato.CodigoWhatsapp;
-
-                        if (dataAtual < dataMensagem)
+                        if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim())
                         {
-                            diferenca -= diferenca * 2;
-                        }
+                            var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
+                            var dataAtual = DateTime.Now;
+                            var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
+                            string numero = item.Contato.CodigoWhatsapp == "557988132044" || item.Contato.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.Contato.CodigoWhatsapp) : item.Contato.CodigoWhatsapp;
 
-                        //ver se tem uma opção melhor para enviar a mensagem por que fica paia essa não sendo enviada de vez em quando
-                        //if (diferenca >= 5 && diferenca <= 10)
-                        //{
-                        //    await EnviarMensagemDoTipoSimples("Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!", numero);
-                        //}
-
-                        if (diferenca >= 10)
-                        {
-                            AtendimentoDttoGet Atendimento = new AtendimentoDttoGet
+                            if (dataAtual < dataMensagem)
                             {
-                                Codigo = item.Atendimento.Codigo,
-                                EstadoAtendimento = "Finalizado",
-                                Data = DateTime.Now,
-                                Atendente = item?.Atendimento?.Atendente,
-                                Departamento = item?.Atendimento?.Departamento,
-                                Login = item?.Atendimento?.Login,
-                                Contato = item?.Atendimento?.Contato,
-                            };
-                            await AtualizarEstadoAtendimento(Atendimento, "Finalizado");
-                            await EnviarMensagemDoTipoSimples("O atendimento foi finalizado por inatividade.", numero);
+                                diferenca -= diferenca * 2;
+                            }
+
+                            //ver se tem uma opção melhor para enviar a mensagem por que fica paia essa não sendo enviada de vez em quando
+                            //if (diferenca >= 5 && diferenca <= 10)
+                            //{
+                            //    await EnviarMensagemDoTipoSimples("Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!", numero);
+                            //}
+
+                            if (diferenca >= 10)
+                            {
+                                AtendimentoDttoGet Atendimento = new AtendimentoDttoGet
+                                {
+                                    Codigo = item.Atendimento.Codigo,
+                                    EstadoAtendimento = "Finalizado",
+                                    Data = DateTime.Now,
+                                    Atendente = item?.Atendimento?.Atendente,
+                                    Departamento = item?.Atendimento?.Departamento,
+                                    Login = item?.Atendimento?.Login,
+                                    Contato = item?.Atendimento?.Contato,
+                                };
+                                await AtualizarEstadoAtendimento(Atendimento, "Finalizado");
+                                await EnviarMensagemDoTipoSimples("O atendimento foi finalizado por inatividade.", numero);
+                            }
                         }
                     }
                 }
@@ -226,7 +229,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
                     //Se For Uma Mensagem Simples ele vai responder aqui
                     if (OptionSelecionada.Tipo == nameof(ETipos.MensagemDeResposta))
-                    {                        
+                    {
                         dadosJson = await EnviarMensagemDoTipoSimples(OptionSelecionada?.Resposta, numero);
                     }
 

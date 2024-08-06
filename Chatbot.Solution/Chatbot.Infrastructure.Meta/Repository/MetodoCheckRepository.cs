@@ -283,6 +283,21 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
+        public static bool IsDifferenceLessThanFiveMinutes(long timestamp, DateTime dateTime)
+        {
+            // Converte o timestamp para DateTime em UTC
+            DateTime dateTimeFromTimestamp = DateTimeOffset.FromUnixTimeSeconds(timestamp).UtcDateTime;
+
+            // Converte dateTime para UTC
+            DateTime dateTimeInUtc = dateTime.ToUniversalTime();
+            DateTime dateTimeFromTimestampToUtc = dateTimeFromTimestamp.ToUniversalTime();
+
+            // Calcula a diferença entre as duas datas
+            TimeSpan difference = dateTimeFromTimestampToUtc - dateTimeInUtc;
+
+            // Verifica se a diferença é menor que 5 minutos
+            return Math.Abs(difference.TotalMinutes) < 5;
+        }
         public async Task<DataAndType> VerificaçõesIniciais(DataAndType dados)
         {
 
@@ -294,13 +309,13 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 AtendimentoDttoGet Item = await _AtendimentoInterfaceServices.ResgatarAtendimentoPorLogIdEContatoWaId(dados?.Dados?.entry[0].changes[0].value.contacts[0].wa_id, Login.Codigo);
                 MensagensDttoGet mensagenPorContato = await _MensagemInterfaceServices.PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(dados?.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id, Login?.CodigoWhatsap);
                 ChatsDttoGet chat = await _ChatsInterfaceServices.RetornarChatPorAtenId(Item != null ? Item.Codigo : 0);
-                
+
                 //checkando para ver se e necessario criar alguma dessas informações
                 contato = contato == null ? contato = await ContatoIsNull(dados, Login) : contato;
                 Item = Item == null ? await AtendimentoIsNull(dados, contato, Login) : Item;
                 chat = chat == null ? await ChatIsNull(dados, Item) : chat;
                 string descricao = dados.Tipo == ETipoRetornoJson.TipoSimples ? Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].text.body) : Convert.ToString(dados.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description);
-                
+
                 //verificar se o contato esta bloqueado antes de enviar alguma mensagem
                 if (contato.BloqueadoStatus == true)
                 {
@@ -308,12 +323,17 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
                 
                 //verficar se a mensagem e repetida 
-                if (mensagenPorContato != null && mensagenPorContato.Descricao == descricao)
+                if (mensagenPorContato != null && IsDifferenceLessThanFiveMinutes(Convert.ToInt64(dados.Dados.entry[0].changes[0].value.messages[0].timestamp), Convert.ToDateTime(mensagenPorContato.Data)))
                 {
-                    //desabilitei a funcao pela instablidade da meta depois vou ver tambem uma maneira melhor de identificar se a mensagem e repetida esse jeito e meio paia
-                    //return await MensageIsRepetead(dados);
-                    throw new Exception("mensagem repetida");
+                    if (mensagenPorContato.Descricao == descricao)
+                    {
+                        //desabilitei a funcao pela instablidade da meta depois vou ver tambem uma maneira melhor de identificar se a mensagem e repetida esse jeito e meio paia
+                        //return await MensageIsRepetead(dados); esse metodo faz com que quando ele indetificar uma mensagemm repetida ele mandar diretamente no chat
+                        throw new Exception("mensagem repetida");
+                    }
+
                 }
+
                 //se tudo ocorrer bem salvar a mensagem e continuar
                 await SaveMensage(Login, contato, chat, descricao);
 

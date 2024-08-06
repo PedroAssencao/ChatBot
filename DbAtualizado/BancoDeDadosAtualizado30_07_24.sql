@@ -149,6 +149,7 @@ insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt
 values 
 (1, 1, '2024-07-19 11:07:40.017', 'Referente a Financeiro', 0, '2', 'MensagemDeRespostaInterativa', 'Financeiro'),
 (1, 1, '2024-07-19 11:07:40.020', 'Referente a Suporte', 0, '3', 'MensagemDeRespostaInterativa', 'Suporte'),
+(1, 1, '2024-07-23T22:31:35.673', 'Historia do Senai Contada Pela IA e Interação Geral Com IA', 0, NULL, 'MensagemPorIA', 'Historia Senai'),
 (5, 1, '2024-07-19 11:07:40.020', 'Pagamento Não Disponivel', 1, 'Sua Forma de Pagamento não esta disponivel no sistema? Use esse qrcode para pagar diretamente: (exemploqrcode)', 'MensagemDeResposta', 'Pagamento Indisponivel'),
 (5, 1, '2024-07-19 11:07:40.020', 'Pagamento Não Autorizado', 1, 'Sinto Muito Pelo Transtorno se Possivel tente checkar seu saldo para ver se ouve uma transação erronea', 'MensagemDeResposta', 'Pagamento Não Autorizado'),
 (5, 1, '2024-07-19 11:07:40.020', 'Finalizar Atendimento', 1, 'Muito Obrigado Por Interagir', 'MensagemDeResposta', 'Finalizar'),
@@ -156,9 +157,9 @@ values
 (4, 1, '2024-07-19 11:07:40.020', 'Instabilidade No Geral', 1, 'Lamentamos se o sistema esta lento hoje, estamos em periodo de manuntenção ja voltaremos ao normal', 'MensagemDeResposta', 'Dificuldades Sistemas'),
 (4, 1, '2024-07-19 11:07:40.020', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir Volte Sempre', 'MensagemDeResposta', 'Finalizar'),
 (2, 1, '2024-07-19 11:07:40.023', 'Dificuldades no Pagamento', 0, '5', 'MensagemDeRespostaInterativa', 'Pagamento'),
-(2, 1, '2024-07-19 11:07:40.023', 'Dificuldades com o Sistema', 0, '6', 'MensagemDeRespostaInterativa', 'Sistema'),
 (2, 1, '2024-07-19 11:07:40.023', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir, espero que tenha conseguido resolver seu problema.', 'MensagemDeResposta', 'Finalizar'),
-(1, 1, '2024-07-23T22:31:35.673', 'Historia do Senai Contada Pela IA e Interação Geral Com IA', 0, NULL, 'MensagemPorIA', 'Historia Senai'),
+(3, 1, '2024-07-19 11:07:40.023', 'Dificuldades com o Sistema', 0, '4', 'MensagemDeRespostaInterativa', 'Sistema'),
+(3, 1, '2024-07-19 11:07:40.023', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir, espero que tenha conseguido resolver seu problema.', 'MensagemDeResposta', 'Finalizar'),
 (6, 1, '2024-07-23T22:31:35.673', 'Voltar ao Fluxo de Atendimento Normal', 0, 'Sim', 'MensagemPorIA', 'Sim'),
 (6, 1, '2024-07-23T22:31:35.673', 'Finalizar o Atendimento', 1, 'Obrigado Por Interagir com O Sistema!', 'MensagemPorIA', 'Finalizar');
 
