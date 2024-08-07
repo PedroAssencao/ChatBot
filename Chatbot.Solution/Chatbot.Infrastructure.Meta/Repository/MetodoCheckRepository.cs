@@ -1,20 +1,10 @@
-﻿using Azure.Core;
-using Chatbot.Domain.Models;
-using Chatbot.Domain.Models.Enums;
+﻿using Chatbot.Domain.Models.Enums;
 using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.Formats.Asn1;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-
 namespace Chatbot.Infrastructure.Meta.Repository
 {
     public class MetodoCheckRepository : IMetodoCheck

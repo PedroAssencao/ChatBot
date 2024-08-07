@@ -134,7 +134,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await GetALl();
-                return dados.Where(x => x.EstadoAtendimento == null || x.EstadoAtendimento == "Finalizado" || x.EstadoAtendimento == "GPT").FirstOrDefault(x => x.Contato.Codigo == contato.Codigo && x.Login.Codigo == login.Codigo);
+                return dados.Where(x => x.EstadoAtendimento == null || x.EstadoAtendimento.Trim().ToLower() == "Finalizado".Trim().ToLower() || x.EstadoAtendimento.Trim().ToLower() == "GPT".Trim().ToLower() || x.EstadoAtendimento.Trim().ToLower() == "HUMANO".Trim().ToLower()).FirstOrDefault(x => x.Contato.Codigo == contato.Codigo && x.Login.Codigo == login.Codigo);
             }
             catch (Exception)
             {

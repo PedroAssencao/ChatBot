@@ -112,9 +112,9 @@ create table options (
 )
 go
 
--- Inserções
+-- InserÃ§Ãµes
 
---se desejar usar o bot de teste precisa alterar o log_waid para 15550882003, se o bot escolhido for o de produção mudar para 557999411293
+--se desejar usar o bot de teste precisa alterar o log_waid para 15550882003, se o bot escolhido for o de produÃ§Ã£o mudar para 557999411293
 insert into login (log_email, log_senha, log_img, log_plano, log_user, log_waid) 
 values ('master.123@123', 'c2VuYWkuMTIz', 'img-placeholder', 'master', 'Master', '557999411293')
 go
@@ -137,27 +137,27 @@ go
 
 insert into menus (men_header, men_footer, men_body, log_id, men_tipo, men_title) 
 values 
-('Empresas Senai', 'Todos direitos reservados', 'Seja Bem Vindo ao Nosso Robo de Atendimento, Antes de Falar Com Nossos Atendentes Por Favor Resposnda as Perguntas Abaixo Para Sabermos o Seu Problema, Tentaremos Resolver Sem Intervenção Humana Se Possivel!', 1, 'PrimeiraMensagem', 'Menu Inicial'),
-('Empresas Senai', 'Todos direitos reservados', 'Por Favor Escolha Qual Parte das Finança Voce Esta Tendo Problemas', 1, 'MenuBot', 'Finanças'),
+('Empresas Senai', 'Todos direitos reservados', 'Seja Bem Vindo ao Nosso Robo de Atendimento, Antes de Falar Com Nossos Atendentes Por Favor Resposnda as Perguntas Abaixo Para Sabermos o Seu Problema, Tentaremos Resolver Sem IntervenÃ§Ã£o Humana Se Possivel!', 1, 'PrimeiraMensagem', 'Menu Inicial'),
+('Empresas Senai', 'Todos direitos reservados', 'Por Favor Escolha Qual Parte das FinanÃ§a Voce Esta Tendo Problemas', 1, 'MenuBot', 'FinanÃ§as'),
 ('Empresas Senai', 'Todos direitos reservados', 'Por Favor Escolha Qual Setor de Suporte Que Voce Deseja Ser Atendido', 1, 'MenuBot', 'Suporte'),
-('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das Opções Abaixo Descreve Melhor o Seu Problema', 1, 'MenuBot', 'Menu de Dificuldades ao Acessar o Sistema'),
-('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das Opções Abaixo Descreve Melhor o Seu Problema de Pagamento', 1, 'MenuBot', 'DificuldadePagar'),
-('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das Opções Abaixo e a Sua Vontade Se Tiver Mais Alguma Pergunta Apenas Pergunte!', 1, 'MenuDaIA', 'Menu IA')
+('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das OpÃ§Ãµes Abaixo Descreve Melhor o Seu Problema', 1, 'MenuBot', 'Menu de Dificuldades ao Acessar o Sistema'),
+('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das OpÃ§Ãµes Abaixo Descreve Melhor o Seu Problema de Pagamento', 1, 'MenuBot', 'DificuldadePagar'),
+('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das OpÃ§Ãµes Abaixo e a Sua Vontade Se Tiver Mais Alguma Pergunta Apenas Pergunte!', 1, 'MenuDaIA', 'Menu IA')
 go
 --quando a option for tipo RedirecinamentoHumano lembrar que a optResposta tem que ser igual ao id do departamento que deve ser redirecionado para o codigo funcionar
 --quando a option for tipo MensagemDeRespostaInterativa lembrar que a optResposta tem que ser igual ao id do menu que deve ser usado como resposta para o codigo funcionar
---quando a option for tipo MensagemPorIA lembrar que a optResposta pode ser null por que não vai ser usada ja que e a ia que ira responder e por enquanto quando esse tipo de mensagem e utilizada ele ja entra automaticamente no modo de interação com ia talvez futuramente quando o cliente queira apenas uma resposta com ia possa colocar a optresposta para ser o id do proximo menu que ela deve responder
+--quando a option for tipo MensagemPorIA lembrar que a optResposta pode ser null por que nÃ£o vai ser usada ja que e a ia que ira responder e por enquanto quando esse tipo de mensagem e utilizada ele ja entra automaticamente no modo de interaÃ§Ã£o com ia talvez futuramente quando o cliente queira apenas uma resposta com ia possa colocar a optresposta para ser o id do proximo menu que ela deve responder
 --quando a option for tipo MensagemDeResposta lembrar que a optResposta e oque vai ser respondido no chat ja que o texto enviado e de um tipo simples
 insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta, opt_tipo, opt_title) 
 values 
 (1, 1, '2024-07-19 11:07:40.017', 'Referente a Financeiro', 0, '2', 'MensagemDeRespostaInterativa', 'Financeiro'),
 (1, 1, '2024-07-19 11:07:40.020', 'Referente a Suporte', 0, '3', 'MensagemDeRespostaInterativa', 'Suporte'),
-(1, 1, '2024-07-23T22:31:35.673', 'Historia do Senai Contada Pela IA e Interação Geral Com IA', 0, NULL, 'MensagemPorIA', 'Historia Senai'),
-(5, 1, '2024-07-19 11:07:40.020', 'Pagamento Não Disponivel', 1, 'Sua Forma de Pagamento não esta disponivel no sistema? Use esse qrcode para pagar diretamente: (exemploqrcode)', 'MensagemDeResposta', 'Pagamento Indisponivel'),
-(5, 1, '2024-07-19 11:07:40.020', 'Pagamento Não Autorizado', 1, 'Sinto Muito Pelo Transtorno se Possivel tente checkar seu saldo para ver se ouve uma transação erronea', 'MensagemDeResposta', 'Pagamento Não Autorizado'),
+(1, 1, '2024-07-23T22:31:35.673', 'Historia do Senai Contada Pela IA e InteraÃ§Ã£o Geral Com IA', 0, NULL, 'MensagemPorIA', 'Historia Senai'),
+(5, 1, '2024-07-19 11:07:40.020', 'Pagamento NÃ£o Disponivel', 1, 'Sua Forma de Pagamento nÃ£o esta disponivel no sistema? Use esse qrcode para pagar diretamente: (exemploqrcode)', 'MensagemDeResposta', 'Pagamento Indisponivel'),
+(5, 1, '2024-07-19 11:07:40.020', 'Pagamento NÃ£o Autorizado', 1, 'Sinto Muito Pelo Transtorno se Possivel tente checkar seu saldo para ver se ouve uma transaÃ§Ã£o erronea', 'MensagemDeResposta', 'Pagamento NÃ£o Autorizado'),
 (5, 1, '2024-07-19 11:07:40.020', 'Finalizar Atendimento', 1, 'Muito Obrigado Por Interagir', 'MensagemDeResposta', 'Finalizar'),
-(4, 1, '2024-07-19 11:07:40.020', 'Esqueci Minha Senha', 1, 'Aqui Esta um Link Para Preencher as informações para o reset da sua senha: (linkExemplo), espero que fique bem.', 'MensagemDeResposta', 'Esquecimento da Senha'),
-(4, 1, '2024-07-19 11:07:40.020', 'Instabilidade No Geral', 1, 'Lamentamos se o sistema esta lento hoje, estamos em periodo de manuntenção ja voltaremos ao normal', 'MensagemDeResposta', 'Dificuldades Sistemas'),
+(4, 1, '2024-07-19 11:07:40.020', 'Esqueci Minha Senha', 1, 'Aqui Esta um Link Para Preencher as informaÃ§Ãµes para o reset da sua senha: (linkExemplo), espero que fique bem.', 'MensagemDeResposta', 'Esquecimento da Senha'),
+(4, 1, '2024-07-19 11:07:40.020', 'Instabilidade No Geral', 1, 'Lamentamos se o sistema esta lento hoje, estamos em periodo de manuntenÃ§Ã£o ja voltaremos ao normal', 'MensagemDeResposta', 'Dificuldades Sistemas'),
 (4, 1, '2024-07-19 11:07:40.020', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir Volte Sempre', 'MensagemDeResposta', 'Finalizar'),
 (2, 1, '2024-07-19 11:07:40.023', 'Dificuldades no Pagamento', 0, '5', 'MensagemDeRespostaInterativa', 'Pagamento'),
 (2, 1, '2024-07-19 11:07:40.023', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir, espero que tenha conseguido resolver seu problema.', 'MensagemDeResposta', 'Finalizar'),

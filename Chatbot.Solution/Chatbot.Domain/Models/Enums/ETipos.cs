@@ -13,6 +13,7 @@ namespace Chatbot.Domain.Models.Enums
         MensagemEnviada,
         mensagemderespostainterativa,
         MensagemPorIA,
-        MenuDaIA
+        MenuDaIA,
+        RedirecinamentoHumano
     }
 }

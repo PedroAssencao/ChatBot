@@ -1,10 +1,4 @@
 ﻿using Chatbot.Domain.Models.JsonMetaApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
 {
@@ -16,5 +10,6 @@ namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
         public Task<dynamic> BotResposta(DataAndType Model);
         public Task<dynamic> ChamarMetodo(dynamic Values);
         Task CompararData();
+        Task SalvarMensagemAtendente(string descricao, int chat, int ate);
     }
 }

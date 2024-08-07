@@ -32,5 +32,19 @@ namespace Chatbot.API.Controllers
         [HttpGet("hook")]
         public IActionResult HandleWebhook([FromQuery(Name = "hub.challenge")] string hubChallenge) => Ok(hubChallenge);
 
+        [HttpPost("EnviarMensagenAtendente")]
+        public async Task<IActionResult> testeAtendenteEnviarMensagenChat(string descricao, int chat, int ate)
+        {
+            try
+            {
+                await _services.SalvarMensagemAtendente(descricao, chat, ate);
+                return Ok("Mensagen Enviada");    
+            }
+            catch (Exception)
+            {
+                return BadRequest("Mensagen Não foi enviada");
+            }
+        }
+
     }
 }

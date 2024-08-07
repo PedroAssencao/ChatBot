@@ -43,5 +43,18 @@ namespace Chatbot.Infrastructure.Meta.Services
                 throw;
             }
         }
+
+        public async Task SalvarMensagemAtendente(string descricao, int chat, int ate)
+        {
+            try
+            {
+                await _metaRepository.SalvarMensagemAtendente(descricao, chat,ate);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
