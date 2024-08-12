@@ -29,8 +29,9 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly IAtendenteInterfaceServices _atendenteInterfaceServices;
         public MetaRepository(IMetodoCheck metodoCheck, IContatoInterfaceServices contatoInterfaceServices,
             IAtendimentoInterfaceServices atendimentoInterfaceServices, ILoginInterfaceServices
-            loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config, IOpenaiRequest openai, 
-            IChatsInterfaceServices chatsInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices, IDepartamentoInterfaceServices departamentoInterfaceServices, IAtendenteInterfaceServices atendenteInterfaceServices)
+            loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config, IOpenaiRequest openai,
+            IChatsInterfaceServices chatsInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices,
+            IDepartamentoInterfaceServices departamentoInterfaceServices, IAtendenteInterfaceServices atendenteInterfaceServices)
         {
             _metodoCheck = metodoCheck;
             _contatoInterfaceServices = contatoInterfaceServices;
@@ -66,43 +67,47 @@ namespace Chatbot.Infrastructure.Meta.Repository
             try
             {
                 var dados = await _chatsInterfaceServices.GetALl();
+
                 var dadosJson = "";
                 foreach (var item in dados)
                 {
                     if (item.Atendimento != null)
                     {
-                        if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim() || item.Atendimento.EstadoAtendimento.ToLower().Trim() != "HUMANO".ToLower().Trim())
+                        if (item.Atendimento.EstadoAtendimento != null)
                         {
-                            var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
-                            var dataAtual = DateTime.Now;
-                            var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
-                            string numero = item.Contato.CodigoWhatsapp == "557988132044" || item.Contato.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.Contato.CodigoWhatsapp) : item.Contato.CodigoWhatsapp;
-
-                            if (dataAtual < dataMensagem)
+                            if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim())
                             {
-                                diferenca -= diferenca * 2;
-                            }
+                                var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
+                                var dataAtual = DateTime.Now;
+                                var diferenca = Math.Abs((dataAtual - dataMensagem).TotalMinutes);
+                                string numero = item.Contato.CodigoWhatsapp == "557988132044" || item.Contato.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.Contato.CodigoWhatsapp) : item.Contato.CodigoWhatsapp;
 
-                            //ver se tem uma opção melhor para enviar a mensagem por que fica paia essa não sendo enviada de vez em quando
-                            //if (diferenca >= 5 && diferenca <= 10)
-                            //{
-                            //    await EnviarMensagemDoTipoSimples("Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!", numero);
-                            //}
-
-                            if (diferenca >= 10)
-                            {
-                                AtendimentoDttoGet Atendimento = new AtendimentoDttoGet
+                                if (dataAtual < dataMensagem)
                                 {
-                                    Codigo = item.Atendimento.Codigo,
-                                    EstadoAtendimento = "Finalizado",
-                                    Data = DateTime.Now,
-                                    Atendente = item?.Atendimento?.Atendente,
-                                    Departamento = item?.Atendimento?.Departamento,
-                                    Login = item?.Atendimento?.Login,
-                                    Contato = item?.Atendimento?.Contato,
-                                };
-                                await AtualizarEstadoAtendimento(Atendimento, "Finalizado",null,null);
-                                await EnviarMensagemDoTipoSimples("O atendimento foi finalizado por inatividade.", numero);
+                                    diferenca -= diferenca * 2;
+                                }
+
+                                //ver se tem uma opção melhor para enviar a mensagem por que fica paia essa não sendo enviada de vez em quando
+                                //if (diferenca >= 5 && diferenca <= 10)
+                                //{
+                                //    await EnviarMensagemDoTipoSimples("Olá o atendimento ainda não foi finalizado, Se passar mais 10 minutos ele sera automaticamente finalizado!", numero);
+                                //}
+
+                                if (diferenca >= 10)
+                                {
+                                    AtendimentoDttoGet Atendimento = new AtendimentoDttoGet
+                                    {
+                                        Codigo = item.Atendimento.Codigo,
+                                        EstadoAtendimento = "Finalizado",
+                                        Data = DateTime.Now,
+                                        Atendente = item?.Atendimento?.Atendente,
+                                        Departamento = item?.Atendimento?.Departamento,
+                                        Login = item?.Atendimento?.Login,
+                                        Contato = item?.Atendimento?.Contato,
+                                    };
+                                    await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "Finalizado", null, null);
+                                    await EnviarMensagemDoTipoSimples("O atendimento foi finalizado por inatividade.", numero, item.Atendimento, item);
+                                }
                             }
                         }
                     }
@@ -113,36 +118,14 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-        public async Task SaveMensage(int Login, int chat, string descricao)
-        {
-            //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
-            try
-            {
-                MensagensDttoPost NewModel = new MensagensDttoPost
-                {
-                    CodigoLogin = Login,
-                    CodigoContato = null,
-                    CodigoChat = chat,
-                    Data = DateTime.Now,
-                    Descricao = descricao,
-                    TipoDaMensagem = "MensagemEnviada"
-                };
-                await _MensagemInterfaceServices.AdicionarPost(NewModel);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public async Task SalvarMensagemAtendente(string descricao, int chat,int ate)
+        public async Task SalvarMensagemAtendente(string descricao, int chat, int ate)
         {
             try
             {
                 var dados = await _chatsInterfaceServices.GetPorId(chat);
                 if (dados?.Atendente?.Codigo != ate)
                 {
-                    await AtualizarEstadoAtendimento(dados.Atendimento, dados.Atendimento.EstadoAtendimento, dados.Atendimento.Departamento.Codigo, ate);
+                    await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(dados.Atendimento, dados.Atendimento.EstadoAtendimento, dados.Atendimento.Departamento.Codigo, ate);
                     Chat NewModel = new Chat
                     {
                         ChaId = dados.Codigo,
@@ -158,15 +141,14 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     }
                 }
                 var numero = dados?.Contato?.CodigoWhatsapp == "557988132044" || dados?.Contato?.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(dados?.Contato?.CodigoWhatsapp) : dados?.Contato?.CodigoWhatsapp;
-                await SaveMensage(dados.Atendimento.Login.Codigo,dados.Codigo,descricao);
-                await EnviarMensagemDoTipoSimples(descricao, numero);
+                await EnviarMensagemDoTipoSimples(descricao, numero, dados.Atendimento, dados);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public async Task<string> EnviarMensagemDoTipoSimples(string conteudo, string numero)
+        public async Task<string> EnviarMensagemDoTipoSimples(string conteudo, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
         {
             try
             {
@@ -180,6 +162,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     text = new { preview_url = false, body = conteudo },
                 };
                 dadosJson = JsonConvert.SerializeObject(responseObject);
+                await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, conteudo);
                 return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
 
             }
@@ -192,6 +175,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         {
             try
             {
+                ChatsDttoGet chat = await _chatsInterfaceServices.RetornarChatPorAtenId(Atendimento.Codigo);
                 //voltar para o fluxo normal se a resposta enviada for sim
                 if (Conteudo.Trim().ToLower() == "sim")
                 {
@@ -200,14 +184,12 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
 
                 //Enviar Mensagem de Aguardo a Mensagem do Gpt
-                await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero);
-
+                await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
                 //Enviar Mensagem de Resposta do Gpt
-                var resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, Conteudo);
-                await EnviarMensagemDoTipoSimples(resposta, numero);
+                string resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, Conteudo);
 
                 var menuselecionado = await _menuInterfaceServices.PegarMenuDeIaPorLogId(Atendimento.Login.Codigo);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], MontarMenuParaEnvio(menuselecionado, numero));
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(menuselecionado, numero, Atendimento, chat));
             }
             catch (Exception)
             {
@@ -220,12 +202,12 @@ namespace Chatbot.Infrastructure.Meta.Repository
             var descricaoDaMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description ?? Model.Dados.entry[0].changes[0].value.messages[0].text.body;
             var codigoMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.id;
             string name = Model.Dados.entry[0].changes[0].value.metadata.display_phone_number;
-            var Login = await _loginInterfaceServices.RetornarLogIdPorWaID(name);             
+            var Login = await _loginInterfaceServices.RetornarLogIdPorWaID(name);
             var numero = Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id == "557988132044" || Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id) : Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id;
             AtendimentoDttoGet Atendimento = await _atendimentoInterfaceServices.ResgatarAtendimentoPorLogIdEContatoWaId(Model.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id, Convert.ToInt32(Login?.Codigo));
             OptionDttoGet OptionSelecionada = await _optionInterfaceServices.GetPorId(Convert.ToInt32(codigoMensagem));
             MenuDttoGet MenuSelecionadoOption = await _menuInterfaceServices.PegarMenuPorOptionId(Convert.ToInt32(codigoMensagem));
-            var dadosJson = "";
+            ChatsDttoGet chat = await _chatsInterfaceServices.RetornarChatPorAtenId(Atendimento.Codigo);
             var isFinalizar = false;
             var isBotAtendimento = false;
             try
@@ -238,7 +220,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         if (Atendimento != null)
                         {
-                            await AtualizarEstadoAtendimento(Atendimento, "Finalizado",null, null);
+                            await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "Finalizado", null, null);
                             isFinalizar = true;
                         }
                     }
@@ -247,51 +229,47 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         if (descricaoDaMensagem.Trim().ToLower() == "Voltar ao Fluxo de Atendimento Normal".Trim().ToLower())
                         {
-                            await AtualizarEstadoAtendimento(Atendimento, "Bot", null,null);
-                            return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], MontarMenuParaEnvio(await _menuInterfaceServices.PegarMenuInicialPorLogId(Login.Codigo), numero));
+                            await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "Bot", null, null);
+                            return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(await _menuInterfaceServices.PegarMenuInicialPorLogId(Login.Codigo), numero, Atendimento, chat));
                         }
 
                         if (descricaoDaMensagem.Trim().ToLower() == "Finalizar o Atendimento".Trim().ToLower())
                         {
-                            await AtualizarEstadoAtendimento(Atendimento, "Finalizado", null,null);
-                            dadosJson = EnviarMensagemDoTipoSimples("O Atendimento com IA foi finalizado Obrigado por interagir", numero);
+                            await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "Finalizado", null, null);
+                            await EnviarMensagemDoTipoSimples("O Atendimento com IA foi finalizado Obrigado por interagir", numero, Atendimento, chat);
                             isFinalizar = true;
                         }
 
                         if (isFinalizar == false)
                         {
-
-                            dadosJson = EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero);
-                            await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
-
-                            var resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, descricaoDaMensagem);
-                            dadosJson = EnviarMensagemDoTipoSimples(resposta, numero);
-                            await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                            await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
+                            string resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, descricaoDaMensagem);
+                            await EnviarMensagemDoTipoSimples(resposta, numero, Atendimento, chat);
                         }
                     }
 
                     //Se o Menu for do tipo de mensagem com multipla escolha ele vai responder com essa resposta
                     if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa).Trim()?.ToLower())
                     {
-                        dadosJson = MontarMenuParaEnvio(MenuSelecionadoOption, numero);
+                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(MenuSelecionadoOption, numero, Atendimento, chat));
                     }
 
                     //Se For Uma Mensagem Simples ele vai responder aqui
                     if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.MensagemDeResposta).Trim()?.ToLower())
                     {
-                        dadosJson = await EnviarMensagemDoTipoSimples(OptionSelecionada?.Resposta, numero);
+                        await EnviarMensagemDoTipoSimples(OptionSelecionada?.Resposta, numero, Atendimento, chat);
                     }
 
                     //Se For Uma Mensagem Feita Por Ia ele vai Respoder assim
-                    if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.MensagemPorIA).Trim()?.ToLower())
+                    if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.MensagemPorIA).Trim()?.ToLower() && isFinalizar != true)
                     {
                         if (Atendimento != null && Atendimento?.EstadoAtendimento.Trim()?.ToLower() != "GPT".Trim()?.ToLower())
                         {
-                            await AtualizarEstadoAtendimento(Atendimento, "GPT", null,null);
+                            await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "GPT", null, null);
                         }
-                        dadosJson = await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero);
-                        var resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, descricaoDaMensagem);
-                        dadosJson = await EnviarMensagemDoTipoSimples(resposta, numero);
+                        await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
+                        string resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, descricaoDaMensagem);
+                        await EnviarMensagemDoTipoSimples(resposta, numero, Atendimento, chat);
                         isBotAtendimento = true;
                     }
 
@@ -300,27 +278,26 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         if (Atendimento != null && Atendimento?.EstadoAtendimento?.Trim()?.ToLower() != "HUMANO".Trim()?.ToLower())
                         {
-                            await AtualizarEstadoAtendimento(Atendimento, "HUMANO", Convert.ToInt32(OptionSelecionada?.Resposta),null);
+                            await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "HUMANO", Convert.ToInt32(OptionSelecionada?.Resposta), null);
                         }
-                        return await EnviarMensagemDoTipoSimples("Voce entrou na nossa fila de atendimento por favor aguarde sua vez de ser atendido por um de nossos atendentes!", numero);
+                        await EnviarMensagemDoTipoSimples("Voce entrou na nossa fila de atendimento por favor aguarde sua vez de ser atendido por um de nossos atendentes!", numero, Atendimento, chat);
                     }
 
                     //Verifcações do estado para resposta especiais dependendo do estado das variaveis definidas acima
                     if (isFinalizar)
                     {
-                        dadosJson = await EnviarMensagemDoTipoSimples("O Atendimento foi Finalizado Se Tiver Mais Alguma Questão Apenas Intereja Novamente!", numero);
-                        return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                        await EnviarMensagemDoTipoSimples("O Atendimento foi Finalizado Se Tiver Mais Alguma Questão Apenas Intereja Novamente!", numero, Atendimento, chat);
                     }
 
                     if (isBotAtendimento)
                     {
-                        dadosJson = await EnviarMensagemDoTipoSimples("Voce entrou no modo de Interação com a IA Faça Uma Pergunta que ela ira te responder!", numero);
-                        return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                        await EnviarMensagemDoTipoSimples("Voce entrou no modo de Interação com a IA Faça Uma Pergunta que ela ira te responder!", numero, Atendimento, chat);
                     }
 
                     //se ocorrer tudo bem apenas ira retornar
-                    return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
+                    return "Mensagem Enviada Com Sucesso";
                 }
+
                 throw new Exception();
             }
             catch (Exception)
@@ -366,42 +343,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-        public async Task AtualizarEstadoAtendimento(AtendimentoDttoGet IsAtendimentoGoing, string estado, int? codDep, int? codAte)
-        {
-            try
-            {
-                IsAtendimentoGoing.EstadoAtendimento = estado;
-                if (codDep != null)
-                {
-                    IsAtendimentoGoing.Departamento = await _departamentoInterfaceServices.GetPorId(Convert.ToInt32(codDep));
-                }
-                if (codAte != null)
-                {
-                    IsAtendimentoGoing.Atendente = await _atendenteInterfaceServices.GetPorId(Convert.ToInt32(codAte));
-                }
-                Atendimento NovoAtendimento = new Atendimento
-                {
-                    AtenId = IsAtendimentoGoing.Codigo,
-                    AtenEstado = IsAtendimentoGoing.EstadoAtendimento,
-                    AtenData = DateTime.Now,
-                    AteId = IsAtendimentoGoing.Atendente?.Codigo,
-                    DepId = IsAtendimentoGoing.Departamento?.Codigo,
-                    LogId = IsAtendimentoGoing.Login?.Codigo,
-                    ConId = IsAtendimentoGoing.Contato?.Codigo,
-                };
-                using (var newContext = new chatbotContext())
-                {
-                    newContext.Atendimentos.Update(NovoAtendimento);
-                    await newContext.SaveChangesAsync();
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public string MontarMenuParaEnvio(MenuDttoGet menuselecionado, string numero)
+        public async Task<string> MontarMenuParaEnvio(MenuDttoGet menuselecionado, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
         {
             try
             {
@@ -427,7 +369,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         }
                     }
                 };
-
+                await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, menuselecionado.Titulo);
                 return JsonConvert.SerializeObject(responseObject);
             }
             catch (Exception)
@@ -456,20 +398,22 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     return await IsAtendimentoNull(Model);
                 }
 
-                if (IsAtendimentoGoing.EstadoAtendimento.Trim().ToLower() == "GPT".Trim().ToLower())
+                if (IsAtendimentoGoing.EstadoAtendimento != null)
                 {
-                    return await RespostaGpt(IsAtendimentoGoing, conteudo, contato.CodigoWhatsapp, Model);
+                    if (IsAtendimentoGoing.EstadoAtendimento.Trim().ToLower() == "GPT".Trim().ToLower())
+                    {
+                        return await RespostaGpt(IsAtendimentoGoing, conteudo, contato.CodigoWhatsapp, Model);
+                    }
+
+                    //como a mensagem ja e salva e o chat ja esta configurado no metodo inicial vou deixar apenas para ele não retornar nada aqui por enquanto
+                    if (IsAtendimentoGoing.EstadoAtendimento.Trim().ToLower() == "HUMANO".Trim().ToLower())
+                    {
+                        throw new NotImplementedException();
+                    }
                 }
-
-                //como a mensagem ja e salva e o chat ja esta configurado no metodo inicial vou deixar apenas para ele não retornar nada aqui por enquanto
-                if (IsAtendimentoGoing.EstadoAtendimento.Trim().ToLower() == "HUMANO".Trim().ToLower())
-                {
-                    throw new NotImplementedException();
-                }
-
-                await AtualizarEstadoAtendimento(IsAtendimentoGoing, "Bot", null, null);
-
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], MontarMenuParaEnvio(menuselecionado, contato.CodigoWhatsapp));
+                var chat = await _chatsInterfaceServices.RetornarChatPorAtenId(IsAtendimentoGoing.Codigo);
+                await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(IsAtendimentoGoing, "Bot", null, null);
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(menuselecionado, contato.CodigoWhatsapp, chat.Atendimento, chat));
             }
             catch (Exception)
             {

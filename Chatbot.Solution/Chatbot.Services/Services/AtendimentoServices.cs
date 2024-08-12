@@ -1,4 +1,5 @@
-﻿using Chatbot.Domain.Models;
+﻿using Chatbot.API.DAL;
+using Chatbot.Domain.Models;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
@@ -27,6 +28,41 @@ namespace Chatbot.Services.Services
             _contato = contato;
             _departamento = departamento;
         }
+
+        public async Task<AtendimentoDttoGet> AtendimentoIsNull(Domain.Models.JsonMetaApi.DataAndType dados, ContatoDttoGet contato, LoginDttoGet Login)
+        {
+            //caso o atendimento não exista esse metodo vai crialo
+            try
+            {
+                AtendimentoDttoPost NovoAtendimento = new AtendimentoDttoPost
+                {
+                    EstadoAtendimento = null,
+                    Data = DateTime.Now,
+                    CodigoAtendente = null,
+                    CodigoDepartamento = null,
+                    CodigoLogin = Login?.Codigo,
+                    CodigoContato = contato?.Codigo,
+                };
+                var viewmodel = await AdicionarPost(NovoAtendimento);
+                AtendimentoDttoGet bababa = new AtendimentoDttoGet
+                {
+                    Codigo = viewmodel.Codigo,
+                    Contato = viewmodel.Contato,
+                    Atendente = viewmodel.Atendente,
+                    Data = viewmodel.Data,
+                    Departamento = viewmodel.Departamento,
+                    EstadoAtendimento = viewmodel.EstadoAtendimento,
+                    Login = viewmodel.Login
+                };
+                return bababa;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<List<AtendimentoDttoGet>> GetALl()
         {
             try
@@ -99,6 +135,42 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
+        public async Task AtualizarEstadoAtendimento(AtendimentoDttoGet IsAtendimentoGoing, string estado, int? codDep, int? codAte)
+        {
+            try
+            {
+                IsAtendimentoGoing.EstadoAtendimento = estado;
+                if (codDep != null)
+                {
+                    IsAtendimentoGoing.Departamento = await _departamento.GetPorId(Convert.ToInt32(codDep));
+                }
+                if (codAte != null)
+                {
+                    IsAtendimentoGoing.Atendente = await _Atendente.GetPorId(Convert.ToInt32(codAte));
+                }
+                Atendimento NovoAtendimento = new Atendimento
+                {
+                    AtenId = IsAtendimentoGoing.Codigo,
+                    AtenEstado = IsAtendimentoGoing.EstadoAtendimento,
+                    AtenData = DateTime.Now,
+                    AteId = IsAtendimentoGoing.Atendente?.Codigo,
+                    DepId = IsAtendimentoGoing.Departamento?.Codigo,
+                    LogId = IsAtendimentoGoing.Login?.Codigo,
+                    ConId = IsAtendimentoGoing.Contato?.Codigo,
+                };
+                using (var newContext = new chatbotContext())
+                {
+                    newContext.Atendimentos.Update(NovoAtendimento);
+                    await newContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         public async Task<List<AtendimentoDttoGet>> RetornarTodosAtendimentosPorLogId(int id)
         {

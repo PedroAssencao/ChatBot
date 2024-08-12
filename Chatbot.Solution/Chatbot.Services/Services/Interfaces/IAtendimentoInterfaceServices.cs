@@ -1,4 +1,5 @@
-﻿using Chatbot.Infrastructure.Dtto;
+﻿using Chatbot.Domain.Models.JsonMetaApi;
+using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,7 @@ namespace Chatbot.Services.Services.Interfaces
         public Task<AtendimentoDttoGet?> ResgatarAtendimentoPorLogIdEContatoWaId(string ConWaId, int LogWaId);
         public Task<AtendimentoDttoGet> AtendimentoExiste(LoginDttoGet login, ContatoDttoGet contato);
         public Task AtualizarAtendimentoComDttoDeGet(AtendimentoDttoGet Atendimento);
+        public Task AtualizarEstadoAtendimento(AtendimentoDttoGet IsAtendimentoGoing, string estado, int? codDep, int? codAte);
+        public Task<AtendimentoDttoGet> AtendimentoIsNull(DataAndType dados, ContatoDttoGet contato, LoginDttoGet Login);
     }
 }

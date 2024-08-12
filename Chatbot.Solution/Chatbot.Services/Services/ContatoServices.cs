@@ -2,6 +2,7 @@
 using AutoMapper;
 using Chatbot.API.Repository;
 using Chatbot.Domain.Models;
+using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
@@ -37,6 +38,38 @@ namespace Chatbot.Infrastructure.Services
                     List.Add(NewModel);
                 }
                 return List;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<ContatoDttoGet> ContatoIsNull(DataAndType dados, LoginDttoGet Login)
+        {
+            //se o contato não existir esse metodo vai crialo
+            try
+            {
+                ContatoDttoGet newModel = new ContatoDttoGet
+                {
+                    CodigoWhatsapp = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id,
+                    DataCadastro = DateTime.Now,
+                    BloqueadoStatus = false,
+                    Nome = dados.Dados?.entry[0]?.changes[0]?.value?.contacts[0].profile.name,
+                    Codigologin = Login.Codigo
+
+                };
+                var viewmodel = await CreateComCodigo(newModel);
+                ContatoDttoGet bababa = new ContatoDttoGet
+                {
+                    Codigo = viewmodel.Codigo,
+                    Codigologin = viewmodel.Codigologin,
+                    CodigoWhatsapp = viewmodel.CodigoWhatsapp,
+                    BloqueadoStatus = viewmodel.BloqueadoStatus,
+                    DataCadastro = viewmodel.DataCadastro,
+                    Nome = viewmodel.Nome,
+                };
+                return bababa;
             }
             catch (Exception)
             {

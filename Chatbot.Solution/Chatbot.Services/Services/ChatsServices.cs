@@ -2,6 +2,7 @@
 
 using Chatbot.API.Repository;
 using Chatbot.Domain.Models;
+using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
@@ -31,6 +32,26 @@ namespace Chatbot.Infrastructure.Services
             _contato = contato;
             _login = login;
             _mensagem = mensagem;
+        }
+
+        public async Task<ChatsDttoGet> ChatIsNull(DataAndType dados, AtendimentoDttoGet Item)
+        {
+            //se o chat da pessoa não existir no sistema esse metodo criara ele
+            try
+            {
+                ChatsDttoPost ChatModel = new ChatsDttoPost
+                {
+                    CodigoAtendente = Item.Atendente == null ? null : Item.Atendente.Codigo,
+                    CodigoAtendimento = Item.Codigo == null ? null : Item.Codigo,
+                    CodigoContato = Item.Contato == null ? null : Item.Contato.Codigo,
+                    CodigoLogin = Item.Login == null ? null : Item.Login.Codigo
+                };
+                return await AdicionarPost(ChatModel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<List<ChatsDttoGet>> GetALl()

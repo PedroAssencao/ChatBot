@@ -1,4 +1,5 @@
-﻿using Chatbot.Infrastructure.Dtto;
+﻿using Chatbot.Domain.Models.JsonMetaApi;
+using Chatbot.Infrastructure.Dtto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Chatbot.Infrastructure.Services.Interfaces
         public Task<ContatoDttoGet> RetornarConIdPorWaID(string waid);
         public Task<ContatoDttoGetForView> GetContatoForViewPorId(int id);
         public Task<ContatoDttoGet> CreateComCodigo(ContatoDttoGet Model);
+        public Task<ContatoDttoGet> ContatoIsNull(DataAndType dados, LoginDttoGet Login);
     }
 }

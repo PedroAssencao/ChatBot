@@ -1,4 +1,5 @@
 ﻿
+using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Chatbot.Infrastructure.Services.Interfaces
         Task<ChatsDttoGet> AdicionarPost(ChatsDttoPost Model);
         Task<ChatsDttoGet> AtualziarPut(ChatsDttoPut Model);
         public Task<ChatsDttoGet?> RetornarChatPorAtenId(int atenId);
+        public Task<ChatsDttoGet> ChatIsNull(DataAndType dados, AtendimentoDttoGet Item);
     }
 }

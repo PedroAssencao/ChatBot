@@ -50,7 +50,7 @@ namespace Chatbot.Infrastrucutre.OpenAI.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while making the API request", ex);
+                return "Não Foi Possivel Gerar Sua Resposta, Por Favor Tente Novamente Mais Tarde";
             }
         }
 

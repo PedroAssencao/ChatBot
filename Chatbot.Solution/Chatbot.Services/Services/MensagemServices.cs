@@ -42,6 +42,7 @@ namespace Chatbot.Services.Services
                         TipoDaMensagem = item.MenTipo,
                         Descricao = item.MensDescricao,
                         CodigoChat = Convert.ToInt32(item.ChaId),
+                        CodigoWhatsapp = item.mensWaId,
                         Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                         Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                     };
@@ -67,6 +68,7 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoChat = Convert.ToInt32(item.ChaId),
+                    CodigoWhatsapp = item.mensWaId,
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
@@ -104,6 +106,21 @@ namespace Chatbot.Services.Services
             }
         }
 
+        public async Task<MensagensDttoGet?> BuscarMensagemPorWaId(string waID)
+        {
+            try
+            {
+                var dados = await GetALl();
+                var model = dados.FirstOrDefault(x => x.CodigoWhatsapp == waID);
+                return model;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<MensagensDttoGet?> PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(string ConWaID, string LogConWaID)
         {
             try
@@ -127,6 +144,7 @@ namespace Chatbot.Services.Services
                     MensData = Model.Data,
                     MensDescricao = Model.Descricao,
                     MenTipo = Model.TipoDaMensagem,
+                    mensWaId = Model.CodigoWhatsapp,
                     ChaId = Model.CodigoChat,
                     LogId = Model.CodigoLogin,
                     ConId = Model.CodigoContato
@@ -138,11 +156,59 @@ namespace Chatbot.Services.Services
                     Data = item.MensData,
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
+                    CodigoWhatsapp = item.mensWaId,
                     CodigoChat = item.ChaId == null ? 0 : Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
                 return ViewModel;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public async Task SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp)
+        {
+            //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
+            try
+            {
+                MensagensDttoPost NewModel = new MensagensDttoPost
+                {
+                    CodigoLogin = Login.Codigo,
+                    CodigoContato = contato.Codigo,
+                    CodigoChat = chat.Codigo,
+                    CodigoWhatsapp = CodigoWhatsapp,
+                    Data = DateTime.Now,
+                    Descricao = descricao,
+                    TipoDaMensagem = "MensagemEnviada"
+                };
+                await AdicionarPost(NewModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public async Task SaveMensage(int Login, int chat, string descricao)
+        {
+            //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
+            try
+            {
+                MensagensDttoPost NewModel = new MensagensDttoPost
+                {
+                    CodigoLogin = Login,
+                    CodigoContato = null,
+                    CodigoChat = chat,
+                    Data = DateTime.Now,
+                    Descricao = descricao,
+                    TipoDaMensagem = "MensagemEnviada"
+                };
+                await AdicionarPost(NewModel);
             }
             catch (Exception)
             {
@@ -161,6 +227,7 @@ namespace Chatbot.Services.Services
                     MensData = Model.Data,
                     MensDescricao = Model.Descricao,
                     MenTipo = Model.TipoDaMensagem,
+                    mensWaId = Model.CodigoWhatsapp,
                     ChaId = Model.CodigoChat,
                     LogId = Model.CodigoLogin,
                     ConId = Model.CodigoContato
@@ -172,6 +239,7 @@ namespace Chatbot.Services.Services
                     Data = item.MensData,
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
+                    CodigoWhatsapp = item.mensWaId,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
@@ -196,6 +264,7 @@ namespace Chatbot.Services.Services
                     Data = item.MensData,
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
+                    CodigoWhatsapp= item.mensWaId,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),

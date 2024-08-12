@@ -22,3 +22,27 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Service
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\refint\Chatbot.Services.Meta.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.pdb
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\ref\Chatbot.Services.Meta.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Services.Meta.deps.json
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Services.Meta.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Services.Meta.pdb
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Domain.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Infrastructure.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Infrastructure.Meta.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Infrastrucutre.OpenAI.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Services.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Infrastructure.Meta.pdb
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Domain.pdb
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Infrastructure.pdb
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Infrastrucutre.OpenAI.pdb
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\bin\Debug\net8.0\Chatbot.Services.pdb
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.csproj.AssemblyReference.cache
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.AssemblyInfoInputs.cache
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.AssemblyInfo.cs
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.sourcelink.json
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot..21ED2931.Up2Date
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\refint\Chatbot.Services.Meta.dll
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\Chatbot.Services.Meta.pdb
+C:\Users\Administrador\Documents\tcc\ChatBot\Chatbot.Solution\Chatbot.Services.Meta\obj\Debug\net8.0\ref\Chatbot.Services.Meta.dll
