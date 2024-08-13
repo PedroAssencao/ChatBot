@@ -7,6 +7,7 @@ using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Runtime.Serialization;
 
 namespace Chatbot.Infrastructure.Services
 {
@@ -195,6 +196,20 @@ namespace Chatbot.Infrastructure.Services
                 throw new Exception("ocorreu um error ao tentar fazer a requisição" + ex.Message);
             }
 
+        }
+
+        public async Task<List<ContatoDttoGet>> GetListaDeContatosBloqueadosPorLogId(int logId)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.Where(x => x.BloqueadoStatus == true && x.Codigologin == logId).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<ContatoDttoGetForView> GetContatoForViewPorId(int id)

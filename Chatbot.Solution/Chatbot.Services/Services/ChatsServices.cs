@@ -98,6 +98,25 @@ namespace Chatbot.Infrastructure.Services
                 throw;
             }
         }
+
+        public async Task<ChatsDttoGet?> RetornarChatPorConIdELogId(int? conId, int? LogId)
+        {
+            try
+            {
+                if (conId == null && LogId == null)
+                {
+                    return null;
+                }
+
+                var dados = await GetALl();
+                return dados.FirstOrDefault(x => x?.Contato?.Codigo == conId && x?.Atendimento?.Login?.Codigo == LogId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public async Task<ChatsDttoGetForMensagens> BuscarChatParaMensagen(int id)
         {
             try
@@ -117,6 +136,8 @@ namespace Chatbot.Infrastructure.Services
                 throw;
             }
         }
+
+        
 
         public async Task<ChatsDttoGet> GetPorId(int id)
         {

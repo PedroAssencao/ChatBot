@@ -3,9 +3,9 @@ using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -15,7 +15,7 @@ namespace Chatbot.API.Controllers
         {
             _repository = repository;
         }
-        [HttpGet("/login")]
+        [HttpGet("login")]
         public async Task<IActionResult> BuscarTodosLogin()
         {
             try
@@ -28,7 +28,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/login/{id}")]
+        [HttpGet("login/{id}")]
         public async Task<IActionResult> BuscarTodosLoginPorId(int id)
         {
             try
@@ -41,7 +41,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPost("/login/Cadastrar")]
+        [HttpPost("login/Cadastrar")]
         public async Task<IActionResult> Cadastrar(LoginDttoGet Model)
         {
             try
@@ -55,21 +55,21 @@ namespace Chatbot.API.Controllers
         }
 
 
-        [HttpPost("/login/logar")]
+        [HttpPost("login/logar")]
         public async Task<IActionResult> Logar(LoginDttoPost Model, bool Iscadastrate)
         {
             try
             {
-                 await _repository.Logar(Model, Iscadastrate);
+                await _repository.Logar(Model, Iscadastrate);
                 return Ok("Logado Com sucesso");
             }
             catch (Exception ex)
             {
-               return BadRequest(new Exception("error: " + ex.Message));
+                return BadRequest(new Exception("error: " + ex.Message));
             }
         }
 
-        [HttpPut("/login/Atualizar")]
+        [HttpPut("login/Atualizar")]
         public async Task<IActionResult> AtualizarLogin(LoginDttoGet Model)
         {
             try
@@ -82,7 +82,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpDelete("/login/Delete")]
+        [HttpDelete("login/Delete")]
         public async Task<IActionResult> ApagarLogin(int id)
         {
             try
@@ -95,7 +95,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPost("/login/Logout")]
+        [HttpPost("login/Logout")]
         public async Task<IActionResult> logout()
         {
             try

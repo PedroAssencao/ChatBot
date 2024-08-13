@@ -3,21 +3,21 @@ using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
-    public class AtendimentoController : ControllerBase
+    public class AtendenteController : ControllerBase
     {
-        protected readonly IAtendimentoInterfaceServices _repository;
+        protected readonly IAtendenteInterfaceServices _repository;
 
-        public AtendimentoController(IAtendimentoInterfaceServices repository)
+        public AtendenteController(IAtendenteInterfaceServices repository)
         {
             _repository = repository;
         }
 
-        [HttpGet("/Atendimento")]
-        public async Task<IActionResult> BuscarTodosAtendimento()
+        [HttpGet("Atendente")]
+        public async Task<IActionResult> BuscarTodosAtendentes()
         {
             try
             {
@@ -29,8 +29,8 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/Atendimento/{id}")]
-        public async Task<IActionResult> BuscarAtendimentoPorId(int id)
+        [HttpGet("Atendente/{id}")]
+        public async Task<IActionResult> BuscarAtendendePorId(int id)
         {
             try
             {
@@ -42,21 +42,8 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/Atendimento/BuscarTodosPorLog/{id}")]
-        public async Task<IActionResult> BuscarTodosAtendimentosPorLogId(int id)
-        {
-            try
-            {
-                return Ok(await _repository.RetornarTodosAtendimentosPorLogId(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("error: " + ex.Message);
-            }
-        }
-
-        [HttpPost("/Atendimento/Create")]
-        public async Task<IActionResult> AdicionarAtendimento(AtendimentoDttoPost Model)
+        [HttpPost("Atendente/Create")]
+        public async Task<IActionResult> AdicionarAtendente(AtendenteDttoForPost Model)
         {
             try
             {
@@ -68,20 +55,21 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPut("/Atendimento/Atualizar")]
-        public async Task<IActionResult> AtualizarAtendimento(AtendimentoDttoPut Model)
+        [HttpPut("Atendente/Atualizar")]
+        public async Task<IActionResult> AtualizarAtendente(AtendenteDttoForPut Model)
         {
             try
             {
-                return Ok(await _repository.AtualizarPut(Model));
+                return Ok(await _repository.UpdatePost(Model));
             }
             catch (Exception ex)
             {
                 return BadRequest("error: " + ex.Message);
             }
         }
-        [HttpDelete("/Atendimento/Delete")]
-        public async Task<IActionResult> DeletarAtendimento(int id)
+
+        [HttpDelete("Atendente/Remove")]
+        public async Task<IActionResult> ApagarAtendente(int id)
         {
             try
             {

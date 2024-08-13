@@ -5,9 +5,9 @@ using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class MensagemController : ControllerBase
     {
@@ -18,15 +18,15 @@ namespace Chatbot.API.Controllers
             _repository = repository;
         }
 
-        [HttpGet("/mensagens")]
+        [HttpGet("mensagens")]
         public async Task<IActionResult> PegarTodasMensagens() => Ok(await _repository.GetALl());
-        [HttpGet("/mensagens/chat")]
+        [HttpGet("mensagens/chat")]
         public async Task<IActionResult> PegarMensagensParaChat(int con, int log) => Ok(await _repository.BuscarMensagensDeUmChat(con, log));
-        [HttpPost("/mensagens/Create")]
+        [HttpPost("mensagens/Create")]
         public async Task<IActionResult> CriarMensagem(MensagensDttoPost Model) => Ok(await _repository.AdicionarPost(Model));
-        [HttpPut("/mensagens/Atualizar")]
+        [HttpPut("mensagens/Atualizar")]
         public async Task<IActionResult> AtualizarMensagens(MensagensDttoPut Model) => Ok(await _repository.AtualizarPut(Model));
-        [HttpDelete("/mensagens/Delete")]
+        [HttpDelete("mensagens/Delete")]
         public async Task<IActionResult> ApagarMensagens(int id) => Ok(await _repository.Delete(id));
     }
 }

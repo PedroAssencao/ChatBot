@@ -152,7 +152,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
         {
             try
             {
-                var dadosJson = "";
                 var responseObject = new
                 {
                     messaging_product = "whatsapp",
@@ -161,10 +160,13 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     type = "text",
                     text = new { preview_url = false, body = conteudo },
                 };
-                dadosJson = JsonConvert.SerializeObject(responseObject);
-                await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, conteudo);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], dadosJson);
 
+                if (Atendimento != null || chat != null)
+                {
+                    await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, conteudo);
+                }
+
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(responseObject));
             }
             catch (Exception)
             {
@@ -453,6 +455,27 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-
+        public async Task<string> EnvioDeMensagensEmMassa(List<ContatoDttoGet> Contatos, string conteudo)
+        {
+            try
+            {
+                foreach (var item in Contatos)
+                {
+                    var chat = await _chatsInterfaceServices.RetornarChatPorConIdELogId(item.Codigo, item.Codigologin);
+                    if (chat != null)
+                    {
+                        if (chat.Atendimento != null)
+                        {
+                            await EnviarMensagemDoTipoSimples(conteudo, item.CodigoWhatsapp == "557988132044" || item.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.CodigoWhatsapp) : item.CodigoWhatsapp, chat.Atendimento, chat);
+                        }
+                    }                    
+                }
+                return "Mensagens Enviadas Com Sucesso";
+            }
+            catch (Exception ex)
+            {
+                return $"Error Ao Enviar Mensagens: Error{ex.Message}";
+            }
+        }
     }
 }

@@ -4,9 +4,9 @@ using Chatbot.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ContatoController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace Chatbot.API.Controllers
         {
             _contatoServices = contatoServices;
         }
-        [HttpGet("/Contatos/Get")]
+        [HttpGet("Contatos/Get")]
         public async Task<IActionResult> BuscarTodosContato()
         {
             try
@@ -28,7 +28,7 @@ namespace Chatbot.API.Controllers
                 return BadRequest("error: " + ex.Message);
             }
         }
-        [HttpGet("/Contatos/Get/{id}")]
+        [HttpGet("Contatos/Get/{id}")]
         public async Task<IActionResult> BuscarContatoPorId(int id)
         {
             try
@@ -41,7 +41,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/Contatos/Get/waID/{id}")]
+        [HttpGet("Contatos/Get/waID/{id}")]
         public async Task<IActionResult> BuscaContatoPorWaId(string id)
         {
             try
@@ -55,7 +55,7 @@ namespace Chatbot.API.Controllers
         }
 
 
-        [HttpPost("/Contatos/Create")]
+        [HttpPost("Contatos/Create")]
         public async Task<IActionResult> CriarNovoContato(ContatoDttoGet Model)
         {
             try
@@ -68,7 +68,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPut("/Contatos/Update")]
+        [HttpPut("Contatos/Update")]
         public async Task<IActionResult> AtualizarContato(ContatoDttoGet Model)
         {
             try
@@ -81,7 +81,21 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpDelete("/Contatos/Delete")]
+        [HttpGet("Contatos/ContatosBloqueados")]
+        public async Task<IActionResult> PegarTodosContatosBloqueados(int logId)
+        {
+            try
+            {
+                return Ok(await _contatoServices.GetListaDeContatosBloqueadosPorLogId(logId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
+
+        [HttpDelete("Contatos/Delete")]
         public async Task<IActionResult> ApagarContato(int id)
         {
             try

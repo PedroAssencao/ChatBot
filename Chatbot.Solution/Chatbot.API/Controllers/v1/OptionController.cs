@@ -1,22 +1,25 @@
 ﻿using Chatbot.Infrastructure.Dtto;
+using Chatbot.Services.Services;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class OptionController : ControllerBase
     {
         protected readonly IOptionInterfaceServices _repository;
+        protected readonly IMenuInterfaceServices _menu;
 
-        public OptionController(IOptionInterfaceServices repository)
+        public OptionController(IOptionInterfaceServices repository, IMenuInterfaceServices menu)
         {
             _repository = repository;
+            _menu = menu;
         }
 
-        [HttpGet("/Option")]
+        [HttpGet("Option")]
         public async Task<IActionResult> BuscarTodasOption()
         {
             try
@@ -29,7 +32,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/Option/{id}")]
+        [HttpGet("Option/{id}")]
         public async Task<IActionResult> BuscarOptionPorId(int id)
         {
             try
@@ -42,11 +45,27 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPost("/Option/Create")]
+        [HttpPost("Option/Create")]
         public async Task<IActionResult> AdicionarOption(OptionDttoPost Model)
         {
             try
             {
+
+                if (Model != null)
+                {
+                    if (Model.CodigoMenu != null)
+                    {
+                        var menu = await _menu.GetPorId(Convert.ToInt32(Model.CodigoMenu));
+                        if (menu != null)
+                        {
+                            if (menu?.Options?.Count >= 10)
+                            {
+                                throw new Exception("Numero de opções por menu execedida");
+                            }
+                        }
+                    }
+                }
+
                 return Ok(await _repository.AdicionarPost(Model));
             }
             catch (Exception ex)
@@ -55,7 +74,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPut("/Option/Update")]
+        [HttpPut("Option/Update")]
         public async Task<IActionResult> AtualizarOption(OptionDttoPut Model)
         {
             try
@@ -68,7 +87,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpDelete("/Option/Delete")]
+        [HttpDelete("Option/Delete")]
         public async Task<IActionResult> ApagarOption(int id)
         {
             try

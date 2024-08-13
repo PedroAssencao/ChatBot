@@ -4,9 +4,9 @@ using Chatbot.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ChatController : ControllerBase
     {
@@ -17,18 +17,18 @@ namespace Chatbot.API.Controllers
             _repository = repository;
         }
 
-        [HttpGet("/chats")]
+        [HttpGet("chats")]
         public async Task<IActionResult> BuscarTodos() => Ok(await _repository.GetALl());
 
-        [HttpGet("/chats/{id}")]
+        [HttpGet("chats/{id}")]
         public async Task<IActionResult> BuscarPorID(int id) => Ok(await _repository.GetPorId(id));
 
-        [HttpPost("/chats/create")]
+        [HttpPost("chats/create")]
         public async Task<IActionResult> Adicionar(ChatsDttoPost Model) => Ok(await _repository.AdicionarPost(Model));
-        [HttpPut("/chats/Atualizar")]
+        [HttpPut("chats/Atualizar")]
         public async Task<IActionResult> Atualizar(ChatsDttoPut Model) => Ok(await _repository.AtualziarPut(Model));
 
-        [HttpDelete("/chats/Delete")]
+        [HttpDelete("chats/Delete")]
         public async Task<IActionResult> Delete(int id) => Ok(await _repository.Delete(id));
 
     }

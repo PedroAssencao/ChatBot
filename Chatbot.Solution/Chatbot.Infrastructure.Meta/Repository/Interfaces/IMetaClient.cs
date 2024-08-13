@@ -1,4 +1,5 @@
 ﻿using Chatbot.Domain.Models.JsonMetaApi;
+using Chatbot.Infrastructure.Dtto;
 
 namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
 {
@@ -11,5 +12,6 @@ namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
         public Task<dynamic> ChamarMetodo(dynamic Values);
         Task CompararData();
         Task SalvarMensagemAtendente(string descricao, int chat, int ate);
+        public Task<string> EnvioDeMensagensEmMassa(List<ContatoDttoGet> Contatos, string conteudo);
     }
 }

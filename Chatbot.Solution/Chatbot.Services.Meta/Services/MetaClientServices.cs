@@ -1,4 +1,5 @@
-﻿using Chatbot.Infrastructure.Meta.Repository;
+﻿using Chatbot.Infrastructure.Dtto;
+using Chatbot.Infrastructure.Meta.Repository;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,20 @@ namespace Chatbot.Infrastructure.Meta.Services
         {
             try
             {
-                await _metaRepository.SalvarMensagemAtendente(descricao, chat,ate);
+                await _metaRepository.SalvarMensagemAtendente(descricao, chat, ate);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<string> EnvioDeMensagensEmMassaServices(List<ContatoDttoGet> Contatos, string conteudo)
+        {
+            try
+            {
+                return await _metaRepository.EnvioDeMensagensEmMassa(Contatos, conteudo);
             }
             catch (Exception)
             {

@@ -1,16 +1,17 @@
-﻿using Chatbot.Infrastructure.Meta.Repository.Interfaces;
+﻿using Chatbot.Infrastructure.Dtto;
+using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
-    public class WebHookController : ControllerBase
+    public class MetaController : ControllerBase
     {
         protected readonly IMetaClientServices _services;
 
-        public WebHookController(IMetaClientServices services)
+        public MetaController(IMetaClientServices services)
         {
             _services = services;
         }
@@ -38,7 +39,21 @@ namespace Chatbot.API.Controllers
             try
             {
                 await _services.SalvarMensagemAtendente(descricao, chat, ate);
-                return Ok("Mensagen Enviada");    
+                return Ok("Mensagen Enviada");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Mensagen Não foi enviada");
+            }
+        }
+
+        [HttpPost("EnvioMensagensEmMassa")]
+        public async Task<IActionResult> testeAtendenteEnviarMensagenChat(string conteudo, List<ContatoDttoGet> contatos)
+        {
+            try
+            {
+                await _services.EnvioDeMensagensEmMassaServices(contatos, conteudo);
+                return Ok("Mensagen Enviada");
             }
             catch (Exception)
             {

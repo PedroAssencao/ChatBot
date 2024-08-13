@@ -3,9 +3,9 @@ using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class DepartamanetoController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace Chatbot.API.Controllers
             _repository = repository;
         }
 
-        [HttpGet("/Departamento")]
+        [HttpGet("Departamento")]
         public async Task<IActionResult> BuscarTodos()
         {
             try
@@ -29,7 +29,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/Departamento/{id}")]
+        [HttpGet("Departamento/{id}")]
         public async Task<IActionResult> BuscarDepartamnetoPorId(int id)
         {
             try
@@ -42,7 +42,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPost("/Departamento/Create")]
+        [HttpPost("Departamento/Create")]
         public async Task<IActionResult> AdicionarDepartamento(DepartamentoDttoGet Model)
         {
             try
@@ -55,7 +55,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPut("/Departamento/Update")]
+        [HttpPut("Departamento/Update")]
         public async Task<IActionResult> AtualizarDepartamento(DepartamentoDttoGet Model)
         {
             try
@@ -68,7 +68,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpDelete("/Departamento/Delete")]
+        [HttpDelete("Departamento/Delete")]
         public async Task<IActionResult> ApagarDepartamento(int id)
         {
             try

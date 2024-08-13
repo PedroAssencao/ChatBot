@@ -3,9 +3,9 @@ using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chatbot.API.Controllers
+namespace Chatbot.API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class MenusController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace Chatbot.API.Controllers
             _repository = repository;
         }
 
-        [HttpGet("/Menus")]
+        [HttpGet("Menus")]
         public async Task<IActionResult> BuscarTodosMenus()
         {
             try
@@ -29,7 +29,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/menus/{id}")]
+        [HttpGet("Menus/{id}")]
         public async Task<IActionResult> BuscarMenusPorId(int id)
         {
             try
@@ -42,7 +42,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpGet("/Menus/MenuInicial/{id}")]
+        [HttpGet("Menus/MenuInicial/{id}")]
         public async Task<IActionResult> BuscarMenuInicial(int id)
         {
             try
@@ -55,7 +55,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPost("/Menus/Create")]
+        [HttpPost("Menus/Create")]
         public async Task<IActionResult> AdicionarMenu(MenuDttoPost Model)
         {
             try
@@ -68,7 +68,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpPut("/Menus/Atualizar")]
+        [HttpPut("Menus/Atualizar")]
         public async Task<IActionResult> AtualizarMenu(MenuDttoPut Model)
         {
             try
@@ -81,7 +81,7 @@ namespace Chatbot.API.Controllers
             }
         }
 
-        [HttpDelete("/Menus/Delete")]
+        [HttpDelete("Menus/Delete")]
         public async Task<IActionResult> ApagarMenu(int id)
         {
             try

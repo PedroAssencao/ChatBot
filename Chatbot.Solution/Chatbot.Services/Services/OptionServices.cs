@@ -14,7 +14,7 @@ namespace Chatbot.Services.Services
     {
         protected readonly IOptionsInterface _repository;
         protected readonly ILoginInterfaceServices _loginService;
-
+        
         public OptionServices(IOptionsInterface repository, ILoginInterfaceServices loginService)
         {
             _repository = repository;
@@ -122,6 +122,12 @@ namespace Chatbot.Services.Services
                     LogId = Model.CodigoLogin,
                     MenId = Model.CodigoMenu
                 };
+
+                if (NewModel == null)
+                {
+                    throw new Exception("Entrada Vazia");
+                }
+
                 var item = await _repository.Adicionar(NewModel);
                 OptionDttoGet ViewModel = new OptionDttoGet
                 {
@@ -137,9 +143,9 @@ namespace Chatbot.Services.Services
                 };
                 return ViewModel;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
         }
 
