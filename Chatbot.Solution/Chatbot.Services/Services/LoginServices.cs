@@ -5,14 +5,10 @@ using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
-
+using Chatbot.API.DAL;
+using Microsoft.EntityFrameworkCore;
 namespace Chatbot.Services.Services
 {
     public class LoginServices : ILoginInterfaceServices
@@ -159,7 +155,50 @@ namespace Chatbot.Services.Services
         {
             try
             {
-                var item = await _repository.delete(id);
+                var item = await _repository.GetPorId(id);
+                using (var context = new chatbotContext())
+                {
+                    var login = await context.Logins
+                         .Include(x => x.Mensagens)
+                         .Include(x => x.Menus)
+                         .Include(x => x.Options)
+                         .Include(x => x.Chats)
+                         .Include(x => x.Atendentes)
+                         .Include(x => x.Atendimentos)
+                         .Include(x => x.Contatos)
+                         .Include(x => x.Departamentos)
+                         .SingleOrDefaultAsync(x => x.LogId == id);
+
+                    if (login.Menus.Count != 0)
+                    {
+                        context.RemoveRange(login.Menus);
+                    }
+                    if (login.Chats.Count != 0)
+                    {
+                        context.RemoveRange(login.Chats);
+                    }
+                    if (login.Atendentes.Count != 0)
+                    {
+                        context.RemoveRange(login.Atendentes);
+                    }
+                    if (login.Atendimentos.Count != 0)
+                    {
+                        context.RemoveRange(login.Atendimentos);
+                    }
+                    if (login.Contatos.Count != 0)
+                    {
+                        context.RemoveRange(login.Contatos);
+                    }
+                    if (login.Departamentos.Count != 0)
+                    {
+                        context.RemoveRange(login.Departamentos);
+                    }
+                    if (login.Mensagens.Count != 0)
+                    {
+                        context.RemoveRange(login.Mensagens);
+                    }
+                    await context.SaveChangesAsync();
+                }
                 LoginDttoGet NewModel = new LoginDttoGet
                 {
                     Codigo = item.LogId,
@@ -170,6 +209,7 @@ namespace Chatbot.Services.Services
                     Imagem = item.LogImg,
                     Plano = item.LogPlano,
                 };
+                await _repository.delete(NewModel.Codigo);
                 return NewModel;
             }
             catch (Exception)
@@ -199,11 +239,7 @@ namespace Chatbot.Services.Services
 
                     return claims;
                 }
-                else
-                {
-                    throw new Exception("Usuario Não Encontrado");
-
-                }
+                throw new Exception("Usuario Não Encontrado");
             }
             catch (Exception ex)
             {
@@ -243,16 +279,10 @@ namespace Chatbot.Services.Services
                         await Logar(NewModel, true);
                         return Model;
                     }
-                    else
-                    {
-                        throw new Exception("Usuario ou Email Já Cadastrados");
-                    }
 
+                    throw new Exception("Usuario ou Email Já Cadastrados");
                 }
-                else
-                {
-                    throw new Exception("Não foi Possivel Cadastrar");
-                }
+                throw new Exception("Não foi Possivel Cadastrar");
             }
             catch (Exception ex)
             {

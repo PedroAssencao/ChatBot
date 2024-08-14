@@ -255,7 +255,7 @@ namespace Chatbot.Services.Services
         {
             try
             {
-                var item = await _repository.delete(id);
+                var item = await _repository.GetPorId(id);
                 MenuDttoGet ViewModel = new MenuDttoGet
                 {
                     Codigo = item.MenId,
@@ -267,6 +267,13 @@ namespace Chatbot.Services.Services
                     Login = await _loginService.GetPorId(Convert.ToInt32(item.LogId)),
                     Options = await _optionService.GetPorIdForMenu(item.MenId)
                 };
+
+                foreach (var item1 in ViewModel.Options)
+                {
+                    await _optionService.Delete(item1.Codigo);
+                }
+                await _repository.delete(id);
+
                 return ViewModel;
             }
             catch (Exception)

@@ -1,4 +1,5 @@
-﻿using Chatbot.Infrastructure.Dtto;
+﻿using Chatbot.Domain.Models;
+using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +19,6 @@ namespace Chatbot.Services.Services.Interfaces
         Task<List<Claim>> Logar(LoginDttoPost Model, bool IsCadastre);
         Task<LoginDttoGet> Cadastrar(LoginDttoGet Model);
         Task<HttpStatusCode> Logout();
-
         Task<LoginDttoGetForView> GetPorIdLoginView(int id);
     }
 }

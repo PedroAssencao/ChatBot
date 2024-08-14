@@ -1,9 +1,11 @@
-﻿using Chatbot.Domain.Models;
+﻿using Chatbot.API.DAL;
+using Chatbot.Domain.Models;
 using Chatbot.Domain.Models.Enums;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -257,7 +259,8 @@ namespace Chatbot.Services.Services
         {
             try
             {
-                var item = await _repository.delete(id);
+                var item = await _repository.GetPorId(id);
+        
                 MensagensDttoGet ViewModel = new MensagensDttoGet
                 {
                     Codigo = item.MensId,
@@ -269,6 +272,7 @@ namespace Chatbot.Services.Services
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
+                await _repository.delete(ViewModel.Codigo);
                 return ViewModel;
             }
             catch (Exception)

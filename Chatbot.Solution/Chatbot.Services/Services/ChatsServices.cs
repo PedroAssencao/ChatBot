@@ -220,7 +220,7 @@ namespace Chatbot.Infrastructure.Services
         {
             try
             {
-                var item = await _repository.delete(id);
+                var item = await _repository.GetPorId(id);
                 ChatsDttoGet ViewModel = new ChatsDttoGet
                 {
                     Codigo = item.ChaId,
@@ -229,6 +229,11 @@ namespace Chatbot.Infrastructure.Services
                     Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Mensagens = item?.ChaId == null && item?.LogId == null ? null : await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
                 };
+                foreach (var item1 in ViewModel.Mensagens)
+                {
+                    await _mensagem.Delete(item1.Codigo);
+                }
+                await _repository.delete(id);
                 return ViewModel;
             }
             catch (Exception)

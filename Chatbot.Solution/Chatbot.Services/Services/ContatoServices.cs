@@ -1,11 +1,13 @@
 ﻿
 using AutoMapper;
+using Chatbot.API.DAL;
 using Chatbot.API.Repository;
 using Chatbot.Domain.Models;
 using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Runtime.Serialization;
 
@@ -152,7 +154,33 @@ namespace Chatbot.Infrastructure.Services
         {
             try
             {
-                var model = await _contatoRepository.delete(id);
+                var model = await _contatoRepository.GetPorId(id);
+
+                using (var context = new chatbotContext())
+                {
+                    var contato = await context.Contatos
+                         .Include(x => x.Atendimentos)
+                         .Include(x => x.Chats)
+                         .Include(x => x.Mensagens)
+                         .SingleOrDefaultAsync(x => x.ConId == id);
+
+                    if (contato.Atendimentos.Count != 0)
+                    {
+                        context.RemoveRange(contato.Atendimentos);
+                    }
+                    if (contato.Chats.Count != 0)
+                    {
+                        context.RemoveRange(contato.Chats);
+                    }
+                    if (contato.Mensagens.Count != 0)
+                    {
+                        context.RemoveRange(contato.Mensagens);
+                    }
+
+                    context.Remove(contato);
+                    await context.SaveChangesAsync();
+                }
+
                 ContatoDttoGet NewModel = new ContatoDttoGet
                 {
                     Codigo = model.ConId,
