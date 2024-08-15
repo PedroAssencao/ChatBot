@@ -1,12 +1,46 @@
-.containerInicio{
-    height: 40rem;
+.containerInicio {
+    height: 10rem;
+    box-shadow: -1px 9px 37px 1px rgba(0, 0, 0, 0.75);
 }
 
-.header{
-    background-color: gray;
+.header {
+    background-color: #a8a79f;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
-.ContainerInfos{
+.btnColorForFluxoBot {
+    background-color: #2e4979;
+    color: #fff;
+    font-weight: bold;
+}
+
+.textColorForFluxoBot{
+    color: #a8a49a;
+}
+
+.menuContainerForFluxoBot{
+    width: 20rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn:hover {
+    background-color: #2e4979 !important; /* Mantém a cor de fundo original */
+    color: #fff !important; /* Mantém a cor do texto original */
+    border-color: none !important; /* Mantém a cor da borda original */
+}
+
+.TituloForFluxoBot {
+    font-weight: bold;
+    color: #304b76;
+}
+
+.ContainerInfos {
     height: 30rem;
+    box-shadow: -1px 9px 37px 1px rgba(0, 0, 0, 0.75); 
 }

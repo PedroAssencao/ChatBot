@@ -9,7 +9,7 @@ export default function App() {
 
   const searchLocation = window.location.pathname;
 
-  const urlQueteramSideBarENavBar = ['/', '/home', '/Atendimento','/FluxoBot'];
+  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot'];
   
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {
@@ -25,7 +25,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="container-fluid bg-warning min-vh-100">
-        <div className="row bg-success min-vh-100">
+        <div className="row bg-light min-vh-100">
           {IsTrue ? <Sidebar/> : null}
           <Routes>
             <Route index element={<Home />} />
