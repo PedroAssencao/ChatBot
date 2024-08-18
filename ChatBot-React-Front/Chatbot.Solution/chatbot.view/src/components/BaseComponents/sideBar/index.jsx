@@ -2,7 +2,7 @@ import './style.css'
 import A from '../a'
 export default function SideBar() {
     return (
-        <div className="col flex-lg-column sideBarContainer mt-5" style={{ display: "flex" }} id="sidebar">
+        <div className="col flex-lg-column sideBarContainer" style={{ display: "flex" }} id="sidebar">
             {/* Icon Menu */}
             <A className={"btn text-light sideBarIcon espacamentoInicial"} icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
