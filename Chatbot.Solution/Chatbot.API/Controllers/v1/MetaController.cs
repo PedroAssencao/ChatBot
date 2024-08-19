@@ -76,5 +76,20 @@ namespace Chatbot.API.Controllers.v1
             }
         }
 
+        [HttpGet("PegarMensagensProgramadas")]
+
+        public async Task<IActionResult> PegarMensagemProgramada()
+        {
+            try
+            {
+                
+                return Ok(await _services.PegarMensagemProgramadaService());
+            }
+            catch (Exception)
+            {
+                return BadRequest("Mensagen Não foi enviada");
+            }
+        }
+
     }
 }

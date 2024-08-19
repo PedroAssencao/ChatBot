@@ -193,3 +193,4 @@ select * from menus
 select * from chat
 select * from Mensagens
 select * from contatos
+select * from MensagemProgramada
