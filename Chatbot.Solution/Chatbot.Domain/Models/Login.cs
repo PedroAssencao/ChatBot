@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.Domain.Models;
@@ -13,11 +12,6 @@ public partial class Login
     [Key]
     [Column("log_id")]
     public int LogId { get; set; }
-
-    [Column("log_user")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string? LogUser { get; set; }
 
     [Column("log_email")]
     [StringLength(255)]
@@ -37,6 +31,11 @@ public partial class Login
     [StringLength(255)]
     [Unicode(false)]
     public string? LogPlano { get; set; }
+
+    [Column("log_user")]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string? LogUser { get; set; }
 
     [Column("log_waid")]
     [StringLength(255)]
@@ -59,6 +58,9 @@ public partial class Login
     public virtual ICollection<Departamento> Departamentos { get; set; } = new List<Departamento>();
 
     [InverseProperty("Log")]
+    public virtual ICollection<MensagemProgramadum> MensagemProgramada { get; set; } = new List<MensagemProgramadum>();
+
+    [InverseProperty("Log")]
     public virtual ICollection<Mensagen> Mensagens { get; set; } = new List<Mensagen>();
 
     [InverseProperty("Log")]
@@ -66,5 +68,4 @@ public partial class Login
 
     [InverseProperty("Log")]
     public virtual ICollection<Option> Options { get; set; } = new List<Option>();
-
 }

@@ -28,7 +28,6 @@ public partial class Mensagen
     [Unicode(false)]
     public string? mensWaId { get; set; }
 
-
     [Column("con_id")]
     public int? ConId { get; set; }
 

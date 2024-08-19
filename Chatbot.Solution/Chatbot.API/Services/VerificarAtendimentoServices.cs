@@ -39,6 +39,8 @@ public class VerificarAtendimentoService : IHostedService, IDisposable
 
     private async Task DoWork(object state)
     {
+
+
         using (var scope = _serviceProvider.CreateScope())
         {
             var repository = scope.ServiceProvider.GetRequiredService<IMetaClient>();

@@ -50,7 +50,6 @@ namespace Chatbot.Infrastructure.Dtto
         public string? MenBody { get; set; }
         public string? MenFooter { get; set; }
         public string? MenTipo { get; set; }
-        public LoginDttoGetForView? Login { get; set; }
         public List<OptionDttoGetForMenu>? Options { get; set; }
     }
 }

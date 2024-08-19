@@ -89,6 +89,17 @@ create table Mensagens (
 
 select * from Mensagens
 
+create table MensagemProgramada (
+    mempro_id int identity(1,1) primary key,
+    mempro_datacriada datetime,
+	mempro_dataenvio datetime,
+    mempro_descricao varchar(max),
+	mempro_tipo varchar(255),
+    log_id int,
+    constraint fk_login_mensagemprogramada foreign key (log_id) references login(log_id) on delete set null,
+)
+
+
 go
 
 create table menus (

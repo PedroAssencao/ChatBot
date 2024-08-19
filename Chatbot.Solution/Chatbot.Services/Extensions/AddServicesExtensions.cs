@@ -32,6 +32,7 @@ namespace Chatbot.Services.Extensions
 
             services.AddTransient<IContatoInterfaceServices, ContatoServices>();
             services.AddTransient<IMensagemInterfaceServices, MensagemServices>();
+            services.AddTransient<IMensagemProgramadaServices, MensagemProgramadaServices>();
             services.AddTransient<IMenuInterfaceServices, MenuServices>();
             services.AddTransient<IOptionInterfaceServices, OptionServices>();
             services.AddTransient<IDepartamentoInterfaceServices, DepartamentoServices>();

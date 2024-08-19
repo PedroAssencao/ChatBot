@@ -61,5 +61,20 @@ namespace Chatbot.API.Controllers.v1
             }
         }
 
+        [HttpPost("EnvioMensagensProgramadas")]
+
+        public async Task<IActionResult> MensagemProgramada(string conteudo, [FromBody]DateTime data)
+        {
+            try
+            {
+                await _services.MensagemProgramadaService(data, conteudo);
+                return Ok("Mensagen Enviada");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Mensagen Não foi enviada");
+            }
+        }
+
     }
 }

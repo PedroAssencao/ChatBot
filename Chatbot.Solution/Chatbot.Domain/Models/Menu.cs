@@ -13,11 +13,6 @@ public partial class Menu
     [Column("men_id")]
     public int MenId { get; set; }
 
-    [Column("men_title")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string? MenTitle { get; set; }
-
     [Column("men_header")]
     [StringLength(255)]
     [Unicode(false)]
@@ -32,13 +27,19 @@ public partial class Menu
     [StringLength(255)]
     [Unicode(false)]
     public string? MenBody { get; set; }
+
+    [Column("log_id")]
+    public int? LogId { get; set; }
+
     [Column("men_tipo")]
     [StringLength(255)]
     [Unicode(false)]
     public string? MenTipo { get; set; }
 
-    [Column("log_id")]
-    public int? LogId { get; set; }
+    [Column("men_title")]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string? MenTitle { get; set; }
 
     [ForeignKey("LogId")]
     [InverseProperty("Menus")]
