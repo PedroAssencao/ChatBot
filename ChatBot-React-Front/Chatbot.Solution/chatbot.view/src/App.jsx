@@ -20,7 +20,7 @@ export default function App() {
     return false;
   }
 
-  const IsTrue = isNoPage(urlQueteramSideBarENavBar, searchLocation);
+  const IsTrue = isNoPage(urlQueteramSideBarENavBar, searchLocation.trim().toLowerCase());
 
   return (
     <BrowserRouter>
