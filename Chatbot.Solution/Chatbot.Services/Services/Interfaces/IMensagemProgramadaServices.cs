@@ -14,6 +14,7 @@ namespace Chatbot.Services.Services.Interfaces
         Task<List<MensagemProgramadaDttoGet>> GetALl();
         Task<MensagemProgramadaDttoGet> GetPorId(int id);
         Task<MensagemProgramadaDttoPost> Create(MensagemProgramadaDttoPost Model);
+        public Task<MensagemProgramadaDttoGet> AdicionarPost(MensagemProgramadaDttoPost Model);
         //Task<MensagemProgramadaDtto> Update(MensagemProgramadaDtto Model);
         //Task<MensagemProgramadaDtto> Delete(int id);
     }
