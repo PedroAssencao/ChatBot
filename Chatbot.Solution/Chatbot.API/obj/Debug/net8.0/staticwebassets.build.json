@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "TxqoX4F1n7pjmQm02MDotb87KB7SAFim7tyXaa6vNkQ=",
+  "Source": "Chatbot.API",
+  "BasePath": "_content/Chatbot.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
