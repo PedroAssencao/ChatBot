@@ -29,6 +29,7 @@
     gap: 1rem;
 }
 
+
 .btn:hover {
     background-color: #2e4979 !important; /* Mantém a cor de fundo original */
     color: #fff !important; /* Mantém a cor do texto original */
@@ -41,6 +42,5 @@
 }
 
 .ContainerInfos {
-    height: 30rem;
     box-shadow: -1px 9px 37px 1px rgba(0, 0, 0, 0.75); 
 }

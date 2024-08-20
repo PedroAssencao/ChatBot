@@ -1,15 +1,42 @@
 import './style.css';
+import React, { useEffect, useRef } from 'react';
+import jsPlumb from 'jsplumb';
+
 export default function FluxoBot() {
 
     document.querySelector("#bodyFromPageAll").style = "overflow-y: auto;"
+    const containerRef = useRef(null);
 
+    useEffect(() => {
+        const instance = jsPlumb.getInstance();
+
+        if (containerRef.current) {
+            instance.setContainer(containerRef.current);
+
+            // Configuração de endpoints e conexões
+            instance.addEndpoint('box1', { anchor: 'Right', endpoint: 'Dot', paintStyle: { fill: 'blue', radius: 5 } });
+            instance.addEndpoint('box2', { anchor: 'Left', endpoint: 'Dot', paintStyle: { fill: 'blue', radius: 5 } });
+            instance.addEndpoint('box2', { anchor: 'Bottom', endpoint: 'Dot', paintStyle: { fill: 'blue', radius: 5 } });
+            instance.addEndpoint('box3', { anchor: 'Top', endpoint: 'Dot', paintStyle: { fill: 'blue', radius: 5 } });
+            instance.addEndpoint('box4', { anchor: 'Top', endpoint: 'Dot', paintStyle: { fill: 'blue', radius: 5 } });
+
+            instance.connect({ source: 'box1', target: 'box2' });
+            instance.connect({ source: 'box2', target: 'box3' });
+            instance.connect({ source: 'box2', target: 'box4' });
+
+            // Limpeza
+            return () => {
+                instance.reset();
+            };
+        }
+    }, []);
     return (
         <div className='col'>
             <div className="container-fluid border-bottom border-secondary border-2 mt-5">
                 <h2 className="h2 TituloForFluxoBot">Dazzle Bot</h2>
             </div>
-            <div className="row container-fluid flex-column flex-md-row p-0 mt-3 gap-5" style={{ marginLeft: "1px" }}>
-                <div className="col-12 col-md-2 p-0 bg-light containerInicio">
+            <div className="row container-fluid flex-column p-0 mt-3 gap-5" style={{ marginLeft: "1px" }}>
+                {/* <div className="col-12 col-md-2 p-0 bg-light containerInicio">
                     <div className='header p-2'>
                         <h4 className='text-danger'>OFFLINE</h4>
                     </div>
@@ -33,8 +60,8 @@ export default function FluxoBot() {
                             Menus
                         </h6>
                     </div>
-                </div>
-                <div className="col p-0 bg-warning ContainerInfos" >
+                </div> */}
+                <div className="col p-0 bg-warning ContainerInfos">
 
                     <div className='header p-2'>
                         <div className='ms-3'>
@@ -59,13 +86,12 @@ export default function FluxoBot() {
                             </div>
                         </div> */}
 
-                        <div className='w-100 bg-light p-2 d-flex flex-column gap-2 flex-row' style={{ flexWrap: "nowrap" }}>
-
-                            <div className='offset-1 row p-0 gap-2' style={{ flexWrap: "nowrap" }}>
-                                <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                    <h6>Titulo do Menu</h6>
+                        <div ref={containerRef} className='w-100 bg-light p-2 d-flex flex-column gap-2 flex-row' style={{ flexWrap: 'nowrap' }}>
+                            <div className='offset-1 row p-0 gap-2' style={{ flexWrap: 'nowrap' }}>
+                                <div id='box1' className='col p-1 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: '30rem', minWidth: '30rem' }}>
+                                    <h6>Título do Menu</h6>
                                     <button className='btn btnColorForFluxoBot'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-skip-end-circle" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                             <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
                                         </svg>
@@ -73,12 +99,11 @@ export default function FluxoBot() {
                                 </div>
                             </div>
 
-                            <div className='offset-3 row p-0 gap-2 flex-column ' style={{ flexWrap: "nowrap" }}>
-
-                                <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                    <h6>Titulo do Menu</h6>
+                            <div className='offset-3 row p-0 gap-2 flex-column ' style={{ flexWrap: 'nowrap' }}>
+                                <div id='box2' className='col p-1 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: '30rem', minWidth: '30rem' }}>
+                                    <h6>Título do Menu</h6>
                                     <button className='btn btnColorForFluxoBot'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-skip-end-circle" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                             <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
                                         </svg>
@@ -86,11 +111,10 @@ export default function FluxoBot() {
                                 </div>
 
                                 <div className='offset-1 p-0'>
-
-                                    <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                        <h6>Titulo do Menu</h6>
+                                    <div id='box3' className='col p-1 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: '30rem', minWidth: '30rem' }}>
+                                        <h6>Título do Menu</h6>
                                         <button className='btn btnColorForFluxoBot'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-skip-end-circle" viewBox="0 0 16 16">
                                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                                 <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
                                             </svg>
@@ -98,85 +122,29 @@ export default function FluxoBot() {
                                     </div>
 
                                     <div className='offset-2 mt-3'>
-                                        <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                            <h6>Titulo do Menu</h6>
+                                        <div id='box4' className='col p-1 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: '30rem', minWidth: '30rem' }}>
+                                            <h6>Título do Menu</h6>
                                             <button className='btn btnColorForFluxoBot'>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-skip-end-circle" viewBox="0 0 16 16">
                                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                                     <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
                                                 </svg>
                                             </button>
                                         </div>
                                         <div className='offset-3 mt-3'>
-                                            <div className='col mt-3 p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                                <h6>Titulo do Menu</h6>
+                                            <div className='col p-1 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: '30rem', minWidth: '30rem' }}>
+                                                <h6>Título do Menu</h6>
                                                 <button className='btn btnColorForFluxoBot'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-skip-end-circle" viewBox="0 0 16 16">
                                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                                         <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <div className='col mt-3 p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                                <h6>Titulo do Menu</h6>
+                                            <div className='col p-1 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: '30rem', minWidth: '30rem' }}>
+                                                <h6>Título do Menu</h6>
                                                 <button className='btn btnColorForFluxoBot'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                        <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                    <h6>Titulo do Menu</h6>
-                                    <button className='btn btnColorForFluxoBot'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div className='offset-1 p-0'>
-
-                                    <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                        <h6>Titulo do Menu</h6>
-                                        <button className='btn btnColorForFluxoBot'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                            </svg>
-                                        </button>
-                                    </div>
-
-                                    <div className='offset-2 mt-3'>
-                                        <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                            <h6>Titulo do Menu</h6>
-                                            <button className='btn btnColorForFluxoBot'>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div className='offset-3 mt-3'>
-                                            <div className='col mt-3 p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                                <h6>Titulo do Menu</h6>
-                                                <button className='btn btnColorForFluxoBot'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                        <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='col mt-3 p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                                <h6>Titulo do Menu</h6>
-                                                <button className='btn btnColorForFluxoBot'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-skip-end-circle" viewBox="0 0 16 16">
                                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                                         <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
                                                     </svg>
@@ -184,69 +152,10 @@ export default function FluxoBot() {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
-                                <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                    <h6>Titulo do Menu</h6>
-                                    <button className='btn btnColorForFluxoBot'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-
-                                <div className='offset-1 p-0'>
-
-                                    <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                        <h6>Titulo do Menu</h6>
-                                        <button className='btn btnColorForFluxoBot'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                            </svg>
-                                        </button>
-                                    </div>
-
-                                    <div className='offset-2 mt-3'>
-                                        <div className='col p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                            <h6>Titulo do Menu</h6>
-                                            <button className='btn btnColorForFluxoBot'>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div className='offset-3 mt-3'>
-                                            <div className='col mt-3 p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                                <h6>Titulo do Menu</h6>
-                                                <button className='btn btnColorForFluxoBot'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                        <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='col mt-3 p-5 bg-light menuContainerForFluxoBot border rounded-3 border-dark' style={{ maxWidth: "30rem", minWidth: "30rem" }}>
-                                                <h6>Titulo do Menu</h6>
-                                                <button className='btn btnColorForFluxoBot'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-circle" viewBox="0 0 16 16">
-                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                        <path d="M6.271 5.055a.5.5 0 0 1 .52.038L9.5 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
                             </div>
-                            
                         </div>
+
                     </div>
                 </div>
             </div>
