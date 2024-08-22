@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema De Flow Com PlumbJs Com Row</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<style>
+    .menu {
+        max-width: 20rem;
+        min-width: 20rem;
+        margin-bottom: 1rem;
+    }
+
+    .marginClasses-0 {
+        margin-left: 3rem;
+        margin-top: 3rem;
+    }
+
+    .marginClasses-1 {
+        margin-top: 3rem;
+        margin-left: 5rem;
+    }
+
+    .marginClasses-2 {
+        margin-top: 3rem;
+        margin-left: 7rem;
+    }
+
+    .marginClasses-3 {
+        margin-top: 3rem;
+        margin-left: 10rem;
+    }
+
+    .marginClasses-4 {
+        margin-top: 3rem;
+        margin-left: 11rem;
+    }
+</style>
+
+<body class="">
+
+    <div class="container-fluid">
+        <div class="row p-3">
+            <!--Linha Do Primeiro Menu-->
+            <div class="col-12 d-flex p-0 marginClasses-0">
+
+                <!--Esse Seria o Primeiro Menu de Fato-->
+                <div class="p-0 mt-5">
+                    <div class="bg-dark p-5 menu" id="Menu1">
+                        <strong class="h6 text-light">Menu Numero 1</strong>
+                    </div>
+                </div>
+                <!--Essa Section Aqui Seriam Opções desse Menu-->
+
+                <!--Menu2-->
+                <div class="p-0">
+
+                    <div class="p-0">
+                        <div class="bg-dark p-5 menu marginClasses-1" id="Menu2">
+                            <strong class="h6 text-light">Menu 2 sou do Menu 1</strong>
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="bg-dark p-5 menu marginClasses-2" id="Menu4">
+                            <strong class="h6 text-light">Menu 4 sou do Menu 2</strong>
+                        </div>
+                    </div>
+
+                    <div class="p-0 d-flex">
+
+                        <div class="p-0">
+                            <div class="bg-dark p-5 menu marginClasses-2" id="Menu5">
+                                <strong class="h6 text-light">Menu 5 sou do Menu 2</strong>
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="bg-dark p-5 menu marginClasses-1" id="Menu6">
+                                <strong class="h6 text-light">Menu 6 sou do Menu 5</strong>
+                            </div>
+
+                            <div class="p-0">
+                                <div class="bg-dark p-5 menu marginClasses-2" id="Menu8">
+                                    <strong class="h6 text-light">Menu 8 sou do Menu 6</strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="p-0">
+                            <div class="bg-dark p-5 menu marginClasses-1" id="Menu7">
+                                <strong class="h6 text-light">Menu 7 sou do Menu 5</strong>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!--Menu3-->
+                <div class="p-0">
+                    <div class="p-0">
+                        <div class="bg-dark p-5 menu marginClasses-1" id="Menu3">
+                            <strong class="h6 text-light">Menu 3 sou do Menu 1</strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        jsPlumb.ready(function () {
+
+            jsPlumb.connect({
+                source: "Menu1",
+                target: "Menu2",
+                anchors: ["Right", "Left"],
+                connector: ["Flowchart"],
+                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                endpoint: "Blank",
+                overlays: [
+                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                ]
+            });
+
+            jsPlumb.connect({
+                source: "Menu2",
+                target: "Menu3",
+                anchors: ["Right", "Left"],
+                connector: ["Flowchart"],
+                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                endpoint: "Blank",
+                overlays: [
+                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                ]
+            });
+
+            jsPlumb.connect({
+                source: "Menu2",
+                target: "Menu4",
+                anchors: ["BottomLeft", "Left"],
+                connector: ["Flowchart"],
+                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                endpoint: "Blank",
+                overlays: [
+                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                ]
+            });
+
+            jsPlumb.connect({
+                source: "Menu2",
+                target: "Menu5",
+                anchors: ["BottomLeft", "Left"],
+                connector: ["Flowchart"],
+                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                endpoint: "Blank",
+                overlays: [
+                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                ]
+            });
+
+            jsPlumb.connect({
+                source: "Menu5",
+                target: "Menu6",
+                anchors: ["Right", "Left"],
+                connector: ["Flowchart"],
+                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                endpoint: "Blank",
+                overlays: [
+                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                ]
+            });
+
+            jsPlumb.connect({
+                source: "Menu6",
+                target: "Menu7",
+                anchors: ["Right", "Left"],
+                connector: ["Flowchart"],
+                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                endpoint: "Blank",
+                overlays: [
+                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                ]
+            });
+
+            jsPlumb.connect({
+                source: "Menu6",
+                target: "Menu8",
+                anchors: ["BottomLeft", "Left"],
+                connector: ["Flowchart"],
+                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                endpoint: "Blank",
+                overlays: [
+                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                ]
+            });
+
+        });
+    </script>
+</body>
+
+</html>
