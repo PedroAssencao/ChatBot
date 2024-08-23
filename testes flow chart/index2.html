@@ -7,106 +7,41 @@
     <title>Sistema De Flow Com PlumbJs Com Column</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .menu {
+            max-width: 20rem;
+            margin-bottom: 1rem;
+        }
+
+        .marginClasses-0 {
+            margin-left: 1rem;
+            /* Ajuste para o menu principal */
+        }
+
+        .marginClasses-1 {
+            margin-left: 5rem;
+        }
+
+        .marginClasses-2 {
+            margin-left: 7rem;
+        }
+
+        .marginClasses-3 {
+            margin-left: 10rem;
+        }
+
+        .marginClasses-4 {
+            margin-left: 11rem;
+        }
+    </style>
+
 </head>
 
-<style>
-    .menu {
-        max-width: 20rem;
-        margin-bottom: 1rem;
-    }
-
-    .marginClasses-0 {
-        margin-left: 3rem;
-    }
-
-    .marginClasses-1 {
-        margin-left: 5rem;
-    }
-
-    .marginClasses-2 {
-        margin-left: 7rem;
-    }
-
-    .marginClasses-3 {
-        margin-left: 10rem;
-    }
-
-    .marginClasses-4 {
-        margin-left: 11rem;
-    }
-</style>
-
-<body class="">
-
+<body>
     <div class="container-fluid">
         <div class="row p-3">
-            <!--Linha Do Primeiro Menu-->
-            <div class="col-12 p-0 marginClasses-0">
-                <!--Esse Seria o Primeiro Menu de Fato-->
-
-                <div class="bg-dark p-5 menu" id="Menu1">
-                    <strong class="h6 text-light">Menu Numero 1</strong>
-                </div>
-                <!--Essa Section Aqui Seriam Opções desse Menu-->
-
-                <div class="col-12 p-0 marginClasses-1">
-
-                    <div class="bg-dark p-5 menu" id="Menu2">
-                        <strong class="h6 text-light">Menu 2 sou do Menu 1</strong>
-                    </div>
-
-                    <div class="col-12 p-0 marginClasses-2">
-                        <div class="bg-dark p-5 menu" id="Menu5">
-                            <strong class="h6 text-light">Menu 5 sou do Menu 2</strong>
-                        </div>
-                    </div>
-
-                    <div class="col-12 p-0 marginClasses-2">
-                        <div class="bg-dark p-5 menu" id="Menu6">
-                            <strong class="h6 text-light">Menu 6 sou do Menu 2</strong>
-                        </div>
-
-                        <div class="col-12 p-0 marginClasses-3">
-                            <div class="bg-dark p-5 menu" id="Menu8">
-                                <strong class="h6 text-light">Menu 8 sou do Menu 6</strong>
-                            </div>
-                        </div>
-
-                        <div class="col-12 p-0 marginClasses-3">
-                            <div class="bg-dark p-5 menu" id="Menu9">
-                                <strong class="h6 text-light">Menu 9 sou do Menu 6</strong>
-                            </div>
-
-                            <div class="col-12 p-0 marginClasses-4">
-                                <div class="bg-dark p-5 menu" id="Menu10">
-                                    <strong class="h6 text-light">Menu 10 sou do Menu 9</strong>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-12 p-0 marginClasses-2">
-                        <div class="bg-dark p-5 menu" id="Menu7">
-                            <strong class="h6 text-light">Menu 7 sou do Menu 2</strong>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-12 p-0">
-                    <div class="bg-dark p-5 menu marginClasses-1" id="Menu3">
-                        <strong class="h6 text-light">Menu 3 sou do Menu 1</strong>
-                    </div>
-                </div>
-
-                <div class="col-12 p-0">
-                    <div class="bg-dark p-5 menu marginClasses-1" id="Menu4">
-                        <strong class="h6 text-light">Menu 4 sou do Menu 1</strong>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Linha do Primeiro Menu -->
+            <div class="col-12 p-0" id="LinhaMenuPrincipal"></div>
         </div>
     </div>
 
@@ -114,118 +49,75 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="./dados.js"></script>
     <script>
+        // Funções para simular o backend enquanto não integra com a página principal
+        const getMenuPorId = (codigo) => data.filter(x => x.codigo == codigo)[0];
+
+        // Função para gerar o HTML dos menus em cascata
+        const gerarMenuHtml = (menu, nivel = 0) => {
+            let marginClass = `marginClasses-${nivel}`;
+            let menuHtml = `
+                <div class="col-12 p-0 ${marginClass}">
+                    <div class="bg-dark p-5 menu" id="Menu${menu.codigo}">
+                        <strong class="h6 text-light">${menu.titulo}</strong>
+                    </div>
+                </div>
+            `;
+
+            // Percorre as opções do menu atual
+            menu.options.forEach(option => {
+                menuHtml += `
+                <div class="col-12 p-0 ${marginClass}">
+                    <div class="bg-dark p-5 menu" id="Menu${option.codigo}">
+                        <strong class="h6 text-light">${option.titulo}</strong>
+                    </div>
+                </div>
+                `;
+
+                if (option.tipo === "MensagemDeRespostaInterativa" && option.resposta) {
+                    const subMenu = getMenuPorId(parseInt(option.resposta));
+                    if (subMenu) {
+                        menuHtml += gerarMenuHtml(subMenu, nivel + 1);  // Chama a função recursivamente para o próximo nível
+                    }
+                }
+            });
+
+            return menuHtml;
+        };
+
+        // Inicia com o menu inicial (Menu ID 1)
+        const MenuInicial = getMenuPorId(1);
+        const menuHtml = gerarMenuHtml(MenuInicial);
+
+        // Insere o HTML gerado no documento
+        document.querySelector("#LinhaMenuPrincipal").innerHTML = menuHtml;
+
+        // Configuração do jsPlumb
         jsPlumb.ready(function () {
-
-            jsPlumb.connect({
-                source: "Menu1",
-                target: "Menu2",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu1",
-                target: "Menu3",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu1",
-                target: "Menu4",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu2",
-                target: "Menu5",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu2",
-                target: "Menu6",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu2",
-                target: "Menu7",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu6",
-                target: "Menu8",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu6",
-                target: "Menu9",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-            jsPlumb.connect({
-                source: "Menu9",
-                target: "Menu10",
-                anchors: ["BottomLeft", "Left"],
-                connector: ["Flowchart"],
-                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                endpoint: "Blank",
-                overlays: [
-                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                ]
-            });
-
-
+            // Função para criar as conexões entre os menus
+            const conectarMenus = (menu) => {
+                menu.options.forEach(option => {
+                    if (option.tipo === "MensagemDeRespostaInterativa" && option.resposta != null) {
+                        const subMenu = getMenuPorId(parseInt(option.resposta));
+                        if (subMenu) {
+                            jsPlumb.connect({
+                                source: `Menu${menu.codigo}`,
+                                target: `Menu${subMenu.codigo}`,
+                                anchors: ["BottomLeft", "Left"],
+                                connector: ["Flowchart"],
+                                paintStyle: { stroke: "#000", strokeWidth: 2 },
+                                endpoint: "Blank",
+                                overlays: [
+                                    ["Arrow", { width: 12, length: 12, location: 1 }]
+                                ]
+                            });
+                            conectarMenus(subMenu);
+                        }
+                    }
+                });
+            };
+            conectarMenus(MenuInicial);
         });
     </script>
 </body>
