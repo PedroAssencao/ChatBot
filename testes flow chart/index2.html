@@ -33,6 +33,38 @@
         .marginClasses-4 {
             margin-left: 11rem;
         }
+
+        .marginClasses-5 {
+            margin-left: 12rem;
+        }
+
+        .marginClasses-6 {
+            margin-left: 13rem;
+        }
+
+        .marginClasses-7 {
+            margin-left: 14rem;
+        }
+
+        .marginClasses-8 {
+            margin-left: 15rem;
+        }
+
+        .marginClasses-9 {
+            margin-left: 16rem;
+        }
+
+        .marginClasses-10 {
+            margin-left: 17rem;
+        }
+
+        .marginClasses-11 {
+            margin-left: 18rem;
+        }
+
+        .marginClasses-12 {
+            margin-left: 19rem;
+        }
     </style>
 
 </head>
@@ -57,6 +89,7 @@
         // Função para gerar o HTML dos menus em cascata
         const gerarMenuHtml = (menu, nivel = 0) => {
             let marginClass = `marginClasses-${nivel}`;
+
             let menuHtml = `
                 <div class="col-12 p-0 ${marginClass}">
                     <div class="bg-dark p-5 menu" id="Menu${menu.codigo}">
@@ -66,19 +99,24 @@
             `;
 
             // Percorre as opções do menu atual
-            menu.options.forEach(option => {
+            menu.options.forEach((option) => {
+                // Incrementa o nível para as opções
+                let optionNivel = nivel + 1;
+                let optionMarginClass = `marginClasses-${optionNivel}`;
+
                 menuHtml += `
-                <div class="col-12 p-0 ${marginClass}">
-                    <div class="bg-dark p-5 menu" id="Menu${option.codigo}">
-                        <strong class="h6 text-light">${option.titulo}</strong>
+                <div class="col-12 p-0 ${optionMarginClass}">
+                    <div class="bg-dark p-5 menu" id="option${option.codigo}">
+                        <strong class="h6 text-light">sou uma option de ${menu.titulo} | ${option.titulo}</strong>
                     </div>
                 </div>
                 `;
 
+                // Se a opção tiver um submenu, gera o HTML recursivamente
                 if (option.tipo === "MensagemDeRespostaInterativa" && option.resposta) {
                     const subMenu = getMenuPorId(parseInt(option.resposta));
                     if (subMenu) {
-                        menuHtml += gerarMenuHtml(subMenu, nivel + 1);  // Chama a função recursivamente para o próximo nível
+                        menuHtml += gerarMenuHtml(subMenu, optionNivel);
                     }
                 }
             });
@@ -90,36 +128,34 @@
         const MenuInicial = getMenuPorId(1);
         const menuHtml = gerarMenuHtml(MenuInicial);
 
-        // Insere o HTML gerado no documento
         document.querySelector("#LinhaMenuPrincipal").innerHTML = menuHtml;
 
         // Configuração do jsPlumb
         jsPlumb.ready(function () {
-            // Função para criar as conexões entre os menus
+
             const conectarMenus = (menu) => {
                 menu.options.forEach(option => {
-                    if (option.tipo === "MensagemDeRespostaInterativa" && option.resposta != null) {
-                        const subMenu = getMenuPorId(parseInt(option.resposta));
-                        if (subMenu) {
-                            jsPlumb.connect({
-                                source: `Menu${menu.codigo}`,
-                                target: `Menu${subMenu.codigo}`,
-                                anchors: ["BottomLeft", "Left"],
-                                connector: ["Flowchart"],
-                                paintStyle: { stroke: "#000", strokeWidth: 2 },
-                                endpoint: "Blank",
-                                overlays: [
-                                    ["Arrow", { width: 12, length: 12, location: 1 }]
-                                ]
-                            });
-                            conectarMenus(subMenu);
-                        }
-                    }
+                    jsPlumb.connect({
+                        source: `Menu${option.codigoMenu}`,
+                        target: `option${option.codigo}`,
+                        anchors: ["BottomLeft", "Left"],
+                        connector: ["Flowchart"],
+                        paintStyle: { stroke: "#000", strokeWidth: 2 },
+                        endpoint: "Blank",
+                        overlays: [
+                            ["Arrow", { width: 12, length: 12, location: 1 }]
+                        ]
+                    });
                 });
             };
-            conectarMenus(MenuInicial);
+
+            data.forEach(element => {
+                conectarMenus(element); 
+            });
         });
     </script>
+
+
 </body>
 
 </html>
