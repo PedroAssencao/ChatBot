@@ -39,7 +39,7 @@ const data = [
           "codigoMenu": 1,
           "titulo": "Historia Senai",
           "descricao": "Historia do Senai Contada Pela IA e Interação Geral Com IA",
-          "resposta": null,
+          "resposta": "6",
           "tipo": "MensagemPorIA",
           "finalizar": false
         }
@@ -249,4 +249,3 @@ const data = [
       ]
     }
   ];
-  
