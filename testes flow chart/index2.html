@@ -28,11 +28,48 @@
             color: #fff;
             margin-bottom: 1rem;
             background-color: #5870af;
-            width: 19rem;
+            width: 10rem;
+        }
+
+        .buttonSalvarFromHome {
+            color: #fff;
+            margin-bottom: 1rem;
+            background-color: #5870af;
+            width: 10rem;
+            font-weight: bold;
+        }
+
+        .buttonSalvarFromHome:hover {
+            color: #fff;
+            margin-bottom: 1rem;
+            background-color: #5870af;
+            width: 10rem;
+            font-weight: bold;
+        }
+
+        .buttonCancelarFromHome {
+            color: #fff;
+            margin-bottom: 1rem;
+            background-color: gray;
+            width: 10rem;
+            font-weight: bold;
+        }
+
+        .buttonCancelarFromHome:hover {
+            color: #fff;
+            margin-bottom: 1rem;
+            background-color: gray;
+            width: 10rem;
+            font-weight: bold;
+        }
+
+        .dropdownMargin {
+            margin-bottom: -5rem !important;
+            margin-left: 1rem !important;
         }
 
         .marginClasses-0 {
-            margin-left: 1rem;
+            margin-left: 2rem;
             margin-bottom: 1rem;
         }
 
@@ -42,56 +79,72 @@
         }
 
         .marginClasses-2 {
-            margin-left: 6rem;
-            margin-bottom: 1rem;
-        }
-
-        .marginClasses-3 {
-            margin-left: 7rem;
-            margin-bottom: 1rem;
-        }
-
-        .marginClasses-4 {
-            margin-left: 8rem;
-            margin-bottom: 1rem;
-        }
-
-        .marginClasses-5 {
-            margin-left: 9rem;
-            margin-bottom: 1rem;
-        }
-
-        .marginClasses-6 {
             margin-left: 10rem;
             margin-bottom: 1rem;
         }
 
+        .marginClasses-3 {
+            margin-left: 15rem;
+            margin-bottom: 1rem;
+        }
+
+        .marginClasses-4 {
+            margin-left: 20rem;
+            margin-bottom: 1rem;
+        }
+
+        .marginClasses-5 {
+            margin-left: 25rem;
+            margin-bottom: 1rem;
+        }
+
+        .marginClasses-6 {
+            margin-left: 30rem;
+            margin-bottom: 1rem;
+        }
+
         .marginClasses-7 {
-            margin-left: 11rem;
+            margin-left: 35rem;
             margin-bottom: 1rem;
         }
 
         .marginClasses-8 {
-            margin-left: 12rem;
+            margin-left: 40rem;
             margin-bottom: 1rem;
         }
 
         .marginClasses-9 {
-            margin-left: 13rem;
+            margin-left: 45rem;
             margin-bottom: 1rem;
         }
 
         .marginClasses-10 {
-            margin-left: 14rem;
+            margin-left: 50rem;
             margin-bottom: 1rem;
         }
 
         .marginClasses-11 {
-            margin-left: 15rem;
+            margin-left: 55rem;
         }
 
         .marginClasses-12 {
-            margin-left: 16rem;
+            margin-left: 60rem;
+        }
+
+        .buttonDeletarFromHome{
+            color: #fff;
+            margin-bottom: 1rem;
+            background-color: red;
+            width: 10rem;
+            font-weight: bold;
+        }
+
+        .buttonDeletarFromHome:hover{
+            color: #fff;
+            margin-bottom: 1rem;
+            background-color: red;
+            width: 10rem;
+            font-weight: bold;
         }
     </style>
 
@@ -102,8 +155,111 @@
         <div class="row p-3">
             <!-- Linha do Primeiro Menu -->
             <div class="col-12 p-0" id="LinhaMenuPrincipal" style="margin-left: 2rem;">
-                <div class="col-12 p-0" id="CreateMenu">
-                    <button class="btn buttonAdicionarFromHome"><strong>Adicionar Menu</strong></button>
+                <div class="col-12 p-0">
+                    <button class="btn buttonAdicionarFromHome" id="CreateMenu"><strong>Adicionar Menu</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modals-->
+    <style>
+        .containerTipo {
+            width: 30rem;
+        }
+    </style>
+
+    <!--Modal Para Adição de Opção no Menu-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <div class="d-flex gap-3 mt-3 justify-content-between">
+                        <div class="containerTipo">
+                            <label class="mb-2"><strong>Tipo</strong></label>
+                            <!--Puxar Aqui Do Codigo Todos os Tipo Para Inserção-->
+                            <select class="form-select" id="SelectTipo">
+                                <option value="0" selected>Selecione um Tipo</option>
+                                <option value="1">Redirecionamento</option>
+                                <option value="2">Mensagem Simples</option>
+                                <option value="3">Mensagem de Multipla Escolhas</option>
+                            </select>
+                        </div>
+
+                        <div class="containerTipo" style="display: none;" id="DepartamentoSelect">
+                            <label class="mb-2"><strong>Departamento destinado ao Redirecionamento</strong></label>
+                            <!--Puxar Aqui Do Codigo Todos os Departamentos Para Inserção-->
+                            <select class="form-select">
+                                <option selected>Selecione um Departamento</option>
+                                <option value="1">Suporte</option>
+                                <option value="2">Financeiro</option>
+                                <option value="3">Técnico</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="gap-3 justify-content-between mt-4" style="display: none;"
+                        id="FinalizarAtendimentoSelect">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Finalizar atendimento ápos a resposta?
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--Caso A mensagem Seja do Tipo de Resposta Simples-->
+                    <div class="gap-3 justify-content-between mt-4" style="display: none;" id="TextareaSelect">
+                        <div class="w-100">
+                            <label class="mb-2"><strong>Resposta</strong></label>
+                            <textarea style="min-height: 10rem; resize: none;" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <!--Caso A mensagem Seja do Tipo de Multiplas Escolhas-->
+                    <div class="row mt-4" style="display: none;" id="MultiplaEscolha">
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>Titulo</strong></label>
+                            <input placeholder="Obrigatorio" class="form-control" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>Cabeçalho</strong></label>
+                            <input placeholder="Opcional" class="form-control" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>Corpo</strong></label>
+                            <input placeholder="Obrigatorio" class="form-control" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>rodapé</strong></label>
+                            <input placeholder="Opcional" class="form-control" />
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn buttonCancelarFromHome" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn buttonSalvarFromHome">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Para Exclusão de Opção no Menu-->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex gap-3 mt-3 justify-content-between">
+                        <h6 class="h6" id="ExclusaoHeader"><strong>Você Realmente Deseja a Exclusão do Item: ${Inserir o Nome Dinamicamente Aqui}?</strong></h6>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn buttonCancelarFromHome" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn buttonDeletarFromHome">Excluir</button>
                 </div>
             </div>
         </div>
@@ -116,6 +272,34 @@
     <script src="./dados.js"></script>
     <script>
 
+        document.querySelector("#SelectTipo").addEventListener("change", (element) => {
+
+            if (element.target.value == "0") {
+                document.querySelector('#DepartamentoSelect').style.display = "none"
+                document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
+                document.querySelector("#TextareaSelect").style.display = "none"
+            }
+
+            if (element.target.value == "1") {
+                document.querySelector('#DepartamentoSelect').style.display = "block"
+                document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
+                document.querySelector("#TextareaSelect").style.display = "Flex"
+            }
+
+            if (element.target.value == "2") {
+                document.querySelector("#FinalizarAtendimentoSelect").style.display = "Flex"
+                document.querySelector("#TextareaSelect").style.display = "Flex"
+                document.querySelector('#DepartamentoSelect').style.display = "none"
+            }
+
+            if (element.target.value == "3") {
+                document.querySelector('#MultiplaEscolha').style.display = "Flex"
+                document.querySelector('#DepartamentoSelect').style.display = "none"
+                document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
+                document.querySelector("#TextareaSelect").style.display = "none"
+            }
+        });
+
         // Funções para simular o backend enquanto não integra com a página principal
         const getMenuPorId = (codigo) => data.filter(x => x.codigo == codigo)[0];
         const getMenuPorTipo = (Tipo) => data.filter(x => x.tipo == Tipo)[0];
@@ -124,8 +308,8 @@
         const gerarMenuHtml = (menu, nivel = 0) => {
             let marginClass = `marginClasses-${nivel}`;
             let menuHtml = `
-                <div class="col-12 p-0 ${marginClass}">
-                    <div class="bg-light p-4 rounded-5 border border-dark border-3 menu" id="Menu${menu.codigo}">
+                <div class="col-12 p-0 mt-4 ${marginClass}">
+                    <div class="bg-light p-4 rounded-0 border border-dark border-2 menu" id="Menu${menu.codigo}">
                         <strong class="h6 text-dark">${menu.titulo}</strong>
                         <div class="dropdown">
                             <button class="btn text-dark border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -133,10 +317,10 @@
                                     <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
                                 </svg>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-start ms-3" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Option 1</a></li>
-                                <li><a class="dropdown-item" href="#">Option 2</a></li>
-                                <li><a class="dropdown-item" href="#">Option 3</a></li>
+                            <ul class="dropdown-menu dropdown-menu-start dropdownMargin" aria-labelledby="dropdownMenuButton">
+                                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item" href="#">Adicionar Opção</a></li>
+                                <li><a class="dropdown-item" href="#">Atualizar Opção</a></li>
+                                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item border-top-5 border-dark" href="#">Excluir</a></li>
                             </ul>
                         </div>
                     </div>
@@ -144,14 +328,13 @@
             `;
 
             menu.options.forEach((option) => {
-                // Incrementa o nível para as opções sempre serem setas a frente dos pais
                 //<strong class="h6 text-dark">sou uma option de ${menu.titulo} | ${option.titulo}</strong>
                 var optionNivel = nivel + 1;
                 let optionMarginClass = `marginClasses-${optionNivel}`;
 
                 menuHtml += `
-                <div class="col-12 p-0 ${optionMarginClass}">
-                    <div class="bg-light p-4 rounded-5 border border-dark border-3 menu" id="option${option.codigo}">
+                <div class="col-12 p-0 mt-4 ${optionMarginClass}">
+                    <div class="bg-light p-4 rounded-0 border border-dark border-2 menu" id="option${option.codigo}">
                         
                         <strong class="h6 text-dark">${option.titulo}</strong>
                         <div class="dropdown">
@@ -160,10 +343,10 @@
                                     <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
                                 </svg>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-start ms-3" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Option 1</a></li>
-                                <li><a class="dropdown-item" href="#">Option 2</a></li>
-                                <li><a class="dropdown-item" href="#">Option 3</a></li>
+                            <ul class="dropdown-menu dropdown-menu-start dropdownMargin" aria-labelledby="dropdownMenuButton">
+                                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item" href="#">Adicionar Opção</a></li>
+                                <li><a class="dropdown-item" href="#">Atualizar Opção</a></li>
+                                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item border-top-5 border-dark" href="#">Excluir</a></li>
                             </ul>
                         </div>
                     </div>
@@ -196,7 +379,7 @@
                     jsPlumb.connect({
                         source: `Menu${option.codigoMenu}`,
                         target: `option${option.codigo}`,
-                        anchors: ["Left", "Left"],
+                        anchors: ["BottomLeft", "Left"],
                         connector: ["Flowchart"],
                         paintStyle: { stroke: "#000", strokeWidth: 2 },
                         endpoint: "Blank",
@@ -209,7 +392,7 @@
                         jsPlumb.connect({
                             source: `CreateMenu`,
                             target: `Menu${getMenuPorTipo("PrimeiraMensagem").codigo}`.trim(),
-                            anchors: ["Left", "Left"],
+                            anchors: ["BottomLeft", "Left"],
                             connector: ["Flowchart"],
                             paintStyle: { stroke: "#000", strokeWidth: 2 },
                             endpoint: "Blank",
@@ -217,14 +400,14 @@
                                 ["Arrow", { width: 1, length: 1, location: 1 }]
                             ]
                         });
-
+                        loopsCount = loopsCount + 1
                     }
 
                     if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
                         jsPlumb.connect({
-                            source: `Menu${option.resposta}`,
-                            target: `option${option.codigo}`,
-                            anchors: ["Left", "Left"],
+                            source: `option${option.codigo}`,
+                            target: `Menu${option.resposta}`,
+                            anchors: ["BottomLeft", "Left"],
                             connector: ["Flowchart"],
                             paintStyle: { stroke: "#000", strokeWidth: 2 },
                             endpoint: "Blank",
@@ -232,6 +415,7 @@
                                 ["Arrow", { width: 1, length: 1, location: 1 }]
                             ]
                         });
+
                     }
 
                 });
@@ -240,7 +424,6 @@
             //Concecta Todos Os Menus
             data.forEach(element => {
                 conectarMenus(element);
-                loopsCount = loopsCount + 1
             });
 
         });
