@@ -7,6 +7,7 @@
     <title>Sistema De Flow Com PlumbJs Com Column</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <style>
         .menu {
             max-width: 25rem;
@@ -14,6 +15,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .containerTipo {
+            width: 30rem;
         }
 
         .buttonAdicionarFromHome {
@@ -28,7 +33,7 @@
             color: #fff;
             margin-bottom: 1rem;
             background-color: #5870af;
-            width: 10rem;
+            width: 19rem;
         }
 
         .buttonSalvarFromHome {
@@ -131,7 +136,7 @@
             margin-left: 60rem;
         }
 
-        .buttonDeletarFromHome{
+        .buttonDeletarFromHome {
             color: #fff;
             margin-bottom: 1rem;
             background-color: red;
@@ -139,7 +144,7 @@
             font-weight: bold;
         }
 
-        .buttonDeletarFromHome:hover{
+        .buttonDeletarFromHome:hover {
             color: #fff;
             margin-bottom: 1rem;
             background-color: red;
@@ -150,25 +155,18 @@
 
 </head>
 
-<body>
+<body class="overflow-x-hidden">
+
     <div class="container-fluid">
         <div class="row p-3">
             <!-- Linha do Primeiro Menu -->
             <div class="col-12 p-0" id="LinhaMenuPrincipal" style="margin-left: 2rem;">
-                <div class="col-12 p-0">
-                    <button class="btn buttonAdicionarFromHome" id="CreateMenu"><strong>Adicionar Menu</strong></button>
-                </div>
+
             </div>
         </div>
     </div>
 
     <!--Modals-->
-    <style>
-        .containerTipo {
-            width: 30rem;
-        }
-    </style>
-
     <!--Modal Para Adição de Opção no Menu-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -190,11 +188,12 @@
                         <div class="containerTipo" style="display: none;" id="DepartamentoSelect">
                             <label class="mb-2"><strong>Departamento destinado ao Redirecionamento</strong></label>
                             <!--Puxar Aqui Do Codigo Todos os Departamentos Para Inserção-->
-                            <select class="form-select">
+                            <!--Lembrar que id vai ser o id do departamento selecionado em questao-->
+                            <select id="selectDepartamento" class="form-select">
                                 <option selected>Selecione um Departamento</option>
-                                <option value="1">Suporte</option>
-                                <option value="2">Financeiro</option>
-                                <option value="3">Técnico</option>
+                                <option id="1" value="1">Suporte</option>
+                                <option id="2" value="2">Financeiro</option>
+                                <option id="3" value="3">Técnico</option>
                             </select>
                         </div>
 
@@ -203,7 +202,7 @@
                     <div class="gap-3 justify-content-between mt-4" style="display: none;"
                         id="FinalizarAtendimentoSelect">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" value="" id="FinalizarChecked">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Finalizar atendimento ápos a resposta?
                             </label>
@@ -211,30 +210,50 @@
                     </div>
 
                     <!--Caso A mensagem Seja do Tipo de Resposta Simples-->
-                    <div class="gap-3 justify-content-between mt-4" style="display: none;" id="TextareaSelect">
+                    <div class="gap-3 justify-content-between mt-4 flex-column" style="display: none;"
+                        id="TextareaSelect">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="mb-2"><strong>Titulo</strong></label>
+                                <input id="TituloSimplesInput" placeholder="Obrigatorio" class="form-control" />
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="mb-2"><strong>Descricao</strong></label>
+                                <input id="DescricaoSimplesInput" placeholder="Obrigatorio" class="form-control" />
+                            </div>
+                        </div>
                         <div class="w-100">
                             <label class="mb-2"><strong>Resposta</strong></label>
-                            <textarea style="min-height: 10rem; resize: none;" class="form-control"></textarea>
+                            <textarea style="min-height: 10rem; resize: none;" id="textAreaContent"
+                                class="form-control"></textarea>
                         </div>
                     </div>
 
                     <!--Caso A mensagem Seja do Tipo de Multiplas Escolhas-->
                     <div class="row mt-4" style="display: none;" id="MultiplaEscolha">
                         <div class="col-6 mb-3">
-                            <label class="mb-2"><strong>Titulo</strong></label>
-                            <input placeholder="Obrigatorio" class="form-control" />
+                            <label class="mb-2"><strong>Titulo da Opção</strong></label>
+                            <input id="TituloOpcaoMenuInput" placeholder="Obrigatorio" class="form-control" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>Descrição</strong></label>
+                            <input id="DescricaoMenuInput" placeholder="Opcional" class="form-control" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>Titulo do Menu</strong></label>
+                            <input id="TituloMenuInput" placeholder="Obrigatorio" class="form-control" />
                         </div>
                         <div class="col-6 mb-3">
                             <label class="mb-2"><strong>Cabeçalho</strong></label>
-                            <input placeholder="Opcional" class="form-control" />
+                            <input id="cabecalhoMenuInput" placeholder="Opcional" class="form-control" />
                         </div>
                         <div class="col-6 mb-3">
                             <label class="mb-2"><strong>Corpo</strong></label>
-                            <input placeholder="Obrigatorio" class="form-control" />
+                            <input id="corpoMenuInput" placeholder="Obrigatorio" class="form-control" />
                         </div>
                         <div class="col-6 mb-3">
                             <label class="mb-2"><strong>rodapé</strong></label>
-                            <input placeholder="Opcional" class="form-control" />
+                            <input id="rodapeMenuInput" placeholder="Opcional" class="form-control" />
                         </div>
                     </div>
 
@@ -242,7 +261,7 @@
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="btn buttonCancelarFromHome" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn buttonSalvarFromHome">Salvar</button>
+                    <button type="button" class="btn buttonSalvarFromHome" onclick="AdicionarEmDados()">Salvar</button>
                 </div>
             </div>
         </div>
@@ -254,7 +273,8 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="d-flex gap-3 mt-3 justify-content-between">
-                        <h6 class="h6" id="ExclusaoHeader"><strong>Você Realmente Deseja a Exclusão do Item: ${Inserir o Nome Dinamicamente Aqui}?</strong></h6>
+                        <h6 class="h6" id="ExclusaoHeader"><strong>Você Realmente Deseja a Exclusão do Item: ${Inserir o
+                                Nome Dinamicamente Aqui}?</strong></h6>
                     </div>
                 </div>
                 <div class="modal-footer border-top-0">
@@ -272,12 +292,17 @@
     <script src="./dados.js"></script>
     <script>
 
+        var optionsCounter = 0
+        var MenuCounter = 0
+        var loopsCount = 0
+
         document.querySelector("#SelectTipo").addEventListener("change", (element) => {
 
             if (element.target.value == "0") {
                 document.querySelector('#DepartamentoSelect').style.display = "none"
                 document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
                 document.querySelector("#TextareaSelect").style.display = "none"
+                document.querySelector('#MultiplaEscolha').style.display = "none"
             }
 
             if (element.target.value == "1") {
@@ -298,7 +323,12 @@
                 document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
                 document.querySelector("#TextareaSelect").style.display = "none"
             }
+
         });
+
+        function setMenId(menId) {
+            localStorage.setItem("MenId", menId)
+        }
 
         // Funções para simular o backend enquanto não integra com a página principal
         const getMenuPorId = (codigo) => data.filter(x => x.codigo == codigo)[0];
@@ -306,6 +336,7 @@
 
         // Função para gerar o HTML dos menus em cascata
         const gerarMenuHtml = (menu, nivel = 0) => {
+            MenuCounter = MenuCounter + 20
             let marginClass = `marginClasses-${nivel}`;
             let menuHtml = `
                 <div class="col-12 p-0 mt-4 ${marginClass}">
@@ -318,7 +349,7 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-start dropdownMargin" aria-labelledby="dropdownMenuButton">
-                                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item" href="#">Adicionar Opção</a></li>
+                                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setMenId(${menu.codigo})" class="dropdown-item" href="#">Adicionar Opção</a></li>
                                 <li><a class="dropdown-item" href="#">Atualizar Opção</a></li>
                                 <li><a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item border-top-5 border-dark" href="#">Excluir</a></li>
                             </ul>
@@ -328,9 +359,19 @@
             `;
 
             menu.options.forEach((option) => {
+                optionsCounter = optionsCounter + 10
                 //<strong class="h6 text-dark">sou uma option de ${menu.titulo} | ${option.titulo}</strong>
                 var optionNivel = nivel + 1;
                 let optionMarginClass = `marginClasses-${optionNivel}`;
+
+                let TipoACriacao = ``
+                if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
+                    TipoACriacao = `<li><a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setMenId(${option.resposta})" class="dropdown-item" href="#">Adicionar Opção</a></li>`
+                }
+                else {
+                    TipoACriacao = `<li><a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setMenId(${option.codigoMenu})" class="dropdown-item" href="#">Adicionar Opção</a></li>`
+                }
+                
 
                 menuHtml += `
                 <div class="col-12 p-0 mt-4 ${optionMarginClass}">
@@ -344,7 +385,7 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-start dropdownMargin" aria-labelledby="dropdownMenuButton">
-                                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item" href="#">Adicionar Opção</a></li>
+                                ${TipoACriacao}
                                 <li><a class="dropdown-item" href="#">Atualizar Opção</a></li>
                                 <li><a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item border-top-5 border-dark" href="#">Excluir</a></li>
                             </ul>
@@ -365,14 +406,16 @@
             return menuHtml;
         };
 
-        const MenuInicial = getMenuPorTipo("PrimeiraMensagem");
-        const menuHtml = gerarMenuHtml(MenuInicial);
-        var loopsCount = 0
-        document.querySelector("#LinhaMenuPrincipal").innerHTML += menuHtml;
 
-        // Configuração do jsPlumb biblioteca para fazer as conexoes
-        jsPlumb.ready(function () {
-
+        function Iniciar() {
+            console.log("Carregou")
+            console.log(data)
+            const MenuInicial = getMenuPorTipo("PrimeiraMensagem");
+            const menuHtml = gerarMenuHtml(MenuInicial);    
+            document.querySelector("#LinhaMenuPrincipal").innerHTML = ` <div class="col-12 p-0">
+                    <button class="btn buttonAdicionarFromHome" id="CreateMenu"><strong>Adicionar Menu</strong></button>
+                </div>
+                ` + menuHtml;
             const conectarMenus = (menu) => {
                 menu.options.forEach(option => {
 
@@ -415,18 +458,89 @@
                                 ["Arrow", { width: 1, length: 1, location: 1 }]
                             ]
                         });
-
                     }
 
                 });
             };
-
-            //Concecta Todos Os Menus
             data.forEach(element => {
                 conectarMenus(element);
             });
+        }
 
+        jsPlumb.ready(function () {
+            Iniciar()
         });
+
+        function AdicionarEmDados() {
+            var selectValue = document.querySelector("#SelectTipo").value
+            //Lembrar que como os id e 1,1 ele vao se preencher suave nao precisa ficar com dor de cabeca sobre isso
+
+            if (selectValue == "1") {
+                const newOption = {
+                    "codigo": optionsCounter,
+                    "codigoMenu": parseInt(localStorage.getItem("MenId")),
+                    "titulo": document.querySelector("#TituloSimplesInput").value,
+                    "descricao": document.querySelector("#DescricaoSimplesInput").value,
+                    "resposta": document.querySelector("#selectDepartamento").id,
+                    "tipo": "RedirecinamentoHumano",
+                    "finalizar": document.querySelector("#FinalizarChecked").checked
+                }
+
+                getMenuPorId(parseInt(localStorage.getItem("MenId"))).options.push(newOption)
+                Iniciar()
+            }
+
+            if (selectValue == "2") {
+                const newOption = {
+                    "codigo": optionsCounter,
+                    "codigoMenu": parseInt(localStorage.getItem("MenId")),
+                    "titulo": document.querySelector("#TituloSimplesInput").value,
+                    "descricao": document.querySelector("#DescricaoSimplesInput").value,
+                    "resposta": document.querySelector("#textAreaContent").value,
+                    "tipo": "MensagemDeResposta",
+                    "finalizar": document.querySelector("#FinalizarChecked").checked
+                }
+                Iniciar()
+            }
+
+            if (selectValue == "3") {
+
+                const NewMenu = {
+                    "codigo": MenuCounter,
+                    "titulo": document.querySelector("#TituloMenuInput").value,
+                    "header": document.querySelector("#cabecalhoMenuInput").value,
+                    "body": document.querySelector("#corpoMenuInput").value,
+                    "footer": document.querySelector("#rodapeMenuInput").value,
+                    "tipo": "MenuBot",
+                    "login": {
+                        "codigo": 1,
+                        "codigoWhatsap": "557999411293",
+                        "usuario": "Master",
+                        "email": "master.123@123",
+                        "senha": "c2VuYWkuMTIz",
+                        "imagem": "img-placeholder",
+                        "plano": "master"
+                    },
+                    "options": []
+                }
+
+                const newOption = {
+                    "codigo": optionsCounter,
+                    "codigoMenu": parseInt(localStorage.getItem("MenId")),
+                    "titulo": document.querySelector("#TituloOpcaoMenuInput").value,
+                    "descricao": document.querySelector("#DescricaoMenuInput").value,
+                    "resposta": NewMenu.codigo.toString(),
+                    "tipo": "MensagemDeRespostaInterativa",
+                    "finalizar": document.querySelector("#FinalizarChecked").checked
+                }
+
+                data.push(NewMenu)
+                getMenuPorId(localStorage.getItem("MenId")).options.push(newOption)
+                Iniciar()
+            }
+
+        }
+
     </script>
 
 
