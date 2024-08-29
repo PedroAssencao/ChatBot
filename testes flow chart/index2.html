@@ -199,6 +199,20 @@
 
                     </div>
 
+                    <!--Menu Simples para opcao de Redirecionamento Departamento-->
+                    <div class="row mt-4" style="display: none;" id="RedirecionamentoInputsSections">
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>Titulo da Opção</strong></label>
+                            <input id="TituloOpcaoMenuInputRedirecionamento" placeholder="Obrigatorio"
+                                class="form-control" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="mb-2"><strong>Descrição</strong></label>
+                            <input id="DescricaoMenuInputRedirecionamento" placeholder="Opcional"
+                                class="form-control" />
+                        </div>
+                    </div>
+
                     <div class="gap-3 justify-content-between mt-4" style="display: none;"
                         id="FinalizarAtendimentoSelect">
                         <div class="form-check">
@@ -297,30 +311,34 @@
         var loopsCount = 0
 
         document.querySelector("#SelectTipo").addEventListener("change", (element) => {
-
             if (element.target.value == "0") {
                 document.querySelector('#DepartamentoSelect').style.display = "none"
                 document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
                 document.querySelector("#TextareaSelect").style.display = "none"
                 document.querySelector('#MultiplaEscolha').style.display = "none"
+                document.querySelector('#RedirecionamentoInputsSections').style.display = "none"
             }
 
             if (element.target.value == "1") {
                 document.querySelector('#DepartamentoSelect').style.display = "block"
                 document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
-                document.querySelector("#TextareaSelect").style.display = "Flex"
+                document.querySelector('#MultiplaEscolha').style.display = "none"
+                document.querySelector('#RedirecionamentoInputsSections').style.display = "flex"
+                document.querySelector("#TextareaSelect").style.display = "none"
             }
 
             if (element.target.value == "2") {
                 document.querySelector("#FinalizarAtendimentoSelect").style.display = "Flex"
                 document.querySelector("#TextareaSelect").style.display = "Flex"
                 document.querySelector('#DepartamentoSelect').style.display = "none"
+                document.querySelector('#RedirecionamentoInputsSections').style.display = "none"
             }
 
             if (element.target.value == "3") {
                 document.querySelector('#MultiplaEscolha').style.display = "Flex"
                 document.querySelector('#DepartamentoSelect').style.display = "none"
                 document.querySelector("#FinalizarAtendimentoSelect").style.display = "none"
+                document.querySelector('#RedirecionamentoInputsSections').style.display = "none"
                 document.querySelector("#TextareaSelect").style.display = "none"
             }
 
@@ -371,7 +389,7 @@
                 else {
                     TipoACriacao = `<li><a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setMenId(${option.codigoMenu})" class="dropdown-item" href="#">Adicionar Opção</a></li>`
                 }
-                
+
 
                 menuHtml += `
                 <div class="col-12 p-0 mt-4 ${optionMarginClass}">
@@ -406,22 +424,35 @@
             return menuHtml;
         };
 
+        const resetarAndStartPlumbJS = () => {
+            jsPlumb.deleteEveryConnection();
+            jsPlumb.deleteEveryEndpoint();
+            jsPlumb.reset();
+            data.forEach(element => {
+                conectarMenus(element);
+            });
+            jsPlumb.repaintEverything();
+        };
 
-        function Iniciar() {
-            console.log("Carregou")
-            console.log(data)
-            const MenuInicial = getMenuPorTipo("PrimeiraMensagem");
-            const menuHtml = gerarMenuHtml(MenuInicial);    
-            document.querySelector("#LinhaMenuPrincipal").innerHTML = ` <div class="col-12 p-0">
-                    <button class="btn buttonAdicionarFromHome" id="CreateMenu"><strong>Adicionar Menu</strong></button>
-                </div>
-                ` + menuHtml;
-            const conectarMenus = (menu) => {
-                menu.options.forEach(option => {
+        const conectarMenus = (menu) => {
+            menu.options.forEach(option => {
 
+                jsPlumb.connect({
+                    source: `Menu${option.codigoMenu}`,
+                    target: `option${option.codigo}`,
+                    anchors: ["BottomLeft", "Left"],
+                    connector: ["Flowchart"],
+                    paintStyle: { stroke: "#000", strokeWidth: 2 },
+                    endpoint: "Blank",
+                    overlays: [
+                        ["Arrow", { width: 1, length: 1, location: 1 }]
+                    ]
+                });
+
+                if (loopsCount == 0) {
                     jsPlumb.connect({
-                        source: `Menu${option.codigoMenu}`,
-                        target: `option${option.codigo}`,
+                        source: `CreateMenu`,
+                        target: `Menu${getMenuPorTipo("PrimeiraMensagem").codigo}`.trim(),
                         anchors: ["BottomLeft", "Left"],
                         connector: ["Flowchart"],
                         paintStyle: { stroke: "#000", strokeWidth: 2 },
@@ -430,43 +461,39 @@
                             ["Arrow", { width: 1, length: 1, location: 1 }]
                         ]
                     });
+                    loopsCount = loopsCount + 1
+                }
 
-                    if (loopsCount == 0) {
-                        jsPlumb.connect({
-                            source: `CreateMenu`,
-                            target: `Menu${getMenuPorTipo("PrimeiraMensagem").codigo}`.trim(),
-                            anchors: ["BottomLeft", "Left"],
-                            connector: ["Flowchart"],
-                            paintStyle: { stroke: "#000", strokeWidth: 2 },
-                            endpoint: "Blank",
-                            overlays: [
-                                ["Arrow", { width: 1, length: 1, location: 1 }]
-                            ]
-                        });
-                        loopsCount = loopsCount + 1
-                    }
+                if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
+                    jsPlumb.connect({
+                        source: `option${option.codigo}`,
+                        target: `Menu${option.resposta}`,
+                        anchors: ["BottomLeft", "Left"],
+                        connector: ["Flowchart"],
+                        paintStyle: { stroke: "#000", strokeWidth: 2 },
+                        endpoint: "Blank",
+                        overlays: [
+                            ["Arrow", { width: 1, length: 1, location: 1 }]
+                        ]
+                    });
+                }
 
-                    if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
-                        jsPlumb.connect({
-                            source: `option${option.codigo}`,
-                            target: `Menu${option.resposta}`,
-                            anchors: ["BottomLeft", "Left"],
-                            connector: ["Flowchart"],
-                            paintStyle: { stroke: "#000", strokeWidth: 2 },
-                            endpoint: "Blank",
-                            overlays: [
-                                ["Arrow", { width: 1, length: 1, location: 1 }]
-                            ]
-                        });
-                    }
-
-                });
-            };
-            data.forEach(element => {
-                conectarMenus(element);
             });
-        }
+        };
 
+        function Iniciar() {
+            console.log("Carregou")
+            jsPlumb.deleteEveryConnection();
+            jsPlumb.repaintEverything();
+            const MenuInicial = getMenuPorTipo("PrimeiraMensagem");
+            const menuHtml = gerarMenuHtml(MenuInicial);
+            document.querySelector("#LinhaMenuPrincipal").innerHTML = `<div class="col-12 p-0">
+                    <button class="btn buttonAdicionarFromHome" id="CreateMenu"><strong>Adicionar Menu</strong></button>
+                </div>
+                ` + menuHtml;
+            resetarAndStartPlumbJS()
+        }
+        
         jsPlumb.ready(function () {
             Iniciar()
         });
@@ -479,8 +506,8 @@
                 const newOption = {
                     "codigo": optionsCounter,
                     "codigoMenu": parseInt(localStorage.getItem("MenId")),
-                    "titulo": document.querySelector("#TituloSimplesInput").value,
-                    "descricao": document.querySelector("#DescricaoSimplesInput").value,
+                    "titulo": document.querySelector("#TituloOpcaoMenuInputRedirecionamento").value,
+                    "descricao": document.querySelector("#DescricaoMenuInputRedirecionamento").value,
                     "resposta": document.querySelector("#selectDepartamento").id,
                     "tipo": "RedirecinamentoHumano",
                     "finalizar": document.querySelector("#FinalizarChecked").checked
