@@ -41,6 +41,149 @@
 }
 
 .ContainerInfos {
-    height: 30rem;
+    min-height: 30rem;
     box-shadow: -1px 9px 37px 1px rgba(0, 0, 0, 0.75); 
+}
+
+.menu {
+    max-width: 25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.containerTipo {
+    width: 30rem;
+}
+
+.buttonAdicionarFromHome {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: #5870af;
+    width: 19rem;
+    font-size: 15pt;
+}
+
+.buttonAdicionarFromHome:hover {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: #5870af;
+    width: 19rem;
+}
+
+.buttonSalvarFromHome {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: #5870af;
+    width: 10rem;
+    font-weight: bold;
+}
+
+.buttonSalvarFromHome:hover {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: #5870af;
+    width: 10rem;
+    font-weight: bold;
+}
+
+.buttonCancelarFromHome {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: gray;
+    width: 10rem;
+    font-weight: bold;
+}
+
+.buttonCancelarFromHome:hover {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: gray;
+    width: 10rem;
+    font-weight: bold;
+}
+
+.dropdownMargin {
+    margin-bottom: -5rem !important;
+    margin-left: 1rem !important;
+}
+
+.marginClasses-0 {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-1 {
+    margin-left: 5rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-2 {
+    margin-left: 10rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-3 {
+    margin-left: 15rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-4 {
+    margin-left: 20rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-5 {
+    margin-left: 25rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-6 {
+    margin-left: 30rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-7 {
+    margin-left: 35rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-8 {
+    margin-left: 40rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-9 {
+    margin-left: 45rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-10 {
+    margin-left: 50rem;
+    margin-bottom: 1rem;
+}
+
+.marginClasses-11 {
+    margin-left: 55rem;
+}
+
+.marginClasses-12 {
+    margin-left: 60rem;
+}
+
+.buttonDeletarFromHome {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: red;
+    width: 10rem;
+    font-weight: bold;
+}
+
+.buttonDeletarFromHome:hover {
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: red;
+    width: 10rem;
+    font-weight: bold;
 }
