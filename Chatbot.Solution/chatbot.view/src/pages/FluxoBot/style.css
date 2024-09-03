@@ -30,9 +30,9 @@
 }
 
 .btn:hover {
-    background-color: #2e4979 !important; /* Mantém a cor de fundo original */
-    color: #fff !important; /* Mantém a cor do texto original */
-    border-color: none !important; /* Mantém a cor da borda original */
+    background-color: #2e4979 !important;
+    color: #fff !important;
+    border-color: none !important;
 }
 
 .TituloForFluxoBot {
@@ -84,22 +84,6 @@
     color: #fff;
     margin-bottom: 1rem;
     background-color: #5870af;
-    width: 10rem;
-    font-weight: bold;
-}
-
-.buttonCancelarFromHome {
-    color: #fff;
-    margin-bottom: 1rem;
-    background-color: gray;
-    width: 10rem;
-    font-weight: bold;
-}
-
-.buttonCancelarFromHome:hover {
-    color: #fff;
-    margin-bottom: 1rem;
-    background-color: gray;
     width: 10rem;
     font-weight: bold;
 }
@@ -172,18 +156,3 @@
     margin-left: 60rem;
 }
 
-.buttonDeletarFromHome {
-    color: #fff;
-    margin-bottom: 1rem;
-    background-color: red;
-    width: 10rem;
-    font-weight: bold;
-}
-
-.buttonDeletarFromHome:hover {
-    color: #fff;
-    margin-bottom: 1rem;
-    background-color: red;
-    width: 10rem;
-    font-weight: bold;
-}

@@ -1,5 +1,5 @@
 import A from '../a'
-import Input from '../input/input'
+import Input from '../input'
 export default function searchBar(props) {
     return (
         <div className="d-none d-lg-flex justify-content-center ms-4 align-items-center" style={{ maxWidth: "90%" }}>

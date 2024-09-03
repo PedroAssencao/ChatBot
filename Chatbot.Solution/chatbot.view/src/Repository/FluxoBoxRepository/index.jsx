@@ -401,7 +401,7 @@ const gerarMenuHtml = (menu, nivel = 0) => {
 
   return menuHtml;
 };
- 
+
 export const resetarAndStartPlumbJS = () => {
   jsPlumb.deleteEveryConnection();
   jsPlumb.deleteEveryEndpoint();
@@ -477,7 +477,7 @@ export const Iniciar = () => {
 //   Iniciar()
 // });
 
- export const AdicionarEmDados = () => {
+export const AdicionarEmDados = () => {
   var selectValue = document.querySelector("#SelectTipo").value
   //Lembrar que como os id e 1,1 ele vao se preencher suave nao precisa ficar com dor de cabeca sobre isso
 
