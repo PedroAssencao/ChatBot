@@ -1,5 +1,5 @@
 import './style.css';
-import { Iniciar, resetarAndStartPlumbJS } from '../../Repository/FluxoBoxRepository/index'
+import { Iniciar, resetarAndStartPlumbJS, fetchNewDatas } from '../../Repository/FluxoBoxRepository/index'
 import { useEffect } from 'react';
 import BaseModal from '../../components/BaseComponents/BaseModal'
 import HeaderControlFluxobot from '../../components/ComponentesFluxoBot/HeaderControlFluxoBot';
@@ -9,8 +9,19 @@ import SidebarControlFluxoBot from '../../components/ComponentesFluxoBot/SideBar
 export default function FluxoBot() {
 
   useEffect(() => {
-    jsPlumb.ready(Iniciar)
-    window.addEventListener('resize', resetarAndStartPlumbJS);
+    const initialize = async () => {
+      const result = await fetchNewDatas();
+      if (result) {
+        jsPlumb.ready(Iniciar);
+        window.addEventListener('resize', resetarAndStartPlumbJS);
+      }
+    };
+
+    initialize();
+
+    return () => {
+      window.removeEventListener('resize', resetarAndStartPlumbJS);
+    };
   }, []);
 
   document.querySelector("#bodyFromPageAll").style = "overflow-y: auto;"
@@ -39,7 +50,7 @@ export default function FluxoBot() {
             </div>
           </div>
 
-          <ModalDeAdicaoFluxoBot/>
+          <ModalDeAdicaoFluxoBot />
 
           <BaseModal
             id="exampleModal2"
