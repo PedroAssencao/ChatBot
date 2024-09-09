@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo para a barra superior */
+.barra-superior {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.barra-superior h1 {
+    margin: 0;
+    font-size: 24px;
+    color: black;
+}
+
+/* Estilo para o conteúdo abaixo da barra superior */
+.conteudo {
+    background-color: #EBEFF9; /* Azul claro */
+    height: 100vh;
+    padding: 20px;
+}
+
+.conteudo h2 {
+    margin: 0;
+    font-size: 20px;
+    color: black;
+}
+
+/* Linha horizontal abaixo da palavra "bloqueados" */
+.linha-horizontal {
+    margin-top: 5px;
+    border: none;
+    border-bottom: 2px solid black;
+}
