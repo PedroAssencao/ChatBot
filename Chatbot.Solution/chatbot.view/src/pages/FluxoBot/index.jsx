@@ -66,9 +66,7 @@ export default function FluxoBot() {
       </div>
 
       {/* existe apenas para dar espaçamento na tela de celulares pequenos */}
-      <div className='col mt-5' style={{ visibility: "hidden" }}>
-
-      </div>
+      <div className='col mt-5' style={{ visibility: "hidden" }}></div>
 
     </div>
   )

@@ -3,7 +3,7 @@ import './style.css';
 
 export default function ModalBase(props) {
     const HasHeader = props.HasHeader || false;
-    const ModalSizeClass = `modal-dialog modal-dialog-centered ${props.ModalSize || ''}`;
+    const ModalSizeClass = `modal-dialog modal-dialog-centered ${props.ModalSize || null}`;
 
     return (
         <div className="modal fade" id={props.id} tabIndex="-1" aria-hidden="true">

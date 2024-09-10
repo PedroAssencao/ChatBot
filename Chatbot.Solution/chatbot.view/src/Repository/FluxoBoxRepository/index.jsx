@@ -10,13 +10,12 @@ export const fetchNewDatas = async () => {
   try {
     const response = await fetch(`${urlBase}/v1/Menus/Menus/GetAllMenusByLogId/${UsuarioLogadoId}`);
     const responseJson = await response.json();
-    data = responseJson;
+    data = responseJson;    
     return true;
   } catch (error) {
     console.error(error);
-    console.log("Dados Exibidos e Apenas um Mock")
     //deixar isso aqui apenas no ambiente de teste 
-    data = dataMock
+    data = dataMock;    
     return false;
   }
 }
@@ -36,14 +35,34 @@ const AdicionarNovaOpcao = async (element) => {
     }
 
     const Model = await response.json();
-    console.log("Sucesso")
-    return Model;
+    return Model
   } catch (error) {
     console.error('Erro ao adicionar nova opção:', error);
+    return false
   }
 };
 
+const AdicionarNovoMenu = async (element) => {
+  try {
+    const response = await fetch(`${urlBase}/v1/Menus/Menus/Create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(element),
+    });
 
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.status}`);
+    }
+
+    const Model = await response.json();
+    return Model
+  } catch (error) {
+    console.error('Erro ao adicionar nova opção:', error);
+    return false
+  }
+}
 
 export const SelectTipoHandEvent = (element) => {
   if (element.target.value == "0") {
@@ -113,9 +132,6 @@ export const SelectTipoHandEvent = (element) => {
 
 // });
 
-const setMenId = (menId) => {
-  localStorage.setItem("MenId", menId)
-}
 
 // Funções para simular o backend enquanto não integra com a página principal
 const getMenuPorId = (codigo) => data.filter(x => x.codigo == codigo)[0];
@@ -136,7 +152,13 @@ const gerarMenuHtml = (menu, nivel = 0) => {
                         </svg>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-start dropdownMargin" aria-labelledby="dropdownMenuButton">
-                        <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setMenId(${menu.codigo})" class="dropdown-item" href="#">Adicionar Opção</a></li>
+                        <li>
+                          <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                            onclick="localStorage.setItem('MenId', ${menu.codigo})" 
+                            class="dropdown-item" href="#">
+                            Adicionar Opção
+                          </a>
+                        </li>
                         <li><a class="dropdown-item" href="#">Atualizar Opção</a></li>
                         <li><a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item border-top-5 border-dark" href="#">Excluir</a></li>
                     </ul>
@@ -152,13 +174,27 @@ const gerarMenuHtml = (menu, nivel = 0) => {
     let optionMarginClass = `marginClasses-${optionNivel}`;
 
     let TipoACriacao = ``
+    
     if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
-      TipoACriacao = `<li><a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setMenId(${option.resposta})" class="dropdown-item" href="#">Adicionar Opção</a></li>`
+      TipoACriacao = `
+        <li>
+          <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
+            onclick="localStorage.setItem('MenId', ${option.codigoMenu})" 
+            class="dropdown-item" href="#">
+            Adicionar Opção Ao Menu Principal
+          </a>
+        </li>`
     }
     else {
-      TipoACriacao = `<li><a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setMenId(${option.codigoMenu})" class="dropdown-item" href="#">Adicionar Opção</a></li>`
+      TipoACriacao = `
+        <li>
+          <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
+            onclick="localStorage.setItem('MenId', ${option.resposta})" 
+            class="dropdown-item" href="#">
+            Adicionar Opção Como Resposta
+          </a>
+        </li>`
     }
-
 
     menuHtml += `
         <div class="col-12 p-0 mt-4 ${optionMarginClass}">
@@ -206,7 +242,6 @@ export const resetarAndStartPlumbJS = () => {
   jsPlumb.repaintEverything();
   console.log = originalLog;
 };
-
 
 const conectarMenus = (menu) => {
   menu.options.forEach(option => {
@@ -256,7 +291,6 @@ const conectarMenus = (menu) => {
 };
 
 export const Iniciar = () => {
-  console.log("Carregou")
   jsPlumb.deleteEveryConnection();
   jsPlumb.repaintEverything();
   const MenuInicial = getMenuPorTipo("PrimeiraMensagem");
@@ -265,16 +299,22 @@ export const Iniciar = () => {
             <button class="btn buttonAdicionarFromHome" id="CreateMenu"><strong>Adicionar Menu</strong></button>
         </div>
         ` + menuHtml;
-  resetarAndStartPlumbJS()
+  resetarAndStartPlumbJS()  
 }
 
 // jsPlumb.ready(function () {
 //   Iniciar()
 // });
 
-export const AdicionarEmDados = () => {
+export const AdicionarEmDados = async (e) => {
+  console.log(e)
+  e.target.disabled = true
+  e.target.innerHtml = "Loading..."
   var selectValue = document.querySelector("#SelectTipo").value
   //Lembrar que como os id e 1,1 ele vao se preencher suave nao precisa ficar com dor de cabeca sobre isso
+  // Ajustando o horário para o fuso horário de Brasília (UTC-3)
+  const now = new Date();
+  const HorarioDeBrasilia = new Date(now.setHours(now.getUTCHours() - 3))
 
   if (selectValue == "1") {
 
@@ -291,18 +331,23 @@ export const AdicionarEmDados = () => {
     // }
 
     const newOption = {
+      "CodigoLogin": UsuarioLogadoId,
       "codigoMenu": parseInt(localStorage.getItem("MenId")),
       "titulo": document.querySelector("#TituloOpcaoMenuInputRedirecionamento").value,
-      "data": new Date().toLocaleString(),
+      "data": HorarioDeBrasilia,
       "descricao": document.querySelector("#DescricaoMenuInputRedirecionamento").value,
-      "resposta": document.querySelector("#selectDepartamento").id,
+      "resposta": document.querySelector("#selectDepartamento").options[document.querySelector("#selectDepartamento").selectedIndex].id,
       "tipo": "RedirecinamentoHumano",
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
-    
-    AdicionarNovaOpcao(newOption)
-    getMenuPorId(parseInt(localStorage.getItem("MenId"))).options.push(newOption)
-    Iniciar()
+
+    let optionResponse = await AdicionarNovaOpcao(newOption)
+
+    if (optionResponse) {
+      getMenuPorId(parseInt(localStorage.getItem("MenId"))).options.push(newOption)
+      Iniciar()
+    }
+
   }
 
   if (selectValue == "2") {
@@ -316,56 +361,90 @@ export const AdicionarEmDados = () => {
     //   "tipo": "MensagemDeResposta",
     //   "finalizar": document.querySelector("#FinalizarChecked").checked
     // }
-    
+
     const newOption = {
+      "CodigoLogin": UsuarioLogadoId,
       "codigoMenu": parseInt(localStorage.getItem("MenId")),
       "titulo": document.querySelector("#TituloSimplesInput").value,
-      "data": new Date().toLocaleString(),
+      "data": HorarioDeBrasilia,
       "descricao": document.querySelector("#DescricaoSimplesInput").value,
       "resposta": document.querySelector("#textAreaContent").value,
       "tipo": "MensagemDeResposta",
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
-    
-    AdicionarNovaOpcao(newOption)
-    getMenuPorId(parseInt(localStorage.getItem("MenId"))).options.push(newOption)
-    Iniciar()
+
+    let optionResponse = await AdicionarNovaOpcao(newOption)
+
+    if (optionResponse) {
+      getMenuPorId(parseInt(localStorage.getItem("MenId"))).options.push(newOption)
+      Iniciar()
+    }
+
+    return
   }
 
   if (selectValue == "3") {
 
+    // const NewMenu = {
+    //   "codigo": MenuCounter,
+    //   "titulo": document.querySelector("#TituloMenuInput").value,
+    //   "header": document.querySelector("#cabecalhoMenuInput").value,
+    //   "body": document.querySelector("#corpoMenuInput").value,
+    //   "footer": document.querySelector("#rodapeMenuInput").value,
+    //   "tipo": "MenuBot",
+    //   "CodigoLogin": UsuarioLogadoId,
+    //   "options": []
+    // }
+
     const NewMenu = {
-      "codigo": MenuCounter,
       "titulo": document.querySelector("#TituloMenuInput").value,
       "header": document.querySelector("#cabecalhoMenuInput").value,
       "body": document.querySelector("#corpoMenuInput").value,
       "footer": document.querySelector("#rodapeMenuInput").value,
       "tipo": "MenuBot",
-      "login": {
-        "codigo": 1,
-        "codigoWhatsap": "557999411293",
-        "usuario": "Master",
-        "email": "master.123@123",
-        "senha": "c2VuYWkuMTIz",
-        "imagem": "img-placeholder",
-        "plano": "master"
-      },
+      "CodigoLogin": UsuarioLogadoId,
       "options": []
     }
 
+    // const newOption = {
+    //   "codigo": optionsCounter,
+    //   "CodigoLogin": UsuarioLogadoId,
+    //   "codigoMenu": parseInt(localStorage.getItem("MenId")),
+    //   "data": HorarioDeBrasilia,
+    //   "titulo": document.querySelector("#TituloOpcaoMenuInput").value,
+    //   "descricao": document.querySelector("#DescricaoMenuInput").value,
+    //   "resposta": NewMenu.codigo.toString(),
+    //   "tipo": "MensagemDeRespostaInterativa",
+    //   "finalizar": document.querySelector("#FinalizarChecked").checked
+    // }
+
+    let MenuResponse = await AdicionarNovoMenu(NewMenu)
+    
     const newOption = {
-      "codigo": optionsCounter,
+      "CodigoLogin": UsuarioLogadoId,
       "codigoMenu": parseInt(localStorage.getItem("MenId")),
+      "data": HorarioDeBrasilia,
       "titulo": document.querySelector("#TituloOpcaoMenuInput").value,
       "descricao": document.querySelector("#DescricaoMenuInput").value,
-      "resposta": NewMenu.codigo.toString(),
+      "resposta": MenuResponse.codigo.toString(),
       "tipo": "MensagemDeRespostaInterativa",
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
 
-    data.push(NewMenu)
-    getMenuPorId(localStorage.getItem("MenId")).options.push(newOption)
-    Iniciar()
+   
+    if (MenuResponse) {
+      let optionResponse = await AdicionarNovaOpcao(newOption)
+
+      if (optionResponse) {
+        data.push(MenuResponse)
+        getMenuPorId(localStorage.getItem("MenId")).options.push(optionResponse)
+        Iniciar()
+      }
+
+    }
+
+    e.target.disabled = false
+    e.target.innerHtml = "Salvar"
   }
 
 }

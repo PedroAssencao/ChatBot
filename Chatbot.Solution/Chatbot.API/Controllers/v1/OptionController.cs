@@ -50,7 +50,6 @@ namespace Chatbot.API.Controllers.v1
         {
             try
             {
-
                 if (Model != null)
                 {
                     if (Model.CodigoMenu != null)
