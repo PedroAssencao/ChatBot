@@ -3,7 +3,7 @@ using Chatbot.Infrastructure.Extensions;
 using Chatbot.Services.Meta.Extensions;
 using Chatbot.Infrastructure.Meta.Extensions;
 using Chatbot.Infrastrucutre.OpenAI.Extensions;
-using Chatbot.API.Controllers;
+using Chatbot.API.Services.SignalRWebbSocket;
 namespace Chatbot.API.Extensions
 {
     public static class Startup
@@ -57,6 +57,13 @@ namespace Chatbot.API.Extensions
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/ChatHub");
+            });
         }
     }
 }
