@@ -1,11 +1,6 @@
 ﻿using Chatbot.Infrastructure.Meta.Repository;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatbot.Infrastructure.Meta.Extensions
 {
@@ -17,6 +12,7 @@ namespace Chatbot.Infrastructure.Meta.Extensions
             services.AddScoped<IMetodoCheck,MetodoCheckRepository>();
             services.AddScoped<IMetaClient,MetaRepository>();
         }
+
     }
 
 }

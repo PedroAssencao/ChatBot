@@ -3,7 +3,7 @@ using Chatbot.Infrastructure.Extensions;
 using Chatbot.Services.Meta.Extensions;
 using Chatbot.Infrastructure.Meta.Extensions;
 using Chatbot.Infrastrucutre.OpenAI.Extensions;
-using Chatbot.API.Services.SignalRWebbSocket;
+using Chatbot.Infrastructure.Meta.Repository.SignalRForChat;
 namespace Chatbot.API.Extensions
 {
     public static class Startup
@@ -13,6 +13,8 @@ namespace Chatbot.API.Extensions
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddSignalR();
+            services.AddHostedService<VerificarAtendimentoService>();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -55,15 +57,26 @@ namespace Chatbot.API.Extensions
 
             app.UseCors("AllowAllOrigins");
             app.UseHttpsRedirection();
+
+            // Adiciona o roteamento
+            app.UseRouting(); // Adicione esta linha
+
             app.UseAuthorization();
+
+            // Mapeia os controladores
             app.MapControllers();
+
+            // Define os endpoints, incluindo o SignalR hub
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapHub<ChatHub>("/ChatHub");
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                // Mapeia o SignalR hub
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
+
     }
 }

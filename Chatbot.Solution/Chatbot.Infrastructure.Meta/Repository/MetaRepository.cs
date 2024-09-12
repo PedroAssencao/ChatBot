@@ -5,9 +5,11 @@ using Chatbot.Domain.Models.Enums;
 using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
+using Chatbot.Infrastructure.Meta.Repository.SignalRForChat;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Infrastrucutre.OpenAI.Repository.Interface;
 using Chatbot.Services.Services.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 namespace Chatbot.Infrastructure.Meta.Repository
@@ -27,11 +29,12 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly IMensagemInterfaceServices _MensagemInterfaceServices;
         protected readonly IDepartamentoInterfaceServices _departamentoInterfaceServices;
         protected readonly IAtendenteInterfaceServices _atendenteInterfaceServices;
+        private readonly IHubContext<ChatHub> _hubContext;
         public MetaRepository(IMetodoCheck metodoCheck, IContatoInterfaceServices contatoInterfaceServices,
             IAtendimentoInterfaceServices atendimentoInterfaceServices, ILoginInterfaceServices
             loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config, IOpenaiRequest openai,
             IChatsInterfaceServices chatsInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices,
-            IDepartamentoInterfaceServices departamentoInterfaceServices, IAtendenteInterfaceServices atendenteInterfaceServices)
+            IDepartamentoInterfaceServices departamentoInterfaceServices, IAtendenteInterfaceServices atendenteInterfaceServices, IHubContext<ChatHub> hubContext)
         {
             _metodoCheck = metodoCheck;
             _contatoInterfaceServices = contatoInterfaceServices;
@@ -45,6 +48,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
             _MensagemInterfaceServices = mensagemInterfaceServices;
             _departamentoInterfaceServices = departamentoInterfaceServices;
             _atendenteInterfaceServices = atendenteInterfaceServices;
+            _hubContext = hubContext;
         }
 
         public HttpClient ConfigurarClient(string token, string url)
@@ -131,8 +135,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         ChaId = dados.Codigo,
                         AteId = ate,
                         AtenId = dados.Atendimento.Codigo,
-                        ConId = dados.Contato.Codigo,
-                        LogId = dados.Atendimento.Login.Codigo
+                        ConId = dados?.Contato?.Codigo,
+                        LogId = dados?.Atendimento?.Login?.Codigo
                     };
                     using (var newContext = new chatbotContext())
                     {
@@ -142,6 +146,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
                 var numero = dados?.Contato?.CodigoWhatsapp == "557988132044" || dados?.Contato?.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(dados?.Contato?.CodigoWhatsapp) : dados?.Contato?.CodigoWhatsapp;
                 await EnviarMensagemDoTipoSimples(descricao, numero, dados.Atendimento, dados);
+                await _hubContext.Clients.User(Convert.ToString(dados.Codigo)).SendAsync("ReceiveMessage", descricao);
             }
             catch (Exception)
             {

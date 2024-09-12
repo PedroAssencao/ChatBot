@@ -1,9 +1,8 @@
-﻿using Chatbot.Infrastructure.Dtto;
-using Chatbot.Infrastructure.Services.Interfaces;
+﻿using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Chatbot.API.Services.SignalRWebbSocket
+namespace Chatbot.Infrastructure.Meta.Repository.SignalRForChat
 {
     public class ChatHub : Hub
     {
@@ -37,16 +36,12 @@ namespace Chatbot.API.Services.SignalRWebbSocket
 
             // Armazenar a mensagem no banco de dados
 
-            MensagensDttoGet Model = new MensagensDttoGet
-            {
-                
-            };
             //lembrar de colocar o metodo para salvar no webhook tambem para as mensagens ficarem dinamicas
             //await _MessageServices.AdicionarPost();
             // Enviar a mensagem para os dois usuários
             await Clients.User(receiverId).SendAsync("ReceiveMessage", message);
             await Clients.User(senderId).SendAsync("ReceiveMessage", message);
         }
+
     }
 }
-
