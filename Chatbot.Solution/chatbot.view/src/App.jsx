@@ -4,6 +4,7 @@ import NoPage from './pages/NoPage';
 import './App.css';
 import Atendimento from './pages/AtendentePage'
 import FluxoBot from './pages/FluxoBot'
+import DashBoard from './pages/DashBoard'
 import Sidebar from './components/BaseComponents/sideBar'
 export default function App() {
 
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/Atendimento" element={<Atendimento />} />
             <Route path="/FluxoBot" element={<FluxoBot />} />
+            <Route path="/DashBoard" element={<DashBoard />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </div>
