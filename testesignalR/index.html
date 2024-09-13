@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.5/signalr.min.js"></script>
+</head>
+
+<body>
+    <h1>Chat</h1>
+    <ul id="messagesList"></ul>
+    <input type="text" id="messageInput" placeholder="Type a message" />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+
+        const chatId = 2;
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl(`http://localhost:5058/chatHub?chatId=${chatId}`)
+            .build();
+
+        connection.on("ReceiveMessage", (message) => {
+            console.log(message)
+            const li = document.createElement("li");
+            li.textContent = message.descricao;
+            document.getElementById("messagesList").appendChild(li);
+        });
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        function sendMessage() {
+            const message = document.getElementById("messageInput").value;
+            const AtenId = 1;
+            const ChatId = 2;
+
+            connection.invoke("SendMessage", AtenId, ChatId, message)
+                .catch(err => console.error(err.toString()));
+        }
+    </script>
+</body>
+
+</html>

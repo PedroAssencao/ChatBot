@@ -4,7 +4,7 @@ import ContainerMensagen from '../../components/ComponentesAtendentePage/Contain
 import ContainerChats from '../../components/ComponentesAtendentePage/ContainerChats';
 import { VerficarAltura } from '../../Repository/AtendenteRepository/index'
 import OffCanvasBuscaMobile from '../../components/ComponentesAtendentePage/offCanvasBuscaParaMobile';
-export default function Atendente(props) {
+export default function Atendente() {
 
     useEffect(() => {
         window.addEventListener('resize', VerficarAltura);

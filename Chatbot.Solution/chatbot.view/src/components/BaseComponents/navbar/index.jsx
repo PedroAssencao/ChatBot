@@ -7,25 +7,26 @@ export default function Navbar(props) {
         // navbar
 
         //colocar os ifs para atender condições de renderização aqui depois
-        <div className="col-12 p-4 bg-light" id="navbar">
+        <div className="col-12 p-0 bg-light" id="navbar">
             <div className="row justify-content-between">
 
                 {/* Header aqui fica o contato e a navbar */}
-                <div id='TituloNavbar' className="col mt-3" style={{ maxWidth: "35rem" }}>
+                <div id='TituloNavbar' className="col bg-dark border-end border-1 border-secondary" style={{ minWidth:"35.8rem", maxWidth: "35.8rem" }}>
+
                     <div className="d-flex gap-3">
+
                         <h1 className="d-block" style={{ color: "#263a6d", fontWeight: "bold", fontSize: "2rem" }}>
                             Chatbot
                         </h1>
 
-                        {/* <button className="btn btnAdicionar">
+                    </div>
+
+                    {/* <button className="btn btnAdicionar">
                             <p className="buttonplus">+</p>
                         </button> */}
-
-                    </div>
                 </div>
 
-
-                <div id='NavbarSearch' className='col mt-3'>
+                <div id='NavbarSearch' className='d-lg-none'>
                     <A className={"col d-flex d-lg-none justify-content-end align-items-center"} bootsrapAction={"offcanvas"} href={"#offcanvasExample"} icon={
                         <svg xmlns="http://www.w3.org/2000/svg" style={{ color: "#182c5f", display: "flex" }} width="36" height="36"
                             fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
@@ -35,22 +36,24 @@ export default function Navbar(props) {
                     } />
                 </div>
 
-
                 {/* Contato, Ver Como Vai ficar isso aqui depois, acho massa fazer algo como whastapp que so aparece os chat quando clicka aqui */}
-                <div className="col mt-3 d-lg-block" style={{ display: "none" }} id='setarVoltar'>
-                    <div className="p-3 d-lg-none" onClick={voltarChat}>
+                <div className="col d-none d-lg-block p-5 bg-success" id='setarVoltar'>
+
+                    {/* <div className="p-3 d-lg-none" onClick={voltarChat}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                             fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
                             <path fillRule="evenodd"
                                 d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
                         </svg>
                     </div>
+                    
                     <div className="d-flex gap-3">
                         <div className="d-flex align-items-end gap-3">
                             <img src={image} className="leadImage rounded-circle" />
                             <p style={{ fontFamily: "Arial, Helvetica, sans-serif" }}>Pedro Assenção</p>
                         </div>
-                    </div>
+                    </div> */}
+
                 </div>
 
             </div>
