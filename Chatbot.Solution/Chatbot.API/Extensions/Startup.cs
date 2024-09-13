@@ -20,9 +20,10 @@ namespace Chatbot.API.Extensions
                 options.AddPolicy("AllowAllOrigins",
                     builder =>
                     {
-                        builder.AllowAnyOrigin()
+                        builder.WithOrigins("http://127.0.0.1:5500")
                                .AllowAnyMethod()
-                               .AllowAnyHeader();
+                               .AllowAnyHeader()
+                               .AllowCredentials(); 
                     });
             });
         }
@@ -54,28 +55,12 @@ namespace Chatbot.API.Extensions
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseCors("AllowAllOrigins");
             app.UseHttpsRedirection();
-
-            // Adiciona o roteamento
-            app.UseRouting(); // Adicione esta linha
-
+            app.UseRouting();
             app.UseAuthorization();
-
-            // Mapeia os controladores
             app.MapControllers();
-
-            // Define os endpoints, incluindo o SignalR hub
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-                // Mapeia o SignalR hub
-                endpoints.MapHub<ChatHub>("/chatHub");
-            });
+            app.MapHub<ChatHub>("/chatHub");
         }
 
     }

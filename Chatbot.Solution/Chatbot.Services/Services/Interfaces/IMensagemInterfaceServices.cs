@@ -11,6 +11,6 @@ namespace Chatbot.Services.Services.Interfaces
         public Task<MensagensDttoGet?> PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(string ConWaID, string LogConWaID);
         public Task<MensagensDttoGet?> BuscarMensagemPorWaId(string waID);
         public Task SaveMensage(int Login, int chat, string descricao);
-        public Task SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp);
+        public Task<MensagensDttoGetForView> SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp);
     }
 }

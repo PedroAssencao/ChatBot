@@ -212,9 +212,15 @@ namespace Chatbot.Infrastructure.Meta.Repository
         }
         public async Task SaveAndNotifyAsync(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp)
         {
-            await _MensagemInterfaceServices.SaveMensageWithCodigoWhatsappId(Login, contato, chat, descricao, CodigoWhatsapp);
-            await _hubContext.Clients.User(Convert.ToString(chat.Codigo)).SendAsync("ReceiveMessage", descricao);
-            await _hubContext.Clients.User(Convert.ToString(contato.Codigo)).SendAsync("ReceiveMessage", descricao);
+            try
+            {
+                var mensage = await _MensagemInterfaceServices.SaveMensageWithCodigoWhatsappId(Login, contato, chat, descricao, CodigoWhatsapp);
+                await _hubContext.Clients.Group(Convert.ToString(chat.Codigo)).SendAsync("ReceiveMessage", mensage);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

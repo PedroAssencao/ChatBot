@@ -126,7 +126,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         {
             try
             {
-                var dados = await _chatsInterfaceServices.GetPorId(chat);
+                var dados = await _chatsInterfaceServices.GetPorId(chat);                
                 if (dados?.Atendente?.Codigo != ate)
                 {
                     await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(dados.Atendimento, dados.Atendimento.EstadoAtendimento, dados.Atendimento.Departamento.Codigo, ate);
@@ -144,9 +144,16 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         await newContext.SaveChangesAsync();
                     }
                 }
+                MensagensDttoGetForView Message = new MensagensDttoGetForView
+                {
+                    Contato = null,
+                    Descricao = descricao,
+                    Data = DateTime.Now,
+                    Codigo = 0
+                };
                 var numero = dados?.Contato?.CodigoWhatsapp == "557988132044" || dados?.Contato?.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(dados?.Contato?.CodigoWhatsapp) : dados?.Contato?.CodigoWhatsapp;
                 await EnviarMensagemDoTipoSimples(descricao, numero, dados.Atendimento, dados);
-                await _hubContext.Clients.User(Convert.ToString(dados.Codigo)).SendAsync("ReceiveMessage", descricao);
+                await _hubContext.Clients.Group(Convert.ToString(dados.Codigo)).SendAsync("ReceiveMessage", Message);
             }
             catch (Exception)
             {
@@ -473,7 +480,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         {
                             await EnviarMensagemDoTipoSimples(conteudo, item.CodigoWhatsapp == "557988132044" || item.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.CodigoWhatsapp) : item.CodigoWhatsapp, chat.Atendimento, chat);
                         }
-                    }                    
+                    }
                 }
                 return "Mensagens Enviadas Com Sucesso";
             }

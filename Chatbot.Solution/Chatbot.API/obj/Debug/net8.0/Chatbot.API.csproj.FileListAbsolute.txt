@@ -605,3 +605,8 @@ C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.pdb
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.genruntimeconfig.cache
 C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\ref\Chatbot.API.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
