@@ -10,7 +10,7 @@ export default function App() {
 
   const searchLocation = window.location.pathname;
 
-  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot'];
+  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot','/DashBoard'];
   
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {

@@ -1,5 +1,27 @@
 .Header{
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.Title{
+    color: #263a6d;
+}
+
+.Content{
+    padding:1rem;
+}
+
+.Page{
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.Date{
+    font-size: 18px;
+}
+
+.bi-calendar-date{
+    margin-left: 0.3rem;
 }

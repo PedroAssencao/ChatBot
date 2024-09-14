@@ -1,0 +1,33 @@
+.IconeAtendimentoPendente{
+   display: flex;
+   justify-content: center; 
+   align-items: center;
+}
+
+.Icon{
+   display: flex; 
+   flex-direction: row; 
+   width: 350px; 
+   height: 150px; 
+   padding: 1rem;
+   justify-content: space-around;
+}
+
+.FirstColumn{
+   display: flex;
+    justify-content: center;
+     align-items: center; 
+     padding: 0.5rem;
+}
+
+.SecondColumn{
+  display: flex; flex-direction: column; justify-content: center; align-items: center;padding: 0.5rem; margin-left: 0.5rem;
+}
+
+.Text{
+   color: green;
+}
+
+.Number{
+  color: green; font-weight: bolder;
+}
