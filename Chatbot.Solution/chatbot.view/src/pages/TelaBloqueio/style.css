@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
+.col{
+    padding: 0px;
+}
 
-/* Estilo para a barra superior */
 .barra-superior {
     background-color: white;
+    height: 8vh;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -13,26 +17,30 @@ body {
 
 .barra-superior h1 {
     margin: 0;
-    font-size: 24px;
-    color: black;
+    color: #182c5f;
 }
 
 /* Estilo para o conteúdo abaixo da barra superior */
 .conteudo {
-    background-color: #EBEFF9; /* Azul claro */
+    background-color: #EBEFF9; 
     height: 100vh;
     padding: 20px;
 }
 
 .conteudo h2 {
     margin: 0;
-    font-size: 20px;
-    color: black;
+    color: #182c5f;
 }
 
-/* Linha horizontal abaixo da palavra "bloqueados" */
 .linha-horizontal {
     margin-top: 5px;
     border: none;
     border-bottom: 2px solid black;
 }
+.poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+ 
+  
