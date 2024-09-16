@@ -5,7 +5,7 @@ export default function Mensagem() {
   useEffect(() => {
     // Verifique se o Chart.js foi carregado
     if (window.Chart) {
-      const canvas = document.getElementById('myChart');
+      const canvas = document.getElementById('Mensagem');
       const ctx = canvas.getContext('2d');
       
       // Se já houver um gráfico, destrua-o
@@ -59,7 +59,7 @@ export default function Mensagem() {
 
     // Limpeza ao desmontar o componente
     return () => {
-      const canvas = document.getElementById('myChart');
+      const canvas = document.getElementById('Mensagem');
       if (canvas && canvas.chart) {
         canvas.chart.destroy();
       }
@@ -86,7 +86,7 @@ export default function Mensagem() {
         </div>
 
         <div className='Grafico'>
-          <canvas id="myChart"></canvas>
+          <canvas id="Mensagem"></canvas>
         </div>
       </div>
   );

@@ -1,5 +1,5 @@
 .Mensagem {
-    width: 500px;
+    width: 410px;
     box-shadow: 1px 1px 2px 2px grey;
 }
 
@@ -9,8 +9,7 @@
 }
 
 .Grafico {
-    width: 514px;
-    margin-right: 1rem;
+    width: 26.5rem;
     position: relative;
     right: 0.55rem;
     bottom: -0.55rem;

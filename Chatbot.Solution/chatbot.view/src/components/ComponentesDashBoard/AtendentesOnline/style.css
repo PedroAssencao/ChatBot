@@ -1,0 +1,37 @@
+.AtenOnlineTitle{
+    color: green;
+}
+
+.AtenOnlineNumber{
+    color: green; 
+    font-weight: bolder;
+}
+
+.AtenInfo{
+    margin-left: 0.5rem;
+}
+
+.MiddleAtenOnline{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    padding: 0.5rem; 
+    margin-left: 0.5rem;
+}
+
+.AtendimentoOnline{
+    display: flex; 
+    flex-direction: row; 
+    width: 350px; 
+    height: 150px; 
+    padding: 1rem;
+    justify-content: space-around;
+}
+
+.FirstAtenOnline{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 0.5rem;
+}

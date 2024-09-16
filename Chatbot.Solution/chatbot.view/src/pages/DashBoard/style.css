@@ -25,3 +25,23 @@
 .bi-calendar-date{
     margin-left: 0.3rem;
 }
+
+.GraficosPrimarios{
+    display: flex;
+    justify-content: space-between;
+}
+
+.GraficosSecundarios{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.DashBoardNovidades{
+    color: #263a6d;
+    font-size: 18px;
+    font-weight: 400;
+}
+.col{
+    padding: 0.5rem;
+}
