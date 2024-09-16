@@ -92,6 +92,7 @@ namespace Chatbot.Infrastructure.Services
                     Nome = Model.ConNome,
                     DataCadastro = Model.ConDataCadastro,
                     BloqueadoStatus = Model.ConBloqueadoStatus,
+                    Codigologin = Convert.ToInt32(Model.LogId)
                 };
                 return NewModel;
             }
@@ -262,6 +263,20 @@ namespace Chatbot.Infrastructure.Services
         public Task<ContatoDttoGet> Create(ContatoDttoGet Model)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<ContatoDttoGet>> GetListaDeContatosPorLogId(int logId)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.Where(x => x.Codigologin == logId).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

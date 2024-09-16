@@ -253,5 +253,19 @@ namespace Chatbot.Infrastructure.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<ChatsDttoGet>> RetornarTodosOsChatPorLogId(int? logId)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.Where(x => x?.Atendimento?.Login?.Codigo == logId).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

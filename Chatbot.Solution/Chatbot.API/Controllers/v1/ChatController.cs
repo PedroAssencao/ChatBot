@@ -22,6 +22,19 @@ namespace Chatbot.API.Controllers.v1
 
         [HttpGet("chats/{id}")]
         public async Task<IActionResult> BuscarPorID(int id) => Ok(await _repository.GetPorId(id));
+        [HttpGet("chats/Get/BuscarTodosOsChatsPorLogId/{id}")]
+        public async Task<IActionResult> BuscarTodosOSChatsPorLogId(int id)
+        {
+            try
+            {
+                return Ok(await _repository.RetornarTodosOsChatPorLogId(id));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         [HttpPost("chats/create")]
         public async Task<IActionResult> Adicionar(ChatsDttoPost Model) => Ok(await _repository.AdicionarPost(Model));

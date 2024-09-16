@@ -38,7 +38,7 @@ namespace Chatbot.API.DAL
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //    => optionsBuilder.UseSqlServer("Name=ConnectionStrings:Chinook");
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-           => optionsBuilder.UseSqlServer("Data Source=DESKTOP-02BUU56;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
+           => optionsBuilder.UseSqlServer("Data Source=LAPTOP-M68K5TBC\\SQLEXPRESS;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

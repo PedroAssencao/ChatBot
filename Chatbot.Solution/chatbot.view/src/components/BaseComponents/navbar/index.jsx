@@ -8,12 +8,12 @@ export default function Navbar(props) {
 
         //colocar os ifs para atender condições de renderização aqui depois
         <div className="col-12 p-0 bg-light" id="navbar">
-            <div className="row justify-content-between">
+            <div className="row justify-content-between border-bottom border-1 border-dark">
 
                 {/* Header aqui fica o contato e a navbar */}
-                <div id='TituloNavbar' className="col bg-dark border-end border-1 border-secondary" style={{ minWidth:"35.8rem", maxWidth: "35.8rem" }}>
+                   <div id='TituloNavbar' className="d-flex align-items-center bg-light BordarParaSerAplicadaEmTelasMaiores border-1 border-dark" style={{ maxWidth: "28.77rem" }}>
 
-                    <div className="d-flex gap-3">
+                    <div className="d-flex gap-3 ms-4">
 
                         <h1 className="d-block" style={{ color: "#263a6d", fontWeight: "bold", fontSize: "2rem" }}>
                             Chatbot
@@ -37,9 +37,9 @@ export default function Navbar(props) {
                 </div>
 
                 {/* Contato, Ver Como Vai ficar isso aqui depois, acho massa fazer algo como whastapp que so aparece os chat quando clicka aqui */}
-                <div className="col d-none d-lg-block p-5 bg-success" id='setarVoltar'>
+                <div className="col d-none d-lg-block p-3" id='setarVoltar'>
 
-                    {/* <div className="p-3 d-lg-none" onClick={voltarChat}>
+                    <div className="p-3 d-lg-none" onClick={voltarChat}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                             fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
                             <path fillRule="evenodd"
@@ -48,11 +48,11 @@ export default function Navbar(props) {
                     </div>
                     
                     <div className="d-flex gap-3">
-                        <div className="d-flex align-items-end gap-3">
+                        <div className="d-flex justify-content-center align-items-center gap-3">
                             <img src={image} className="leadImage rounded-circle" />
-                            <p style={{ fontFamily: "Arial, Helvetica, sans-serif" }}>Pedro Assenção</p>
+                            <strong style={{ fontFamily: "Arial, Helvetica, sans-serif", height: "20px" }}>Pedro Assenção</strong>
                         </div>
-                    </div> */}
+                    </div>
 
                 </div>
 

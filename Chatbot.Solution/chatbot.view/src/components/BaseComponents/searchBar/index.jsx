@@ -2,7 +2,7 @@ import A from '../a'
 import Input from '../input/input'
 export default function searchBar(props) {
     return (
-        <div className="d-none d-lg-flex justify-content-center ms-4 align-items-center" style={{ maxWidth: "90%" }}>
+        <div className="d-none d-lg-flex justify-content-center ms-4 gap-3 align-items-center mt-2" style={{ maxWidth: "90%" }}>
             <Input placeholder={"Buscar por usuário ou telefone"} />
             <A bootsrapAction={"offcanvas"} href={"#offcanvasExample"} className={"btn b0dea5"} icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"

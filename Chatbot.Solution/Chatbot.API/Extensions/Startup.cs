@@ -17,13 +17,13 @@ namespace Chatbot.API.Extensions
             services.AddHostedService<VerificarAtendimentoService>();
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOrigins",
+                options.AddPolicy("AllowLocalhost",
                     builder =>
                     {
-                        builder.WithOrigins("http://127.0.0.1:5500")
+                        builder.WithOrigins("https://localhost:5173")
                                .AllowAnyMethod()
                                .AllowAnyHeader()
-                               .AllowCredentials(); 
+                               .AllowCredentials();
                     });
             });
         }
@@ -55,7 +55,8 @@ namespace Chatbot.API.Extensions
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseCors("AllowAllOrigins");
+            app.UseCors("AllowLocalhost");
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();

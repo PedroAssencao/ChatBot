@@ -22,11 +22,12 @@ namespace Chatbot.Infrastructure.Meta.Repository.SignalRForChat
         public override async Task OnConnectedAsync()
         {
             var httpContext = Context.Features.Get<IHttpContextFeature>()?.HttpContext;
-            var chatId = Convert.ToInt32(httpContext.Request.Query["chatId"]);
+            var chatId = Convert.ToInt32(httpContext?.Request.Query["chatId"]);
             await Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString());
+            //talvez não precse fazer esse fetch inicial aqui vou me aprodundar mais para ver essa possibilidade
             var chat = await _ChatServices.GetPorId(chatId);
 
-            foreach (var message in chat.Mensagens)
+            foreach (var message in chat?.Mensagens)
             {
                 await Clients.Caller.SendAsync("ReceiveMessage", message);
             }
@@ -34,8 +35,7 @@ namespace Chatbot.Infrastructure.Meta.Repository.SignalRForChat
             await base.OnConnectedAsync();
         }
 
-
-        public async Task SendMessage(int AtenId, int ChatId, string message) => await _metaClientServices.SalvarMensagemAtendente(message, ChatId, AtenId);
+        public async Task SendMessage(int AteId, int ChatId, string message) => await _metaClientServices.SalvarMensagemAtendente(message, ChatId, AteId);
 
 
     }

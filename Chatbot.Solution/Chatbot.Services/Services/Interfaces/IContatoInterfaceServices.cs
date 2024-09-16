@@ -15,5 +15,6 @@ namespace Chatbot.Infrastructure.Services.Interfaces
         public Task<ContatoDttoGet> CreateComCodigo(ContatoDttoGet Model);
         public Task<ContatoDttoGet> ContatoIsNull(DataAndType dados, LoginDttoGet Login);
         public Task<List<ContatoDttoGet>> GetListaDeContatosBloqueadosPorLogId(int logId);
+        public Task<List<ContatoDttoGet>> GetListaDeContatosPorLogId(int logId);
     }
 }

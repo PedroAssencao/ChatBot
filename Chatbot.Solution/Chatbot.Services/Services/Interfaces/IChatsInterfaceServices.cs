@@ -17,5 +17,6 @@ namespace Chatbot.Infrastructure.Services.Interfaces
         public Task<ChatsDttoGet?> RetornarChatPorAtenId(int atenId);
         public Task<ChatsDttoGet> ChatIsNull(DataAndType dados, AtendimentoDttoGet Item);
         public Task<ChatsDttoGet?> RetornarChatPorConIdELogId(int? conId, int? LogId);
+        Task<List<ChatsDttoGet>> RetornarTodosOsChatPorLogId(int? logId);
     }
 }

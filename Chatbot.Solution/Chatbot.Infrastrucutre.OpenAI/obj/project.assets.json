@@ -824,24 +824,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\silva\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastrucutre.OpenAI\\Chatbot.Infrastrucutre.OpenAI.csproj",
+      "projectUniqueName": "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastrucutre.OpenAI\\Chatbot.Infrastrucutre.OpenAI.csproj",
       "projectName": "Chatbot.Infrastrucutre.OpenAI",
-      "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastrucutre.OpenAI\\Chatbot.Infrastrucutre.OpenAI.csproj",
-      "packagesPath": "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastrucutre.OpenAI\\obj\\",
+      "projectPath": "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastrucutre.OpenAI\\Chatbot.Infrastrucutre.OpenAI.csproj",
+      "packagesPath": "C:\\Users\\silva\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastrucutre.OpenAI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Pedro Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\silva\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
