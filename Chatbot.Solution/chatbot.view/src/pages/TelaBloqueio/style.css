@@ -42,5 +42,15 @@ body {
     font-weight: 700;
     font-style: normal;
   }
- 
-  
+.table-group svg{
+   color: tomato;
+}
+.parte-superior{
+    display: flex;
+    justify-content: space-between;
+}
+.parte-superior button{
+   background-color: rgb(0, 170, 14);
+   border-radius: 20px;
+   border:none;
+}
