@@ -22,9 +22,24 @@ export default function Ativo() {
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3, 2, 5, 7,10,7],
             borderWidth: 1,
-            backgroundColor: [
-              'rgba(75, 192, 192, 0.2)',
-            ],
+            backgroundColor: (context) =>{
+              const bgColor = [
+                "rgba(75, 192, 192, 0.7)",
+                "rgba(75, 192, 192, 0.2)"
+              ];
+              if(!context.chart.chartArea){
+                return;
+              }
+              console.log(context.chart.chartArea)
+              const {ctx, data, chartArea: {top,bottom}} = context.chart;
+              const gradientBg = ctx.createLinearGradient(0,top,0,bottom);
+              gradientBg.addColorStop(0,bgColor[0])
+              gradientBg.addColorStop(1,bgColor[1])
+              return gradientBg
+              },
+            // backgroundColor: [
+            //   'rgba(75, 192, 192, 0.2)',
+            // ],
           }],
         },
         options: {
@@ -55,7 +70,7 @@ export default function Ativo() {
       <div className="atendimentoAtivos card">
         <div className='HeaderAtivo'>
           <p className='titleAtivo'>Atendimento ativos por atendentes</p>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" className="bi bi-info-circle"
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#263a6d" className="bi bi-info-circle"
                viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
             <path

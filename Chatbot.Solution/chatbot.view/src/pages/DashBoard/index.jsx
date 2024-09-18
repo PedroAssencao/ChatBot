@@ -1,5 +1,8 @@
 import "./style.css";
 import Mensagem from "../../components/ComponentesDashBoard/Mensagem";
+import Leads from "../../components/ComponentesDashBoard/Leads";
+import Atendimentos from "../../components/ComponentesDashBoard/Atendimentos";
+import Avaliacoes from "../../components/ComponentesDashBoard/Avaliacoes";
 import Ativo from "../../components/ComponentesDashBoard/Ativo";
 import Departamento from "../../components/ComponentesDashBoard/Departamento";
 import AtendentesOnline from "../../components/ComponentesDashBoard/AtendentesOnline";
@@ -37,10 +40,10 @@ export default function DashBoard() {
           </div>
           <br></br>
           <div className="GraficosSecundarios">
+            <Leads/>
             <Mensagem />
-            <Mensagem />
-            <Mensagem />
-            <Mensagem />
+            <Atendimentos/>
+            <Avaliacoes />
           </div>
 
 

@@ -53,7 +53,7 @@ export default function Mensagem() {
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="16"
-          fill="green"
+          fill="#263a6d"
           className="bi bi-info-circle"
           viewBox="0 0 16 16"
         >
@@ -64,9 +64,12 @@ export default function Mensagem() {
 
       <div className="DepartamentoInfo">
         <p className="DepartamentoTitle">Departamentos</p>
-        <button type="button" className="btn btn-outline-success">
-          Atendimentos Pendentes
-        </button>
+        <select class="form-select form-select mb-3 DepartamentoBtn" aria-label="Large select example">
+          <option selected>Atendimentos Pendentes</option>
+          <option value="1">Atendimentos Ativos</option>
+        </select>
+
+
       </div>
 
       <div className="Container">
