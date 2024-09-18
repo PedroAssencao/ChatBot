@@ -1,42 +1,56 @@
 import React, { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels"; // Importando o plugin
 import "./style.css";
-import Chart from "chart.js/auto"; // Certifique-se de que você tem o Chart.js instalado
 
 export default function Mensagem() {
-  const chartRef = useRef(null); // Ref para armazenar a instância do gráfico
+  const chartRef = useRef(null);
 
   useEffect(() => {
-    if (window.Chart) {
-      const canvas = document.getElementById("Departamento");
-      const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("Departamento");
+    const ctx = canvas.getContext("2d");
 
-      // Se já houver um gráfico, destrua-o
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
+    // Se já houver um gráfico, destrua-o
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
 
-      // Crie um novo gráfico e armazene a instância na ref
-      chartRef.current = new Chart(ctx, {
-        type: "pie",
-        data: {
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [19, 12],
-              borderWidth: 1,
-              backgroundColor: ["purple", "rgba(128, 0, 128, 0.582)"],
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: false, // Oculta a legenda
+    // Criar o gráfico
+    chartRef.current = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: [
+          "Rejeitado",
+          "Aprovada"
+        ],
+        datasets: [
+          {
+            data: [228, 91.1],
+            backgroundColor: ["purple", "rgba(128, 0, 128, 0.582)"],
+          },
+        ],
+      },
+      plugins: [ChartDataLabels], // Adicionando o plugin aqui
+      options: {
+        responsive: true,
+        plugins: {
+          datalabels: {
+            color: "rgb(52, 52, 52)",
+            formatter: (value, ctx) => {
+              const totalSum = ctx.dataset.data.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                0
+              );
+              const percentage = (value / totalSum) * 100;
+              return `${percentage.toFixed(1)}%`;
             },
           },
+          legend: {
+            display: false,
+          },
         },
-      });
-    }
+      },
+    });
 
     // Limpeza ao desmontar o componente
     return () => {
@@ -44,7 +58,7 @@ export default function Mensagem() {
         chartRef.current.destroy();
       }
     };
-  }, []); // O array vazio garante que o efeito só será executado na montagem inicial
+  }, []);
 
   return (
     <div className="card Departamento">
@@ -64,12 +78,10 @@ export default function Mensagem() {
 
       <div className="DepartamentoInfo">
         <p className="DepartamentoTitle">Departamentos</p>
-        <select class="form-select form-select mb-3 DepartamentoBtn" aria-label="Large select example">
+        <select className="form-select form-select mb-3 DepartamentoBtn" aria-label="Large select example">
           <option selected>Atendimentos Pendentes</option>
           <option value="1">Atendimentos Ativos</option>
         </select>
-
-
       </div>
 
       <div className="Container">
