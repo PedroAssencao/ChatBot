@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './style.css';
-
 export default function TelaBloqueio() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newContact, setNewContact] = useState('');
@@ -27,13 +26,14 @@ export default function TelaBloqueio() {
     return (
         <div className="col">
             <div className="barra-superior">
-                <h1>ChatBot</h1>
+                <h1>DazzleBot</h1>
             </div>
 
             <div className="conteudo">
                 <div className="parte-superior">
                     <h2>Bloqueados</h2>
                     <button type="button" className="btn btn-success" onClick={() => setIsModalOpen(true)}>
+                    <i class="bi bi-plus"></i>
                         Adicionar Contato
                     </button>
                 </div>
@@ -70,7 +70,11 @@ export default function TelaBloqueio() {
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
                             <h5 class="modal-title">Adicionar Contato</h5>
+                            
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setIsModalOpen(false)}></button>
                           </div>
                           <div class="modal-body">
