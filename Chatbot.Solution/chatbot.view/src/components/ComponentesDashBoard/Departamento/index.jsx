@@ -35,7 +35,7 @@ export default function Mensagem() {
         responsive: true,
         plugins: {
           datalabels: {
-            color: "rgb(52, 52, 52)",
+            color: "rgb(255, 255, 255)",
             formatter: (value, ctx) => {
               const totalSum = ctx.dataset.data.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,

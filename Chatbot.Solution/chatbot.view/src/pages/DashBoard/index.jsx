@@ -6,6 +6,10 @@ import Avaliacoes from "../../components/ComponentesDashBoard/Avaliacoes";
 import Ativo from "../../components/ComponentesDashBoard/Ativo";
 import Departamento from "../../components/ComponentesDashBoard/Departamento";
 import AtendentesOnline from "../../components/ComponentesDashBoard/AtendentesOnline";
+import AtendimentosAtivos from "../../components/ComponentesDashBoard/AtendimentosAtivos";
+import AtendimentosPendentes from "../../components/ComponentesDashBoard/AtendimentosPendentes";
+import BotsOnline from "../../components/ComponentesDashBoard/BotsOnline";
+import AtendimentosAtivosProgress from "../../components/ComponentesDashBoard/AtendimentosAtivosProgress";
 
 
 export default function DashBoard() {
@@ -33,7 +37,14 @@ export default function DashBoard() {
         <div className="Content">
           <p className="DashBoardNovidades">Novidades</p>
 
+          <div className="GraficosSecundarios">
           <AtendentesOnline/>
+          <AtendimentosAtivos/>
+          <AtendimentosPendentes/>
+          <BotsOnline/>
+          </div>
+<br></br>
+
           <div className="GraficosPrimarios">
             <Ativo />
             <Departamento />
@@ -45,7 +56,17 @@ export default function DashBoard() {
             <Atendimentos/>
             <Avaliacoes />
           </div>
-
+<br></br>
+          <div className="GraficosPrimarios">
+          <AtendimentosAtivosProgress/>
+          <AtendimentosAtivosProgress/>
+          </div>
+          
+          <div className="GraficosPrimarios">
+          <AtendimentosAtivosProgress/>
+          <AtendimentosAtivosProgress/>
+          </div>
+       
 
         </div>
       </div>
