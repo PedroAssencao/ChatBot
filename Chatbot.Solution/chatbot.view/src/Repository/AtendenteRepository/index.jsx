@@ -26,17 +26,17 @@ export function VerficarAltura() {
 export const FetchChatsData = async () => {
     try {
         const response = await fetch(urlBase + "/v1/Chat/chats/Get/BuscarTodosOsChatsPorLogId/" + UsuarioLogadoId);
-        const data = await response.json();
-        console.log("Lista De Chats Aqui")
-        console.log(data)
+        const data = await response.json();     
         return data;
     } catch (error) {
         console.error('Error fetching contacts:', error);
     }
 };
 
-export const FiltrarDataPorStatus = (status, data) => {
+export const FiltrarDataPorStatus = async (status) => {
     const statusNormalizado = status.trim().toLowerCase();
+    console.log("os dados que chegaram na function foram esses")
+    console.log(data)
     if (statusNormalizado == "ativo") {
         return data.filter(x =>
             x?.atendimento?.atendente != null &&
@@ -50,19 +50,24 @@ export const FiltrarDataPorStatus = (status, data) => {
             x?.estadoAtendimento?.trim().toLowerCase() != "humano"
         );
     }
-
-
-    return [];
 };
 
 
 export function entrarChat() {
-    document.getElementById('TituloNavbar').style.display = 'none'
-    document.getElementById('setarVoltar').style.display = 'flex'
-    document.querySelector('#NavbarSearch').style.display = 'none'
-    document.getElementById('sidebar').style.display = 'none'
-    document.getElementById('containerMensagens').style.display = 'none'
-    document.getElementById('containerChats').style.display = 'flex'
+    var larguraJanela = window.innerWidth;
+
+    if (larguraJanela < 992) {
+        document.getElementById('TituloNavbar').style.display = 'none'
+        document.getElementById('setarVoltar').style.display = 'flex'
+        document.querySelector('#NavbarSearch').style.display = 'none'
+        document.getElementById('sidebar').style.display = 'none'
+        document.getElementById('containerMensagens').style.display = 'none'
+        document.getElementById('containerChats').style.display = 'flex'
+    }
+
+    if (larguraJanela > 992) {
+        console.log("babaaba")
+    }
 }
 
 export function voltarChat() {
