@@ -32,7 +32,7 @@ namespace Chatbot.Infrastrucutre.OpenAI.Repository
 
                 var requestBody = new
                 {
-                    model = "gpt-4",
+                    model = "gpt-4-turbo",
                     messages = new[]
                     {
                         new { role = "system", content = "Você é um Assistente" },

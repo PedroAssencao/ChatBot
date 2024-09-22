@@ -189,7 +189,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
                 //Enviar Mensagem de Resposta do Gpt
                 string resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, Conteudo);
-
+                await EnviarMensagemDoTipoSimples(resposta, numero, Atendimento, chat);
                 var menuselecionado = await _menuInterfaceServices.PegarMenuDeIaPorLogId(Atendimento.Login.Codigo);
                 return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(menuselecionado, numero, Atendimento, chat));
             }
