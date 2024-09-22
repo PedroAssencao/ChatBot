@@ -21,7 +21,7 @@ namespace Chatbot.Infrastructure.Extensions
                 services.AddDbContext<chatbotContext>(options =>
                 {
                     options.UseSqlServer(configuration.GetConnectionString("Chinook"));
-                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
                 });
             services.AddTransient<IContatosInterface, ContatoRepository>();
             services.AddScoped<IMensagemInterface, MensagemRepository>();            

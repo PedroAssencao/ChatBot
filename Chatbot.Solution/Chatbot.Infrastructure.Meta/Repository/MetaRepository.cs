@@ -447,6 +447,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);
                 string responseContent = await response.Content.ReadAsStringAsync();
+                sendMessageSuccess.Root myDeserializedClass = JsonConvert.DeserializeObject<sendMessageSuccess.Root>(responseContent);
+                await _MensagemInterfaceServices.CheckMensagemWaId(myDeserializedClass.messages[0].id);
                 return responseContent;
             }
             catch (Exception)

@@ -1,18 +1,9 @@
-﻿using Chatbot.API.DAL;
-using Chatbot.Domain.Models;
+﻿using Chatbot.Domain.Models;
 using Chatbot.Domain.Models.Enums;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Chatbot.Services.Services
 {
@@ -260,14 +251,14 @@ namespace Chatbot.Services.Services
             try
             {
                 var item = await _repository.GetPorId(id);
-        
+
                 MensagensDttoGet ViewModel = new MensagensDttoGet
                 {
                     Codigo = item.MensId,
                     Data = item.MensData,
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
-                    CodigoWhatsapp= item.mensWaId,
+                    CodigoWhatsapp = item.mensWaId,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
@@ -277,6 +268,25 @@ namespace Chatbot.Services.Services
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public async Task CheckMensagemWaId(string waId)
+        {
+            try
+            {
+                var item = _repository.RetornarUltimoValorNaMemoriaDoEFteste();
+                if (item.mensWaId == null)
+                {
+                    item.mensWaId = waId;
+                    await _repository.update(item);
+                }
+
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
@@ -291,6 +301,7 @@ namespace Chatbot.Services.Services
         {
             throw new NotImplementedException();
         }
+
 
     }
 }
