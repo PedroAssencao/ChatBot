@@ -196,7 +196,7 @@ namespace Chatbot.Services.Services
         }
 
 
-        public async Task SaveMensage(int Login, int chat, string descricao)
+        public async Task<MensagensDttoGet> SaveMensage(int Login, int chat, string descricao)
         {
             //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
             try
@@ -210,7 +210,7 @@ namespace Chatbot.Services.Services
                     Descricao = descricao,
                     TipoDaMensagem = "MensagemEnviada"
                 };
-                await AdicionarPost(NewModel);
+                return await AdicionarPost(NewModel);
             }
             catch (Exception)
             {

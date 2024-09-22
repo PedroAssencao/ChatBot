@@ -6,7 +6,7 @@ namespace Chatbot.Infrastructure.Meta.Repository.Interfaces
     public interface IMetaClient
     {
         public HttpClient ConfigurarClient(string token, string url);
-        public Task<string> PostAsync(string url, string token, dynamic data);
+        public Task<string> PostAsync(string url, string token, dynamic data, MensagensDttoGet Model);
         public Task<dynamic> MensagemInicial(DataAndType Model);
         public Task<dynamic> BotResposta(DataAndType Model);
         public Task<dynamic> ChamarMetodo(dynamic Values);

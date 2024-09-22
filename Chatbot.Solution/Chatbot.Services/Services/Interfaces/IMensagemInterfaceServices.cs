@@ -15,7 +15,7 @@ namespace Chatbot.Services.Services.Interfaces
         Task<MensagensDttoGet> AtualizarPut(MensagensDttoPut Model);
         public Task<MensagensDttoGet?> PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(string ConWaID, string LogConWaID);
         public Task<MensagensDttoGet?> BuscarMensagemPorWaId(string waID);
-        public Task SaveMensage(int Login, int chat, string descricao);
+        public Task<MensagensDttoGet?> SaveMensage(int Login, int chat, string descricao);
         public Task SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp);
     }
 }
