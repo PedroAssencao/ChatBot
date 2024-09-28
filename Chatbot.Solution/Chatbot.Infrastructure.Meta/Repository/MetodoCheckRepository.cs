@@ -215,7 +215,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
             try
             {
                 var mensage = await _MensagemInterfaceServices.SaveMensageWithCodigoWhatsappId(Login, contato, chat, descricao, CodigoWhatsapp);
-                await _hubContext.Clients.Group(Convert.ToString(chat.Codigo)).SendAsync("ReceiveMessage", mensage);
+                chat?.Mensagens?.Add(mensage);
+                await _hubContext.Clients.Group(Convert.ToString(chat?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", chat);
             }
             catch (Exception)
             {

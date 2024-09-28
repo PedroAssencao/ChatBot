@@ -152,8 +152,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     Codigo = 0
                 };
                 var numero = dados?.Contato?.CodigoWhatsapp == "557988132044" || dados?.Contato?.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(dados?.Contato?.CodigoWhatsapp) : dados?.Contato?.CodigoWhatsapp;
-                await EnviarMensagemDoTipoSimples(descricao, numero, dados.Atendimento, dados);
-                await _hubContext.Clients.Group(Convert.ToString(dados.Codigo)).SendAsync("ReceiveMessage", Message);
+                await EnviarMensagemDoTipoSimples(descricao, numero, dados?.Atendimento, dados);
+                await _hubContext.Clients.Group(Convert.ToString(dados?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", dados);
             }
             catch (Exception)
             {
