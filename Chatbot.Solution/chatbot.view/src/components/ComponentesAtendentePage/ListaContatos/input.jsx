@@ -28,7 +28,7 @@ export default function ListaContato(props) {
                         entrarChat();
                         props.setChatActive("Ativado");
                     }}
-                    className={"mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"}
+                    className={"mt-4 justify-content-center align-items-center row mx-auto p-2 unactiveChat"}
                 />
             ))}
             {/* Se Nenhum Chat For Reenderizado exibir a mensagem de error */}
