@@ -3,6 +3,7 @@ using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.SignalR;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Chatbot.Infrastructure.Meta.Repository.SignalRForChat
 {
@@ -39,6 +40,8 @@ namespace Chatbot.Infrastructure.Meta.Repository.SignalRForChat
                 await Clients.Caller.SendAsync("ReceiveChats", item);
             }
 
+            // Enviar mensagem de finalização após todos os chats
+            await Clients.Caller.SendAsync("CompleteLoading");
             await base.OnConnectedAsync();
         }
 

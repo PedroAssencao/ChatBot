@@ -17,7 +17,7 @@
         const logid = 1;
         const data = []
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl(`http://localhost:5058/chatHub?logId=${logid}`)
+            .withUrl(`http://localhost:5058/api/chatHub?logId=${logid}`)
             .build();
 
         connection.on("ReceiveChats", (element) => {

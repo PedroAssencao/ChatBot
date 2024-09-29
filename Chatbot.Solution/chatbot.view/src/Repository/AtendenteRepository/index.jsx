@@ -24,24 +24,47 @@ export function VerficarAltura() {
 }
 
 export const FetchChatsData = async () => {
-    try {
-        const response = await fetch(urlBase + "/v1/Chat/chats/Get/BuscarTodosOsChatsPorLogId/" + UsuarioLogadoId);
-        const data = await response.json();     
-        return data;
-    } catch (error) {
-        console.error('Error fetching contacts:', error);
-    }
+    // try {
+    //     const response = await fetch(urlBase + "/v1/Chat/chats/Get/BuscarTodosOsChatsPorLogId/" + UsuarioLogadoId);
+    //     const data = await response.json();     
+    //     return data;
+    // } catch (error) {
+    //     console.error('Error fetching contacts:', error);
+    // }
+
+    /*const connection = new signalR.HubConnectionBuilder()
+        .withUrl(`http://localhost:5058/api/chatHub?logId=${UsuarioLogadoId}`)
+        .build();
+
+    connection.on("ReceiveChats", (element) => {
+        console.log(element)
+        // const index = data.findIndex(item => item.codigo === element.codigo);
+
+        // if (index !== -1) {
+        //     // Substitui o objeto existente pelo novo
+        //     data[index] = element;
+        // } else {
+        //     // Adiciona o novo elemento se não houver um com o mesmo código
+        //     data.push(element);
+        // }
+
+        return element
+    });
+
+    connection.start().catch(err => console.error(err.toString()));
+*/
 };
 
-export const FiltrarDataPorStatus = async (status) => {
+export const FiltrarDataPorStatus = (status,data) => {
     const statusNormalizado = status.trim().toLowerCase();
-    console.log("os dados que chegaram na function foram esses")
-    console.log(data)
+    // console.log("os dados que chegaram na function foram esses")
+    // console.log(data)
     if (statusNormalizado == "ativo") {
         return data.filter(x =>
             x?.atendimento?.atendente != null &&
             x?.estadoAtendimento?.trim().toLowerCase() == "humano"
         );
+        return []
     }
 
     if (statusNormalizado == "esperando") {
@@ -49,6 +72,7 @@ export const FiltrarDataPorStatus = async (status) => {
             x?.atendimento?.atendente == null ||
             x?.estadoAtendimento?.trim().toLowerCase() != "humano"
         );
+        return []
     }
 };
 

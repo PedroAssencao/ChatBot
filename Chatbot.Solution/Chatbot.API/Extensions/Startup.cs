@@ -20,8 +20,8 @@ namespace Chatbot.API.Extensions
                 options.AddPolicy("AllowLocalhost",
                     builder =>
                     {
-                        //builder.WithOrigins("https://localhost:5173")
-                        builder.WithOrigins("http://127.0.0.1:5500")
+                        builder.WithOrigins("https://localhost:5173")
+                                .WithOrigins("http://127.0.0.1:5500")
                                .AllowAnyMethod()
                                .AllowAnyHeader()
                                .AllowCredentials();
@@ -62,7 +62,7 @@ namespace Chatbot.API.Extensions
             app.UseRouting();
             app.UseAuthorization();
             app.MapControllers();
-            app.MapHub<ChatHub>("/chatHub");
+            app.MapHub<ChatHub>("api/chatHub");
         }
 
     }
