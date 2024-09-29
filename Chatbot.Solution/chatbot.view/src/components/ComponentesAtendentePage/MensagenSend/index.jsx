@@ -1,9 +1,9 @@
 import '../MensagenSend/style.css'
 export default function MensagemSend(props) {
     return (
-        <div className="flex-grow-1">
+        <div className="flex-grow-1 d-flex align-items-end">
 
-            <div className="d-flex gap-3 p-2 mensagens mt-3 justify-content-center align-items-center">
+            <div className="d-flex w-100 gap-3 p-2 mensagens mt-3 justify-content-center align-items-center">
 
                 <div className="inputMensagen w-100" style={{maxWidth: "90%"}}>
                     <input className="form-control p-3 rounded-4" style={{backgroundColor: "#c7cfe4"}}

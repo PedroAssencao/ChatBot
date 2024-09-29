@@ -24,8 +24,11 @@ export default function ListaContato(props) {
                 <ChatCard
                     key={x.codigo}
                     ChatDate={x}
-                    onClick={entrarChat}
-                    className={"mt-4 justify-content-center align-items-center row mx-auto p-2 unactiveChat"}
+                    onClick={() => {
+                        entrarChat();
+                        props.setChatActive("Ativado");
+                    }}
+                    className={"mt-4 justify-content-center align-items-center row mx-auto p-2 activeChat"}
                 />
             ))}
             {/* Se Nenhum Chat For Reenderizado exibir a mensagem de error */}

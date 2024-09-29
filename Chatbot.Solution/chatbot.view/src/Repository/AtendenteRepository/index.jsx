@@ -1,26 +1,26 @@
 import { urlBase, UsuarioLogadoId } from '../../appsettings'
 
 export function VerficarAltura() {
-    var larguraJanela = window.innerHeight;
+    // var larguraJanela = window.innerHeight;
 
-    if (document.querySelector(".ConteudoChat") != null) {
-        if (larguraJanela < 559) {
-            document.querySelector('.ConteudoChat').style.maxHeight = "65vh";
-            document.querySelector('.ConteudoChat').style.height = "65vh";
-        } else if (larguraJanela < 670) {
-            document.querySelector('.ConteudoChat').style.maxHeight = "67vh";
-            document.querySelector('.ConteudoChat').style.height = "67vh";
-        } else if (larguraJanela < 768) {
-            document.querySelector('.ConteudoChat').style.maxHeight = "70vh";
-            document.querySelector('.ConteudoChat').style.height = "70vh";
-        } else if (larguraJanela < 874) {
-            document.querySelector('.ConteudoChat').style.maxHeight = "74vh";
-            document.querySelector('.ConteudoChat').style.height = "74vh";
-        } else {
-            document.querySelector('.ConteudoChat').style.maxHeight = "77vh";
-            document.querySelector('.ConteudoChat').style.height = "77vh";
-        }
-    }
+    // if (document.querySelector(".ConteudoChat") != null) {
+    //     if (larguraJanela < 559) {
+    //         document.querySelector('.ConteudoChat').style.maxHeight = "65vh";
+    //         document.querySelector('.ConteudoChat').style.height = "65vh";
+    //     } else if (larguraJanela < 670) {
+    //         document.querySelector('.ConteudoChat').style.maxHeight = "67vh";
+    //         document.querySelector('.ConteudoChat').style.height = "67vh";
+    //     } else if (larguraJanela < 768) {
+    //         document.querySelector('.ConteudoChat').style.maxHeight = "70vh";
+    //         document.querySelector('.ConteudoChat').style.height = "70vh";
+    //     } else if (larguraJanela < 874) {
+    //         document.querySelector('.ConteudoChat').style.maxHeight = "74vh";
+    //         document.querySelector('.ConteudoChat').style.height = "74vh";
+    //     } else {
+    //         document.querySelector('.ConteudoChat').style.maxHeight = "77vh";
+    //         document.querySelector('.ConteudoChat').style.height = "77vh";
+    //     }
+    // }
 }
 
 export const FetchChatsData = async () => {
@@ -76,7 +76,6 @@ export const FiltrarDataPorStatus = (status,data) => {
     }
 };
 
-
 export function entrarChat() {
     var larguraJanela = window.innerWidth;
 
@@ -90,7 +89,7 @@ export function entrarChat() {
     }
 
     if (larguraJanela > 992) {
-        console.log("babaaba")
+        console.log("Configurar Aqui para o modo pc")
     }
 }
 

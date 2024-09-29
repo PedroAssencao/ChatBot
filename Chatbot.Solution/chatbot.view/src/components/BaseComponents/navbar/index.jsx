@@ -8,16 +8,16 @@ export default function Navbar(props) {
 
         //colocar os ifs para atender condições de renderização aqui depois
         <div className="col-12 p-0 bg-light" id="navbar">
-            <div className="row justify-content-between border-bottom border-1 border-dark">
+            <div className="row justify-content-between">
 
                 {/* Header aqui fica o contato e a navbar */}
-                   <div id='TituloNavbar' className="d-flex align-items-center bg-light BordarParaSerAplicadaEmTelasMaiores border-1 border-dark" style={{ maxWidth: "28.77rem" }}>
+                <div id='TituloNavbar' className="d-flex align-items-center bg-light BordarParaSerAplicadaEmTelasMaiores border-bottom border-1 border-dark" style={{ maxWidth: "28.77rem" }}>
 
                     <div className="d-flex gap-3 ms-4">
 
-                        <h1 className="d-block" style={{ color: "#263a6d", fontWeight: "bold", fontSize: "2rem" }}>
+                        <h6 className="d-block" style={{ color: "#263a6d", fontWeight: "bold", fontSize: "2rem" }}>
                             Chatbot
-                        </h1>
+                        </h6>
 
                     </div>
 
@@ -37,24 +37,31 @@ export default function Navbar(props) {
                 </div>
 
                 {/* Contato, Ver Como Vai ficar isso aqui depois, acho massa fazer algo como whastapp que so aparece os chat quando clicka aqui */}
-                <div className="col d-none d-lg-block p-3" id='setarVoltar'>
+                {props.chatActiveStatus == "Desativado" ? (
+                    <div className="col d-none d-lg-block p-3" style={{ minHeight: "5.7rem", backgroundColor: "rgb(235, 239, 249)" }} id='setarVoltar'>
 
-                    <div className="p-3 d-lg-none" onClick={voltarChat}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                            fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
-                            <path fillRule="evenodd"
-                                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-                        </svg>
                     </div>
-                    
-                    <div className="d-flex gap-3">
-                        <div className="d-flex justify-content-center align-items-center gap-3">
-                            <img src={image} className="leadImage rounded-circle" />
-                            <strong style={{ fontFamily: "Arial, Helvetica, sans-serif", height: "20px" }}>Pedro Assenção</strong>
+                ) : (
+                    <div className="col d-none d-lg-block p-3 border-bottom border-1 border-dark" style={{ minHeight: "5.7rem" }} id='setarVoltar'>
+
+                        <div className="p-3 d-lg-none" onClick={voltarChat}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
+                                <path fillRule="evenodd"
+                                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                            </svg>
                         </div>
-                    </div>
 
-                </div>
+                        <div className="d-flex gap-3">
+                            <div className="d-flex justify-content-center align-items-center gap-3">
+                                <img src={image} className="leadImage rounded-circle" />
+                                <strong style={{ fontFamily: "Arial, Helvetica, sans-serif", height: "20px" }}>Pedro Assenção</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                )}
+
 
             </div>
         </div>

@@ -11,6 +11,7 @@ export default function Atendente() {
     const [ChatsDate, setChatsDate] = useState([]);
     const [IsDataLoad, SetLoadDate] = useState(false);
     const [StatusActive, setStatusActive] = useState("Ativo");
+    const [IsChatActive, setChatActive] = useState("Desativado");
     useEffect(() => {
         window.addEventListener('resize', VerficarAltura);
 
@@ -62,15 +63,19 @@ export default function Atendente() {
         setStatusActive(data);
     };
 
+    const handleChatInFromChild = (data) => {
+        setChatActive(data)
+    }
+
     document.querySelector("#bodyFromPageAll").style.overflowX = "hidden"
 
     return (
         <div className="col bg-warning containerPai p-0 container-fluid d-flex flex-column">
             {IsDataLoad ? <>
-                <Navbar />
+                <Navbar chatActiveStatus={IsChatActive}/>
                 <div className='flex-grow-1 d-flex bg-dark p-0'>
-                    {IsDataLoad ? <ContainerMensagen StatusActive={StatusActive} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} /> : null}
-                    <ContainerChats />
+                    <ContainerMensagen StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} />
+                    <ContainerChats chatActiveStatus={IsChatActive} />
                 </div>
                 <OffCanvasBuscaMobile />
             </> : <LoadScreen />}
