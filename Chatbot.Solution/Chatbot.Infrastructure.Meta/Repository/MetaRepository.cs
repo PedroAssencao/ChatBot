@@ -175,9 +175,10 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
                 if (Atendimento != null || chat != null)
                 {
-                    await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, conteudo);
+                    var mensagen = await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, conteudo);
+                    chat?.Mensagens?.Add(mensagen);
                 }
-
+                await _hubContext.Clients.Group(Convert.ToString(chat?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", chat);
                 return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(responseObject));
             }
             catch (Exception)
@@ -383,7 +384,9 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         }
                     }
                 };
-                await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, menuselecionado.Titulo);
+                var mensagen = await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, menuselecionado.Titulo);
+                chat?.Mensagens?.Add(mensagen);
+                await _hubContext.Clients.Group(Convert.ToString(chat?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", chat);
                 return JsonConvert.SerializeObject(responseObject);
             }
             catch (Exception)

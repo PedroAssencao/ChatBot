@@ -204,7 +204,7 @@ namespace Chatbot.Services.Services
         }
 
 
-        public async Task SaveMensage(int Login, int chat, string descricao)
+        public async Task<MensagensDttoGetForView> SaveMensage(int Login, int chat, string descricao)
         {
             //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
             try
@@ -218,7 +218,15 @@ namespace Chatbot.Services.Services
                     Descricao = descricao,
                     TipoDaMensagem = "MensagemEnviada"
                 };
-                await AdicionarPost(NewModel);
+                var Model = await AdicionarPost(NewModel);
+                MensagensDttoGetForView ModelForView = new MensagensDttoGetForView
+                {
+                    Codigo = Model.Codigo,
+                    Contato = Model.Contato,
+                    Data= Model.Data,
+                    Descricao=descricao,
+                };
+                return ModelForView;
             }
             catch (Exception)
             {
@@ -268,14 +276,14 @@ namespace Chatbot.Services.Services
             try
             {
                 var item = await _repository.GetPorId(id);
-        
+
                 MensagensDttoGet ViewModel = new MensagensDttoGet
                 {
                     Codigo = item.MensId,
                     Data = item.MensData,
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
-                    CodigoWhatsapp= item.mensWaId,
+                    CodigoWhatsapp = item.mensWaId,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),

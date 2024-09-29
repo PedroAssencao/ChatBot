@@ -20,7 +20,8 @@ namespace Chatbot.API.Extensions
                 options.AddPolicy("AllowLocalhost",
                     builder =>
                     {
-                        builder.WithOrigins("https://localhost:5173")
+                        //builder.WithOrigins("https://localhost:5173")
+                        builder.WithOrigins("http://127.0.0.1:5500")
                                .AllowAnyMethod()
                                .AllowAnyHeader()
                                .AllowCredentials();

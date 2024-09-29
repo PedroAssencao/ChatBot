@@ -36,7 +36,7 @@ namespace Chatbot.Infrastructure.Meta.Repository.SignalRForChat
 
             foreach (var item in chat)
             {
-                await Clients.Caller.SendAsync("ReceiveChats", chat);
+                await Clients.Caller.SendAsync("ReceiveChats", item);
             }
 
             await base.OnConnectedAsync();

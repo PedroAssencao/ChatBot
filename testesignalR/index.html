@@ -14,16 +14,27 @@
 
     <script>
 
-        const chatId = 2;
+        const logid = 1;
+        const data = []
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl(`http://localhost:5058/chatHub?chatId=${chatId}`)
+            .withUrl(`http://localhost:5058/chatHub?logId=${logid}`)
             .build();
 
-        connection.on("ReceiveMessage", (message) => {
-            console.log(message)
-            const li = document.createElement("li");
-            li.textContent = message.descricao;
-            document.getElementById("messagesList").appendChild(li);
+        connection.on("ReceiveChats", (element) => {
+            console.log(element)
+            const index = data.findIndex(item => item.codigo === element.codigo);
+
+            if (index !== -1) {
+                // Substitui o objeto existente pelo novo
+                data[index] = element;
+            } else {
+                // Adiciona o novo elemento se não houver um com o mesmo código
+                data.push(element);
+            }
+            console.log(data)
+            // const li = document.createElement("li");
+            // li.textContent = message.descricao;
+            // document.getElementById("messagesList").appendChild(li);
         });
 
         connection.start().catch(err => console.error(err.toString()));
