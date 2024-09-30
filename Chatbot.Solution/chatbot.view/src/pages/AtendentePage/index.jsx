@@ -29,6 +29,7 @@ export default function Atendente() {
                 .build();
 
             connection.on("ReceiveChats", (element) => {
+                console.log("mensagen recebida")
                 console.log(element)
                
                 setChatsDate(prevChatsDate => {

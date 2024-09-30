@@ -2,6 +2,8 @@ import ConversaCard from '../conversaCard'
 import MensagemSend from '../MensagenSend'
 import '../conteudoChat/style.css'
 export default function conteudoChat(props) {
+    const chatSelecionadoIndice = props.ChatDates.findIndex(chat => chat.codigo == props.chatActiveStatus.Codigo);
+    const chatSelecionado = props.ChatDates[chatSelecionadoIndice]
     return (
         <>
             {props.chatActiveStatus.chatActiveStatus == "Desativado" ? (
@@ -12,15 +14,15 @@ export default function conteudoChat(props) {
                 </div>
             ) : (
                 <div className="ConteudoChat d-flex flex-column">
-                    {props.ChatDates && props.ChatDates.map((x) => (
-                        x.mensagens && x.mensagens.map((element) => (
+                    {chatSelecionado !== null ? (
+                        chatSelecionado.mensagens.map((x) => (
                             <ConversaCard
-                                key={element.codigo}
-                                IsRecaive={element.contato != null}
-                                descricao={element.descricao}
+                                key={x.codigo}
+                                IsRecaive={x.contato != null}
+                                descricao={x.descricao}
                             />
                         ))
-                    ))}
+                    ) : null}
                     {/* <ConversaCard IsRecaive={true} descricao={"Teste Com Mensagem Recebida"} /> */}
                     <MensagemSend />
                 </div>

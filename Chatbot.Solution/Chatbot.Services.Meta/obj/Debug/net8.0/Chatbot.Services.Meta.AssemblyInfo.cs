@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chatbot.Services.Meta")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2713ed4f3bec14a30aaa35a26b7516a4758531d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77a6746125b5b40ef4b7aeb3a33369c309bf2317")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chatbot.Services.Meta")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chatbot.Services.Meta")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

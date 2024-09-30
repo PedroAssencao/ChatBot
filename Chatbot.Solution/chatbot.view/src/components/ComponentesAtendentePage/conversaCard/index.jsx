@@ -2,7 +2,7 @@ export default function conversaCard(props) {
     const IsRecaiveMessage = props.IsRecaive
     
     return(
-        <div className={`rounded-3 p-3 mt-3 ${IsRecaiveMessage ? 'bg-light' : 'align-self-end'}`}  style={{maxWidth: '20rem',backgroundColor: IsRecaiveMessage ? '#fff' : '#a3adc4',}}>
+        <div className={`rounded-3 p-3 mt-3 ${IsRecaiveMessage ? 'align-self-end' : 'bg-light'}`}  style={{maxWidth: '20rem',backgroundColor: IsRecaiveMessage ? '#a3adc4' : '#fff' ,}}>
             {props.descricao}
         </div>
         
