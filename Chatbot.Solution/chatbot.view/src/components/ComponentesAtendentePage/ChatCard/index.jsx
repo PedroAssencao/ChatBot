@@ -25,8 +25,8 @@ export default function ChatCard(props) {
         <>
             <div
                 onClick={props.onClick}
-                data-codigo-atendente={AtendenteLogado}
-                data-codigo-chat={chatDate?.codigo}
+                // data-codigo-atendente={AtendenteLogado}
+                // data-codigo-chat={chatDate?.codigo}
                 className={props.className}
                 style={{ width: "96%", minHeight: "8vh" }}
                 

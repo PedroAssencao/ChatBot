@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ChatCard from "../ChatCard";
 import SmallLoadScreen from '../../BaseComponents/smallLoading';
 import { entrarChat } from '../../../Repository/AtendenteRepository';
+import { AtendenteLogado } from '../../../appsettings';
 
 export default function ListaContato(props) {
     const [mensagemVazia, setMensagemVazia] = useState(false);
@@ -26,7 +27,11 @@ export default function ListaContato(props) {
                     ChatDate={x}
                     onClick={() => {
                         entrarChat();
-                        props.setChatActive("Ativado");
+                        props.setChatActive({
+                            Codigo: x.codigo,
+                            AtendenteLogado: AtendenteLogado,
+                            chatActiveStatus: "Ativado",
+                        });
                     }}
                     className={"mt-4 justify-content-center align-items-center row mx-auto p-2 unactiveChat"}
                 />

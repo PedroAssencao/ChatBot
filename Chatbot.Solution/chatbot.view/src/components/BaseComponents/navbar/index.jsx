@@ -37,7 +37,7 @@ export default function Navbar(props) {
                 </div>
 
                 {/* Contato, Ver Como Vai ficar isso aqui depois, acho massa fazer algo como whastapp que so aparece os chat quando clicka aqui */}
-                {props.chatActiveStatus == "Desativado" ? (
+                {props.chatActiveStatus.chatActiveStatus == "Desativado" ? (
                     <div className="col d-none d-lg-block p-3" style={{ minHeight: "5.7rem", backgroundColor: "rgb(235, 239, 249)" }} id='setarVoltar'>
 
                     </div>

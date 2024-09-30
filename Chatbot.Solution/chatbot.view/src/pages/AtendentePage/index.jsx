@@ -11,7 +11,7 @@ export default function Atendente() {
     const [ChatsDate, setChatsDate] = useState([]);
     const [IsDataLoad, SetLoadDate] = useState(false);
     const [StatusActive, setStatusActive] = useState("Ativo");
-    const [IsChatActive, setChatActive] = useState("Desativado");
+    const [IsChatActive, setChatActive] = useState({chatActiveStatus: "Desativado"});
     useEffect(() => {
         window.addEventListener('resize', VerficarAltura);
 
@@ -75,7 +75,7 @@ export default function Atendente() {
                 <Navbar chatActiveStatus={IsChatActive}/>
                 <div className='flex-grow-1 d-flex bg-dark p-0'>
                     <ContainerMensagen StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} />
-                    <ContainerChats chatActiveStatus={IsChatActive} />
+                    <ContainerChats ChatDates={ChatsDate} chatActiveStatus={IsChatActive} />
                 </div>
                 <OffCanvasBuscaMobile />
             </> : <LoadScreen />}
