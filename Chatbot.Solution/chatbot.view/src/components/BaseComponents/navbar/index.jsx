@@ -3,6 +3,11 @@ import A from '../a'
 import image from '../../../img/file.jpg'
 import { voltarChat } from '../../../Repository/AtendenteRepository'
 export default function Navbar(props) {
+
+    const chatSelecionadoIndice = props.ChatDates.findIndex(chat => chat.codigo == props.chatActiveStatus.Codigo);
+    const chatSelecionado = props.ChatDates[chatSelecionadoIndice]
+    console.log("Dados aqui")
+    console.log(chatSelecionado)
     return (
         // navbar
 
@@ -55,7 +60,7 @@ export default function Navbar(props) {
                         <div className="d-flex gap-3">
                             <div className="d-flex justify-content-center align-items-center gap-3">
                                 <img src={image} className="leadImage rounded-circle" />
-                                <strong style={{ fontFamily: "Arial, Helvetica, sans-serif", height: "20px" }}>Pedro Assenção</strong>
+                                <strong style={{ fontFamily: "Arial, Helvetica, sans-serif", height: "20px" }}>{chatSelecionado.contato.nome}</strong>
                             </div>
                         </div>
 

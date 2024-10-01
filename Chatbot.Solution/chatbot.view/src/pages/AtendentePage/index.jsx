@@ -76,7 +76,7 @@ export default function Atendente() {
     return (
         <div className="col bg-warning containerPai p-0 container-fluid d-flex flex-column">
             {IsDataLoad ? <>
-                <Navbar chatActiveStatus={IsChatActive}/>
+                <Navbar chatActiveStatus={IsChatActive} ChatDates={ChatsDate}/>
                 <div className='flex-grow-1 d-flex bg-dark p-0'>
                     <ContainerMensagen StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} />
                     <ContainerChats connectionDateChild={connectionDateChild} ChatDates={ChatsDate} chatActiveStatus={IsChatActive} />
