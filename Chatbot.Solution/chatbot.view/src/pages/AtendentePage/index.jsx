@@ -12,6 +12,7 @@ export default function Atendente() {
     const [IsDataLoad, SetLoadDate] = useState(false);
     const [StatusActive, setStatusActive] = useState("Ativo");
     const [IsChatActive, setChatActive] = useState({chatActiveStatus: "Desativado"});
+    const [connectionDateChild, setconnectionDateChild] = useState()
     useEffect(() => {
         window.addEventListener('resize', VerficarAltura);
 
@@ -27,8 +28,10 @@ export default function Atendente() {
             const connection = new signalR.HubConnectionBuilder()
                 .withUrl(`http://localhost:5058/api/chatHub?logId=${UsuarioLogadoId}`)
                 .build();
-
-            connection.on("ReceiveChats", (element) => {
+            
+                setconnectionDateChild(connection)
+            
+                connection.on("ReceiveChats", (element) => {
                 console.log("mensagen recebida")
                 console.log(element)
                
@@ -76,7 +79,7 @@ export default function Atendente() {
                 <Navbar chatActiveStatus={IsChatActive}/>
                 <div className='flex-grow-1 d-flex bg-dark p-0'>
                     <ContainerMensagen StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} />
-                    <ContainerChats ChatDates={ChatsDate} chatActiveStatus={IsChatActive} />
+                    <ContainerChats connectionDateChild={connectionDateChild} ChatDates={ChatsDate} chatActiveStatus={IsChatActive} />
                 </div>
                 <OffCanvasBuscaMobile />
             </> : <LoadScreen />}

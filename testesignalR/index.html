@@ -42,7 +42,7 @@
         function sendMessage() {
             const message = document.getElementById("messageInput").value;
             const AtenId = 1;
-            const ChatId = 2;
+            const ChatId = 1;
 
             connection.invoke("SendMessage", AtenId, ChatId, message)
                 .catch(err => console.error(err.toString()));

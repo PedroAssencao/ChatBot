@@ -766,3 +766,4 @@ C:\Users\silva\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\n
 C:\Users\silva\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.pdb
 C:\Users\silva\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\Chatbot.API.genruntimeconfig.cache
 C:\Users\silva\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\obj\Debug\net8.0\ref\Chatbot.API.dll
+C:\Users\Administrador\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.API\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
