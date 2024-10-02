@@ -129,7 +129,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 var dados = await _chatsInterfaceServices.GetPorId(chat);                
                 if (dados?.Atendente?.Codigo != ate)
                 {
-                    await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(dados.Atendimento, dados.Atendimento.EstadoAtendimento, dados.Atendimento.Departamento.Codigo, ate);
+                    await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(dados.Atendimento, "HUMANO", dados.Atendimento.Departamento.Codigo, ate);
                     Chat NewModel = new Chat
                     {
                         ChaId = dados.Codigo,
