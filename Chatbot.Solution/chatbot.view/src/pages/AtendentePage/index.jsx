@@ -32,8 +32,8 @@ export default function Atendente() {
                 setconnectionDateChild(connection)
             
                 connection.on("ReceiveChats", (element) => {
-                console.log("mensagen recebida")
-                console.log(element)
+                // console.log("mensagen recebida")
+                // console.log(element)
                
                 setChatsDate(prevChatsDate => {
                     // Procura o índice do elemento com o mesmo 'codigo'

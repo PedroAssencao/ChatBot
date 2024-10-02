@@ -57,20 +57,18 @@ export const FetchChatsData = async () => {
 
 export const FiltrarDataPorStatus = (status,data) => {
     const statusNormalizado = status.trim().toLowerCase();
-    // console.log("os dados que chegaram na function foram esses")
-    // console.log(data)
     if (statusNormalizado == "ativo") {
         return data.filter(x =>
-            x?.atendimento?.atendente != null &&
-            x?.estadoAtendimento?.trim().toLowerCase() == "humano"
+            x?.atendente != null &&
+            x?.atendimento?.estadoAtendimento?.trim().toLowerCase() == "humano"
         );
         return []
     }
 
     if (statusNormalizado == "esperando") {
         return data.filter(x =>
-            x?.atendimento?.atendente == null ||
-            x?.estadoAtendimento?.trim().toLowerCase() != "humano"
+            x?.atendente == null ||
+            x?.atendimento?.estadoAtendimento?.trim().toLowerCase() != "humano"
         );
         return []
     }
@@ -89,7 +87,7 @@ export function entrarChat() {
     }
 
     if (larguraJanela > 992) {
-        console.log("Configurar Aqui para o modo pc")
+        //se quiser fazer uma alteração no codigo ao entrar o chat pc entrar aqui
     }
 }
 

@@ -28,7 +28,7 @@ export default function conteudoChat(props) {
                 </div>
             ) : (
                 <>
-                    <div className="ConteudoChat d-flex flex-column" style={{ overflowY: 'auto', maxHeight: '400px' }}>
+                    <div className="ConteudoChat d-flex flex-column">
                         {chatSelecionado !== null ? (
                             chatSelecionado.mensagens.map((x) => (
                                 <ConversaCard
