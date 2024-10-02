@@ -55,21 +55,45 @@ export const FetchChatsData = async () => {
 */
 };
 
+// Função para obter a data da última mensagem de um objeto de chat
+function getUltimaDataMensagem(chat) {
+    if (chat.mensagens && chat.mensagens.length > 0) {
+        // Pega a última mensagem baseada na data mais recente
+        const ultimaMensagem = chat.mensagens.reduce((ultima, mensagemAtual) => {
+            return new Date(mensagemAtual.data) > new Date(ultima.data) ? mensagemAtual : ultima;
+        });
+        return new Date(ultimaMensagem.data);
+    }
+    return null;
+}
+
+// Função para ordenar a lista de chats pela data da última mensagem
+function ordenarChatsPorUltimaMensagem(chats) {
+    return chats.sort((chatA, chatB) => {
+        const ultimaDataA = getUltimaDataMensagem(chatA);
+        const ultimaDataB = getUltimaDataMensagem(chatB);
+
+        // Ordenar do mais recente para o mais antigo
+        return ultimaDataB - ultimaDataA;
+    });
+}
+
+
 export const FiltrarDataPorStatus = (status,data) => {
     const statusNormalizado = status.trim().toLowerCase();
     if (statusNormalizado == "ativo") {
-        return data.filter(x =>
+        return ordenarChatsPorUltimaMensagem(data.filter(x =>
             x?.atendente != null &&
             x?.atendimento?.estadoAtendimento?.trim().toLowerCase() == "humano"
-        );
+        ));
         return []
     }
 
     if (statusNormalizado == "esperando") {
-        return data.filter(x =>
+        return ordenarChatsPorUltimaMensagem(data.filter(x =>
             x?.atendente == null ||
             x?.atendimento?.estadoAtendimento?.trim().toLowerCase() != "humano"
-        );
+        ));
         return []
     }
 };

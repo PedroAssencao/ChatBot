@@ -36,6 +36,7 @@ export default function Atendente() {
                 // console.log(element)
                
                 setChatsDate(prevChatsDate => {
+                    console.log(prevChatsDate)
                     // Procura o índice do elemento com o mesmo 'codigo'
                     const index = prevChatsDate.findIndex(chat => chat.codigo === element.codigo);
 

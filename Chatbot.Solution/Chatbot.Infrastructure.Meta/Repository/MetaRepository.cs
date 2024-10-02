@@ -79,6 +79,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         if (item.Atendimento.EstadoAtendimento != null)
                         {
+                            //Quando for subir a ver~soa oficial lembrar de descomitar essa linha ou colocar mais tempo para finalizar se for humano
+                            //if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim() && item.Atendimento.EstadoAtendimento.ToLower().Trim() != "HUMANO".ToLower().Trim())
                             if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim())
                             {
                                 var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
