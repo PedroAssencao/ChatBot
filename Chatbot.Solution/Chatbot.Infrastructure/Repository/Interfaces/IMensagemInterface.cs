@@ -10,5 +10,6 @@ namespace Chatbot.Infrastructure.Repository.Interfaces
 {
     public interface IMensagemInterface : IBaseInterface<Mensagen>
     {
+        public Mensagen? UltimaMensagem();
     }
 }

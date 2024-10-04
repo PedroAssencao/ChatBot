@@ -5,14 +5,6 @@ using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Chatbot.Services.Services
 {
@@ -260,14 +252,14 @@ namespace Chatbot.Services.Services
             try
             {
                 var item = await _repository.GetPorId(id);
-        
+
                 MensagensDttoGet ViewModel = new MensagensDttoGet
                 {
                     Codigo = item.MensId,
                     Data = item.MensData,
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
-                    CodigoWhatsapp= item.mensWaId,
+                    CodigoWhatsapp = item.mensWaId,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
@@ -292,5 +284,41 @@ namespace Chatbot.Services.Services
             throw new NotImplementedException();
         }
 
+        public async Task<MensagensDttoGet>? UltimaMensagem()
+        {
+            var item = _repository.UltimaMensagem();
+            MensagensDttoGet Model = new MensagensDttoGet
+            {
+                Codigo = item.MensId,
+                Data = item.MensData,
+                TipoDaMensagem = item.MenTipo,
+                Descricao = item.MensDescricao,
+                CodigoChat = Convert.ToInt32(item.ChaId),
+                CodigoWhatsapp = item.mensWaId,
+                Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
+            };
+            return Model;
+        }
+
+        public async Task UpdateWithDirectiveDbContext(MensagensDttoGet Model)
+        {
+            Mensagen mensagen = new Mensagen
+            {
+                MensId = Model.Codigo,
+                mensWaId = Model?.CodigoWhatsapp,
+                ChaId = Model?.CodigoChat,   
+                ConId = Model?.Contato?.Codigo,
+                LogId = Model?.Login?.Codigo,
+                MensDescricao = Model?.Descricao,
+                MensData = Model?.Data,
+                MenTipo = Model?.TipoDaMensagem
+            };
+            using (var newContext = new chatbotContext())
+            {
+                newContext.Mensagens.Update(mensagen);
+                await newContext.SaveChangesAsync();
+            }
+        }
     }
 }
