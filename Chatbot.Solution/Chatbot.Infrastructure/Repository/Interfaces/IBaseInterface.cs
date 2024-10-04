@@ -13,5 +13,6 @@ namespace Chatbot.Infrastructure.Interfaces
         Task<T> Adicionar(T Model);
         Task<T> update(T Model);
         Task<T> delete(int id);
+        public T? UltimaEntidadeManipuladaEntity();
     }
 }

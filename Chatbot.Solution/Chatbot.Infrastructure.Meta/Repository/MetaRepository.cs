@@ -8,10 +8,12 @@ using Chatbot.Infrastructure.Meta.Repository.Interfaces;
 using Chatbot.Infrastructure.Meta.Repository.SignalRForChat;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Infrastrucutre.OpenAI.Repository.Interface;
+using Chatbot.Services.Dtto.Meta;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
     public class MetaRepository : IMetaClient
@@ -162,7 +164,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-        public async Task<string> EnviarMensagemDoTipoSimples(string conteudo, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
+        public async Task<MensagensDttoGet> EnviarMensagemDoTipoSimples(string conteudo, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
         {
             try
             {
@@ -174,6 +176,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     type = "text",
                     text = new { preview_url = false, body = conteudo },
                 };
+
+                MensagensDttoGet Model = new MensagensDttoGet();
 
                 if (Atendimento != null || chat != null)
                 {
@@ -201,12 +205,13 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
 
                 //Enviar Mensagem de Aguardo a Mensagem do Gpt
-                await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
+                var mensagem = await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
                 //Enviar Mensagem de Resposta do Gpt
                 string resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, Conteudo);
 
                 var menuselecionado = await _menuInterfaceServices.PegarMenuDeIaPorLogId(Atendimento.Login.Codigo);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(menuselecionado, numero, Atendimento, chat));
+                var result = await MontarMenuParaEnvio(menuselecionado, numero, Atendimento, chat);
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
             }
             catch (Exception)
             {
@@ -247,7 +252,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         if (descricaoDaMensagem.Trim().ToLower() == "Voltar ao Fluxo de Atendimento Normal".Trim().ToLower())
                         {
                             await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "Bot", null, null);
-                            return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(await _menuInterfaceServices.PegarMenuInicialPorLogId(Login.Codigo), numero, Atendimento, chat));
+                            MensagemMultiplaEscolhaDataAndType result = await MontarMenuParaEnvio(await _menuInterfaceServices.PegarMenuInicialPorLogId(Login.Codigo), numero, Atendimento, chat);
+                            return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
                         }
 
                         if (descricaoDaMensagem.Trim().ToLower() == "Finalizar o Atendimento".Trim().ToLower())
@@ -268,7 +274,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     //Se o Menu for do tipo de mensagem com multipla escolha ele vai responder com essa resposta
                     if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa).Trim()?.ToLower())
                     {
-                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(MenuSelecionadoOption, numero, Atendimento, chat));
+                        MensagemMultiplaEscolhaDataAndType result = await MontarMenuParaEnvio(MenuSelecionadoOption, numero, Atendimento, chat);
+                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
                     }
 
                     //Se For Uma Mensagem Simples ele vai responder aqui
@@ -360,7 +367,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-        public async Task<string> MontarMenuParaEnvio(MenuDttoGet menuselecionado, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
+        public async Task<MensagemMultiplaEscolhaDataAndType> MontarMenuParaEnvio(MenuDttoGet menuselecionado, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
         {
             try
             {
@@ -432,7 +439,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
                 var chat = await _chatsInterfaceServices.RetornarChatPorAtenId(IsAtendimentoGoing.Codigo);
                 await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(IsAtendimentoGoing, "Bot", null, null);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(menuselecionado, contato.CodigoWhatsapp, chat.Atendimento, chat));
+                var result = await MontarMenuParaEnvio(menuselecionado, contato.CodigoWhatsapp, chat.Atendimento, chat);
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
             }
             catch (Exception)
             {
@@ -464,6 +472,13 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);
                 string responseContent = await response.Content.ReadAsStringAsync();
+                var mensagens = await _MensagemInterfaceServices.UltimaMensagem();
+                if (mensagens.CodigoWhatsapp == null)
+                {
+                    mensagens.CodigoWhatsapp = JObject.Parse(responseContent)?["messages"]?[0]?["id"]?.ToString();
+                    await _MensagemInterfaceServices.UpdateWithDirectiveDbContext(mensagens);
+
+                }
                 return responseContent;
             }
             catch (Exception)

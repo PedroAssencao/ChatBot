@@ -1,6 +1,5 @@
 ﻿using Chatbot.API.DAL;
 using Microsoft.EntityFrameworkCore;
-
 namespace Chatbot.API.Repository
 {
     public class BaseRepository<T> where T : class
@@ -59,9 +58,8 @@ namespace Chatbot.API.Repository
             {
                 throw;
             }
-           
-         
         }
 
+        public T? UltimaEntidadeManipuladaEntity() => _chatbotContext.ChangeTracker.Entries<T>().LastOrDefault()?.Entity;
     }
 }
