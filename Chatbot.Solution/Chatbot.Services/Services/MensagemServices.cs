@@ -5,6 +5,7 @@ using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Identity.Client;
 
@@ -93,6 +94,7 @@ namespace Chatbot.Services.Services
                         Data = item.MensData,
                         Descricao = item.MensDescricao,
                         StatusDaMensagen = item.mensStatus,
+                        MensagemWaId = item.mensWaId,
                         Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId))
                     };
                     list.Add(Model);
@@ -360,18 +362,17 @@ namespace Chatbot.Services.Services
                 {
                     if (item.StatusDaMensagen != "read" && item.Contato != null)
                     {
-                        var result = await _repository.GetPorId(item.Codigo);
                         MensagensDttoPut newmodel = new MensagensDttoPut
                         {
                             Codigo = item.Codigo,
                             Data = item.Data,
                             CodigoContato = item?.Contato?.Codigo,
-                            Descricao = item.Descricao,
+                            Descricao = item?.Descricao,
                             StatusDaMensagen = "read",
-                            CodigoChat = result.ChaId,
-                            CodigoLogin = result.LogId,
-                            TipoDaMensagem = result.MenTipo,
-                            CodigoWhatsapp = result.mensWaId
+                            CodigoChat = Models?.Codigo,
+                            CodigoLogin = Models?.Atendimento?.Login?.Codigo,
+                            CodigoWhatsapp = item?.MensagemWaId,
+                            TipoDaMensagem = "MensagemEnviada"
                         };
                         await AtualizarPut(newmodel);
                         item.StatusDaMensagen = "read";
@@ -386,7 +387,7 @@ namespace Chatbot.Services.Services
                 Models.Mensagens = Model;
                 return Models;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

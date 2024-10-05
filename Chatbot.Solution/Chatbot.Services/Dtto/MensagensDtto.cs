@@ -16,6 +16,7 @@ namespace Chatbot.Infrastructure.Dtto
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
         public string? StatusDaMensagen { get; set; }
+        public string? MensagemWaId { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
     }
 
