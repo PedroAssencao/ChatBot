@@ -10,7 +10,7 @@ export default function ContainerMensagen(props) {
         <div className="col bg-light containerMensagens border-end border-1 border-dark" id="containerMensagens">
             <SearchBar />
             <StatusAtendimento SetStatusActive={props.StatusFuncion} />
-            <ListaContato SetChatDatesFromChild={props.SetChatDatesFromChild} setChatActive={props.setChatActive} date={props.ContatosDate} />
+            <ListaContato chatActiveStatus={props.chatActiveStatus} SetChatDatesFromChild={props.SetChatDatesFromChild} setChatActive={props.setChatActive} date={props.ContatosDate} />
         </div>
     )
 }

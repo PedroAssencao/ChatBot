@@ -9,6 +9,7 @@ export default function ListaContato(props) {
     const [mensagemVazia, setMensagemVazia] = useState(false);
     const [IsLoading, SetLoading] = useState(true)
     const [date, setDate] = useState([])
+    
     useEffect(() => {
         SetLoading(true)
         const teste = [...props.date]
@@ -68,6 +69,7 @@ export default function ListaContato(props) {
         }
     };
 
+    const teste = props.chatActiveStatus
     return (
         <div className="ListaContatos overflow-y-auto overflow-x-hidden" style={{ maxHeight: "63vh" }}>
             {/* Percorrer a lista de chats para exibir dependendo do status */}
@@ -75,6 +77,7 @@ export default function ListaContato(props) {
                 <ChatCard
                     key={x.codigo}
                     ChatDate={x}
+                    chatActiveStatus={teste}
                     onClick={() => {
                         entrarChat();
                         setMessagesRead(x)

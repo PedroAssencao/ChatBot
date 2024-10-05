@@ -23,13 +23,16 @@ export default function ChatCard(props) {
 
     let qtdMensagensNaoLidas = 0
 
-    if (mensagens.length > 0) {
-        mensagens.forEach((element) => {
-            if (element.statusDaMensagen != "read" && element.contato) {
-                qtdMensagensNaoLidas++
-            }
-        });
+    if (props?.chatActiveStatus?.Codigo != chatDate?.codigo) {
+        if (mensagens.length > 0) {
+            mensagens.forEach((element) => {
+                if (element.statusDaMensagen != "read" && element.contato) {
+                    qtdMensagensNaoLidas++
+                }
+            });
+        }
     }
+
 
 
     return (
@@ -68,7 +71,7 @@ export default function ChatCard(props) {
                             <p className='rounded-circle d-flex justify-content-center align-items-center' style={{ backgroundColor: "rgb(176, 222, 165)", maxWidth: "2rem", minHeight: "2rem" }}>
                                 {qtdMensagensNaoLidas}
                             </p>
-                        ): null}
+                        ) : null}
 
                     </div>
                 </div>

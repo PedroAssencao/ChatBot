@@ -150,8 +150,7 @@
               "RelativeToolTip": "Chatbot.API\\Controllers\\v1\\MensagemController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAACCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T01:37:53.593Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T01:37:53.593Z"
             },
             {
               "$type": "Document",
@@ -163,8 +162,7 @@
               "RelativeToolTip": "Chatbot.Domain\\Models\\Chat.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T01:03:44.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T01:03:44.606Z"
             },
             {
               "$type": "Document",
@@ -176,8 +174,7 @@
               "RelativeToolTip": "Chatbot.Infrastructure\\Repository\\ChatRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T01:03:40.382Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T01:03:40.382Z"
             },
             {
               "$type": "Document",
@@ -189,8 +186,7 @@
               "RelativeToolTip": "Chatbot.Infrastructure\\Repository\\BaseRepository.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAQwB8AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T00:59:06.334Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T00:59:06.334Z"
             },
             {
               "$type": "Document",
@@ -202,8 +198,7 @@
               "RelativeToolTip": "Chatbot.Infrastructure\\Repository\\MensagemRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T00:59:03.198Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T00:59:03.198Z"
             },
             {
               "$type": "Document",
@@ -215,8 +210,7 @@
               "RelativeToolTip": "Chatbot.Domain\\Models\\Mensagen.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T00:07:34.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T00:07:34.118Z"
             },
             {
               "$type": "Document",
@@ -286,7 +280,7 @@
               "RelativeDocumentMoniker": "Chatbot.Infrastructure.Meta\\Repository\\SignalRForChat\\ChatHub.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Repository\\SignalRForChat\\ChatHub.cs",
               "RelativeToolTip": "Chatbot.Infrastructure.Meta\\Repository\\SignalRForChat\\ChatHub.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAQwCAAAAA2AAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwBUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T11:46:43.086Z",
               "EditorCaption": ""
@@ -301,8 +295,7 @@
               "RelativeToolTip": "Chatbot.Infrastructure.Meta\\Repository\\MetaRepository.cs",
               "ViewState": "AQIAANcAAAAAAAAAAAAcwNkAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T11:47:25.614Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T11:47:25.614Z"
             },
             {
               "$type": "Document",
@@ -386,8 +379,7 @@
               "RelativeToolTip": "Chatbot.Services\\Dtto\\MensagensDtto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T19:15:49.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-16T19:15:49.362Z"
             },
             {
               "$type": "Document",
@@ -483,8 +475,7 @@
               "RelativeToolTip": "Chatbot.Infrastructure.Meta\\Repository\\MetodoCheckRepository.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAAAxwNgAAABWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T11:37:53.188Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T11:37:53.188Z"
             },
             {
               "$type": "Document",
@@ -496,8 +487,7 @@
               "RelativeToolTip": "Chatbot.Services\\Services\\Interfaces\\IMensagemInterfaceServices.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwBAAAABPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T11:45:22.294Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T11:45:22.294Z"
             },
             {
               "$type": "Document",
@@ -521,8 +511,7 @@
               "RelativeToolTip": "Chatbot.Services\\Services\\MensagemServices.cs",
               "ViewState": "AQIAADUBAAAAAAAAAAA7wHIBAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:54:06.959Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T19:54:06.959Z"
             },
             {
               "$type": "Document",
