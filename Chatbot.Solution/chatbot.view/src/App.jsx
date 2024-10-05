@@ -7,7 +7,7 @@ import FluxoBot from './pages/FluxoBot'
 import Sidebar from './components/BaseComponents/sideBar'
 export default function App() {
 
-  const searchLocation = window.location.pathname;
+  const searchLocation = window.location.pathname.toLocaleLowerCase();
 
   const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot'];
   

@@ -16,7 +16,7 @@ namespace Chatbot.API.Repository
         public async Task<Mensagen> Create(Mensagen Model) => await Adicionar(Model);
         public async Task<Mensagen> update(Mensagen Model) => await Update(Model);
         public async Task<Mensagen> delete(int id) => await Delete(id);
-        public Mensagen? RetornarUltimoValorNaMemoriaDoEFteste() => RetornarUltimoValorNaMemoriaDoEF();
+        public Mensagen? UltimaMensagem() => UltimaEntidadeManipuladaEntity();
     }
     
 

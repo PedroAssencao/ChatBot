@@ -69,6 +69,7 @@ create table chat (
     constraint fk_contatos_chat foreign key (con_id) references contatos(con_id) on delete set null,
     constraint fk_atendimento_chat foreign key (aten_id) references Atendimento(aten_id) on delete set null
 )
+
 go
 
 create table Mensagens (

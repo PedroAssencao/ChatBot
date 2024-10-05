@@ -2,8 +2,10 @@
 using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
+using Chatbot.Infrastructure.Meta.Repository.SignalRForChat;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 using System.Text.Json;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
@@ -14,14 +16,16 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly ILoginInterfaceServices _LoginInterfaceServices;
         protected readonly IAtendimentoInterfaceServices _AtendimentoInterfaceServices;
         private readonly IChatsInterfaceServices _ChatsInterfaceServices;
+        private readonly IHubContext<ChatHub> _hubContext;
         public MetodoCheckRepository(IContatoInterfaceServices contatoInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices, ILoginInterfaceServices loginInterfaceServices,
-            IAtendimentoInterfaceServices atendimentoInterfaceServices, IChatsInterfaceServices chatsInterfaceServices)
+            IAtendimentoInterfaceServices atendimentoInterfaceServices, IChatsInterfaceServices chatsInterfaceServices, IHubContext<ChatHub> hubContext)
         {
             _contatoInterfaceServices = contatoInterfaceServices;
             _MensagemInterfaceServices = mensagemInterfaceServices;
             _LoginInterfaceServices = loginInterfaceServices;
             _AtendimentoInterfaceServices = atendimentoInterfaceServices;
             _ChatsInterfaceServices = chatsInterfaceServices;
+            _hubContext = hubContext;
         }
 
         //ver maneira melhor de fazer esse metodo fica muito dificil de ler com esse monte de try aninhado porem por enquanto funciona
@@ -176,7 +180,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 ContatoDttoGet contato = await _contatoInterfaceServices.RetornarConIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.contacts[0].wa_id);
                 LoginDttoGet Login = await _LoginInterfaceServices.RetornarLogIdPorWaID(dados?.Dados?.entry[0]?.changes[0]?.value?.metadata?.display_phone_number);
                 AtendimentoDttoGet Item = await _AtendimentoInterfaceServices.ResgatarAtendimentoPorLogIdEContatoWaId(dados?.Dados?.entry[0].changes[0].value.contacts[0].wa_id, Login.Codigo);
-                ChatsDttoGet chat = await _ChatsInterfaceServices.RetornarChatPorAtenId(Item != null ? Item.Codigo : 0);
+                ChatsDttoGet? chat = await _ChatsInterfaceServices.RetornarChatPorAtenId(Item != null ? Item.Codigo : 0);
 
                 //checkando para ver se e necessario criar alguma dessas informações
                 contato = contato == null ? contato = await _contatoInterfaceServices.ContatoIsNull(dados, Login) : contato;
@@ -198,13 +202,25 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
 
                 //se tudo ocorrer bem salvar a mensagem e continuar
-                await _MensagemInterfaceServices.SaveMensageWithCodigoWhatsappId(Login, contato, chat, descricao, dados.Dados.entry[0].changes[0].value.messages[0].id);
-
+                await SaveAndNotifyAsync(Login, contato, chat, descricao, dados.Dados.entry[0].changes[0].value.messages[0].id);
                 return dados;
             }
             catch (Exception ex)
             {
                 throw new Exception($"Ocorreu Algum Erro ao enviar a mensagem {ex.Message}");
+            }
+        }
+        public async Task SaveAndNotifyAsync(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp)
+        {
+            try
+            {
+                var mensage = await _MensagemInterfaceServices.SaveMensageWithCodigoWhatsappId(Login, contato, chat, descricao, CodigoWhatsapp);
+                chat?.Mensagens?.Add(mensage);
+                await _hubContext.Clients.Group(Convert.ToString(chat?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", chat);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

@@ -26,6 +26,8 @@ namespace Chatbot.API.Controllers.v1
         public async Task<IActionResult> CriarMensagem(MensagensDttoPost Model) => Ok(await _repository.AdicionarPost(Model));
         [HttpPut("mensagens/Atualizar")]
         public async Task<IActionResult> AtualizarMensagens(MensagensDttoPut Model) => Ok(await _repository.AtualizarPut(Model));
+        [HttpPut("mensagens/MarcarMensagensComoLida")]
+        public async Task<IActionResult> AtualizarLidoMensagens(ChatsDttoGet Models) { return Ok(await _repository.MarcarMensagensComoLida(Models)); }
         [HttpDelete("mensagens/Delete")]
         public async Task<IActionResult> ApagarMensagens(int id) => Ok(await _repository.Delete(id));
     }

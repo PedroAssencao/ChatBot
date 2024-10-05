@@ -10,6 +10,6 @@ namespace Chatbot.Infrastructure.Repository.Interfaces
 {
     public interface IMensagemInterface : IBaseInterface<Mensagen>
     {
-        Mensagen RetornarUltimoValorNaMemoriaDoEFteste();
+        public Mensagen? UltimaMensagem();
     }
 }

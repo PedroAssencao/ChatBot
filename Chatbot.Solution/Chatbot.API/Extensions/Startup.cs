@@ -3,9 +3,7 @@ using Chatbot.Infrastructure.Extensions;
 using Chatbot.Services.Meta.Extensions;
 using Chatbot.Infrastructure.Meta.Extensions;
 using Chatbot.Infrastrucutre.OpenAI.Extensions;
-using Chatbot.API.Controllers;
-using Microsoft.OpenApi.Models;
-
+using Chatbot.Infrastructure.Meta.Repository.SignalRForChat;
 namespace Chatbot.API.Extensions
 {
     public static class Startup
@@ -13,27 +11,20 @@ namespace Chatbot.API.Extensions
         public static void StartConfiguration(this IServiceCollection services)
         {
             services.AddControllers();
-
-            // Swagger configuration
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "Chatbot API",
-                    Version = "v1",
-                    Description = "API para gerenciar o chatbot"
-                });
-            });
-
+            services.AddSwaggerGen();
+            services.AddSignalR();
+            services.AddHostedService<VerificarAtendimentoService>();
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOrigins",
+                options.AddPolicy("AllowLocalhost",
                     builder =>
                     {
-                        builder.AllowAnyOrigin()
+                        builder.WithOrigins("https://localhost:5173")
+                                .WithOrigins("http://127.0.0.1:5500")
                                .AllowAnyMethod()
-                               .AllowAnyHeader();
+                               .AllowAnyHeader()
+                               .AllowCredentials();
                     });
             });
         }
@@ -60,20 +51,19 @@ namespace Chatbot.API.Extensions
 
         public static void Configure(this WebApplication app)
         {
-            // Habilitar Swagger para todos os ambientes (não só desenvolvimento)
-            app.UseSwagger();
-
-            // Configurar Swagger UI como página inicial
-            app.UseSwaggerUI(options =>
+            if (app.Environment.IsDevelopment())
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Chatbot API v1");
-                options.RoutePrefix = string.Empty; // Carregar Swagger na raiz "/"
-            });
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+            app.UseCors("AllowLocalhost");
 
-            app.UseCors("AllowAllOrigins");
             app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseAuthorization();
             app.MapControllers();
+            app.MapHub<ChatHub>("api/chatHub");
         }
+
     }
 }

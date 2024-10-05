@@ -146,10 +146,10 @@ namespace Chatbot.Infrastructure.Services
                 var item = await _repository.GetPorId(id);
                 ChatsDttoGet ViewModel = new ChatsDttoGet
                 {
-                    Codigo = item.ChaId,
-                    Atendente = item.AteId == null ? null : await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
-                    Atendimento = item.AtenId == null ? null : await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
-                    Contato = item.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
+                    Codigo = item?.ChaId == null ? 0 : item.ChaId,
+                    Atendente = item?.AteId == null ? null : await _atendente.GetPorId(Convert.ToInt32(item.AteId)),
+                    Atendimento = item?.AtenId == null ? null : await _atendimento.GetPorId(Convert.ToInt32(item.AtenId)),
+                    Contato = item?.ConId == null ? null : await _contato.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Mensagens = item?.ChaId == null && item?.LogId == null ? null : await _mensagem.BuscarMensagensDeUmChat(Convert.ToInt32(item.ChaId), Convert.ToInt32(item.LogId))
                 };
                 return ViewModel;
@@ -252,6 +252,20 @@ namespace Chatbot.Infrastructure.Services
         public Task<ChatsDttoGet> Update(ChatsDttoGet Model)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<ChatsDttoGet>> RetornarTodosOsChatPorLogId(int? logId)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.Where(x => x?.Atendimento?.Login?.Codigo == logId).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

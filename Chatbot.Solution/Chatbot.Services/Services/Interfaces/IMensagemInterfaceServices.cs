@@ -1,10 +1,5 @@
 ﻿using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatbot.Services.Services.Interfaces
 {
@@ -15,8 +10,10 @@ namespace Chatbot.Services.Services.Interfaces
         Task<MensagensDttoGet> AtualizarPut(MensagensDttoPut Model);
         public Task<MensagensDttoGet?> PegarUltimaMensagemDeUmContatoPorLogConWaIdEConWaId(string ConWaID, string LogConWaID);
         public Task<MensagensDttoGet?> BuscarMensagemPorWaId(string waID);
-        public Task SaveMensage(int Login, int chat, string descricao);
-        public Task SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp);
-        public Task CheckMensagemWaId(string waId);
+        public Task<MensagensDttoGetForView?> SaveMensage(int Login, int chat, string descricao);
+        public Task<MensagensDttoGetForView?> SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp);
+        public Task<MensagensDttoGet>? UltimaMensagem();
+        public Task UpdateWithDirectiveDbContext(MensagensDttoGet Model);
+        public Task<ChatsDttoGet> MarcarMensagensComoLida(ChatsDttoGet Models);
     }
 }

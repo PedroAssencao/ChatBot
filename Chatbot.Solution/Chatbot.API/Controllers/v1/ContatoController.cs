@@ -41,6 +41,19 @@ namespace Chatbot.API.Controllers.v1
             }
         }
 
+        [HttpGet("Contatos/Get/BuscarTodosOsContatosDeUmLogID/{id}")]
+        public async Task<IActionResult> BuscarTodosOsContatosDeUmLogId(int id)
+        {
+            try
+            {
+                return Ok(await _contatoServices.GetListaDeContatosPorLogId(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
         [HttpGet("Contatos/Get/waID/{id}")]
         public async Task<IActionResult> BuscaContatoPorWaId(string id)
         {

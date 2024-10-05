@@ -1,7 +1,5 @@
 ﻿using Chatbot.API.DAL;
 using Microsoft.EntityFrameworkCore;
-using static Chatbot.Domain.Models.JsonMetaApi.recaiveMensagemWithMultipleOption;
-
 namespace Chatbot.API.Repository
 {
     public class BaseRepository<T> where T : class
@@ -16,7 +14,7 @@ namespace Chatbot.API.Repository
 
         public async Task<T?> GetPorID(int id) => await _chatbotContext.Set<T>().FindAsync(id);
 
-        public async Task<T> Adicionar(T Model)
+        public async Task<T> Adicionar(T Model) 
         {
             try
             {
@@ -40,7 +38,7 @@ namespace Chatbot.API.Repository
 
         public async Task<T?> Delete(int id)
         {
-
+            
             try
             {
                 var Dados = await GetPorID(id);
@@ -54,32 +52,14 @@ namespace Chatbot.API.Repository
                 {
                     throw new Exception();
                 }
-
+             
             }
             catch (Exception)
             {
                 throw;
             }
-
-
         }
 
-        public T? RetornarUltimoValorNaMemoriaDoEF()
-        {
-            try
-            {
-                var lastEntity = _chatbotContext.ChangeTracker.Entries<T>()
-                                     .Where(e => e.State != EntityState.Deleted)
-                                     .Select(e => e.Entity)
-                                     .LastOrDefault();
-                return lastEntity;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+        public T? UltimaEntidadeManipuladaEntity() => _chatbotContext.ChangeTracker.Entries<T>().LastOrDefault()?.Entity;
     }
 }

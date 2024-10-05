@@ -5,11 +5,15 @@ using Chatbot.Domain.Models.Enums;
 using Chatbot.Domain.Models.JsonMetaApi;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Meta.Repository.Interfaces;
+using Chatbot.Infrastructure.Meta.Repository.SignalRForChat;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Infrastrucutre.OpenAI.Repository.Interface;
+using Chatbot.Services.Dtto.Meta;
 using Chatbot.Services.Services.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 namespace Chatbot.Infrastructure.Meta.Repository
 {
     public class MetaRepository : IMetaClient
@@ -27,11 +31,12 @@ namespace Chatbot.Infrastructure.Meta.Repository
         protected readonly IMensagemInterfaceServices _MensagemInterfaceServices;
         protected readonly IDepartamentoInterfaceServices _departamentoInterfaceServices;
         protected readonly IAtendenteInterfaceServices _atendenteInterfaceServices;
+        private readonly IHubContext<ChatHub> _hubContext;
         public MetaRepository(IMetodoCheck metodoCheck, IContatoInterfaceServices contatoInterfaceServices,
             IAtendimentoInterfaceServices atendimentoInterfaceServices, ILoginInterfaceServices
             loginInterfaceServices, IMenuInterfaceServices menuInterfaceServices, IOptionInterfaceServices Option, IConfiguration config, IOpenaiRequest openai,
             IChatsInterfaceServices chatsInterfaceServices, IMensagemInterfaceServices mensagemInterfaceServices,
-            IDepartamentoInterfaceServices departamentoInterfaceServices, IAtendenteInterfaceServices atendenteInterfaceServices)
+            IDepartamentoInterfaceServices departamentoInterfaceServices, IAtendenteInterfaceServices atendenteInterfaceServices, IHubContext<ChatHub> hubContext)
         {
             _metodoCheck = metodoCheck;
             _contatoInterfaceServices = contatoInterfaceServices;
@@ -45,6 +50,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
             _MensagemInterfaceServices = mensagemInterfaceServices;
             _departamentoInterfaceServices = departamentoInterfaceServices;
             _atendenteInterfaceServices = atendenteInterfaceServices;
+            _hubContext = hubContext;
         }
 
         public HttpClient ConfigurarClient(string token, string url)
@@ -75,6 +81,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     {
                         if (item.Atendimento.EstadoAtendimento != null)
                         {
+                            //Quando for subir a ver~soa oficial lembrar de descomitar essa linha ou colocar mais tempo para finalizar se for humano
+                            //if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim() && item.Atendimento.EstadoAtendimento.ToLower().Trim() != "HUMANO".ToLower().Trim())
                             if (item.Atendimento.EstadoAtendimento.ToLower().Trim() != "Finalizado".ToLower().Trim())
                             {
                                 var dataMensagem = Convert.ToDateTime(item.Mensagens.LastOrDefault().Data);
@@ -125,14 +133,14 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 var dados = await _chatsInterfaceServices.GetPorId(chat);
                 if (dados?.Atendente?.Codigo != ate)
                 {
-                    await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(dados.Atendimento, dados.Atendimento.EstadoAtendimento, dados.Atendimento.Departamento.Codigo, ate);
+                    await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(dados.Atendimento, "HUMANO", dados.Atendimento.Departamento.Codigo, ate);
                     Chat NewModel = new Chat
                     {
                         ChaId = dados.Codigo,
                         AteId = ate,
                         AtenId = dados.Atendimento.Codigo,
-                        ConId = dados.Contato.Codigo,
-                        LogId = dados.Atendimento.Login.Codigo
+                        ConId = dados?.Contato?.Codigo,
+                        LogId = dados?.Atendimento?.Login?.Codigo
                     };
                     using (var newContext = new chatbotContext())
                     {
@@ -140,8 +148,16 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         await newContext.SaveChangesAsync();
                     }
                 }
+                MensagensDttoGetForView Message = new MensagensDttoGetForView
+                {
+                    Contato = null,
+                    Descricao = descricao,
+                    Data = DateTime.Now,
+                    Codigo = 0
+                };
                 var numero = dados?.Contato?.CodigoWhatsapp == "557988132044" || dados?.Contato?.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(dados?.Contato?.CodigoWhatsapp) : dados?.Contato?.CodigoWhatsapp;
-                await EnviarMensagemDoTipoSimples(descricao, numero, dados.Atendimento, dados);
+                await EnviarMensagemDoTipoSimples(descricao, numero, dados?.Atendimento, dados);
+                await _hubContext.Clients.Group(Convert.ToString(dados?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", dados);
             }
             catch (Exception)
             {
@@ -161,11 +177,14 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     text = new { preview_url = false, body = conteudo },
                 };
 
+                MensagensDttoGet Model = new MensagensDttoGet();
+
                 if (Atendimento != null || chat != null)
                 {
-                    await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, conteudo);
+                    var mensagen = await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, conteudo);
+                    chat?.Mensagens?.Add(mensagen);
                 }
-
+                await _hubContext.Clients.Group(Convert.ToString(chat?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", chat);
                 return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(responseObject));
             }
             catch (Exception)
@@ -186,17 +205,22 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
 
                 //Enviar Mensagem de Aguardo a Mensagem do Gpt
-                await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
+                var mensagem = await EnviarMensagemDoTipoSimples("Aguardando Resposta...", numero, Atendimento, chat);
                 //Enviar Mensagem de Resposta do Gpt
                 string resposta = await _openAiRequest.PostAsync(_configuration.GetSection("AES").Value, Conteudo);
-                await EnviarMensagemDoTipoSimples(resposta, numero, Atendimento, chat);
+
                 var menuselecionado = await _menuInterfaceServices.PegarMenuDeIaPorLogId(Atendimento.Login.Codigo);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(menuselecionado, numero, Atendimento, chat));
+                var result = await MontarMenuParaEnvio(menuselecionado, numero, Atendimento, chat);
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result);
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+        public async Task<string?> AtualizarStatusDaMensagem(dynamic Values)
+        {
+            return "Status Atualizado";
         }
         public async Task<dynamic> BotResposta(DataAndType Model)
         {
@@ -232,7 +256,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         if (descricaoDaMensagem.Trim().ToLower() == "Voltar ao Fluxo de Atendimento Normal".Trim().ToLower())
                         {
                             await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(Atendimento, "Bot", null, null);
-                            return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(await _menuInterfaceServices.PegarMenuInicialPorLogId(Login.Codigo), numero, Atendimento, chat));
+                            MensagemMultiplaEscolhaDataAndType result = await MontarMenuParaEnvio(await _menuInterfaceServices.PegarMenuInicialPorLogId(Login.Codigo), numero, Atendimento, chat);
+                            return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
                         }
 
                         if (descricaoDaMensagem.Trim().ToLower() == "Finalizar o Atendimento".Trim().ToLower())
@@ -253,7 +278,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     //Se o Menu for do tipo de mensagem com multipla escolha ele vai responder com essa resposta
                     if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa).Trim()?.ToLower())
                     {
-                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(MenuSelecionadoOption, numero, Atendimento, chat));
+                        string result = await MontarMenuParaEnvio(MenuSelecionadoOption, numero, Atendimento, chat);
+                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result);
                     }
 
                     //Se For Uma Mensagem Simples ele vai responder aqui
@@ -371,7 +397,9 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         }
                     }
                 };
-                await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, menuselecionado.Titulo);
+                var mensagen = await _MensagemInterfaceServices.SaveMensage(Atendimento.Login.Codigo, chat.Codigo, menuselecionado.Titulo);
+                chat?.Mensagens?.Add(mensagen);
+                await _hubContext.Clients.Group(Convert.ToString(chat?.Atendimento?.Login?.Codigo)).SendAsync("ReceiveChats", chat);
                 return JsonConvert.SerializeObject(responseObject);
             }
             catch (Exception)
@@ -415,7 +443,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 }
                 var chat = await _chatsInterfaceServices.RetornarChatPorAtenId(IsAtendimentoGoing.Codigo);
                 await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(IsAtendimentoGoing, "Bot", null, null);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], await MontarMenuParaEnvio(menuselecionado, contato.CodigoWhatsapp, chat.Atendimento, chat));
+                var result = await MontarMenuParaEnvio(menuselecionado, contato.CodigoWhatsapp, chat.Atendimento, chat);
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result);
             }
             catch (Exception)
             {
@@ -433,6 +462,10 @@ namespace Chatbot.Infrastructure.Meta.Repository
             {
                 return await BotResposta(dados);
             }
+            if (dados.Tipo == ETipoRetornoJson.TipoStatus)
+            {
+                return await AtualizarStatusDaMensagem(dados.Dados);
+            }
             if (dados.Tipo == ETipoRetornoJson.TipoPost)
             {
                 return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], JsonConvert.SerializeObject(dados.Dados));
@@ -447,8 +480,13 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);
                 string responseContent = await response.Content.ReadAsStringAsync();
-                sendMessageSuccess.Root myDeserializedClass = JsonConvert.DeserializeObject<sendMessageSuccess.Root>(responseContent);
-                await _MensagemInterfaceServices.CheckMensagemWaId(myDeserializedClass.messages[0].id);
+                var mensagens = await _MensagemInterfaceServices.UltimaMensagem();
+                if (mensagens.CodigoWhatsapp == null)
+                {
+                    mensagens.CodigoWhatsapp = JObject.Parse(responseContent)?["messages"]?[0]?["id"]?.ToString();
+                    await _MensagemInterfaceServices.UpdateWithDirectiveDbContext(mensagens);
+
+                }
                 return responseContent;
             }
             catch (Exception)
@@ -470,7 +508,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                         {
                             await EnviarMensagemDoTipoSimples(conteudo, item.CodigoWhatsapp == "557988132044" || item.CodigoWhatsapp == "557998468046" ? RetornarNumeroDeWhatsappParaNumeroTeste(item.CodigoWhatsapp) : item.CodigoWhatsapp, chat.Atendimento, chat);
                         }
-                    }                    
+                    }
                 }
                 return "Mensagens Enviadas Com Sucesso";
             }
