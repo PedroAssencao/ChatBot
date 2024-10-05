@@ -14,5 +14,6 @@ namespace Chatbot.Services.Services.Interfaces
         public Task<MensagensDttoGetForView?> SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp);
         public Task<MensagensDttoGet>? UltimaMensagem();
         public Task UpdateWithDirectiveDbContext(MensagensDttoGet Model);
+        public Task<ChatsDttoGet> MarcarMensagensComoLida(ChatsDttoGet Models);
     }
 }

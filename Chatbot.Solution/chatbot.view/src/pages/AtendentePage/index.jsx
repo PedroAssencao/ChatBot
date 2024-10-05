@@ -11,8 +11,34 @@ export default function Atendente() {
     const [ChatsDate, setChatsDate] = useState([]);
     const [IsDataLoad, SetLoadDate] = useState(false);
     const [StatusActive, setStatusActive] = useState("Ativo");
-    const [IsChatActive, setChatActive] = useState({chatActiveStatus: "Desativado"});
+    const [IsChatActive, setChatActive] = useState({ chatActiveStatus: "Desativado" });
     const [connectionDateChild, setconnectionDateChild] = useState()
+
+
+    function showNotification(title, options) {
+        // Verifica se a API de Notificações é suportada
+        if (!("Notification" in window)) {
+            console.log("Este navegador não suporta notificações.");
+            return;
+        }
+
+        // Solicita permissão para enviar notificações
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                // Cria e exibe a notificação
+                const notification = new Notification(title, options);
+
+                // Adiciona um evento para quando a notificação é clicada
+                notification.onclick = () => {
+                    console.log("Notificação clicada!");
+                    // Aqui você pode redirecionar o usuário ou realizar outra ação
+                };
+            } else if (permission === "denied") {
+                console.log("Permissão de notificações negada.");
+            }
+        });
+    }
+
     useEffect(() => {
         window.addEventListener('resize', VerficarAltura);
 
@@ -23,18 +49,20 @@ export default function Atendente() {
             setChatsDate(data);
             SetLoadDate(true)
         };*/
+        // Função para mostrar a notificação
 
-        const fetchdata = () => {
+
+        const fetchdata = (firstConnection) => {
             const connection = new signalR.HubConnectionBuilder()
                 .withUrl(`http://localhost:5058/api/chatHub?logId=${UsuarioLogadoId}`)
                 .build();
-            
-                setconnectionDateChild(connection)
-            
-                connection.on("ReceiveChats", (element) => {
+
+            setconnectionDateChild(connection)
+
+            connection.on("ReceiveChats", (element) => {
                 // console.log("mensagen recebida")
                 // console.log(element)
-               
+
                 setChatsDate(prevChatsDate => {
                     console.log(prevChatsDate)
                     // Procura o índice do elemento com o mesmo 'codigo'
@@ -50,17 +78,31 @@ export default function Atendente() {
                         return [...prevChatsDate, element];
                     }
                 });
+                console.log("FirstConnection TEste")
+                console.log(firstConnection)
+                const mensagens = element.mensagens || [];
+                const IsLeadMessage = mensagens.length > 0 ? mensagens[mensagens.length - 1].contato : null
+                if (firstConnection == false && IsLeadMessage) {
+                    console.log("popar note")
+                    const ultimaMensagem = mensagens.length > 0
+                        ? mensagens[mensagens.length - 1].descricao
+                        : 'Aguardando mensagem';
+                    showNotification("Nova Mensagem", {
+                        body: ultimaMensagem,
+                    });
+                }
 
-                
+
             });
 
             connection.on("CompleteLoading", () => {
                 SetLoadDate(true);
+                firstConnection = false
             });
 
             connection.start().catch(err => console.error(err.toString()));
         }
-        fetchdata();
+        fetchdata(true);
         VerficarAltura();
     }, []);
 
@@ -72,14 +114,18 @@ export default function Atendente() {
         setChatActive(data)
     }
 
+    const SetChatDatesFromChild = (data) => {
+        setChatsDate(data)
+    }
+
     document.querySelector("#bodyFromPageAll").style.overflowX = "hidden"
 
     return (
         <div className="col bg-warning containerPai p-0 container-fluid d-flex flex-column">
             {IsDataLoad ? <>
-                <Navbar chatActiveStatus={IsChatActive} ChatDates={ChatsDate}/>
+                <Navbar chatActiveStatus={IsChatActive} ChatDates={ChatsDate} />
                 <div className='flex-grow-1 d-flex bg-dark p-0'>
-                    <ContainerMensagen StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} />
+                    <ContainerMensagen SetChatDatesFromChild={SetChatDatesFromChild} StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} />
                     <ContainerChats connectionDateChild={connectionDateChild} ChatDates={ChatsDate} chatActiveStatus={IsChatActive} />
                 </div>
                 <OffCanvasBuscaMobile />

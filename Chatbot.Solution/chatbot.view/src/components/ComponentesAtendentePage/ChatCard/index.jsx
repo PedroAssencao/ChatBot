@@ -4,14 +4,14 @@ import { AtendenteLogado } from '../../../appsettings'
 export default function ChatCard(props) {
     const chatDate = props.ChatDate || [];
     const nome = chatDate?.contato?.nome
-    ? (chatDate.contato.nome.length > 31 
-        ? chatDate.contato.nome.substring(0, 29) + '...' 
-        : chatDate.contato.nome)
-    : "Sem Nome";
+        ? (chatDate.contato.nome.length > 31
+            ? chatDate.contato.nome.substring(0, 29) + '...'
+            : chatDate.contato.nome)
+        : "Sem Nome";
     const mensagens = chatDate.mensagens || [];
     const ultimaMensagem = mensagens.length > 0
         ? (mensagens[mensagens.length - 1].descricao.length > 5
-            ? mensagens[mensagens.length - 1].descricao.substring(0, 30) + '...'
+            ? mensagens[mensagens.length - 1].descricao.substring(0, 28) + '...'
             : mensagens[mensagens.length - 1].descricao)
         : 'Aguardando mensagem';
 
@@ -21,6 +21,17 @@ export default function ChatCard(props) {
 
     const messagerSender = mensagens.length > 0 && mensagens[mensagens.length - 1].contato == null ? "Você: " : "Cliente: "
 
+    let qtdMensagensNaoLidas = 0
+
+    if (mensagens.length > 0) {
+        mensagens.forEach((element) => {
+            if (element.statusDaMensagen != "read" && element.contato) {
+                qtdMensagensNaoLidas++
+            }
+        });
+    }
+
+
     return (
         <>
             <div
@@ -29,7 +40,7 @@ export default function ChatCard(props) {
                 // data-codigo-chat={chatDate?.codigo}
                 className={props.className}
                 style={{ width: "96%", minHeight: "8vh" }}
-                
+
             >
                 <div className="row justify-content-between">
                     <div className="col-3 d-flex align-items-center gap-3">
@@ -53,6 +64,12 @@ export default function ChatCard(props) {
                         <p style={{ fontWeight: "bold" }}>
                             {ultimaData}
                         </p>
+                        {qtdMensagensNaoLidas > 0 ? (
+                            <p className='rounded-circle d-flex justify-content-center align-items-center' style={{ backgroundColor: "rgb(176, 222, 165)", maxWidth: "2rem", minHeight: "2rem" }}>
+                                {qtdMensagensNaoLidas}
+                            </p>
+                        ): null}
+
                     </div>
                 </div>
             </div>

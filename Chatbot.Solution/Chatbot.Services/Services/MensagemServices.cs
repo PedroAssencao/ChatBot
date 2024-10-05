@@ -5,6 +5,8 @@ using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Identity.Client;
 
 namespace Chatbot.Services.Services
 {
@@ -37,6 +39,7 @@ namespace Chatbot.Services.Services
                         Descricao = item.MensDescricao,
                         CodigoChat = Convert.ToInt32(item.ChaId),
                         CodigoWhatsapp = item.mensWaId,
+                        StatusDaMensagen = item.mensStatus,
                         Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                         Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                     };
@@ -63,6 +66,7 @@ namespace Chatbot.Services.Services
                     Descricao = item.MensDescricao,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     CodigoWhatsapp = item.mensWaId,
+                    StatusDaMensagen = item.mensStatus,
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
                 };
@@ -88,6 +92,7 @@ namespace Chatbot.Services.Services
                         Codigo = item.MensId,
                         Data = item.MensData,
                         Descricao = item.MensDescricao,
+                        StatusDaMensagen = item.mensStatus,
                         Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId))
                     };
                     list.Add(Model);
@@ -139,6 +144,7 @@ namespace Chatbot.Services.Services
                     MensDescricao = Model.Descricao,
                     MenTipo = Model.TipoDaMensagem,
                     mensWaId = Model.CodigoWhatsapp,
+                    mensStatus = Model.StatusDaMensagen,
                     ChaId = Model.CodigoChat,
                     LogId = Model.CodigoLogin,
                     ConId = Model.CodigoContato
@@ -151,6 +157,7 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoWhatsapp = item.mensWaId,
+                    StatusDaMensagen = item.mensWaId,
                     CodigoChat = item.ChaId == null ? 0 : Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
@@ -174,6 +181,7 @@ namespace Chatbot.Services.Services
                     CodigoContato = contato.Codigo,
                     CodigoChat = chat.Codigo,
                     CodigoWhatsapp = CodigoWhatsapp,
+                    StatusDaMensagen = "delivered",
                     Data = DateTime.Now,
                     Descricao = descricao,
                     TipoDaMensagem = "MensagemEnviada"
@@ -184,6 +192,7 @@ namespace Chatbot.Services.Services
                     Codigo = result.Codigo,
                     Contato = result?.Contato,
                     Data = result?.Data,
+                    StatusDaMensagen = result?.StatusDaMensagen,
                     Descricao = result?.Descricao
                 };
                 return Model;
@@ -206,6 +215,7 @@ namespace Chatbot.Services.Services
                     CodigoChat = chat,
                     Data = DateTime.Now,
                     Descricao = descricao,
+                    StatusDaMensagen = "delivered",
                     TipoDaMensagem = "MensagemEnviada"
                 };
                 var result = await AdicionarPost(NewModel);
@@ -214,6 +224,7 @@ namespace Chatbot.Services.Services
                     Codigo = result.Codigo,
                     Contato = result?.Contato,
                     Data = result?.Data,
+                    StatusDaMensagen = result?.StatusDaMensagen,
                     Descricao = result?.Descricao
                 };
                 return Model;
@@ -236,6 +247,7 @@ namespace Chatbot.Services.Services
                     MensDescricao = Model.Descricao,
                     MenTipo = Model.TipoDaMensagem,
                     mensWaId = Model.CodigoWhatsapp,
+                    mensStatus = Model.StatusDaMensagen,
                     ChaId = Model.CodigoChat,
                     LogId = Model.CodigoLogin,
                     ConId = Model.CodigoContato
@@ -248,6 +260,7 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoWhatsapp = item.mensWaId,
+                    StatusDaMensagen = item.mensStatus,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
@@ -274,6 +287,7 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoWhatsapp = item.mensWaId,
+                    StatusDaMensagen = item.mensStatus,
                     CodigoChat = Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
@@ -309,6 +323,7 @@ namespace Chatbot.Services.Services
                 Descricao = item.MensDescricao,
                 CodigoChat = Convert.ToInt32(item.ChaId),
                 CodigoWhatsapp = item.mensWaId,
+                StatusDaMensagen = item.mensStatus,
                 Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                 Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
             };
@@ -321,17 +336,60 @@ namespace Chatbot.Services.Services
             {
                 MensId = Model.Codigo,
                 mensWaId = Model?.CodigoWhatsapp,
-                ChaId = Model?.CodigoChat,   
+                ChaId = Model?.CodigoChat,
                 ConId = Model?.Contato?.Codigo,
                 LogId = Model?.Login?.Codigo,
                 MensDescricao = Model?.Descricao,
                 MensData = Model?.Data,
+                mensStatus = Model?.StatusDaMensagen,
                 MenTipo = Model?.TipoDaMensagem
             };
             using (var newContext = new chatbotContext())
             {
                 newContext.Mensagens.Update(mensagen);
                 await newContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<ChatsDttoGet> MarcarMensagensComoLida(ChatsDttoGet Models)
+        {
+            try
+            {
+                List<MensagensDttoGetForView> Model = new List<MensagensDttoGetForView>();
+                foreach (var item in Models.Mensagens)
+                {
+                    if (item.StatusDaMensagen != "read" && item.Contato != null)
+                    {
+                        var result = await _repository.GetPorId(item.Codigo);
+                        MensagensDttoPut newmodel = new MensagensDttoPut
+                        {
+                            Codigo = item.Codigo,
+                            Data = item.Data,
+                            CodigoContato = item?.Contato?.Codigo,
+                            Descricao = item.Descricao,
+                            StatusDaMensagen = "read",
+                            CodigoChat = result.ChaId,
+                            CodigoLogin = result.LogId,
+                            TipoDaMensagem = result.MenTipo,
+                            CodigoWhatsapp = result.mensWaId
+                        };
+                        await AtualizarPut(newmodel);
+                        item.StatusDaMensagen = "read";
+                        Model.Add(item);
+                    }
+                    else
+                    {
+                        Model.Add(item);
+                    }
+                   
+                }
+                Models.Mensagens = Model;
+                return Models;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

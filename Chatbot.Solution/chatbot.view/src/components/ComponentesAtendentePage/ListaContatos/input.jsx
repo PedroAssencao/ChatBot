@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import ChatCard from "../ChatCard";
 import SmallLoadScreen from '../../BaseComponents/smallLoading';
 import { entrarChat } from '../../../Repository/AtendenteRepository';
-import { AtendenteLogado } from '../../../appsettings';
+import { AtendenteLogado, urlBase } from '../../../appsettings';
+import { json } from 'react-router-dom';
 
 export default function ListaContato(props) {
     const [mensagemVazia, setMensagemVazia] = useState(false);
     const [IsLoading, SetLoading] = useState(true)
+    const [date, setDate] = useState([])
     useEffect(() => {
         SetLoading(true)
-        if (props.date.length <= 0) {
+        const teste = [...props.date]
+        setDate(teste)
+        if (date.length < 0) {
             SetLoading(false);
             setMensagemVazia(true);
         } else {
@@ -17,16 +21,63 @@ export default function ListaContato(props) {
             setMensagemVazia(false);
         }
     }, [props.date]);
+    
+    const setMessagesRead = async (models) => {
+        let qtdMensagensNaoLidas = 0
+        const mensagens = models.mensagens || [];
+
+        if (mensagens.length > 0) {
+            mensagens.forEach((element) => {
+                if (element.statusDaMensagen != "read" && element.contato) {
+                    qtdMensagensNaoLidas++
+                }
+            });
+        }
+
+        if (qtdMensagensNaoLidas > 0) {
+            try {
+                const response = await fetch(`${urlBase}/v1/Mensagem/mensagens/MarcarMensagensComoLida`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(models)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar os dados');
+                }
+
+                const obj = await response.json();
+
+                props.SetChatDatesFromChild(prevChatsDate => {
+                    console.log("Esses são os dados antes")
+                    const index = prevChatsDate.findIndex(chat => chat.codigo === obj.codigo);
+
+                    if (index !== -1) {
+                        const updatedChats = [...prevChatsDate];
+                        updatedChats[index] = obj;
+                        return updatedChats;
+                    } else {
+                        return [...prevChatsDate, obj];
+                    }
+                });
+            } catch (error) {
+                console.error('Erro:', error);
+            }
+        }
+    };
 
     return (
         <div className="ListaContatos overflow-y-auto overflow-x-hidden" style={{ maxHeight: "63vh" }}>
             {/* Percorrer a lista de chats para exibir dependendo do status */}
-            {props.date.map(x => (
+            {date.map(x => (
                 <ChatCard
                     key={x.codigo}
                     ChatDate={x}
                     onClick={() => {
                         entrarChat();
+                        setMessagesRead(x)
                         props.setChatActive({
                             Codigo: x.codigo,
                             AtendenteLogado: AtendenteLogado,

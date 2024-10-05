@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,8 +25,9 @@ public partial class Mensagen
     [Column("men_WaId")]
     [Unicode(false)]
     public string? mensWaId { get; set; }
-
-
+    [Column("mens_status")]
+    [Unicode(false)]
+    public string? mensStatus { get; set; }
     [Column("con_id")]
     public int? ConId { get; set; }
 

@@ -39,7 +39,9 @@ export default function MensagemSend(props) {
 
                 <a
                     className="btn p-3 rounded-4"
-                    onClick={() => sendMessage(props.chatDates.AtendenteLogado, props.chatDates.Codigo, document.querySelector("#InputMessageChat").value)}
+                    onClick={() => {
+                        sendMessage(props.chatDates.AtendenteLogado, props.chatDates.Codigo, document.querySelector("#InputMessageChat").value)
+                    }}
                     style={{ backgroundColor: "#6276A8"}}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                         className="bi bi-send" viewBox="0 0 16 16">

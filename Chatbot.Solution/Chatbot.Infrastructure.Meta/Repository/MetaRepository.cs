@@ -130,7 +130,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
         {
             try
             {
-                var dados = await _chatsInterfaceServices.GetPorId(chat);                
+                var dados = await _chatsInterfaceServices.GetPorId(chat);
                 if (dados?.Atendente?.Codigo != ate)
                 {
                     await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(dados.Atendimento, "HUMANO", dados.Atendimento.Departamento.Codigo, ate);
@@ -217,6 +217,10 @@ namespace Chatbot.Infrastructure.Meta.Repository
             {
                 throw;
             }
+        }
+        public async Task<string?> AtualizarStatusDaMensagem(dynamic Values)
+        {
+            return "Status Atualizado";
         }
         public async Task<dynamic> BotResposta(DataAndType Model)
         {
@@ -457,6 +461,10 @@ namespace Chatbot.Infrastructure.Meta.Repository
             if (dados.Tipo == ETipoRetornoJson.TipoMultiplaEscolhas)
             {
                 return await BotResposta(dados);
+            }
+            if (dados.Tipo == ETipoRetornoJson.TipoStatus)
+            {
+                return await AtualizarStatusDaMensagem(dados.Dados);
             }
             if (dados.Tipo == ETipoRetornoJson.TipoPost)
             {

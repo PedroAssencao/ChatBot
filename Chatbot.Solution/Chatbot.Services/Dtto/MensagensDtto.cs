@@ -15,6 +15,7 @@ namespace Chatbot.Infrastructure.Dtto
         public int Codigo { get; set; }
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
+        public string? StatusDaMensagen { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
     }
 
@@ -26,6 +27,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? TipoDaMensagem { get; set; }
         public int CodigoChat { get; set; }
         public string? CodigoWhatsapp { get; set; }
+        public string? StatusDaMensagen { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
         public LoginDttoGetForView? Login { get; set; }
     }
@@ -35,6 +37,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Descricao { get; set; }
         public string? TipoDaMensagem { get; set; }
         public string? CodigoWhatsapp { get; set; }
+        public string? StatusDaMensagen { get; set; }
         public int? CodigoContato { get; set; }
         public int? CodigoLogin { get; set; }
         public int? CodigoChat { get; set; }
@@ -47,6 +50,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Descricao { get; set; }
         public string? TipoDaMensagem { get; set; }
         public string? CodigoWhatsapp { get; set; }
+        public string? StatusDaMensagen { get; set; }
         public int? CodigoContato { get; set; }
         public int? CodigoLogin { get; set; }
         public int? CodigoChat { get; set; }
