@@ -13,7 +13,7 @@ export default function Atendente() {
     const [StatusActive, setStatusActive] = useState("Ativo");
     const [IsChatActive, setChatActive] = useState({ chatActiveStatus: "Desativado" });
     const [connectionDateChild, setconnectionDateChild] = useState()
-
+    const [ChatDatesFiltered, setChatDatesFiltered] = useState([])
     // Cria um useRef para armazenar o valor mais recente do estado
     const isChatActiveRef = useRef(IsChatActive);
 
@@ -71,8 +71,8 @@ export default function Atendente() {
                 const mensagens = element.mensagens || [];
                 const IsLeadMessage = mensagens.length > 0 ? mensagens[mensagens.length - 1].contato : false;
 
-                if (firstConnection === false && IsLeadMessage && isChatActiveRef.current.Codigo !== element.codigo && 
-                    element?.atendimento?.estadoAtendimento == "HUMANO" && element?.atendimento?.atendente 
+                if (firstConnection === false && IsLeadMessage && isChatActiveRef.current.Codigo !== element.codigo &&
+                    element?.atendimento?.estadoAtendimento == "HUMANO" && element?.atendimento?.atendente
                     && element?.atendimento?.atendente.estadoAtendente) {
                     const ultimaMensagem = mensagens.length > 0
                         ? mensagens[mensagens.length - 1].descricao
@@ -108,6 +108,17 @@ export default function Atendente() {
         setChatsDate(data)
     }
 
+    const BuscarContato = (query) => {
+        if (query == "" || query == null || query == '') {
+            return setChatDatesFiltered([])
+        }
+        const resultado = ChatsDate.filter((chat) => {
+            return chat.contato.nome.toLowerCase().includes(query.toLowerCase()) ||
+                chat.contato.codigoWhatsapp.toLowerCase().includes(query.toLowerCase());
+        });
+        setChatDatesFiltered(resultado)
+    }
+
     document.querySelector("#bodyFromPageAll").style.overflowX = "hidden"
 
     return (
@@ -115,10 +126,10 @@ export default function Atendente() {
             {IsDataLoad ? <>
                 <Navbar chatActiveStatus={IsChatActive} ChatDates={ChatsDate} />
                 <div className='flex-grow-1 d-flex bg-dark p-0'>
-                    <ContainerMensagen SetChatDatesFromChild={SetChatDatesFromChild} chatActiveStatus={IsChatActive} StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={FiltrarDataPorStatus(StatusActive, ChatsDate)} />
+                    <ContainerMensagen searchbarFunction={BuscarContato} SetChatDatesFromChild={SetChatDatesFromChild} chatActiveStatus={IsChatActive} StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={ChatDatesFiltered.length > 0  ? ChatDatesFiltered : FiltrarDataPorStatus(StatusActive, ChatsDate)} />
                     <ContainerChats connectionDateChild={connectionDateChild} ChatDates={ChatsDate} chatActiveStatus={IsChatActive} />
                 </div>
-                <OffCanvasBuscaMobile />
+                <OffCanvasBuscaMobile searchbarFunction={BuscarContato} SetChatDatesFromChild={SetChatDatesFromChild} chatActiveStatus={IsChatActive} StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={ChatDatesFiltered.length > 0 ? ChatDatesFiltered : ChatsDate} />
             </> : <LoadScreen />}
         </div>
     );

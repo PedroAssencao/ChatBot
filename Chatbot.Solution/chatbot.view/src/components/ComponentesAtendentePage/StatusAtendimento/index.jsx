@@ -24,13 +24,13 @@ export default function StatusAtendimento(props) {
                         Ativo</div>
                     <div role='button' onClick={handleSubmit} className="col conversaStatus rounded-2 p-1 text-center" style={{ minWidth: "10rem" }}>
                         Esperando</div>
-                    <div role='button' className="col menuButtonStatus">
+                    {/* <div role='button' className="col menuButtonStatus">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                             fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                             <path
                                 d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                         </svg>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

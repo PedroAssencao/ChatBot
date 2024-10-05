@@ -102,24 +102,25 @@ export function entrarChat() {
     var larguraJanela = window.innerWidth;
 
     if (larguraJanela < 992) {
-        document.getElementById('TituloNavbar').style.display = 'none'
-        document.getElementById('setarVoltar').style.display = 'flex'
-        document.querySelector('#NavbarSearch').style.display = 'none'
-        document.getElementById('sidebar').style.display = 'none'
-        document.getElementById('containerMensagens').style.display = 'none'
-        document.getElementById('containerChats').style.display = 'flex'
+        document.getElementById('TituloNavbar').style.setProperty('display', 'none', 'important');
+        document.getElementById('setarVoltar').style.setProperty('display', 'flex', 'important');
+        document.querySelector('#NavbarSearch').style.setProperty('display', 'none', 'important');
+        document.getElementById('sidebar').style.setProperty('display', 'none', 'important');
+        document.getElementById('containerMensagens').style.setProperty('display', 'none', 'important');
+        document.getElementById('containerChats').style.setProperty('display', 'flex', 'important');
     }
 
     if (larguraJanela > 992) {
-        //se quiser fazer uma alteração no codigo ao entrar o chat pc entrar aqui
+        //se quiser fazer uma alteração no código ao entrar o chat em telas grandes, adicione aqui
     }
 }
 
 export function voltarChat() {
-    document.getElementById('TituloNavbar').style.display = 'block'
-    document.getElementById('setarVoltar').style.display = 'none'
-    document.querySelector('#NavbarSearch').style.display = 'block'
-    document.getElementById('sidebar').style.display = 'flex'
-    document.getElementById('containerMensagens').style.display = 'block'
-    document.getElementById('containerChats').style.display = 'none'
+    document.getElementById('TituloNavbar').style.setProperty('display', 'flex', 'important');
+    document.getElementById('setarVoltar').style.setProperty('display', 'none', 'important');
+    document.querySelector('#NavbarSearch').style.setProperty('display', 'block', 'important');
+    document.getElementById('sidebar').style.setProperty('display', 'flex', 'important');
+    document.getElementById('containerMensagens').style.setProperty('display', 'block', 'important');
+    document.getElementById('containerChats').style.setProperty('display', 'none', 'important');
 }
+

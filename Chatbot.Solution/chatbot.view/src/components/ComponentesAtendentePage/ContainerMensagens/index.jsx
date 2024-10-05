@@ -8,7 +8,7 @@ export default function ContainerMensagen(props) {
     // console.log(props.ContatosDate)
     return (
         <div className="col bg-light containerMensagens border-end border-1 border-dark" id="containerMensagens">
-            <SearchBar />
+            <SearchBar searchbarFunction={props.searchbarFunction} className={"d-none d-lg-flex justify-content-center ms-4 gap-3 align-items-center mt-2"}/>
             <StatusAtendimento SetStatusActive={props.StatusFuncion} />
             <ListaContato chatActiveStatus={props.chatActiveStatus} SetChatDatesFromChild={props.SetChatDatesFromChild} setChatActive={props.setChatActive} date={props.ContatosDate} />
         </div>

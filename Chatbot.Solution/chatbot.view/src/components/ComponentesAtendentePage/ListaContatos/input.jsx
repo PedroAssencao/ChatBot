@@ -9,7 +9,7 @@ export default function ListaContato(props) {
     const [mensagemVazia, setMensagemVazia] = useState(false);
     const [IsLoading, SetLoading] = useState(true)
     const [date, setDate] = useState([])
-    
+
     useEffect(() => {
         SetLoading(true)
         const teste = [...props.date]
@@ -22,7 +22,7 @@ export default function ListaContato(props) {
             setMensagemVazia(false);
         }
     }, [props.date]);
-    
+
     const setMessagesRead = async (models) => {
         let qtdMensagensNaoLidas = 0
         const mensagens = models.mensagens || [];
@@ -86,6 +86,12 @@ export default function ListaContato(props) {
                             AtendenteLogado: AtendenteLogado,
                             chatActiveStatus: "Ativado",
                         });
+                        
+                        const offcanvasElement = document.getElementById('offcanvasExample');
+                        const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                        if (offcanvasElement.classList.contains('show') && offcanvasInstance) {
+                            offcanvasInstance.hide(); 
+                        }
                     }}
                     className={"mt-4 justify-content-center align-items-center row mx-auto p-2 unactiveChat"}
                 />

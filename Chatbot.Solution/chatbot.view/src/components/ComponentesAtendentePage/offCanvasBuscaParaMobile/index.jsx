@@ -1,5 +1,5 @@
-import ChatCard from "../ChatCard"
 import SearchBar from "../../BaseComponents/searchBar"
+import ListaContato from "../ListaContatos/input"
 export default function offCanvasBuscaMobile(props) {
     return (
         // Off Canvas para Busca em mobile mode
@@ -11,16 +11,8 @@ export default function offCanvasBuscaMobile(props) {
             </div>
 
             <div className="offcanvas-body">
-
-                <SearchBar />
-                
-                {/* Fazer o contato buscado aparecer aqui e puxar a lista de contatos para aqui tambem */}
-
-                {/* exemplo de Chat Ativado */}
-                <ChatCard className={"container-fluid mt-4 d-flex justify-content-center align-items-center"} />
-
-                {/* exemplo de Chat desativado */}
-                <ChatCard className={"mt-4 justify-content-center align-items-center row mx-auto p-2 bg-light unactiveChat"} />
+                <SearchBar searchbarFunction={props.searchbarFunction} className={"d-flex justify-content-center ms-4 gap-3 align-items-center mt-2 mx-auto"}/>                
+                <ListaContato chatActiveStatus={props.chatActiveStatus} SetChatDatesFromChild={props.SetChatDatesFromChild} setChatActive={props.setChatActive} date={props.ContatosDate} />
             </div>
         </div>
     )
