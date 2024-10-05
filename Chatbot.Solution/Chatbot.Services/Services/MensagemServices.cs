@@ -163,7 +163,7 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
-        public async Task SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp)
+        public async Task<MensagensDttoGetForView?> SaveMensageWithCodigoWhatsappId(LoginDttoGet Login, ContatoDttoGet contato, ChatsDttoGet chat, string descricao, string CodigoWhatsapp)
         {
             //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
             try
@@ -178,7 +178,15 @@ namespace Chatbot.Services.Services
                     Descricao = descricao,
                     TipoDaMensagem = "MensagemEnviada"
                 };
-                await AdicionarPost(NewModel);
+                var result = await AdicionarPost(NewModel);
+                MensagensDttoGetForView Model = new MensagensDttoGetForView
+                {
+                    Codigo = result.Codigo,
+                    Contato = result?.Contato,
+                    Data = result?.Data,
+                    Descricao = result?.Descricao
+                };
+                return Model;
             }
             catch (Exception)
             {
@@ -186,9 +194,7 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
-
-
-        public async Task<MensagensDttoGet> SaveMensage(int Login, int chat, string descricao)
+        public async Task<MensagensDttoGetForView?> SaveMensage(int Login, int chat, string descricao)
         {
             //metodo feito apenas para salvar a mensagem recebida caso passe em todas as verificações iniciais
             try
@@ -202,7 +208,15 @@ namespace Chatbot.Services.Services
                     Descricao = descricao,
                     TipoDaMensagem = "MensagemEnviada"
                 };
-                return await AdicionarPost(NewModel);
+                var result = await AdicionarPost(NewModel);
+                MensagensDttoGetForView Model = new MensagensDttoGetForView
+                {
+                    Codigo = result.Codigo,
+                    Contato = result?.Contato,
+                    Data = result?.Data,
+                    Descricao = result?.Descricao
+                };
+                return Model;
             }
             catch (Exception)
             {

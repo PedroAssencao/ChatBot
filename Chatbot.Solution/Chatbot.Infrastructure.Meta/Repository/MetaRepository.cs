@@ -164,7 +164,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-        public async Task<MensagensDttoGet> EnviarMensagemDoTipoSimples(string conteudo, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
+        public async Task<string> EnviarMensagemDoTipoSimples(string conteudo, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
         {
             try
             {
@@ -211,7 +211,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
 
                 var menuselecionado = await _menuInterfaceServices.PegarMenuDeIaPorLogId(Atendimento.Login.Codigo);
                 var result = await MontarMenuParaEnvio(menuselecionado, numero, Atendimento, chat);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result);
             }
             catch (Exception)
             {
@@ -274,8 +274,8 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     //Se o Menu for do tipo de mensagem com multipla escolha ele vai responder com essa resposta
                     if (OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa).Trim()?.ToLower())
                     {
-                        MensagemMultiplaEscolhaDataAndType result = await MontarMenuParaEnvio(MenuSelecionadoOption, numero, Atendimento, chat);
-                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
+                        string result = await MontarMenuParaEnvio(MenuSelecionadoOption, numero, Atendimento, chat);
+                        await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result);
                     }
 
                     //Se For Uma Mensagem Simples ele vai responder aqui
@@ -367,7 +367,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 throw;
             }
         }
-        public async Task<MensagemMultiplaEscolhaDataAndType> MontarMenuParaEnvio(MenuDttoGet menuselecionado, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
+        public async Task<string> MontarMenuParaEnvio(MenuDttoGet menuselecionado, string numero, AtendimentoDttoGet Atendimento, ChatsDttoGet chat)
         {
             try
             {
@@ -440,7 +440,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                 var chat = await _chatsInterfaceServices.RetornarChatPorAtenId(IsAtendimentoGoing.Codigo);
                 await _atendimentoInterfaceServices.AtualizarEstadoAtendimento(IsAtendimentoGoing, "Bot", null, null);
                 var result = await MontarMenuParaEnvio(menuselecionado, contato.CodigoWhatsapp, chat.Atendimento, chat);
-                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result.MenuJson);
+                return await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result);
             }
             catch (Exception)
             {
