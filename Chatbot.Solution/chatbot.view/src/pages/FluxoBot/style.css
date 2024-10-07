@@ -16,11 +16,11 @@
     font-weight: bold;
 }
 
-.textColorForFluxoBot{
+.textColorForFluxoBot {
     color: #a8a49a;
 }
 
-.menuContainerForFluxoBot{
+.menuContainerForFluxoBot {
     width: 20rem;
     height: 5rem;
     display: flex;
@@ -42,7 +42,7 @@
 
 .ContainerInfos {
     min-height: 30rem;
-    box-shadow: -1px 9px 37px 1px rgba(0, 0, 0, 0.75); 
+    box-shadow: -1px 9px 37px 1px rgba(0, 0, 0, 0.75);
 }
 
 .menu {
@@ -156,3 +156,36 @@
     margin-left: 60rem;
 }
 
+.ContainerPaiFluxoCards {
+    position: relative;
+    max-height: 40rem;
+    overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 9px;
+    /* Largura da scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Cor do fundo da barra */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #263a6d;
+    /* Cor da barra */
+    border-radius: 10px;
+    /* Borda arredondada */
+    border: 2px solid #f1f1f1;
+    /* Espaçamento em volta da barra */
+}
+
+/* CSS media query dentro de um stylesheet */
+@media (min-width: 1213px) {
+    .TamanhoSubMenuFluxobot{
+        width: 15%!important;
+    }
+  }
+  

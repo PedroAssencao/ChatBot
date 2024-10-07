@@ -10,12 +10,12 @@ export const fetchNewDatas = async () => {
   try {
     const response = await fetch(`${urlBase}/v1/Menus/Menus/GetAllMenusByLogId/${UsuarioLogadoId}`);
     const responseJson = await response.json();
-    data = responseJson;    
+    data = responseJson;
     return true;
   } catch (error) {
     console.error(error);
     //deixar isso aqui apenas no ambiente de teste 
-    data = dataMock;    
+    //data = dataMock;    
     return false;
   }
 }
@@ -174,7 +174,7 @@ const gerarMenuHtml = (menu, nivel = 0) => {
     let optionMarginClass = `marginClasses-${optionNivel}`;
 
     let TipoACriacao = ``
-    
+
     if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
       TipoACriacao = `
         <li>
@@ -254,24 +254,24 @@ const conectarMenus = (menu) => {
       paintStyle: { stroke: "#000", strokeWidth: 2 },
       endpoint: "Blank",
       overlays: [
-        ["Arrow", { width: 1, length: 1, location: 1 }]
+        ["Arrow", { width: 10, length: 10, location: 1 }]
       ]
     });
 
-    if (loopsCount == 0) {
-      jsPlumb.connect({
-        source: `CreateMenu`,
-        target: `Menu${getMenuPorTipo("PrimeiraMensagem").codigo}`.trim(),
-        anchors: ["BottomLeft", "Left"],
-        connector: ["Flowchart"],
-        paintStyle: { stroke: "#000", strokeWidth: 2 },
-        endpoint: "Blank",
-        overlays: [
-          ["Arrow", { width: 1, length: 1, location: 1 }]
-        ]
-      });
-      loopsCount = loopsCount + 1
-    }
+    // if (loopsCount == 0) {
+    jsPlumb.connect({
+      source: `CreateMenu`,
+      target: `Menu${getMenuPorTipo("PrimeiraMensagem").codigo}`.trim(),
+      anchors: ["BottomLeft", "Left"],
+      connector: ["Flowchart"],
+      paintStyle: { stroke: "#000", strokeWidth: 2 },
+      endpoint: "Blank",
+      overlays: [
+        ["Arrow", { width: 10, length: 10, location: 1 }]
+      ]
+    });
+    // loopsCount = loopsCount + 1
+    // }
 
     if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
       jsPlumb.connect({
@@ -282,7 +282,7 @@ const conectarMenus = (menu) => {
         paintStyle: { stroke: "#000", strokeWidth: 2 },
         endpoint: "Blank",
         overlays: [
-          ["Arrow", { width: 1, length: 1, location: 1 }]
+          ["Arrow", { width: 10, length: 10, location: 1 }]
         ]
       });
     }
@@ -296,10 +296,10 @@ export const Iniciar = () => {
   const MenuInicial = getMenuPorTipo("PrimeiraMensagem");
   const menuHtml = gerarMenuHtml(MenuInicial);
   document.querySelector("#LinhaMenuPrincipal").innerHTML = `<div class="col-12 p-0">
-            <button class="btn buttonAdicionarFromHome" id="CreateMenu"><strong>Adicionar Menu</strong></button>
+            <button class="btn buttonAdicionarFromHome" onclick=() id="CreateMenu"><strong>Adicionar Menu</strong></button>
         </div>
         ` + menuHtml;
-  resetarAndStartPlumbJS()  
+  resetarAndStartPlumbJS()
 }
 
 // jsPlumb.ready(function () {
@@ -419,7 +419,7 @@ export const AdicionarEmDados = async (e) => {
     // }
 
     let MenuResponse = await AdicionarNovoMenu(NewMenu)
-    
+
     const newOption = {
       "CodigoLogin": UsuarioLogadoId,
       "codigoMenu": parseInt(localStorage.getItem("MenId")),
@@ -431,7 +431,7 @@ export const AdicionarEmDados = async (e) => {
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
 
-   
+
     if (MenuResponse) {
       let optionResponse = await AdicionarNovaOpcao(newOption)
 

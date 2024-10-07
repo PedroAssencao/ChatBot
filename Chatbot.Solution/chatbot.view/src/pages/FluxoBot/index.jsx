@@ -33,16 +33,16 @@ export default function FluxoBot() {
       </div>
 
       <div className="row container-fluid flex-column flex-md-row p-0 mt-3 gap-5" style={{ marginLeft: "1px" }}>
-        <div className="col-12 col-md-2 p-0 bg-light containerInicio">
+        <div className="col-12 TamanhoSubMenuFluxobot p-0 bg-light containerInicio">
           <SidebarControlFluxoBot />
         </div>
 
-        <div className="col p-0 bg-warning ContainerInfos">
+        <div className="col p-0 bg-light ContainerInfos">
 
           <HeaderControlFluxobot />
 
           <div className="container-fluid overflow-x-hidden" id='ParentContainerToRender'>
-            <div className="row p-3">
+            <div className="row p-3 ContainerPaiFluxoCards">
               {/* Linha do Primeiro Menu */}
               <div className="col-12 p-0" id="LinhaMenuPrincipal" style={{ marginLeft: "2rem" }}>
 
