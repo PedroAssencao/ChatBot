@@ -1,6 +1,6 @@
 import A from '../a'
 import React, { useState } from 'react';
-import Input from '../input/input'
+import Input from '../input';
 export default function searchBar(props) {
     const [inputValue, setInputValue] = useState('');
 
