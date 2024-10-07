@@ -1,7 +1,7 @@
 ﻿using Chatbot.Infrastructure.Dtto;
 using Chatbot.Services.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Chatbot.API.Controllers.v1
 {
@@ -26,6 +26,14 @@ namespace Chatbot.API.Controllers.v1
             {
                 return BadRequest(new Exception("error: " + ex.Message));
             }
+        }
+        [HttpGet("login/GetClaimsInfo")]
+        public IActionResult GetUserInfo()
+        {
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+            var userName = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            return Ok(new { UsuarioLogadoId = userId, UserName = userName });
         }
 
         [HttpGet("login/{id}")]
