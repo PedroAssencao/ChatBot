@@ -42,6 +42,20 @@ namespace Chatbot.API.Controllers.v1
             }
         }
 
+        [HttpGet("Menus/GetAllMenusByLogId/{id}")]
+        public async Task<IActionResult> BuscarTodosOsMenusPorLogId(int id)
+        {
+            try
+            {
+                return Ok(await _repository.PegarTodosOsMenusPorLogID(id));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         [HttpGet("Menus/MenuInicial/{id}")]
         public async Task<IActionResult> BuscarMenuInicial(int id)
         {
