@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from './pages/Home'
 import NoPage from './pages/NoPage';
 import './App.css';
+import Login from './pages/Login'
 import Atendimento from './pages/AtendentePage'
 import FluxoBot from './pages/FluxoBot'
 import Sidebar from './components/BaseComponents/sideBar'
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/Atendimento" element={<Atendimento />} />
             <Route path="/FluxoBot" element={<FluxoBot />} />
             <Route path="*" element={<NoPage />} />
+            <Route path="/Login" element={<Login/>}/>
           </Routes>
         </div>
       </div>

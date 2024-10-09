@@ -5,15 +5,10 @@ using Chatbot.Infrastructure.Services;
 using Chatbot.Infrastructure.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Chatbot.Infrastructure.Extensions;
 using Chatbot.Services.Services.Interfaces;
 using Chatbot.Services.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace Chatbot.Services.Extensions
 {
@@ -24,11 +19,15 @@ namespace Chatbot.Services.Extensions
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = SameSiteMode.Lax; // Use 'None' se necessário
+                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // 'Always' em produção com HTTPS
                 options.LoginPath = "/Usuarios/Index";
                 options.Cookie.Name = "UsuarioDados";
                 options.LogoutPath = "/Usuarios/Logout";
                 options.AccessDeniedPath = "/Usuarios/Index";
             });
+
 
             services.AddTransient<IContatoInterfaceServices, ContatoServices>();
             services.AddTransient<IMensagemInterfaceServices, MensagemServices>();

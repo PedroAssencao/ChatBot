@@ -64,7 +64,7 @@ namespace Chatbot.API.Controllers.v1
 
 
         [HttpPost("login/logar")]
-        public async Task<IActionResult> Logar(LoginDttoPost Model, bool Iscadastrate)
+        public async Task<IActionResult> Logar([FromBody]LoginDttoPost Model, bool Iscadastrate)
         {
             try
             {

@@ -30,7 +30,7 @@ namespace Chatbot.API.Extensions
                     builder =>
                     {
                         builder.WithOrigins("https://localhost:5173")
-                                .WithOrigins("http://127.0.0.1:5500")
+                                //.WithOrigins("http://127.0.0.1:5500")
                                .AllowAnyMethod()
                                .AllowAnyHeader()
                                .AllowCredentials();
@@ -43,6 +43,7 @@ namespace Chatbot.API.Extensions
             services.StartConfiguration();
             services.AddRepositoryStartUp(configuration);
             services.AddServicesSetup();
+            services.AddAuthorization();
             services.ConfigureServicesMeta();
             services.ConfigureServicesOpenAi();
         }
