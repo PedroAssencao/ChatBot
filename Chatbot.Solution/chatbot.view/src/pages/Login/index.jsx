@@ -21,7 +21,7 @@ export default function Registro() {
         //function para enviar dados para efeturar login
         document.getElementById('buttonEntrar').addEventListener('click', async () => {
             const url = "http://localhost:5058/api/v1/Login/login/logar";
-        
+
             // Captura os valores dos inputs
             const email = document.getElementById('inputEmailLogar').value;
             const senha = document.getElementById('inputSenhaLogar').value;
@@ -31,7 +31,7 @@ export default function Registro() {
                 Email: email,
                 Senha: senha,
             };
-        
+
             // Configurações da requisição
             const options = {
                 method: 'POST', // Método HTTP POST
@@ -39,8 +39,9 @@ export default function Registro() {
                     'Content-Type': 'application/json', // Tipo de conteúdo JSON
                 },
                 body: JSON.stringify(data), // Converte o objeto JavaScript em JSON
+                credentials: 'include'
             };
-        
+
             try {
                 // Faz a requisição e aguarda a resposta
                 const response = await fetch(url, options);
@@ -55,7 +56,7 @@ export default function Registro() {
                 console.error('Ocorreu um erro:', error);
             }
         });
-        
+
 
 
         //function para enviar dados para cadastro

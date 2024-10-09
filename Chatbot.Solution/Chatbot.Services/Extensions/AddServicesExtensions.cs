@@ -20,8 +20,8 @@ namespace Chatbot.Services.Extensions
             .AddCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
-                options.Cookie.SameSite = SameSiteMode.Lax; // Use 'None' se necessário
-                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // 'Always' em produção com HTTPS
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.LoginPath = "/Usuarios/Index";
                 options.Cookie.Name = "UsuarioDados";
                 options.LogoutPath = "/Usuarios/Logout";

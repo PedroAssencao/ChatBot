@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\extensions\\addservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|solutionrelative:chatbot.services\\extensions\\addservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|solutionrelative:chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\controllers\\v1\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\controllers\\v1\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|solutionrelative:chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\extensions\\addservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|solutionrelative:chatbot.services\\extensions\\addservicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\services\\verificaratendimentoservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -154,7 +154,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -170,39 +170,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\LoginController.cs",
               "RelativeDocumentMoniker": "Chatbot.API\\Controllers\\v1\\LoginController.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\LoginController.cs",
               "RelativeToolTip": "Chatbot.API\\Controllers\\v1\\LoginController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAD4vyEAAAAlAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAtwCkAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-07T21:55:50.233Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "AddServicesExtensions.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Extensions\\AddServicesExtensions.cs",
               "RelativeDocumentMoniker": "Chatbot.Services\\Extensions\\AddServicesExtensions.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Extensions\\AddServicesExtensions.cs",
               "RelativeToolTip": "Chatbot.Services\\Extensions\\AddServicesExtensions.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABcAAABxAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABYAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-07T20:27:11.447Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "LoginServices.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\LoginServices.cs",
               "RelativeDocumentMoniker": "Chatbot.Services\\Services\\LoginServices.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\LoginServices.cs",
               "RelativeToolTip": "Chatbot.Services\\Services\\LoginServices.cs",
-              "ViewState": "AQIAANgAAAAAAAAAAAAqwNwAAAAIAAAA",
+              "ViewState": "AQIAANsAAAAAAAAAAAAqwOUAAABVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-07T20:25:37.117Z",
               "EditorCaption": ""
@@ -305,13 +305,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Startup.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Extensions\\Startup.cs",
               "RelativeDocumentMoniker": "Chatbot.API\\Extensions\\Startup.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Extensions\\Startup.cs",
               "RelativeToolTip": "Chatbot.API\\Extensions\\Startup.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAgwC0AAAAoAAAA",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAjwC0AAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-04T14:34:11.449Z",
               "EditorCaption": ""
@@ -518,8 +518,7 @@
               "RelativeToolTip": "Chatbot.API\\Services\\VerificarAtendimentoServices.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAgwAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T14:33:39.836Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-04T14:33:39.836Z"
             },
             {
               "$type": "Document",
