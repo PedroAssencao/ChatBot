@@ -20,7 +20,7 @@ export default function Registro() {
 
         //function para enviar dados para efeturar login
         document.getElementById('buttonEntrar').addEventListener('click', async () => {
-            const url = "http://localhost:5058/api/v1/Login/login/logar";
+            const url = urlBase + "/v1/Login/login/logar";
 
             // Captura os valores dos inputs
             const email = document.getElementById('inputEmailLogar').value;
@@ -58,17 +58,24 @@ export default function Registro() {
         });
 
 
-
         //function para enviar dados para cadastro
         document.getElementById('buttonCadastrar').addEventListener('click', () => {
             if (inputSenhaCadastro.value.length > 6) {
-                const url = urlBase + '/v1/login/Cadastrar';
+                const url = urlBase + '/v1/Login/login/Cadastrar';
+
+                const User = document.getElementById('inputNomeCadastrar').value
+                const Email = document.getElementById('inputEmailCadastrar').value
+                const Senha = document.getElementById('inputSenhaCadastrar').value
+
+                console.log(User)
+                console.log(Email)
+                console.log(Senha)
 
                 // Dados a serem enviados no corpo da requisição
                 const data = {
-                    logUser: document.getElementById('inputNomeCadastrar').value,
-                    logEmail: document.getElementById('inputEmailCadastrar').value,
-                    logSenha: document.getElementById('inputSenhaCadastrar').value,
+                    Usuario: User,
+                    Email: Email,
+                    Senha: Senha,
                 };
 
                 // Configurações da requisição

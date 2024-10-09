@@ -15,11 +15,13 @@ namespace Chatbot.Services.Services
     {
         protected readonly ILoginInterface _repository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IAtendeteInterface _atendete;
 
-        public LoginServices(ILoginInterface repository, IHttpContextAccessor httpContextAccessor)
+        public LoginServices(ILoginInterface repository, IHttpContextAccessor httpContextAccessor, IAtendeteInterface atendete)
         {
             _repository = repository;
             _httpContextAccessor = httpContextAccessor;
+            _atendete = atendete;
         }
 
         public async Task<List<LoginDttoGet>> GetALl()
@@ -223,12 +225,18 @@ namespace Chatbot.Services.Services
             {
                 var usuarios = await _repository.GetALl();
                 var usuarioSelecionado = usuarios.FirstOrDefault(x => x.LogEmail == Model?.Email && Model?.DescriptografaSenha(x?.LogSenha) == Model?.Senha || IsCadastre);
+                Atendente? teste = null;
+                if (usuarioSelecionado == null)
+                {
+                    var dates = await _atendete.GetALl();
+                    teste = dates.FirstOrDefault(x => x.AteEmail == Model?.Email && Model?.Senha == x.AteSenha);
+                }
                 if (usuarioSelecionado != null)
                 {
                     var claims = new List<Claim>
                     {
                      new Claim(ClaimTypes.Name, usuarioSelecionado.LogId.ToString()),
-                     new Claim(ClaimTypes.Role, "Logar"),
+                     new Claim(ClaimTypes.Role, usuarioSelecionado.LogPlano == "master" ? "Master" : "Usuario"),
                      new Claim(ClaimTypes.NameIdentifier, usuarioSelecionado.LogUser)
                     };
 
@@ -239,6 +247,24 @@ namespace Chatbot.Services.Services
 
                     return claims;
                 }
+
+                if (teste != null)
+                {
+                    var claims = new List<Claim>
+                    {
+                     new Claim(ClaimTypes.Name, teste.AteId.ToString()),
+                     new Claim(ClaimTypes.Role, "Atendente"),
+                     new Claim(ClaimTypes.NameIdentifier, teste.AteNome)
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                    return claims;
+                }
+
                 throw new Exception("Usuario Não Encontrado");
             }
             catch (Exception ex)

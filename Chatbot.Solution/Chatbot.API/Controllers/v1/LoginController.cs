@@ -32,8 +32,9 @@ namespace Chatbot.API.Controllers.v1
         {
             var userId = User.FindFirst(ClaimTypes.Name)?.Value;
             var userName = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var tipoUsuario = User.FindFirst(ClaimTypes.Role)?.Value;
 
-            return Ok(new { UsuarioLogadoId = userId, UserName = userName });
+            return Ok(new { UsuarioLogadoId = userId, UserName = userName , TipoUsuario = tipoUsuario });
         }
 
         [HttpGet("login/{id}")]
