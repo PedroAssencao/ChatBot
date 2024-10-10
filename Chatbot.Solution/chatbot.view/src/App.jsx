@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home'
+import { urlBase, UsuarioLogado } from './appsettings';
 import NoPage from './pages/NoPage';
 import './App.css';
 import Login from './pages/Login'
@@ -10,8 +11,8 @@ export default function App() {
 
   const searchLocation = window.location.pathname.toLocaleLowerCase();
 
-  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot'];
-  
+  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento', '/fluxobot'];
+
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {
       if (urlIndex[i] === LocationIndex) {
@@ -27,14 +28,14 @@ export default function App() {
     <BrowserRouter>
       <div className="container-fluid bg-warning min-vh-100">
         <div className="row bg-light min-vh-100">
-          {IsTrue ? <Sidebar/> : null}
+          {IsTrue ? <Sidebar /> : null}
           <Routes>
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/Atendimento" element={<Atendimento />} />
             <Route path="/FluxoBot" element={<FluxoBot />} />
+            <Route path="/Login" element={<Login />} />
             <Route path="*" element={<NoPage />} />
-            <Route path="/Login" element={<Login/>}/>
           </Routes>
         </div>
       </div>

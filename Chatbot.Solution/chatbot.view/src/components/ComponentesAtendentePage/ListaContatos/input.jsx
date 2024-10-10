@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import ChatCard from "../ChatCard";
 import SmallLoadScreen from '../../BaseComponents/smallLoading';
 import { entrarChat } from '../../../Repository/AtendenteRepository';
-import { AtendenteLogado, urlBase } from '../../../appsettings';
-import { json } from 'react-router-dom';
+import { UsuarioLogado, urlBase } from '../../../appsettings';
 
 export default function ListaContato(props) {
+    var AtendenteLogado = null;
     const [mensagemVazia, setMensagemVazia] = useState(false);
     const [IsLoading, SetLoading] = useState(true)
     const [date, setDate] = useState([])
@@ -22,6 +22,12 @@ export default function ListaContato(props) {
             setMensagemVazia(false);
         }
     }, [props.date]);
+
+    useEffect(() => {
+        UsuarioLogado().then(result => {
+            AtendenteLogado = result.usuarioLogadoId
+        });
+    }, []);
 
     const setMessagesRead = async (models) => {
         let qtdMensagensNaoLidas = 0
@@ -86,11 +92,11 @@ export default function ListaContato(props) {
                             AtendenteLogado: AtendenteLogado,
                             chatActiveStatus: "Ativado",
                         });
-                        
+
                         const offcanvasElement = document.getElementById('offcanvasExample');
                         const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
                         if (offcanvasElement.classList.contains('show') && offcanvasInstance) {
-                            offcanvasInstance.hide(); 
+                            offcanvasInstance.hide();
                         }
                     }}
                     className={"mt-4 justify-content-center align-items-center row mx-auto p-2 unactiveChat"}

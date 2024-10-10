@@ -1,5 +1,5 @@
 export const urlBase = "http://localhost:5058/api"
-export const AtendenteLogado = () => {
+export const UsuarioLogado = () => {
     return fetch(urlBase + '/v1/Login/login/GetClaimsInfo', {
         credentials: 'include'
     })
@@ -12,6 +12,3 @@ export const AtendenteLogado = () => {
             return null;
         });
 };
-
-
-export const UsuarioLogadoId = 1 

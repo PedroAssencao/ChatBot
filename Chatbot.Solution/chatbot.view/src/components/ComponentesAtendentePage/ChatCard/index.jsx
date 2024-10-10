@@ -1,6 +1,5 @@
 import './style.css';
 import image from '../../../img/file.jpg';
-import { AtendenteLogado } from '../../../appsettings'
 export default function ChatCard(props) {
     const chatDate = props.ChatDate || [];
     const nome = chatDate?.contato?.nome

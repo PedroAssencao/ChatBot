@@ -1,6 +1,40 @@
 import './style.css'
 import A from '../a'
-export default function SideBar() {
+import { urlBase, UsuarioLogado } from '../../../appsettings';
+import { useEffect, useState } from 'react';
+export default function SideBar(props) {
+    const [IsUsuarioLogado, setIsUsuarioLogado] = useState(false);
+    useEffect(() => {
+        const verificarUsuario = async () => {
+            const result = await UsuarioLogado();
+            if (result.usuarioLogadoId == null) {
+                setIsUsuarioLogado(true)
+            } else {
+                setIsUsuarioLogado(false)
+            }
+        };
+
+        verificarUsuario();
+    }, []);
+
+    const UsuarioFunction = async () => {
+        const result = await UsuarioLogado();
+        console.log(result)
+        if (result.usuarioLogadoId !== null) {
+            await fetch(urlBase + '/v1/Login/login/Logout', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            location.reload();
+            return
+        }
+
+        if (result.usuarioLogadoId == null) {
+            location.replace(location.origin + "/login");
+        }
+    };
+
+
     return (
         <div className="col flex-lg-column sideBarContainer" style={{ display: "flex" }} id="sidebar">
             {/* Icon Menu */}
@@ -65,6 +99,32 @@ export default function SideBar() {
                         d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641zM6.374 1 4.168 8.5H7.5a.5.5 0 0 1 .478.647L6.78 13.04 11.478 7H8a.5.5 0 0 1-.474-.658L9.306 1z" />
                 </svg>
             }></A>
+
+            <div className='d-flex flex-grow-1 align-items-end mb-5'>
+                {!IsUsuarioLogado ? (
+                    <div>
+                        <A onClick={UsuarioFunction} className={"btn text-light sideBarIcon mt-4"} icon={
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                <path d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
+                                <path d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                            </svg>
+                        }></A>
+                    </div>
+                ) : (
+                    <div>
+                        <A onClick={UsuarioFunction} className={"btn text-light sideBarIcon mt-4"} icon={
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+                                <path d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                            </svg>
+                        }></A>
+                    </div>
+                )}
+
+
+
+            </div>
+
 
         </div>
     )

@@ -1,14 +1,14 @@
-import { urlBase, UsuarioLogadoId } from "../../appsettings"
+import { urlBase, UsuarioLogado } from "../../appsettings"
 import { dataMock } from "./MockDatesForTestFluxoBot"
 var optionsCounter = 0
 var MenuCounter = 0
 var loopsCount = 0
-
 let data = []
 
 export const fetchNewDatas = async () => {
   try {
-    const response = await fetch(`${urlBase}/v1/Menus/Menus/GetAllMenusByLogId/${UsuarioLogadoId}`);
+    var UsuarioLogadoId = await UsuarioLogado()
+    const response = await fetch(`${urlBase}/v1/Menus/Menus/GetAllMenusByLogId/${UsuarioLogadoId.usuarioLogadoId}`);
     const responseJson = await response.json();
     data = responseJson;
     return true;
@@ -318,6 +318,8 @@ export const AdicionarEmDados = async (e) => {
 
   if (selectValue == "1") {
 
+    var UsuarioLogadoIdResult = await UsuarioLogado()
+    var UsuarioLogadoId = parseInt(UsuarioLogadoIdResult.usuarioLogadoId)
     //esquema para deixar fixo para teste 
 
     // const newOption = {
@@ -430,7 +432,6 @@ export const AdicionarEmDados = async (e) => {
       "tipo": "MensagemDeRespostaInterativa",
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
-
 
     if (MenuResponse) {
       let optionResponse = await AdicionarNovaOpcao(newOption)

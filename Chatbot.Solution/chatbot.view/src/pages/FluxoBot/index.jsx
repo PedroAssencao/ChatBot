@@ -1,5 +1,6 @@
 import './style.css';
 import { Iniciar, resetarAndStartPlumbJS, fetchNewDatas } from '../../Repository/FluxoBoxRepository/index'
+import { UsuarioLogado } from '../../appsettings';
 import { useEffect, useState } from 'react';
 import BaseModal from '../../components/BaseComponents/BaseModal'
 import LoadScreen from '../../components/BaseComponents/loadingScreen';
@@ -8,8 +9,15 @@ import ModalDeAdicaoFluxoBot from '../../components/ComponentesFluxoBot/ModalDeA
 import SidebarControlFluxoBot from '../../components/ComponentesFluxoBot/SideBarControlFluxoBot';
 
 export default function FluxoBot() {
+  
   const [IsDataLoad, SetLoadDate] = useState(false);
   useEffect(() => {
+    UsuarioLogado().then(result => {
+      if (result.usuarioLogadoId == null) {
+        location.replace(location.origin + "/login");
+      }
+    });
+
     const initialize = async () => {
       const result = await fetchNewDatas();
       if (result) {
@@ -30,7 +38,7 @@ export default function FluxoBot() {
 
   return (
     <div className='col'>
-      
+
       {!IsDataLoad ? (
         <LoadScreen />
       ) :

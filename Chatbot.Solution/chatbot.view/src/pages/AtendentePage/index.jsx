@@ -5,9 +5,10 @@ import ContainerMensagen from '../../components/ComponentesAtendentePage/Contain
 import ContainerChats from '../../components/ComponentesAtendentePage/ContainerChats';
 import { VerficarAltura, FetchChatsData, FiltrarDataPorStatus } from '../../Repository/AtendenteRepository/index'
 import OffCanvasBuscaMobile from '../../components/ComponentesAtendentePage/offCanvasBuscaParaMobile';
-import { urlBase, UsuarioLogadoId } from '../../appsettings'
+import { urlBase, UsuarioLogado } from '../../appsettings'
 export default function Atendente() {
-
+    const [UsuarioLogadoId, setUsuarioLogadoId] = useState(null); // Estado para armazenar o usuário logado
+    const [isReady, setIsReady] = useState(false); // Estado para verificar se está pronto para continuar
     const [ChatsDate, setChatsDate] = useState([]);
     const [IsDataLoad, SetLoadDate] = useState(false);
     const [StatusActive, setStatusActive] = useState("Ativo");
@@ -46,11 +47,28 @@ export default function Atendente() {
     }
 
     useEffect(() => {
+        const verificarUsuario = async () => {
+            const result = await UsuarioLogado(); // Espera o resultado da função UsuarioLogado
+            if (result.usuarioLogadoId == null) {
+                location.replace(location.origin + "/login"); // Redireciona se não estiver logado
+            } else {
+                setUsuarioLogadoId(result.usuarioLogadoId); // Define o ID do usuário logado
+                setIsReady(true); // Indica que está pronto para continuar
+            }
+        };
+
+        verificarUsuario(); // Chama a função ao carregar
+
+    }, []); // Apenas no carregamento inicial
+
+    useEffect(() => {
+
+        if (!isReady || !UsuarioLogadoId) return;
         window.addEventListener('resize', VerficarAltura);
 
         const fetchdata = (firstConnection) => {
             const connection = new signalR.HubConnectionBuilder()
-                .withUrl(`http://localhost:5058/api/chatHub?logId=${UsuarioLogadoId}`)
+                .withUrl(`${urlBase}/chatHub?logId=${UsuarioLogadoId}`)
                 .build();
 
             setconnectionDateChild(connection);
@@ -94,7 +112,7 @@ export default function Atendente() {
 
         fetchdata(true);
         VerficarAltura();
-    }, []);
+    }, [isReady, UsuarioLogadoId]);
 
     const handleDataFromChild = (data) => {
         setStatusActive(data);
@@ -126,7 +144,7 @@ export default function Atendente() {
             {IsDataLoad ? <>
                 <Navbar chatActiveStatus={IsChatActive} ChatDates={ChatsDate} />
                 <div className='flex-grow-1 d-flex bg-dark p-0'>
-                    <ContainerMensagen searchbarFunction={BuscarContato} SetChatDatesFromChild={SetChatDatesFromChild} chatActiveStatus={IsChatActive} StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={ChatDatesFiltered.length > 0  ? ChatDatesFiltered : FiltrarDataPorStatus(StatusActive, ChatsDate)} />
+                    <ContainerMensagen searchbarFunction={BuscarContato} SetChatDatesFromChild={SetChatDatesFromChild} chatActiveStatus={IsChatActive} StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={ChatDatesFiltered.length > 0 ? ChatDatesFiltered : FiltrarDataPorStatus(StatusActive, ChatsDate)} />
                     <ContainerChats connectionDateChild={connectionDateChild} ChatDates={ChatsDate} chatActiveStatus={IsChatActive} />
                 </div>
                 <OffCanvasBuscaMobile searchbarFunction={BuscarContato} SetChatDatesFromChild={SetChatDatesFromChild} chatActiveStatus={IsChatActive} StatusActive={StatusActive} setChatActive={handleChatInFromChild} StatusFuncion={handleDataFromChild} ContatosDate={ChatDatesFiltered.length > 0 ? ChatDatesFiltered : ChatsDate} />
