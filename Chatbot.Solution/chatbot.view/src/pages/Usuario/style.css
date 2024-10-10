@@ -59,3 +59,8 @@ margin-top: 10.4rem;
  align-items: center;
  border-color: #263a6d;
 }
+
+
+.perfil{
+    min-width: 40vw;
+}
