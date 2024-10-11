@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +17,13 @@ namespace Chatbot.Services.Services
         protected readonly IAtendeteInterface _repository;
         protected readonly IDepartamentoInterfaceServices _departamento;
         protected readonly ILoginInterfaceServices _login;
-
-        public AtendenteServices(IAtendeteInterface repository, IDepartamentoInterfaceServices departamento, ILoginInterfaceServices login)
+        protected readonly IAtendimentoInterface _atendimentoInterface;
+        public AtendenteServices(IAtendeteInterface repository, IDepartamentoInterfaceServices departamento, ILoginInterfaceServices login, IAtendimentoInterface atendimentoInterface)
         {
             _repository = repository;
             _departamento = departamento;
             _login = login;
+            _atendimentoInterface = atendimentoInterface;
         }
 
         public async Task<List<AtendenteDttoGet>> GetALl()
@@ -43,6 +45,37 @@ namespace Chatbot.Services.Services
                     List.Add(ViewModel);
                 }
                 return List;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<dynamic>> BuscarTodosAtendentesPorLogId(int id)
+        {
+            try
+            {
+                var dados = await GetALl();
+                var AtendimentoDados = await _atendimentoInterface.GetALl();
+                List<dynamic> List = new List<dynamic>();
+                foreach (var item in dados.Where(x => x.Login?.Codigo == id).ToList())
+                {
+                    var qtdFinalizado = AtendimentoDados.Where(x => x.AteId == item.Codigo && x.LogId == item?.Login?.Codigo && x?.AtenEstado?.Trim()?.ToLower() == "finalizado").Count();
+                    var qtdAtivo = AtendimentoDados.Where(x => x.AteId == item.Codigo && x.LogId == item?.Login?.Codigo && x?.AtenEstado?.Trim()?.ToLower() == "humano").Count();
+                    var qtdTotal = qtdFinalizado + qtdAtivo;
+                    var Model = new
+                    {
+                        Atendente = item,
+                        qtdFinalizado = qtdFinalizado,
+                        qtdAtivo = qtdAtivo,
+                        qtdTotal = qtdTotal
+                    };
+                    List.Add(Model);
+                }
+              
+                return List;
+               
             }
             catch (Exception)
             {
@@ -73,7 +106,7 @@ namespace Chatbot.Services.Services
             }
 
         }
-        
+
         public async Task<AtendenteDttoGet> AdicionarPost(AtendenteDttoForPost Model)
         {
             try

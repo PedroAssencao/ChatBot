@@ -12,5 +12,6 @@ namespace Chatbot.Services.Services.Interfaces
     {
         Task<AtendenteDttoGet> AdicionarPost(AtendenteDttoForPost Model);
         Task<AtendenteDttoGet> UpdatePost(AtendenteDttoForPut Model);
+        Task<List<dynamic>> BuscarTodosAtendentesPorLogId(int id);
     }
 }

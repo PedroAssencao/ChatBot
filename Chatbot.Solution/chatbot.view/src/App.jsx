@@ -13,7 +13,7 @@ export default function App() {
 
   const searchLocation = window.location.pathname.toLocaleLowerCase();
 
-  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento', '/fluxobot', '/DashBoard','/Usuario'];
+  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento', '/fluxobot', '/dashboard', '/Usuario'].map(url => url.toLowerCase());
 
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {

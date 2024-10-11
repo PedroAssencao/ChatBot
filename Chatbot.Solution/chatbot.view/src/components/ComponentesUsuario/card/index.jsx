@@ -1,18 +1,19 @@
 import image from "../card/do-utilizador.png"
 import './style.css'
-export default function card() {
+export default function card(props) {
+    const classVariableStatus = props.date.atendente.estadoAtendente == true ? "statusAtivo rounded-circle" : "statusOffline rounded-circle"
     return (
 
         <div className="card">
             <div className="cardBody">
                 {/* status do atendente aqui */}
                 <div>
-                    <div className="statusOffline rounded-circle"></div>
+                    <div className={classVariableStatus}></div>
                 </div>
                 {/* Infos do atendente aqui */}
                 <div className="cardIcon">
                     <img src={image}></img>
-                    <p className="Name">Antony</p>
+                    <p className="Name">{props.date.atendente.nome}</p>
                     <p className="Type">Atendente</p>
                 </div>
                 {/* Icone de configs aqui */}
@@ -26,15 +27,15 @@ export default function card() {
             {/* Infos sobre o atendente aqui */}
             <div className="w-100 d-flex justify-content-between ps-3 pe-3">
                 <div className="cardInfo">
-                    <p className="Number">0</p>
+                    <p className="Number">{props.date.qtdAtivo}</p>
                     <p>Ativo(s)</p>
                 </div>
                 <div className="cardInfo">
-                    <p className="Number">0</p>
+                    <p className="Number">{props.date.qtdFinalizado}</p>
                     <p>Finalizado(s)</p>
                 </div>
                 <div className="cardInfo">
-                    <p className="Number">0</p>
+                    <p className="Number">{props.date.qtdTotal}</p>
                     <p>Total</p>
                 </div>
             </div>

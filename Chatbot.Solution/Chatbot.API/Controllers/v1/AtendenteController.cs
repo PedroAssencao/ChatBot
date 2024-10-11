@@ -29,6 +29,19 @@ namespace Chatbot.API.Controllers.v1
             }
         }
 
+        [HttpGet("Atendente/BuscarTodosAtendentePorLogId")]
+        public async Task<IActionResult> BuscarTodosAtendentesDeUmLogId(int id)
+        {
+            try
+            {
+                return Ok(await _repository.BuscarTodosAtendentesPorLogId(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("error: " + ex.Message);
+            }
+        }
+
         [HttpGet("Atendente/{id}")]
         public async Task<IActionResult> BuscarAtendendePorId(int id)
         {
