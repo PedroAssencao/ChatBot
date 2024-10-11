@@ -1,0 +1,32 @@
+.Ativo {
+    width: 60rem;
+    height: 33rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.atendimentoAtivos {
+    width: 60rem;
+    height: 33rem;
+    padding: 1rem;
+    box-shadow: 1px 1px 2px 2px grey;
+}
+
+.titleAtivo{
+    color: #263a6d;
+}
+
+.HeaderAtivo{
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.AtivoGrafico{
+    width: 53rem;
+}
+
+#Ativo{
+    width: 53rem;
+}

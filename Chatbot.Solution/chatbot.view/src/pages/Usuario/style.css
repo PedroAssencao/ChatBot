@@ -1,0 +1,44 @@
+.Title{
+    color: #263a6d;
+    font-weight: bold;
+}
+
+.Widthteste{
+    min-width: 20rem !important;
+    max-width: 24rem !important;
+}
+
+
+
+p{
+    margin: 0px;
+}
+
+
+
+.Name{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.Type{
+   font-size: 16px;
+   margin-bottom: 0.5rem;
+}
+
+.Number{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.Header{
+    display: flex;
+}
+
+.btn-primary{
+ background-color: #263a6d;
+ --bs-btn-hover-color:  #263a6d solid 1px;
+ display: flex;
+ align-items: center;
+ border-color: #263a6d;
+}
