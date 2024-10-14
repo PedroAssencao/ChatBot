@@ -66,7 +66,7 @@ export default function Ativo() {
   }, []); // O array vazio garante que o efeito só será executado na montagem inicial
 
   return (
-    <div className='Ativo card'>
+
       <div className="atendimentoAtivos card">
         <div className='HeaderAtivo'>
           <p className='titleAtivo'>Atendimento ativos por atendentes</p>
@@ -83,6 +83,6 @@ export default function Ativo() {
           <canvas id="Ativo"></canvas>
         </div>
       </div>
-    </div>
+
   );
 }

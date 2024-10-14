@@ -10,8 +10,7 @@
 .atendimentoAtivos {
     width: 60rem;
     height: 33rem;
-    padding: 1rem;
-    box-shadow: 1px 1px 2px 2px grey;
+    margin: 0px;
 }
 
 .titleAtivo{

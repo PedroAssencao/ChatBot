@@ -15,7 +15,7 @@ import AtendimentosAtivosProgress from "../../components/ComponentesDashBoard/At
 export default function DashBoard() {
   return (
     <div className="col">
-      <div className="">
+
         <div className="Header" style={{ display: "flex" }}>
           <h1 className="Title">DashBoard</h1>
           <p className="Date">
@@ -70,6 +70,5 @@ export default function DashBoard() {
 
         </div>
       </div>
-    </div>
   );
 }
