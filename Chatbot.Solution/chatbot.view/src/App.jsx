@@ -7,12 +7,13 @@ import FluxoBot from './pages/FluxoBot'
 import DashBoard from './pages/DashBoard'
 import Usuario from './pages/Usuario'
 import Perfil from './pages/Perfil'
+import Departamento from './pages/Departamento'
 import Sidebar from './components/BaseComponents/sideBar'
 export default function App() {
 
   const searchLocation = window.location.pathname;
 
-  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot','/DashBoard','/Usuario','/Perfil'];
+  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot','/DashBoard','/Usuario','/Perfil', '/Departamento'];
   
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {
@@ -38,6 +39,7 @@ export default function App() {
             <Route path="/DashBoard" element={<DashBoard />} />
             <Route path="/Usuario" element={<Usuario />} />
             <Route path="/Perfil" element={<Perfil />} />
+            <Route path="/Departamento" element={<Departamento />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </div>

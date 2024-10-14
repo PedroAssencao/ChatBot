@@ -1,0 +1,80 @@
+.Title{
+    color: #263a6d;
+    font-weight: bold;
+}
+
+.container{
+
+}
+
+.card{
+    box-shadow: 2px 2px 2px 2px grey;
+    padding: 0.8rem;
+}
+
+.cardBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cardIcon{
+    display: flex;
+    flex-direction: column;
+}
+
+p{
+    margin: 0px;
+}
+
+.cardInfo{
+/* display: flex;
+justify-content: space-around; */
+margin-top: 10.4rem;
+}
+
+.Name{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.Tipo{
+   color: #263a6d;
+   font-weight: bold;
+}
+
+.Number{
+    font-weight: bold;
+    color: #263a6d;
+    font-size: 26px;
+    margin-left: 2.5rem;
+}
+
+.Header{
+    display: flex;
+}
+
+.btn-primary{
+ background-color: #263a6d;
+ --bs-btn-hover-color:  #263a6d solid 1px;
+ display: flex;
+ align-items: center;
+ border-color: #263a6d;
+}
+
+
+.perfil{
+    min-width: 40vw;
+}
+
+.Departamento{
+    background-color: rgb(228, 227, 227);
+    box-shadow: 2px 2px 2px 2px grey;
+    width: 25rem;
+    height: 8.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
