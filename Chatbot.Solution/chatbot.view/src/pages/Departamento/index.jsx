@@ -1,4 +1,5 @@
 import "./style.css";
+import Departamento from '../../components/ComponentesDepartamentos';
 // import Card from '../../components/ComponentesUsuario/card';
 
 export default function departamento() {
@@ -18,17 +19,11 @@ export default function departamento() {
             <div class="container-fluid text-center">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
                     <div class="col">
-                        <div className="Departamento">
-                            <h2 className="Tipo">Comercial</h2>
-                            <p className="Number">#1263</p>
-                        </div>
+                        <Departamento></Departamento>
                     </div>
 
                     <div class="col">
-                        <div className="Departamento">
-                            <h2 className="Tipo">Suporte</h2>
-                            <p className="Number">#7895</p>
-                        </div>
+                    <Departamento></Departamento>
                     </div>
 
 

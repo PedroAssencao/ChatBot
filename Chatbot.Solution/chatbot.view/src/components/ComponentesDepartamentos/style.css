@@ -1,0 +1,25 @@
+.Departamento{
+    -webkit-box-shadow: 5px 3px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 3px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 3px 15px 0px rgba(0,0,0,0.75);
+    width: 25rem;
+    height: 8.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.Tipo{
+    color: #263a6d;
+    font-weight: bold;
+ }
+ 
+ .Number{
+     font-weight: bold;
+     color: #263a6d;
+     font-size: 22px;
+     margin-left: 2.5rem;
+ }
+ 
