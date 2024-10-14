@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.col{
+    padding: 0px;
+}
+
+.barra-superior {
+    background-color: white;
+    height: 8vh;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.barra-superior h1 {
+    margin: 0;
+    color: #182c5f;
+}
+
+.conteudo {
+    background-color: #EBEFF9; 
+    height: 100vh;
+    padding: 20px;
+}
+.parte-superior{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+    font-family: 'Poppins', sans-serif;
+}
+.parte-superior button{
+    background-color: rgb(0, 170, 14);
+    border-radius: 20px;
+    border:none;
+ }
+.poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .linha-horizontal {
+    margin-top: 5px;
+    border: none;
+    border-bottom: 2px solid black;
+}
+.card-body{
+    -webkit-box-shadow: -1px 2px 49px -16px rgba(0,0,0,0.51);
+-moz-box-shadow: -1px 2px 49px -16px rgba(0,0,0,0.51);
+box-shadow: -1px 2px 49px -16px rgba(0,0,0,0.51);
+}
+
+/* .botoes{
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem;
+}
+.cartoes{
+    display: flex;
+    justify-content: space-around;
+}
+.card{
+    width: 25rem;
+} */
+.card-body{
+    display: inline-flex;
+    justify-content: space-evenly;
+    -webkit-box-shadow: -1px 2px 39px -23px rgba(0,0,0,0.51);
+                            -moz-box-shadow: -1px 2px 39px -23px rgba(0,0,0,0.51);
+                            box-shadow: -1px 2px 39px -23px rgba(0,0,0,0.51);
+}
+
