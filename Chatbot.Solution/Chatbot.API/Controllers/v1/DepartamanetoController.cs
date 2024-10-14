@@ -68,6 +68,19 @@ namespace Chatbot.API.Controllers.v1
             }
         }
 
+        [HttpGet("Departamento/BuscarTodosDepartamentoPorLogId")]
+        public async Task<IActionResult> BuscarTodosDepartamentosPorLogId(int id)
+        {
+            try
+            {
+                return Ok(await _repository.GetAllByLogId(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete("Departamento/Delete")]
         public async Task<IActionResult> ApagarDepartamento(int id)
         {

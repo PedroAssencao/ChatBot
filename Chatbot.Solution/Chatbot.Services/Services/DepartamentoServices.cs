@@ -2,11 +2,6 @@
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Services.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatbot.Services.Services
 {
@@ -39,6 +34,20 @@ namespace Chatbot.Services.Services
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public async Task<List<DepartamentoDttoGet>> GetAllByLogId(int id)
+        {
+            try
+            {
+                var dados = await GetALl();
+                return dados.Where(x => x.CodigoLogin == id).ToList();
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
