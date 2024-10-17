@@ -13,7 +13,7 @@ export default function card(props) {
                 </div>
                 {/* Infos do atendente aqui */}
                 <div className="cardIcon">
-                    <img src={image}></img>
+                    <img width={100} height={100} src={image}></img>
                     <p className="Name">{props.date.atendente.nome}</p>
                     <p className="Type">Atendente</p>
                 </div>

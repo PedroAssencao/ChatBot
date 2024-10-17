@@ -82,7 +82,7 @@ namespace Chatbot.API.Controllers.v1
         }
 
         [HttpDelete("Atendente/Remove")]
-        public async Task<IActionResult> ApagarAtendente(int id)
+        public async Task<IActionResult> ApagarAtendente([FromQuery]int id)
         {
             try
             {

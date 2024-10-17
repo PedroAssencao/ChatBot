@@ -13,6 +13,8 @@ namespace Chatbot.Infrastructure.Dtto
     {
         public int Codigo { get; set; }
         public string? Nome { get; set; }
+        public string? Email { get; set; }
+        public string? Senha { get; set; }
         public bool? EstadoAtendente { get; set; }
         public DepartamentoDttoGet? Departamento { get; set; }
         public LoginDttoGetForView? Login { get; set; }

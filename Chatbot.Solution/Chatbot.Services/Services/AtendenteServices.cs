@@ -38,6 +38,8 @@ namespace Chatbot.Services.Services
                     {
                         Codigo = item.AteId,
                         Nome = item.AteNome,
+                        Email = item.AteEmail,
+                        Senha = item.AteSenha,
                         EstadoAtendente = item.AteEstado,
                         Departamento = item.DepId == null ? null : await _departamento.GetPorId(Convert.ToInt32(item.DepId)),
                         Login = item.LogId == null ? null : await _login.GetPorIdLoginView(Convert.ToInt32(item.LogId))

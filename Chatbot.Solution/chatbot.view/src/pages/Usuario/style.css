@@ -8,13 +8,15 @@
     max-width: 24rem !important;
 }
 
-
-
 p{
     margin: 0px;
 }
 
-
+.btnHoverUsuarios:hover {
+    background-color: #2e4979 !important;
+    color: #fff !important;
+    border-color: none !important;
+}
 
 .Name{
     font-weight: bold;
@@ -33,12 +35,4 @@ p{
 
 .Header{
     display: flex;
-}
-
-.btn-primary{
- background-color: #263a6d;
- --bs-btn-hover-color:  #263a6d solid 1px;
- display: flex;
- align-items: center;
- border-color: #263a6d;
 }

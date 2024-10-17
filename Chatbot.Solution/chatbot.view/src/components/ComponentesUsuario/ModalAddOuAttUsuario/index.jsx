@@ -1,9 +1,33 @@
-import Input from '../../BaseComponents/input'
-import Select from '../../BaseComponents/select'
-import './style.css'
+import Input from '../../BaseComponents/input';
+import Select from '../../BaseComponents/select';
+import { useState, useEffect } from "react";
+import './style.css';
+
 export default function ModalAddOuAttUsuario(props) {
-    console.log("Nome Usuario Aqui")
-    console.log(props.nomeUsuario)
+    const [nomeUsuario, setNomeUsuario] = useState(props?.Usuario?.nome || "");
+    const [emailUsuario, setEmailUsuario] = useState(props?.Usuario?.email || "");
+    const [senhaUsuario, setSenhaUsuario] = useState(props?.Usuario?.senha || "");
+    const DepartamentoUsuario = props?.Usuario?.departamento?.codigo;
+
+    const selecionarDepartamentoAtivoNoSelect = (param) => {
+        const selectElement = document.querySelector("#SelectDepartamentoUsuarioModal");
+        if (selectElement && param) {
+            selectElement.value = param;
+        } else {
+            selectElement.value = 1;
+        }
+    };
+
+    useEffect(() => {
+        selecionarDepartamentoAtivoNoSelect(DepartamentoUsuario);
+    }, [DepartamentoUsuario]);
+
+    useEffect(() => {
+        setNomeUsuario(props?.Usuario?.nome || "");
+        setEmailUsuario(props?.Usuario?.email || "");
+        setSenhaUsuario(props?.Usuario?.senha || "");
+    }, [props.Usuario]);
+
     return (
         <div className="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered modal-lg">
@@ -18,7 +42,12 @@ export default function ModalAddOuAttUsuario(props) {
                         </strong>
                         <div className='row gap-2'>
                             <div className='widthRowUsuarioModal'>
-                                <Input value={props.nomeUsuariov} id={"NomeUsuarioInputUsuarios"} placeholder={"Nome Usuario"} />
+                                <Input
+                                    value={nomeUsuario}
+                                    onChange={(e) => setNomeUsuario(e.target.value)}
+                                    id={"NomeUsuarioInputUsuarios"}
+                                    placeholder={"Nome Usuario"}
+                                />
                             </div>
                             <div className='widthRowUsuarioModal'>
                                 <Select
@@ -29,19 +58,31 @@ export default function ModalAddOuAttUsuario(props) {
                                 />
                             </div>
                             <div className='widthRowUsuarioModal'>
-                                <Input value={props.senhaUsuario} id={"SenhaInputUsuarios"} placeholder={"Senha"} />
+                                <Input
+                                    value={senhaUsuario}
+                                    onChange={(e) => setSenhaUsuario(e.target.value)}
+                                    id={"SenhaInputUsuarios"}
+                                    placeholder={"Senha"}
+                                />
                             </div>
                             <div className='widthRowUsuarioModal'>
-                                <Input value={props.emailUsuario} id={"EmailInputUsuarios"} placeholder={"Email"} />
+                                <Input
+                                    value={emailUsuario}
+                                    onChange={(e) => setEmailUsuario(e.target.value)}
+                                    id={"EmailInputUsuarios"}
+                                    placeholder={"Email"}
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" onClick={props.onClick} className="btn btn-primary">Salvar</button>
+                        {props.isButtondelete ? (
+                            <button data-bs-toggle="modal" data-bs-target="#ModalExcluirAtendenteTelaUsuario" type="button" className="btn btn-danger">Deletar</button>
+                        ) : null}
+                        <button type="button" onClick={props.onClick} className="btn btn-primary btnHoverUsuarios">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
-

@@ -29,11 +29,11 @@
     gap: 1rem;
 }
 
-.btn:hover {
+/* .btn:hover {
     background-color: #2e4979 !important;
     color: #fff !important;
     border-color: none !important;
-}
+} */
 
 .TituloForFluxoBot {
     font-weight: bold;
