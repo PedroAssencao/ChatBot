@@ -7,11 +7,13 @@ import FluxoBot from './pages/FluxoBot'
 import Sidebar from './components/BaseComponents/sideBar'
 import TelaBloqueio from './pages/TelaBloqueio'
 import Push from './pages/Push'
+import Envio from './pages/Envio'
+
 export default function App() {
 
   const searchLocation = window.location.pathname;
 
-  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot', '/TelaBloqueio', '/Push'];
+  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot', '/TelaBloqueio', '/Push', '/Envio'];
   
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {
@@ -36,6 +38,7 @@ export default function App() {
             <Route path="/FluxoBot" element={<FluxoBot />} />
             <Route path="/TelaBloqueio" element={<TelaBloqueio/>}/>
             <Route path="/Push" element={<Push/>}/>
+            <Route path="/Envio" element={<Envio/>}/>
             <Route path="*" element={<NoPage />} />
           </Routes>
         </div>
