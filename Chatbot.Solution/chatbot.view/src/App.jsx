@@ -8,12 +8,13 @@ import DashBoard from './pages/DashBoard'
 import Usuario from './pages/Usuario'
 import Perfil from './pages/Perfil'
 import Departamento from './pages/Departamento'
+import Funil from './pages/Funil'
 import Sidebar from './components/BaseComponents/sideBar'
 export default function App() {
 
   const searchLocation = window.location.pathname;
 
-  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot','/DashBoard','/Usuario','/Perfil', '/Departamento'];
+  const urlQueteramSideBarENavBar = ['/', '/home', '/atendimento','/fluxobot','/DashBoard','/Usuario','/Perfil', '/Departamento','/Funil'];
   
   function isNoPage(urlIndex, LocationIndex) {
     for (let i = 0; i < urlIndex.length; i++) {
@@ -40,6 +41,7 @@ export default function App() {
             <Route path="/Usuario" element={<Usuario />} />
             <Route path="/Perfil" element={<Perfil />} />
             <Route path="/Departamento" element={<Departamento />} />
+            <Route path="/Funil" element={<Funil />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </div>

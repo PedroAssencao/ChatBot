@@ -3,10 +3,6 @@
     font-weight: bold;
 }
 
-.container{
-
-}
-
 .card{
     box-shadow: 2px 2px 2px 2px grey;
     padding: 0.8rem;
@@ -42,7 +38,7 @@ margin-top: 10.4rem;
     display: flex;
 }
 
-.btn-primary{
+.BlueButton{
  background-color: #263a6d;
  --bs-btn-hover-color:  #263a6d solid 1px;
  display: flex;
