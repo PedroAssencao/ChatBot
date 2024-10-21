@@ -1,11 +1,11 @@
 
 import './style.css'
-export default function Departamento() {
+export default function DepartamentoComponent() {
     return (
 
-        <div className="Departamento">
-        <h3 className="Tipo">Comercial</h3>
-        <p className="Number">#1263</p>
+        <div className="DepartamentoCompo">
+        <h3 className="TipoDep">Comercial</h3>
+        <p className="NumberDep">#1263</p>
     </div>
 
     )
