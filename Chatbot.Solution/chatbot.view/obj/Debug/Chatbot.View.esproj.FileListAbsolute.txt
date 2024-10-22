@@ -1,2 +1,1 @@
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.View\obj\Debug\Chatbot.View.esproj.CoreCompileInputs.cache
-C:\Users\Pedro Marcelo\Desktop\ChatBot-feature-OnCasCadeSetNull-BancoDeDados-OnDeleteCascadeManualNoCsharp\ChatBot\Chatbot.Solution\Chatbot.View\obj\Debug\Chatbot.View.esproj.CoreCompileInputs.cache
+C:\Users\silva\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.View\obj\Debug\Chatbot.View.esproj.CoreCompileInputs.cache

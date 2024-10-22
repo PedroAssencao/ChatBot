@@ -50,11 +50,12 @@ namespace Chatbot.API.Controllers.v1
         {
             try
             {
+                //essa logica aqui e funcional porem não fica no padrão de projeto dar uma atenção a isso aqui futuramente
                 if (Model != null)
                 {
-                    if (Model.CodigoMenu != null)
+                    if (Model?.CodigoMenu != null)
                     {
-                        var menu = await _menu.GetPorId(Convert.ToInt32(Model.CodigoMenu));
+                        var menu = await _menu.GetPorId(Convert.ToInt32(Model?.CodigoMenu));
                         if (menu != null)
                         {
                             if (menu?.Options?.Count >= 10)

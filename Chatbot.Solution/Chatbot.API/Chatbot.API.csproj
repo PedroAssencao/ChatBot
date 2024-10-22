@@ -5,10 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>false</InvariantGlobalization>
+	<PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="8.0.8" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,10 +21,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.7.3" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup>       
     <ProjectReference Include="..\Chatbot.Infrastrucutre.OpenAI\Chatbot.Infrastrucutre.OpenAI.csproj" />
     <ProjectReference Include="..\Chatbot.Services.Meta\Chatbot.Services.Meta.csproj" />
     <ProjectReference Include="..\Chatbot.Services\Chatbot.Services.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Chatbot.Test" />
+	</ItemGroup>
 
 </Project>

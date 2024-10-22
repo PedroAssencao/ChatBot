@@ -5,11 +5,6 @@ using Chatbot.Infrastructure.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatbot.Infrastructure.Extensions
 {
@@ -18,11 +13,11 @@ namespace Chatbot.Infrastructure.Extensions
         public static void AddRepositoryStartUp(this IServiceCollection services, IConfiguration configuration)
         {
 
-                services.AddDbContext<chatbotContext>(options =>
-                {
-                    options.UseSqlServer(configuration.GetConnectionString("Chinook"));
-                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
-                });
+            services.AddDbContext<chatbotContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("Chinook"));
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+            });
             services.AddTransient<IContatosInterface, ContatoRepository>();
             services.AddScoped<IMensagemInterface, MensagemRepository>();            
             services.AddScoped<ILoginInterface, LoginRepository>();
