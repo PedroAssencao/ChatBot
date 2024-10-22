@@ -20,14 +20,6 @@ namespace Chatbot.Test.Chatbot.Mock
 
                     if (create)
                     {
-                        // Remove todas as entradas na tabela Login
-                        var existingLogins = await catalogDbContext.Logins.ToListAsync();
-                        if (existingLogins.Any())
-                        {
-                            catalogDbContext.Logins.RemoveRange(existingLogins);
-                            await catalogDbContext.SaveChangesAsync();
-                        }
-
                         // Criação do Modelo Login
                         var login = new Login
                         {

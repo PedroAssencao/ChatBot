@@ -12,7 +12,6 @@ namespace Chatbot.Infrastructure.Extensions
     {
         public static void AddRepositoryStartUp(this IServiceCollection services, IConfiguration configuration)
         {
-
             services.AddDbContext<chatbotContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("Chinook"));
