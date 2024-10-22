@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chatbot.Test.Chatbot.Mock
@@ -19,7 +20,15 @@ namespace Chatbot.Test.Chatbot.Mock
 
                     if (create)
                     {
-                        // Criação do modelo Login
+                        // Remove todas as entradas na tabela Login
+                        var existingLogins = await catalogDbContext.Logins.ToListAsync();
+                        if (existingLogins.Any())
+                        {
+                            catalogDbContext.Logins.RemoveRange(existingLogins);
+                            await catalogDbContext.SaveChangesAsync();
+                        }
+
+                        // Criação do Modelo Login
                         var login = new Login
                         {
                             LogEmail = "master.123@123",
