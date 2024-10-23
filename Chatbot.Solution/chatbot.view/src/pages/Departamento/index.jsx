@@ -17,7 +17,7 @@ export default function departamento() {
 
             <hr></hr>
             <div class="container-fluid text-center">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4">
                     <div class="col">
                     <Departamento></Departamento>
                     </div>

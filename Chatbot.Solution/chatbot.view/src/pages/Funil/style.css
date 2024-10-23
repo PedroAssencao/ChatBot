@@ -34,7 +34,7 @@
     padding: 1rem;
     display: flex;
     justify-content: space-between;
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(238, 238, 238);
 }
 
 .bodyCliente{
@@ -88,15 +88,18 @@ margin-right: 0.8rem;
 display: flex;
 justify-content: start;
 align-items: start;
+gap: 1rem;
+padding: 0px;
 }
 
 .CardFunil{
     width: 20rem;
-    box-shadow: grey 1px 1px 1px 2px;
+    padding: 0px;
+    box-shadow: 1px 1px 2px 2px grey;
 }
 
 .CardFunilHeader{
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(238, 238, 238);
     height: 2rem;
     display: flex;
     align-items: start;
@@ -116,7 +119,7 @@ align-items: start;
 .CardFunilFooter{
     display: flex;
     align-items: start;
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(238, 238, 238);
     height: 5rem;
 }
 
@@ -132,4 +135,52 @@ align-items: start;
 
 .FunilDate{
     display: flex;
+}
+
+.FunilInfo{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px 2px grey;
+    height: 7rem;
+}
+
+.FunilListaInfo{
+    margin-left: 1.3rem;
+    margin-right: 0.1rem;
+    gap: 1rem;
+}
+
+.InfoText{
+    width: 40%;
+    color: #263a6d;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.InfoIcon{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+
+}
+
+.InfoTextNumber{
+    
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.InfoIconCircle{
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+
+.Funis{
+    padding: 0px;
 }
