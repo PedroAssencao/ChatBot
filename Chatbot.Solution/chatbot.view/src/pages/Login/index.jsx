@@ -14,47 +14,64 @@ export default function Registro() {
 
     }
 
+    const metodoEntrar = async () => {
+        const url = urlBase + "/v1/Login/login/logar";
+
+        // Captura os valores dos inputs
+        const email = document.getElementById('inputEmailLogar').value;
+        const senha = document.getElementById('inputSenhaLogar').value;
+
+        // Dados a serem enviados no corpo da requisição
+        const data = {
+            Email: email,
+            Senha: senha,
+        };
+
+        // Configurações da requisição
+        const options = {
+            method: 'POST', // Método HTTP POST
+            headers: {
+                'Content-Type': 'application/json', // Tipo de conteúdo JSON
+            },
+            body: JSON.stringify(data), // Converte o objeto JavaScript em JSON
+            credentials: 'include'
+        };
+
+        try {
+            // Faz a requisição e aguarda a resposta
+            const response = await fetch(url, options);
+            if (response.ok) {
+                // Redireciona para a página desejada
+                location.replace(location.origin);
+            } else {
+                // Exibe a mensagem de erro no front-end
+                document.getElementById('errorLogin').style.display = "block";
+            }
+        } catch (error) {
+            console.error('Ocorreu um erro:', error);
+        }
+
+    }
+    const CheckEntrar = (event) => {
+        console.log(event)
+        if (event.key === 'Enter'){
+            metodoEntrar()
+        }
+    }
+
+    const CheckCadastrar = (event) => {
+        console.log(event)
+        if (event.key === 'Enter'){
+             
+        }
+    }
     useEffect(() => {
 
         var inputSenhaCadastro = document.getElementById("inputSenhaCadastrar")
 
         //function para enviar dados para efeturar login
         document.getElementById('buttonEntrar').addEventListener('click', async () => {
-            const url = urlBase + "/v1/Login/login/logar";
-
-            // Captura os valores dos inputs
-            const email = document.getElementById('inputEmailLogar').value;
-            const senha = document.getElementById('inputSenhaLogar').value;
-
-            // Dados a serem enviados no corpo da requisição
-            const data = {
-                Email: email,
-                Senha: senha,
-            };
-
-            // Configurações da requisição
-            const options = {
-                method: 'POST', // Método HTTP POST
-                headers: {
-                    'Content-Type': 'application/json', // Tipo de conteúdo JSON
-                },
-                body: JSON.stringify(data), // Converte o objeto JavaScript em JSON
-                credentials: 'include'
-            };
-
-            try {
-                // Faz a requisição e aguarda a resposta
-                const response = await fetch(url, options);
-                if (response.ok) {
-                    // Redireciona para a página desejada
-                    location.replace(location.origin);
-                } else {
-                    // Exibe a mensagem de erro no front-end
-                    document.getElementById('errorLogin').style.display = "block";
-                }
-            } catch (error) {
-                console.error('Ocorreu um erro:', error);
-            }
+            await metodoEntrar()
         });
 
 
@@ -172,7 +189,10 @@ export default function Registro() {
 
                             <label className="label-input">
                                 <i className="fas fa-lock icon-modify"></i>
-                                <input id="inputSenhaCadastrar" onKeyDown={hideError} type="password" minLength={"8"} placeholder="Senha" />
+                                <input id="inputSenhaCadastrar" onKeyDown={(e) => {
+                                    CheckCadastrar(e) 
+                                    hideError()
+                                }} type="password" minLength={"8"} placeholder="Senha" />
                             </label>
 
 
@@ -201,7 +221,10 @@ export default function Registro() {
 
                             <label className="label-input">
                                 <i className="fas fa-lock icon-modify"></i>
-                                <input id="inputSenhaLogar" onKeyDown={hideError} type="password" placeholder="Senha" />
+                                <input id="inputSenhaLogar" onKeyDown={(e) => {
+                                    CheckEntrar(e) 
+                                    hideError()
+                                }} type="password" placeholder="Senha" />
                             </label>
 
                             <a className="password" href="#">Esqueceu sua senha?</a>

@@ -50,11 +50,16 @@ export default function Atendente() {
         const verificarUsuario = async () => {
             const result = await UsuarioLogado(); // Espera o resultado da função UsuarioLogado
             if (result.usuarioLogadoId == null) {
-                location.replace(location.origin + "/login"); // Redireciona se não estiver logado
-            } else {
-                setUsuarioLogadoId(result.usuarioLogadoId); // Define o ID do usuário logado
-                setIsReady(true); // Indica que está pronto para continuar
+                return location.replace(location.origin + "/login"); // Redireciona se não estiver logado
             }
+
+            if (result.tipoUsuario !== "Atendente") {
+                return location.replace(location.origin + "/Home"); // Redireciona se não for tipo Atendente
+            }
+
+            console.log(result)
+            setUsuarioLogadoId(result.usuarioLogadoId);
+            setIsReady(true);
         };
 
         verificarUsuario(); // Chama a função ao carregar
