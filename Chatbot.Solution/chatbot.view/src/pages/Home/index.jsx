@@ -1,11 +1,34 @@
 import { UsuarioLogado } from "../../appsettings";
+import { useEffect, useState } from "react";
+import LoadScreen from "../../components/BaseComponents/loadingScreen";
 export default function Home() {
-    // UsuarioLogado().then(result => {
-    //     console.log(result); // Aqui você tem o valor da Promise resolvida
-    // });
+    const [IsLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        console.log("Carregou use effect")
+        UsuarioLogado().then(result => {
+            console.log("Entrou no usuario logado funciton")
+
+            //aqui podemos redirecionar para qualquer tela dependendo se o usuario esta logado, se e um usuario cliente se e master se e atendete etc...
+
+            console.log(result)
+            if (result.usuarioLogadoId == null) {
+                console.log("Usuario Redirecionado")
+                location.replace(location.origin + "/login");
+            }
+            setIsLoading(false)
+        });
+    }, []);
+
     return (
-        <div className="col">
-            <h1>Home</h1>
-        </div>
+        <>
+            {IsLoading ? (
+                <LoadScreen />
+            ) : (
+                <div className="col">
+                    <h1>Home</h1>
+                </div>
+            )}
+        </>
+
     );
 }

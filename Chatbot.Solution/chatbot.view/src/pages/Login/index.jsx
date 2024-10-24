@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from './DazzleBot.png'
 import './style.css'
 import { urlBase } from '../../appsettings'
-
+import LoadScreen from '../../components/BaseComponents/loadingScreen'
 export default function Registro() {
-
+    const [IsDataLoad, SetLoadDate] = useState(true);
     //function para tirar a mensagem de error quando o input e acionado
     const hideError = () => {
 
@@ -128,6 +128,8 @@ export default function Registro() {
             body.className = "sign-up-js";
         });
 
+        SetLoadDate(false)
+
         // Retorne uma função de limpeza para remover os event listeners quando o componente for desmontado
         return () => {
             btnSignin.removeEventListener("click", () => {
@@ -137,17 +139,18 @@ export default function Registro() {
                 body.className = "sign-up-js";
             });
         };
-    }, []); // O segundo argumento vazio [] garante que este efeito seja executado apenas uma vez após a montagem do componente
+    }, []); 
 
     return (
         <>
+            {IsDataLoad && <LoadScreen />}
             <div className="container container-fluid">
                 <div className="content first-content">
                     <div className="first-column">
                         <h2 className="title title-primary">Seja bem vindo!</h2>
                         <p className="description description-primary">pra continuar conectado</p>
                         <p className="description description-primary">realizar login com informações pessoais</p>
-                        <button id="signin" className="btnFromLogin btn-primaryFromLogin">sign in</button>
+                        <button id="signin" className="btnFromLogin btn-primaryFromLogin">Login</button>
                     </div>
                     <div className="second-column">
                         <img className="imagem" src={Image} />
@@ -186,7 +189,7 @@ export default function Registro() {
                         <h2 className="title title-primary">ola, amigo!</h2>
                         <p className="description description-primary">coloque detalhes pessoais</p>
                         <p className="description description-primary">comece uma jornada com nós</p>
-                        <button id="signup" className="btnFromLogin btn-primaryFromLogin">entrar</button>
+                        <button id="signup" className="btnFromLogin btn-primaryFromLogin">Cadastro</button>
                     </div>
                     <div className="second-column">
                         <img className="imagem" src={Image} />
@@ -203,8 +206,8 @@ export default function Registro() {
                                 <i className="fas fa-lock icon-modify"></i>
                                 <input id="inputSenhaLogar" onKeyDown={hideError} type="password" placeholder="Senha" />
                             </label>
-
-                            <a className="password" href="#">Esqueceu sua senha?</a>
+                            {/* Deixar essa função ativa apenas quando ela estiver pronta */}
+                            {/* <a className="password" href="#">Esqueceu sua senha?</a> */}
                             <button id="buttonEntrar" className="btnFromLogin btn-second">entrar</button>
                         </div>
                     </div>

@@ -5765,19 +5765,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\silva\\.nuget\\packages\\": {}
+    "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
+      "projectUniqueName": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
       "projectName": "Chatbot.Services.Meta",
-      "projectPath": "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
-      "packagesPath": "C:\\Users\\silva\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\obj\\",
+      "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\Chatbot.Services.Meta.csproj",
+      "packagesPath": "C:\\Users\\Pedro Marcelo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services.Meta\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\silva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pedro Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5792,8 +5797,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj": {
-              "projectPath": "C:\\Users\\silva\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj"
+            "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj": {
+              "projectPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Chatbot.Infrastructure.Meta.csproj"
             }
           }
         }
