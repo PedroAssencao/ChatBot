@@ -15,7 +15,7 @@ namespace Chatbot.Test.Chatbot.Mock
 
                 using (var catalogDbContext = provider.GetRequiredService<chatbotContext>())
                 {
-
+                    await catalogDbContext.Database.EnsureDeletedAsync();
                     await catalogDbContext.Database.EnsureCreatedAsync();
 
                     if (create)

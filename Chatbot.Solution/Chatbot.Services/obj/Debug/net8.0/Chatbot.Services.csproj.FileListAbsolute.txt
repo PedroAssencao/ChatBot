@@ -698,7 +698,6 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Service
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.AspNetCore.WebUtilities.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.CSharp.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.Extensions.Caching.Abstractions.dll
-C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.Extensions.Configuration.Binder.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.Extensions.Configuration.CommandLine.dll
@@ -911,3 +910,4 @@ C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Service
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\refint\Chatbot.Services.dll
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\Chatbot.Services.pdb
 C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\obj\Debug\net8.0\ref\Chatbot.Services.dll
+C:\Users\Pedro Marcelo\Documents\GitHub\ChatBot\Chatbot.Solution\Chatbot.Services\bin\Debug\net8.0\refs\Microsoft.Extensions.Caching.Memory.dll

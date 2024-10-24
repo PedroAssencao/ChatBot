@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.test\\chatbot.infrastructure.test\\get\\loginrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|solutionrelative:chatbot.test\\chatbot.infrastructure.test\\get\\loginrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D2B272A0-78CE-4D3A-A260-5569A1EE8B33}|Chatbot.Infrastructure\\Chatbot.Infrastructure.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.infrastructure\\repository\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2B272A0-78CE-4D3A-A260-5569A1EE8B33}|Chatbot.Infrastructure\\Chatbot.Infrastructure.csproj|solutionrelative:chatbot.infrastructure\\repository\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\controllers\\v1\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\controllers\\v1\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|solutionrelative:chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\controllers\\v1\\atendentecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\controllers\\v1\\atendentecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D2B272A0-78CE-4D3A-A260-5569A1EE8B33}|Chatbot.Infrastructure\\Chatbot.Infrastructure.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.infrastructure\\dal\\chatbotcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,16 +31,28 @@
       "RelativeMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|solutionrelative:chatbot.test\\chatbot.mock\\chatbotconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.test\\chatbot.infrastructure.test\\get\\loginrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|solutionrelative:chatbot.test\\chatbot.infrastructure.test\\get\\loginrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.test\\chatbot.mock\\chatbotmockdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|solutionrelative:chatbot.test\\chatbot.mock\\chatbotmockdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.test\\chatbot.infrastructure.test\\get\\contatorepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26CFD6D0-0754-4735-9DA9-AF3B9BE8884E}|Chatbot.Test\\Chatbot.Test.csproj|solutionrelative:chatbot.test\\chatbot.infrastructure.test\\get\\contatorepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\services\\atendenteservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|solutionrelative:chatbot.services\\services\\atendenteservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\extensions\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D2B272A0-78CE-4D3A-A260-5569A1EE8B33}|Chatbot.Infrastructure\\Chatbot.Infrastructure.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.infrastructure\\extensions\\addrepositoryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,10 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{3A0E4DF8-A769-47F0-A1AC-FCCDFEFD8289}|Chatbot.API\\Chatbot.API.csproj|solutionrelative:chatbot.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|solutionrelative:chatbot.services\\services\\loginservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{347233CD-8704-4817-948C-340F631FD4A1}|Chatbot.Services\\Chatbot.Services.csproj|c:\\users\\pedro marcelo\\documents\\github\\chatbot\\chatbot.solution\\chatbot.services\\services\\chatsservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -98,7 +118,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -118,72 +138,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\Repository\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "Chatbot.Infrastructure\\Repository\\BaseRepository.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\Repository\\BaseRepository.cs",
+              "RelativeToolTip": "Chatbot.Infrastructure\\Repository\\BaseRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T01:40:24.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\LoginController.cs",
+              "RelativeDocumentMoniker": "Chatbot.API\\Controllers\\v1\\LoginController.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\LoginController.cs",
+              "RelativeToolTip": "Chatbot.API\\Controllers\\v1\\LoginController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T01:39:42.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AtendenteController.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\AtendenteController.cs",
+              "RelativeDocumentMoniker": "Chatbot.API\\Controllers\\v1\\AtendenteController.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\AtendenteController.cs",
+              "RelativeToolTip": "Chatbot.API\\Controllers\\v1\\AtendenteController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAA1wBQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T01:04:58.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ChatbotMockDate.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Mock\\ChatbotMockDate.cs",
               "RelativeDocumentMoniker": "Chatbot.Test\\Chatbot.Mock\\ChatbotMockDate.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Mock\\ChatbotMockDate.cs",
               "RelativeToolTip": "Chatbot.Test\\Chatbot.Mock\\ChatbotMockDate.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHYBAAAUAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAkAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T21:29:06.745Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Program.cs",
-              "RelativeDocumentMoniker": "Chatbot.API\\Program.cs",
-              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Program.cs",
-              "RelativeToolTip": "Chatbot.API\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T22:26:09.729Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "ContatoRepositoryTest.cs",
-              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
-              "RelativeDocumentMoniker": "Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
-              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
-              "RelativeToolTip": "Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T21:19:59.689Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "ChatbotConnection.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Mock\\ChatbotConnection.cs",
               "RelativeDocumentMoniker": "Chatbot.Test\\Chatbot.Mock\\ChatbotConnection.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Mock\\ChatbotConnection.cs",
               "RelativeToolTip": "Chatbot.Test\\Chatbot.Mock\\ChatbotConnection.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAQwCIAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T21:27:46.056Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 12,
               "Title": "Startup.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Extensions\\Startup.cs",
               "RelativeDocumentMoniker": "Chatbot.API\\Extensions\\Startup.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Extensions\\Startup.cs",
               "RelativeToolTip": "Chatbot.API\\Extensions\\Startup.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T21:22:50.597Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "AddRepositoryExtensions.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\Extensions\\AddRepositoryExtensions.cs",
               "RelativeDocumentMoniker": "Chatbot.Infrastructure\\Extensions\\AddRepositoryExtensions.cs",
@@ -191,25 +224,50 @@
               "RelativeToolTip": "Chatbot.Infrastructure\\Extensions\\AddRepositoryExtensions.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T21:24:41.272Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-21T21:24:41.272Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "LoginRepositoryTest.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\LoginRepositoryTest.cs",
               "RelativeDocumentMoniker": "Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\LoginRepositoryTest.cs",
               "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\LoginRepositoryTest.cs",
               "RelativeToolTip": "Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\LoginRepositoryTest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-22T15:29:33.93Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 5,
+              "Title": "chatbotContext.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
+              "RelativeDocumentMoniker": "Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
+              "RelativeToolTip": "Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T21:37:30.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AtendenteServices.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\AtendenteServices.cs",
+              "RelativeDocumentMoniker": "Chatbot.Services\\Services\\AtendenteServices.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\AtendenteServices.cs",
+              "RelativeToolTip": "Chatbot.Services\\Services\\AtendenteServices.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T01:05:58.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "VerificarAtendimentoServices.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Services\\VerificarAtendimentoServices.cs",
               "RelativeDocumentMoniker": "Chatbot.API\\Services\\VerificarAtendimentoServices.cs",
@@ -221,20 +279,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "chatbotContext.cs",
-              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
-              "RelativeDocumentMoniker": "Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
-              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
-              "RelativeToolTip": "Chatbot.Infrastructure\\DAL\\chatbotContext.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAIA5wCcAAAAtAAAA",
+              "DocumentIndex": 3,
+              "Title": "LoginServices.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\LoginServices.cs",
+              "RelativeDocumentMoniker": "Chatbot.Services\\Services\\LoginServices.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\LoginServices.cs",
+              "RelativeToolTip": "Chatbot.Services\\Services\\LoginServices.cs",
+              "ViewState": "AQIAAD4BAAAAAAAAAAApwFsBAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T21:37:30.306Z",
+              "WhenOpened": "2024-10-22T15:50:56.647Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "ContatoRepositoryTest.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
+              "RelativeDocumentMoniker": "Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
+              "RelativeToolTip": "Chatbot.Test\\Chatbot.Infrastructure.Test\\Get\\ContatoRepositoryTest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T21:19:59.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Program.cs",
+              "RelativeDocumentMoniker": "Chatbot.API\\Program.cs",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Program.cs",
+              "RelativeToolTip": "Chatbot.API\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T22:26:09.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Chatbot.API\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Chatbot.API\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-24T00:51:32.732Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "MetaRepository.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure.Meta\\Repository\\MetaRepository.cs",
               "RelativeDocumentMoniker": "Chatbot.Infrastructure.Meta\\Repository\\MetaRepository.cs",
@@ -242,12 +339,11 @@
               "RelativeToolTip": "Chatbot.Infrastructure.Meta\\Repository\\MetaRepository.cs",
               "ViewState": "AQIAAHcAAAAAAAAAAAAwwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T00:11:47.437Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-24T00:11:47.437Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "OptionController.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\OptionController.cs",
               "RelativeDocumentMoniker": "Chatbot.API\\Controllers\\v1\\OptionController.cs",
@@ -259,19 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "LoginServices.cs",
-              "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\LoginServices.cs",
-              "RelativeDocumentMoniker": "Chatbot.Services\\Services\\LoginServices.cs",
-              "ToolTip": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\LoginServices.cs",
-              "RelativeToolTip": "Chatbot.Services\\Services\\LoginServices.cs",
-              "ViewState": "AQIAAEkBAAAAAAAAAAAnwFsBAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T15:50:56.647Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "ChatsServices.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Services\\ChatsServices.cs",
               "RelativeDocumentMoniker": "Chatbot.Services\\Services\\ChatsServices.cs",
@@ -283,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\appsettings.json",
               "RelativeDocumentMoniker": "Chatbot.API\\appsettings.json",
@@ -291,12 +375,11 @@
               "RelativeToolTip": "Chatbot.API\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-21T21:36:54.194Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-21T21:36:54.194Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "Chatbot.API.csproj",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Chatbot.API.csproj",
               "RelativeDocumentMoniker": "Chatbot.API\\Chatbot.API.csproj",
@@ -308,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "Chatbot.Test.csproj",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Test.csproj",
               "RelativeDocumentMoniker": "Chatbot.Test\\Chatbot.Test.csproj",
@@ -320,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "Option.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Domain\\Models\\Option.cs",
               "RelativeDocumentMoniker": "Chatbot.Domain\\Models\\Option.cs",
@@ -332,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "OpenAiController.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.API\\Controllers\\v1\\OpenAiController.cs",
               "RelativeDocumentMoniker": "Chatbot.API\\Controllers\\v1\\OpenAiController.cs",
@@ -344,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "AtendenteDtto.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Services\\Dtto\\AtendenteDtto.cs",
               "RelativeDocumentMoniker": "Chatbot.Services\\Dtto\\AtendenteDtto.cs",
@@ -356,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "Chatbot.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\Chatbot.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Chatbot.Infrastructure\\Chatbot.Infrastructure.csproj",
@@ -368,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "ContatoRepository.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Infrastructure\\Repository\\ContatoRepository.cs",
               "RelativeDocumentMoniker": "Chatbot.Infrastructure\\Repository\\ContatoRepository.cs",
@@ -380,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "OpenaiRequest.cs",
               "DocumentMoniker": "C:\\Users\\Pedro Marcelo\\Documents\\GitHub\\ChatBot\\Chatbot.Solution\\Chatbot.Test\\Chatbot.Infrastructure.OpenAI.Test\\OpenaiRequest.cs",
               "RelativeDocumentMoniker": "Chatbot.Test\\Chatbot.Infrastructure.OpenAI.Test\\OpenaiRequest.cs",
