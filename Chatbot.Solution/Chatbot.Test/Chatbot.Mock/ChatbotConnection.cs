@@ -17,8 +17,8 @@ namespace Chatbot.Test.Chatbot.Mock
 
             builder.ConfigureServices(services =>
             {
-                services.RemoveAll(typeof(chatbotContext));
-                //services.RemoveAll(typeof(DbContextOptions<chatbotContext>));
+                //services.RemoveAll(typeof(chatbotContext));
+                services.RemoveAll(typeof(DbContextOptions<chatbotContext>));
                 services.AddDbContext<chatbotContext>(options =>
                 {
                     options.UseInMemoryDatabase("DataBase", root);
