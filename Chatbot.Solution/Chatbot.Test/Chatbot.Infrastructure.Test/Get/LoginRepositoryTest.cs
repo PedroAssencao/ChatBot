@@ -1,57 +1,33 @@
-﻿using Chatbot.API.DAL;
-using Chatbot.API.Repository;
-using Chatbot.Infrastructure.Dtto;
+﻿using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Test.Chatbot.Mock;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http.Json;
 
 namespace Chatbot.Test.Chatbot.Infrastructure.Test.Get
 {
-    public class LoginRepositoryTest
+    public class LoginRepositoryTest : IClassFixture<ChatbotConnection>
     {
-        private readonly LoginRepository _repository = new LoginRepository(new chatbotContext());
+        private readonly ILoginInterface _repository;
 
-        //metodo que esta funcionando
-        [Fact]
-        public async Task BuscarTodosLoginViaEnpoint()
+        public LoginRepositoryTest(ChatbotConnection application)
         {
-            try
-            {
-                await using var application = new ChatbotConnection();
-
-                await ChatbotMockDate.CreateDates(application, true);
-                var url = "/api/v1/Login/login";
-
-                var client = application.CreateClient();
-
-                var result = await client.GetAsync(url);
-                var dates = await client.GetFromJsonAsync<List<LoginDttoGet>>(url);
-                Assert.True(dates?.Count > 0);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            ChatbotMockDate.CreateDates(application, true).Wait();
+            var scope = application.Services.CreateScope();
+            _repository = scope.ServiceProvider.GetRequiredService<ILoginInterface>();
         }
 
-        //metodo que ainda não esta funcionando
         [Fact]
-        public async Task BuscarTodosLoginViaScript()
+        public async Task BuscarTodosLogin()
         {
             try
             {
-                await using var application = new ChatbotConnection();
-                await ChatbotMockDate.CreateDates(application, true);
-
                 var result = await _repository.GetALl();
                 Assert.True(result.Count > 0);
+
             }
             catch (Exception ex)
             {
-                throw;
+                throw new Exception("Ocorreu um error ao tentar Executar o Teste BuscarTodosLogin, error: " + ex.Message);
             }
         }
-
     }
 }

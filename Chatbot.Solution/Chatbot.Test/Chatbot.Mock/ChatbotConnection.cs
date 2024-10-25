@@ -1,4 +1,6 @@
 ﻿using Chatbot.API.DAL;
+using Chatbot.API.Repository;
+using Chatbot.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -27,7 +29,11 @@ namespace Chatbot.Test.Chatbot.Mock
                         warnings.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning);
                     });
                 });
+
+                services.AddScoped<ILoginInterface, LoginRepository>();
             });
+
+
 
             return base.CreateHost(builder);
         }

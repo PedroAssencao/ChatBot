@@ -1,11 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.Domain.Models;
 using Chatbot.Infrastructure.Repository.Interfaces;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
-using System.Text;
 
 namespace Chatbot.API.Repository
 {
