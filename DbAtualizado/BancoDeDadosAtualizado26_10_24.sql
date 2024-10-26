@@ -1,3 +1,6 @@
+
+
+
 use chatbot
 go
 -- Tabelas
@@ -78,9 +81,9 @@ create table Mensagens (
     mens_id int identity(1,1) primary key,
     mens_data datetime,
     mens_descricao varchar(max),
-    men_tipo varchar(255),
+    men_tipo int,
 	men_WaId varchar(max),
-	mens_status varchar(255),
+	mens_status int,
     con_id int,
     log_id int,
     cha_id int,
@@ -88,6 +91,14 @@ create table Mensagens (
     constraint fk_login_mensagens foreign key (log_id) references login(log_id) on delete set null,
     constraint fk_chat_mensagens foreign key (cha_id) references chat(cha_id) on delete set null
 )
+
+ALTER TABLE Mensagens
+ALTER COLUMN men_tipo int;
+
+ALTER TABLE Mensagens
+ALTER COLUMN mens_status int;
+
+
 
 go
 
@@ -150,28 +161,30 @@ values
 ('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das Opções Abaixo Descreve Melhor o Seu Problema de Pagamento', 1, 2, 'DificuldadePagar'),
 ('Empresas Senai', 'Todos direitos reservados', 'Escolha Quais Das Opções Abaixo e a Sua Vontade Se Tiver Mais Alguma Pergunta Apenas Pergunte!', 1, 3, 'Menu IA')
 go
+
 --quando a option for tipo RedirecinamentoHumano lembrar que a optResposta tem que ser igual ao id do departamento que deve ser redirecionado para o codigo funcionar
 --quando a option for tipo MensagemDeRespostaInterativa lembrar que a optResposta tem que ser igual ao id do menu que deve ser usado como resposta para o codigo funcionar
 --quando a option for tipo MensagemPorIA lembrar que a optResposta pode ser null por que não vai ser usada ja que e a ia que ira responder e por enquanto quando esse tipo de mensagem e utilizada ele ja entra automaticamente no modo de interação com ia talvez futuramente quando o cliente queira apenas uma resposta com ia possa colocar a optresposta para ser o id do proximo menu que ela deve responder
 --quando a option for tipo MensagemDeResposta lembrar que a optResposta e oque vai ser respondido no chat ja que o texto enviado e de um tipo simples
-insert into options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta, opt_tipo, opt_title) 
-values 
-(1, 1, '2024-07-23T22:31:35.673', 'Referente a Financeiro', 0, '2', 3, 'Financeiro'),
-(1, 1, '2024-07-23T22:31:35.673', 'Referente a Suporte', 0, '3', 3, 'Suporte'),
-(1, 1, '2024-07-23T22:31:35.673', 'Historia do Senai Contada Pela IA e Interação Geral Com IA', 0, NULL, 4, 'Historia Senai'),
-(5, 1, '2024-07-23T22:31:35.673', 'Pagamento Não Disponivel', 1, 'Sua Forma de Pagamento não esta disponivel no sistema? Use esse qrcode para pagar diretamente: (exemploqrcode)', 1, 'Pagamento Indisponivel'),
-(5, 1, '2024-07-23T22:31:35.673', 'Pagamento Não Autorizado', 1, 'Sinto Muito Pelo Transtorno se Possivel tente checkar seu saldo para ver se ouve uma transação erronea', 1, 'Pagamento Não Autorizado'),
-(5, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Muito Obrigado Por Interagir', 1, 'Finalizar'),
-(4, 1, '2024-07-23T22:31:35.673', 'Esqueci Minha Senha', 1, 'Aqui Esta um Link Para Preencher as informações para o reset da sua senha: (linkExemplo), espero que fique bem.', 1, 'Esquecimento da Senha'),
-(4, 1, '2024-07-23T22:31:35.673', 'Instabilidade No Geral', 1, 'Lamentamos se o sistema esta lento hoje, estamos em periodo de manuntenção ja voltaremos ao normal', 1, 'Dificuldades Sistemas'),
-(4, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir Volte Sempre', 1, 'Finalizar'),
-(2, 1, '2024-07-23T22:31:35.673', 'Dificuldades no Pagamento', 0, '5', 3, 'Pagamento'),
-(2, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir, espero que tenha conseguido resolver seu problema.', 1, 'Finalizar'),
-(3, 1, '2024-07-23T22:31:35.673', 'Dificuldades com o Sistema', 0, '4', 'MensagemDeRespostaInterativa', 'Sistema'),
-(3, 1, '2024-07-23T22:31:35.673', 'Falar Com Atendente Do Setor de Suporte', 0, '1', 6, 'Suporte Humano'),
-(3, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Obrigado Por Interagir, espero que tenha conseguido resolver seu problema.', 1, 'Finalizar'),
-(6, 1, '2024-07-23T22:31:35.673', 'Voltar ao Fluxo de Atendimento Normal', 0, 'Sim', 4, 'Sim'),
-(6, 1, '2024-07-23T22:31:35.673', 'Finalizar o Atendimento', 1, 'Obrigado Por Interagir com O Sistema!', 4, 'Finalizar');
+
+INSERT INTO options (men_id, log_id, opt_data, opt_descricao, opt_finalizar, opt_resposta, opt_tipo, opt_title) 
+VALUES 
+    (1, 1, '2024-07-23T22:31:35.673', 'Referente a Financeiro', 0, '2', 3, 'Financeiro'),
+    (1, 1, '2024-07-23T22:31:35.673', 'Referente a Suporte', 0, '3', 3, 'Suporte'),
+    (1, 1, '2024-07-23T22:31:35.673', 'História do Senai Contada Pela IA e Interação Geral Com IA', 0, NULL, 4, 'História Senai'),
+    (5, 1, '2024-07-23T22:31:35.673', 'Pagamento Não Disponível', 1, 'Sua forma de pagamento não está disponível no sistema. Use esse QR code para pagar diretamente: (exemploQRcode)', 1, 'Pagamento Indisponível'),
+    (5, 1, '2024-07-23T22:31:35.673', 'Pagamento Não Autorizado', 1, 'Sinto muito pelo transtorno. Se possível, verifique seu saldo para conferir se houve uma transação errônea.', 1, 'Pagamento Não Autorizado'),
+    (5, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Muito obrigado por interagir', 1, 'Finalizar'),
+    (4, 1, '2024-07-23T22:31:35.673', 'Esqueci Minha Senha', 1, 'Aqui está um link para preencher as informações para o reset da sua senha: (linkExemplo). Espero que fique bem.', 1, 'Esquecimento da Senha'),
+    (4, 1, '2024-07-23T22:31:35.673', 'Instabilidade no Geral', 1, 'Lamentamos se o sistema está lento hoje. Estamos em período de manutenção e voltaremos ao normal em breve.', 1, 'Dificuldades Sistemas'),
+    (4, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Obrigado por interagir. Volte sempre!', 1, 'Finalizar'),
+    (2, 1, '2024-07-23T22:31:35.673', 'Dificuldades no Pagamento', 0, '5', 3, 'Pagamento'),
+    (2, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Obrigado por interagir. Espero que tenha conseguido resolver seu problema.', 1, 'Finalizar'),
+    (3, 1, '2024-07-23T22:31:35.673', 'Dificuldades com o Sistema', 0, '4', 3, 'Sistema'),
+    (3, 1, '2024-07-23T22:31:35.673', 'Falar com Atendente do Setor de Suporte', 0, '1', 6, 'Suporte Humano'),
+    (3, 1, '2024-07-23T22:31:35.673', 'Finalizar Atendimento', 1, 'Obrigado por interagir. Espero que tenha conseguido resolver seu problema.', 1, 'Finalizar'),
+    (6, 1, '2024-07-23T22:31:35.673', 'Voltar ao Fluxo de Atendimento Normal', 0, 'Sim', 4, 'Sim'),
+    (6, 1, '2024-07-23T22:31:35.673', 'Finalizar o Atendimento', 1, 'Obrigado por interagir com o sistema!', 4, 'Finalizar');
 
 select * from login
 select * from atendentes

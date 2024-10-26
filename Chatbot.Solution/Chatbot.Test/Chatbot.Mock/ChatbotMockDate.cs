@@ -1,7 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.Domain.Models;
 using Chatbot.Domain.Models.Enums;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chatbot.Test.Chatbot.Mock
@@ -361,9 +360,9 @@ namespace Chatbot.Test.Chatbot.Mock
                             {
                                 MensData = Convert.ToDateTime("2024-10-16 16:15:08.453"),
                                 MensDescricao = "Finalizar Atendimento",
-                                MenTipo = "MensagemEnviada",
+                                MenTipo = ETipoMensagem.MensagemEnviada,
                                 mensWaId = "wamid.HBgMNTU3OTg4MTMyMDQ0FQIAEhgWM0VCMDBFMzlGQzREMzZFQjUwQzkyMgA=",
-                                mensStatus = "read",
+                                mensStatus = ETipoStatusMensagem.read,
                                 ChaId = chat.ChaId,
                                 ConId = contatos.First().ConId,
                                 LogId = login.LogId

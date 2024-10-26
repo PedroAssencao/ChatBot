@@ -81,7 +81,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await _repository.GetALl();
-                var dadosFiltrados = dados.Where(x => x.ChaId == cha && x.MenTipo == nameof(ETiposDeOptions.MensagemEnviada)).ToList();
+                var dadosFiltrados = dados.Where(x => x.ChaId == cha && x.MenTipo == ETipoMensagem.MensagemEnviada).ToList();
                 List<MensagensDttoGetForView> list = new List<MensagensDttoGetForView>();
                 foreach (var item in dadosFiltrados)
                 {
@@ -124,7 +124,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await GetALl();
-                var item = dados.LastOrDefault(x => x?.Contato?.CodigoWhatsapp == ConWaID && x?.Login?.CodigoWhatsapp == LogConWaID && x.TipoDaMensagem == nameof(ETiposDeOptions.MensagemEnviada));
+                var item = dados.LastOrDefault(x => x?.Contato?.CodigoWhatsapp == ConWaID && x?.Login?.CodigoWhatsapp == LogConWaID && x.TipoDaMensagem == ETipoMensagem.MensagemEnviada);
                 return item;
             }
             catch (Exception)
@@ -156,7 +156,7 @@ namespace Chatbot.Services.Services
                     TipoDaMensagem = item.MenTipo,
                     Descricao = item.MensDescricao,
                     CodigoWhatsapp = item.mensWaId,
-                    StatusDaMensagen = item.mensWaId,
+                    StatusDaMensagen = item.mensStatus,
                     CodigoChat = item.ChaId == null ? 0 : Convert.ToInt32(item.ChaId),
                     Contato = item.ConId == null ? null : await _contatoRepository.GetContatoForViewPorId(Convert.ToInt32(item.ConId)),
                     Login = item.LogId == null ? null : await _loginInterfaceRepository.GetPorIdLoginView(Convert.ToInt32(item.LogId)),
@@ -180,10 +180,10 @@ namespace Chatbot.Services.Services
                     CodigoContato = contato.Codigo,
                     CodigoChat = chat.Codigo,
                     CodigoWhatsapp = CodigoWhatsapp,
-                    StatusDaMensagen = "delivered",
+                    StatusDaMensagen = ETipoStatusMensagem.delivered,
                     Data = DateTime.Now,
                     Descricao = descricao,
-                    TipoDaMensagem = "MensagemEnviada"
+                    TipoDaMensagem = ETipoMensagem.MensagemEnviada
                 };
                 var result = await AdicionarPost(NewModel);
                 MensagensDttoGetForView Model = new MensagensDttoGetForView
@@ -214,8 +214,8 @@ namespace Chatbot.Services.Services
                     CodigoChat = chat,
                     Data = DateTime.Now,
                     Descricao = descricao,
-                    StatusDaMensagen = "delivered",
-                    TipoDaMensagem = "MensagemEnviada"
+                    StatusDaMensagen = ETipoStatusMensagem.delivered,
+                    TipoDaMensagem = ETipoMensagem.MensagemEnviada
                 };
                 var result = await AdicionarPost(NewModel);
                 MensagensDttoGetForView Model = new MensagensDttoGetForView
@@ -357,7 +357,7 @@ namespace Chatbot.Services.Services
                 List<MensagensDttoGetForView> Model = new List<MensagensDttoGetForView>();
                 foreach (var item in Models.Mensagens)
                 {
-                    if (item.StatusDaMensagen != "read" && item.Contato != null)
+                    if (item.StatusDaMensagen != ETipoStatusMensagem.read && item.Contato != null)
                     {
                         MensagensDttoPut newmodel = new MensagensDttoPut
                         {
@@ -365,14 +365,14 @@ namespace Chatbot.Services.Services
                             Data = item.Data,
                             CodigoContato = item?.Contato?.Codigo,
                             Descricao = item?.Descricao,
-                            StatusDaMensagen = "read",
+                            StatusDaMensagen = ETipoStatusMensagem.read,
                             CodigoChat = Models?.Codigo,
                             CodigoLogin = Models?.Atendimento?.Login?.Codigo,
                             CodigoWhatsapp = item?.MensagemWaId,
-                            TipoDaMensagem = "MensagemEnviada"
+                            TipoDaMensagem = ETipoMensagem.MensagemEnviada
                         };
                         await AtualizarPut(newmodel);
-                        item.StatusDaMensagen = "read";
+                        item.StatusDaMensagen = ETipoStatusMensagem.read;
                         Model.Add(item);
                     }
                     else

@@ -1,12 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Chatbot.Domain.Models.Enums;
 
 namespace Chatbot.Infrastructure.Dtto
 {
@@ -15,7 +7,7 @@ namespace Chatbot.Infrastructure.Dtto
         public int Codigo { get; set; }
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
-        public string? StatusDaMensagen { get; set; }
+        public ETipoStatusMensagem? StatusDaMensagen { get; set; }
         public string? MensagemWaId { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
     }
@@ -25,10 +17,10 @@ namespace Chatbot.Infrastructure.Dtto
         public int Codigo { get; set; }
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
-        public string? TipoDaMensagem { get; set; }
+        public ETipoMensagem? TipoDaMensagem { get; set; }
         public int CodigoChat { get; set; }
         public string? CodigoWhatsapp { get; set; }
-        public string? StatusDaMensagen { get; set; }
+        public ETipoStatusMensagem? StatusDaMensagen { get; set; }
         public ContatoDttoGetForView? Contato { get; set; }
         public LoginDttoGetForView? Login { get; set; }
     }
@@ -36,9 +28,9 @@ namespace Chatbot.Infrastructure.Dtto
     {        
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
-        public string? TipoDaMensagem { get; set; }
+        public ETipoMensagem? TipoDaMensagem { get; set; }
         public string? CodigoWhatsapp { get; set; }
-        public string? StatusDaMensagen { get; set; }
+        public ETipoStatusMensagem? StatusDaMensagen { get; set; }
         public int? CodigoContato { get; set; }
         public int? CodigoLogin { get; set; }
         public int? CodigoChat { get; set; }
@@ -49,9 +41,9 @@ namespace Chatbot.Infrastructure.Dtto
         public int Codigo { get; set; }
         public DateTime? Data { get; set; }
         public string? Descricao { get; set; }
-        public string? TipoDaMensagem { get; set; }
+        public ETipoMensagem? TipoDaMensagem { get; set; }
         public string? CodigoWhatsapp { get; set; }
-        public string? StatusDaMensagen { get; set; }
+        public ETipoStatusMensagem? StatusDaMensagen { get; set; }
         public int? CodigoContato { get; set; }
         public int? CodigoLogin { get; set; }
         public int? CodigoChat { get; set; }

@@ -175,7 +175,7 @@ const gerarMenuHtml = (menu, nivel = 0) => {
 
     let TipoACriacao = ``
 
-    if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
+    if (option.tipo == 3 || option.tipo == 4) {
       TipoACriacao = `
         <li>
           <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
@@ -218,7 +218,7 @@ const gerarMenuHtml = (menu, nivel = 0) => {
         `;
 
     // Se a opção tiver um submenu, gera o HTML recursivamente
-    if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
+    if (option.tipo == 3 || option.tipo == 4) {
       const subMenu = getMenuPorId(parseInt(option.resposta));
       if (subMenu) {
         menuHtml += gerarMenuHtml(subMenu, optionNivel + 1);
@@ -261,7 +261,7 @@ const conectarMenus = (menu) => {
     // if (loopsCount == 0) {
     jsPlumb.connect({
       source: `CreateMenu`,
-      target: `Menu${getMenuPorTipo("PrimeiraMensagem").codigo}`.trim(),
+      target: `Menu${getMenuPorTipo(1).codigo}`.trim(),
       anchors: ["BottomLeft", "Left"],
       connector: ["Flowchart"],
       paintStyle: { stroke: "#000", strokeWidth: 2 },
@@ -273,7 +273,7 @@ const conectarMenus = (menu) => {
     // loopsCount = loopsCount + 1
     // }
 
-    if (option.tipo == "MensagemDeRespostaInterativa" || option.tipo == "MensagemPorIA") {
+    if (option.tipo == 3 || option.tipo == 4) {
       jsPlumb.connect({
         source: `option${option.codigo}`,
         target: `Menu${option.resposta}`,
@@ -293,7 +293,7 @@ const conectarMenus = (menu) => {
 export const Iniciar = () => {
   jsPlumb.deleteEveryConnection();
   jsPlumb.repaintEverything();
-  const MenuInicial = getMenuPorTipo("PrimeiraMensagem");
+  const MenuInicial = getMenuPorTipo(1);
   const menuHtml = gerarMenuHtml(MenuInicial);
   document.querySelector("#LinhaMenuPrincipal").innerHTML = `<div class="col-12 p-0">
             <button class="btn buttonAdicionarFromHome" onclick=() id="CreateMenu"><strong>Adicionar Menu</strong></button>
@@ -328,7 +328,7 @@ export const AdicionarEmDados = async (e) => {
     //   "titulo": document.querySelector("#TituloOpcaoMenuInputRedirecionamento").value,
     //   "descricao": document.querySelector("#DescricaoMenuInputRedirecionamento").value,
     //   "resposta": document.querySelector("#selectDepartamento").id,
-    //   "tipo": "RedirecinamentoHumano",
+    //   "tipo": 6,
     //   "finalizar": document.querySelector("#FinalizarChecked").checked
     // }
 
@@ -339,7 +339,7 @@ export const AdicionarEmDados = async (e) => {
       "data": HorarioDeBrasilia,
       "descricao": document.querySelector("#DescricaoMenuInputRedirecionamento").value,
       "resposta": document.querySelector("#selectDepartamento").options[document.querySelector("#selectDepartamento").selectedIndex].id,
-      "tipo": "RedirecinamentoHumano",
+      "tipo": 6,
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
 
@@ -360,7 +360,7 @@ export const AdicionarEmDados = async (e) => {
     //   "titulo": document.querySelector("#TituloSimplesInput").value,
     //   "descricao": document.querySelector("#DescricaoSimplesInput").value,
     //   "resposta": document.querySelector("#textAreaContent").value,
-    //   "tipo": "MensagemDeResposta",
+    //   "tipo": 1,
     //   "finalizar": document.querySelector("#FinalizarChecked").checked
     // }
 
@@ -371,7 +371,7 @@ export const AdicionarEmDados = async (e) => {
       "data": HorarioDeBrasilia,
       "descricao": document.querySelector("#DescricaoSimplesInput").value,
       "resposta": document.querySelector("#textAreaContent").value,
-      "tipo": "MensagemDeResposta",
+      "tipo": 1,
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
 
@@ -393,7 +393,7 @@ export const AdicionarEmDados = async (e) => {
     //   "header": document.querySelector("#cabecalhoMenuInput").value,
     //   "body": document.querySelector("#corpoMenuInput").value,
     //   "footer": document.querySelector("#rodapeMenuInput").value,
-    //   "tipo": "MenuBot",
+    //   "tipo": 2,
     //   "CodigoLogin": UsuarioLogadoId,
     //   "options": []
     // }
@@ -403,7 +403,7 @@ export const AdicionarEmDados = async (e) => {
       "header": document.querySelector("#cabecalhoMenuInput").value,
       "body": document.querySelector("#corpoMenuInput").value,
       "footer": document.querySelector("#rodapeMenuInput").value,
-      "tipo": "MenuBot",
+      "tipo": 2,
       "CodigoLogin": UsuarioLogadoId,
       "options": []
     }
@@ -416,7 +416,7 @@ export const AdicionarEmDados = async (e) => {
     //   "titulo": document.querySelector("#TituloOpcaoMenuInput").value,
     //   "descricao": document.querySelector("#DescricaoMenuInput").value,
     //   "resposta": NewMenu.codigo.toString(),
-    //   "tipo": "MensagemDeRespostaInterativa",
+    //   "tipo": 3,
     //   "finalizar": document.querySelector("#FinalizarChecked").checked
     // }
 
@@ -429,7 +429,7 @@ export const AdicionarEmDados = async (e) => {
       "titulo": document.querySelector("#TituloOpcaoMenuInput").value,
       "descricao": document.querySelector("#DescricaoMenuInput").value,
       "resposta": MenuResponse.codigo.toString(),
-      "tipo": "MensagemDeRespostaInterativa",
+      "tipo": 3,
       "finalizar": document.querySelector("#FinalizarChecked").checked
     }
 
