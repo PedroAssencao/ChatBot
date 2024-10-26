@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chatbot.Test.Chatbot.Mock
@@ -14,12 +15,12 @@ namespace Chatbot.Test.Chatbot.Mock
 
                 using (var catalogDbContext = provider.GetRequiredService<chatbotContext>())
                 {
-
+                    await catalogDbContext.Database.EnsureDeletedAsync();
                     await catalogDbContext.Database.EnsureCreatedAsync();
 
                     if (create)
                     {
-                        // Criação do modelo Login
+                        // Criação do Modelo Login
                         var login = new Login
                         {
                             LogEmail = "master.123@123",

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Chatbot.Domain.Models;
+﻿using Chatbot.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.API.DAL
@@ -35,10 +33,16 @@ namespace Chatbot.API.DAL
 
         public virtual DbSet<Option> Options { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-02BUU56;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
+            }
+        }
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //    => optionsBuilder.UseSqlServer("Name=ConnectionStrings:Chinook");
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-           => optionsBuilder.UseSqlServer("Data Source=DESKTOP-02BUU56;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //   => optionsBuilder.UseSqlServer("Data Source=LAPTOP-M68K5TBC\\SQLEXPRESS;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
