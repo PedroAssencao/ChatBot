@@ -37,7 +37,7 @@ namespace Chatbot.API.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-02BUU56;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
+                optionsBuilder.UseSqlServer("Data Source=.\\SENAI2023;Initial Catalog=chatbot;User ID=sa;Password=senai.123;Encrypt=False");
             }
         }
 
