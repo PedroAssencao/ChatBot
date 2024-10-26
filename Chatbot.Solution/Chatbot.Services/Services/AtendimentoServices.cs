@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.Domain.Models;
+using Chatbot.Domain.Models.Enums;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Infrastructure.Services.Interfaces;
@@ -102,8 +103,8 @@ namespace Chatbot.Services.Services
                     CodigoDepartamento = null,
                     Data = DateTime.Now,
                     EstadoAtendimento = null,
-                    CodigoContato = Atendimento.Contato.Codigo,
-                    CodigoLogin = Atendimento.Login.Codigo
+                    CodigoContato = Atendimento?.Contato?.Codigo,
+                    CodigoLogin = Atendimento?.Login?.Codigo
                 };
                 await AtualizarPut(NewModel);
             }
@@ -135,7 +136,7 @@ namespace Chatbot.Services.Services
                 throw;
             }
         }
-        public async Task AtualizarEstadoAtendimento(AtendimentoDttoGet IsAtendimentoGoing, string estado, int? codDep, int? codAte)
+        public async Task AtualizarEstadoAtendimento(AtendimentoDttoGet IsAtendimentoGoing, EEstadoAtendimento estado, int? codDep, int? codAte)
         {
             try
             {
@@ -206,7 +207,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await GetALl();
-                return dados.Where(x => x.EstadoAtendimento == null || x.EstadoAtendimento.Trim().ToLower() == "Finalizado".Trim().ToLower() || x.EstadoAtendimento.Trim().ToLower() == "GPT".Trim().ToLower() || x.EstadoAtendimento.Trim().ToLower() == "HUMANO".Trim().ToLower()).FirstOrDefault(x => x.Contato.Codigo == contato.Codigo && x.Login.Codigo == login.Codigo);
+                return dados.Where(x => x.EstadoAtendimento == null || x.EstadoAtendimento == EEstadoAtendimento.Finalizado || x.EstadoAtendimento == EEstadoAtendimento.GPT || x.EstadoAtendimento == EEstadoAtendimento.HUMANO).FirstOrDefault(x => x.Contato.Codigo == contato.Codigo && x.Login.Codigo == login.Codigo);
             }
             catch (Exception)
             {

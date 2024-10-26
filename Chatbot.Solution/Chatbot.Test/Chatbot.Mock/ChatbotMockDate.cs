@@ -1,5 +1,6 @@
 ﻿using Chatbot.API.DAL;
 using Chatbot.Domain.Models;
+using Chatbot.Domain.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -330,7 +331,7 @@ namespace Chatbot.Test.Chatbot.Mock
                         // Criação dos modelos Atendimento
                         var atendimento = new Atendimento
                         {
-                            AtenEstado = "Finalizado",
+                            AtenEstado = EEstadoAtendimento.Finalizado,
                             AtenData = Convert.ToDateTime("2024-10-16 16:15:07.987"),
                             AteId = atendente.AteId,
                             DepId = departamento.DepId,

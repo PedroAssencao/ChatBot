@@ -134,9 +134,11 @@
           "Microsoft.Extensions.Caching.Abstractions.Reference": "8.0.0.0",
           "Microsoft.Extensions.Caching.Memory.Reference": "8.0.0.0",
           "Microsoft.Extensions.Configuration.Abstractions.Reference": "8.0.0.0",
+          "Microsoft.Extensions.Configuration.Binder.Reference": "8.0.0.0",
           "Microsoft.Extensions.Configuration.CommandLine.Reference": "8.0.0.0",
           "Microsoft.Extensions.Configuration.Reference": "8.0.0.0",
           "Microsoft.Extensions.Configuration.EnvironmentVariables.Reference": "8.0.0.0",
+          "Microsoft.Extensions.Configuration.FileExtensions.Reference": "8.0.0.0",
           "Microsoft.Extensions.Configuration.Ini": "8.0.0.0",
           "Microsoft.Extensions.Configuration.KeyPerFile": "8.0.0.0",
           "Microsoft.Extensions.Configuration.Xml": "8.0.0.0",
@@ -1029,9 +1031,6 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.724.31311"
           }
-        },
-        "compile": {
-          "lib/net8.0/Microsoft.Extensions.Configuration.Binder.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.CommandLine/8.0.0": {
@@ -1059,9 +1058,6 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.724.31311"
           }
-        },
-        "compile": {
-          "lib/net8.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Json/8.0.1": {
@@ -2606,6 +2602,12 @@
         },
         "compileOnly": true
       },
+      "Microsoft.Extensions.Configuration.Binder.Reference/8.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.Binder.dll": {}
+        },
+        "compileOnly": true
+      },
       "Microsoft.Extensions.Configuration.CommandLine.Reference/8.0.0.0": {
         "compile": {
           "Microsoft.Extensions.Configuration.CommandLine.dll": {}
@@ -2621,6 +2623,12 @@
       "Microsoft.Extensions.Configuration.EnvironmentVariables.Reference/8.0.0.0": {
         "compile": {
           "Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Configuration.FileExtensions.Reference/8.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.FileExtensions.dll": {}
         },
         "compileOnly": true
       },
@@ -5265,6 +5273,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.Extensions.Configuration.Binder.Reference/8.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.Extensions.Configuration.CommandLine.Reference/8.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
@@ -5276,6 +5289,11 @@
       "sha512": ""
     },
     "Microsoft.Extensions.Configuration.EnvironmentVariables.Reference/8.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.FileExtensions.Reference/8.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

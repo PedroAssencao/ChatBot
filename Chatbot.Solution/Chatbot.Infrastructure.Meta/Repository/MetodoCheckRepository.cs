@@ -28,7 +28,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
             _hubContext = hubContext;
         }
 
-        //ver maneira melhor de fazer esse metodo fica muito dificil de ler com esse monte de try aninhado porem por enquanto funciona
+        //ver maneira melhor de fazer esse metodo, fica muito dificil de ler com esse monte de try aninhado, porem por enquanto funciona
         public async Task<DataAndType> VerificarTipoDeRetorno(dynamic Values)
         {
             try

@@ -3,7 +3,6 @@ using Chatbot.Infrastructure.Services.Interfaces;
 using Chatbot.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.SignalR;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Chatbot.Infrastructure.Meta.Repository.SignalRForChat
 {

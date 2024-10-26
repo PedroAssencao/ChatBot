@@ -1,4 +1,5 @@
 ﻿using Chatbot.Domain.Models;
+using Chatbot.Domain.Models.Enums;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Services.Services.Interfaces;
@@ -63,15 +64,15 @@ namespace Chatbot.Services.Services
                 List<dynamic> List = new List<dynamic>();
                 foreach (var item in dados.Where(x => x.Login?.Codigo == id).ToList())
                 {
-                    var qtdFinalizado = AtendimentoDados.Where(x => x.AteId == item.Codigo && x.LogId == item?.Login?.Codigo && x?.AtenEstado?.Trim()?.ToLower() == "finalizado").Count();
-                    var qtdAtivo = AtendimentoDados.Where(x => x.AteId == item.Codigo && x.LogId == item?.Login?.Codigo && x?.AtenEstado?.Trim()?.ToLower() == "humano").Count();
+                    var qtdFinalizado = AtendimentoDados.Where(x => x.AteId == item.Codigo && x.LogId == item?.Login?.Codigo && x?.AtenEstado == EEstadoAtendimento.Finalizado).Count();
+                    var qtdAtivo = AtendimentoDados.Where(x => x.AteId == item.Codigo && x.LogId == item?.Login?.Codigo && x?.AtenEstado == EEstadoAtendimento.HUMANO).Count();
                     var qtdTotal = qtdFinalizado + qtdAtivo;
                     var Model = new
                     {
                         Atendente = item,
-                        qtdFinalizado = qtdFinalizado,
-                        qtdAtivo = qtdAtivo,
-                        qtdTotal = qtdTotal
+                        qtdFinalizado,
+                        qtdAtivo,
+                        qtdTotal
                     };
                     List.Add(Model);
                 }

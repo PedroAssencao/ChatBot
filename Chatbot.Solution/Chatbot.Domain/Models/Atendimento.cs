@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Chatbot.Domain.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.Domain.Models;
@@ -14,9 +15,8 @@ public partial class Atendimento
     public int AtenId { get; set; }
 
     [Column("aten_estado")]
-    [StringLength(255)]
     [Unicode(false)]
-    public string? AtenEstado { get; set; }
+    public EEstadoAtendimento? AtenEstado { get; set; }
 
     [Column("aten_data", TypeName = "datetime")]
     public DateTime? AtenData { get; set; }
