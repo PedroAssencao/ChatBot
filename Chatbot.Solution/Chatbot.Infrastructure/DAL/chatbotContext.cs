@@ -46,7 +46,9 @@ namespace Chatbot.API.DAL
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //   => optionsBuilder.UseSqlServer("Data Source=LAPTOP-M68K5TBC\\SQLEXPRESS;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //   => optionsBuilder.UseSqlServer("Data Source=.\\SENAI2023;Initial Catalog=chatbot;User ID=sa;Password=senai.123;Encrypt=False");
+        //   => optionsBuilder.UseSqlServer("Data Source=LAPTOP-M68K5TBC\\SQLEXPRESS;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    => optionsBuilder.UseSqlServer("Data Source=.\\SENAI2023;Initial Catalog=chatbot;User ID=sa;Password=senai.123;Encrypt=False");
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //   => optionsBuilder.UseSqlServer("Data Source=SQL8006.site4now.net;Initial Catalog=db_a964fc_chatbot;User Id=db_a964fc_chatbot_admin;Password=senai.123");
 

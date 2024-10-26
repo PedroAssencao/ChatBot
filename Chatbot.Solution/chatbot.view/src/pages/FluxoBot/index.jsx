@@ -9,7 +9,7 @@ import ModalDeAdicaoFluxoBot from '../../components/ComponentesFluxoBot/ModalDeA
 import SidebarControlFluxoBot from '../../components/ComponentesFluxoBot/SideBarControlFluxoBot';
 
 export default function FluxoBot() {
-  
+
   const [IsDataLoad, SetLoadDate] = useState(false);
   useEffect(() => {
     UsuarioLogado().then(result => {

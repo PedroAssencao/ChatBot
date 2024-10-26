@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
-import ChartDataLabels from "chartjs-plugin-datalabels"; // Importando o plugin
 import "./style.css";
 
 export default function Mensagem() {

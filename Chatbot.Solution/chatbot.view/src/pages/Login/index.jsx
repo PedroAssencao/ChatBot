@@ -14,105 +14,125 @@ export default function Registro() {
 
     }
 
-    useEffect(() => {
+    const metodoEntrar = async () => {
+        const url = urlBase + "/v1/Login/login/logar";
 
-        var inputSenhaCadastro = document.getElementById("inputSenhaCadastrar")
+        // Captura os valores dos inputs
+        const email = document.getElementById('inputEmailLogar').value;
+        const senha = document.getElementById('inputSenhaLogar').value;
 
-        //function para enviar dados para efeturar login
-        document.getElementById('buttonEntrar').addEventListener('click', async () => {
-            const url = urlBase + "/v1/Login/login/logar";
+        // Dados a serem enviados no corpo da requisição
+        const data = {
+            Email: email,
+            Senha: senha,
+        };
 
-            // Captura os valores dos inputs
-            const email = document.getElementById('inputEmailLogar').value;
-            const senha = document.getElementById('inputSenhaLogar').value;
+        // Configurações da requisição
+        const options = {
+            method: 'POST', // Método HTTP POST
+            headers: {
+                'Content-Type': 'application/json', // Tipo de conteúdo JSON
+            },
+            body: JSON.stringify(data), // Converte o objeto JavaScript em JSON
+            credentials: 'include'
+        };
+
+        try {
+            // Faz a requisição e aguarda a resposta
+            const response = await fetch(url, options);
+            if (response.ok) {
+                // Redireciona para a página desejada
+                location.replace(location.origin);
+            } else {
+                // Exibe a mensagem de erro no front-end
+                document.getElementById('errorLogin').style.display = "block";
+            }
+        } catch (error) {
+            console.error('Ocorreu um erro:', error);
+        }
+
+    }
+
+    const metodoCadastrar = async () => {
+        if (inputSenhaCadastro.value.length > 6) {
+            const url = urlBase + '/v1/Login/login/Cadastrar';
+
+            const User = document.getElementById('inputNomeCadastrar').value
+            const Email = document.getElementById('inputEmailCadastrar').value
+            const Senha = document.getElementById('inputSenhaCadastrar').value
+
+            console.log(User)
+            console.log(Email)
+            console.log(Senha)
 
             // Dados a serem enviados no corpo da requisição
             const data = {
-                Email: email,
-                Senha: senha,
+                Usuario: User,
+                Email: Email,
+                Senha: Senha,
             };
 
             // Configurações da requisição
             const options = {
                 method: 'POST', // Método HTTP POST
                 headers: {
-                    'Content-Type': 'application/json', // Tipo de conteúdo JSON
+                    'Content-Type': 'application/json' // Tipo de conteúdo JSON
                 },
-                body: JSON.stringify(data), // Converte o objeto JavaScript em JSON
-                credentials: 'include'
+                credentials: 'include',
+                body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
             };
 
-            try {
-                // Faz a requisição e aguarda a resposta
-                const response = await fetch(url, options);
-                if (response.ok) {
-                    // Redireciona para a página desejada
-                    location.replace(location.origin);
-                } else {
-                    // Exibe a mensagem de erro no front-end
-                    document.getElementById('errorLogin').style.display = "block";
-                }
-            } catch (error) {
-                console.error('Ocorreu um erro:', error);
-            }
+            // Realiza a requisição usando fetch
+            fetch(url, options)
+                .then(response => {
+                    if (response.ok) {
+                        location.replace(location.origin) //Redireciona Para a Tela Desejada
+                    } else {
+                        document.getElementById('errorCadastro').style.display = "block"
+                        throw new Error('Erro ao enviar os dados.'); // Lança um erro se a requisição falhar
+                    }
+
+                })
+                // .then(data => {
+                //     console.log('Resposta do servidor:', data);
+                //     location.reload()
+
+                // })
+                .catch(error => {
+                    console.error('Ocorreu um erro:', error);
+
+                });
+        }
+        else {
+            document.getElementById('errorCadastroSenha').style.display = 'block';
+        }
+    }
+
+    const CheckEntrar = (event) => {
+        console.log(event)
+        if (event.key === 'Enter'){
+            metodoEntrar()
+        }
+    }
+
+    const CheckCadastrar = (event) => {
+        console.log(event)
+        if (event.key === 'Enter'){
+            metodoCadastrar()
+        }
+    }
+
+    useEffect(() => {
+
+        //function para enviar dados para efeturar login
+        document.getElementById('buttonEntrar').addEventListener('click', async () => {
+            await metodoEntrar()
         });
 
 
         //function para enviar dados para cadastro
-        document.getElementById('buttonCadastrar').addEventListener('click', () => {
-            if (inputSenhaCadastro.value.length > 6) {
-                const url = urlBase + '/v1/Login/login/Cadastrar';
-
-                const User = document.getElementById('inputNomeCadastrar').value
-                const Email = document.getElementById('inputEmailCadastrar').value
-                const Senha = document.getElementById('inputSenhaCadastrar').value
-
-                console.log(User)
-                console.log(Email)
-                console.log(Senha)
-
-                // Dados a serem enviados no corpo da requisição
-                const data = {
-                    Usuario: User,
-                    Email: Email,
-                    Senha: Senha,
-                };
-
-                // Configurações da requisição
-                const options = {
-                    method: 'POST', // Método HTTP POST
-                    headers: {
-                        'Content-Type': 'application/json' // Tipo de conteúdo JSON
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
-                };
-
-                // Realiza a requisição usando fetch
-                fetch(url, options)
-                    .then(response => {
-                        if (response.ok) {
-                            location.replace(location.origin) //Redireciona Para a Tela Desejada
-                        } else {
-                            document.getElementById('errorCadastro').style.display = "block"
-                            throw new Error('Erro ao enviar os dados.'); // Lança um erro se a requisição falhar
-                        }
-
-                    })
-                    // .then(data => {
-                    //     console.log('Resposta do servidor:', data);
-                    //     location.reload()
-
-                    // })
-                    .catch(error => {
-                        console.error('Ocorreu um erro:', error);
-
-                    });
-            }
-            else {
-                document.getElementById('errorCadastroSenha').style.display = 'block';
-            }
-
+        document.getElementById('buttonCadastrar').addEventListener('click', async () => {
+            await metodoCadastrar()
         })
 
         // Coloque todo o seu código JavaScript dentro desta função de efeito
@@ -175,7 +195,10 @@ export default function Registro() {
 
                             <label className="label-input">
                                 <i className="fas fa-lock icon-modify"></i>
-                                <input id="inputSenhaCadastrar" onKeyDown={hideError} type="password" minLength={"8"} placeholder="Senha" />
+                                <input id="inputSenhaCadastrar" onKeyDown={(e) => {
+                                    CheckCadastrar(e) 
+                                    hideError()
+                                }} type="password" minLength={"8"} placeholder="Senha" />
                             </label>
 
 
@@ -204,7 +227,10 @@ export default function Registro() {
 
                             <label className="label-input">
                                 <i className="fas fa-lock icon-modify"></i>
-                                <input id="inputSenhaLogar" onKeyDown={hideError} type="password" placeholder="Senha" />
+                                <input id="inputSenhaLogar" onKeyDown={(e) => {
+                                    CheckEntrar(e) 
+                                    hideError()
+                                }} type="password" placeholder="Senha" />
                             </label>
                             {/* Deixar essa função ativa apenas quando ela estiver pronta */}
                             {/* <a className="password" href="#">Esqueceu sua senha?</a> */}

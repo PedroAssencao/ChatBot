@@ -8,7 +8,9 @@ let data = []
 export const fetchNewDatas = async () => {
   try {
     var UsuarioLogadoId = await UsuarioLogado()
+    console.log(UsuarioLogadoId)
     const response = await fetch(`${urlBase}/v1/Menus/Menus/GetAllMenusByLogId/${UsuarioLogadoId.usuarioLogadoId}`);
+    console.log(response)
     const responseJson = await response.json();
     data = responseJson;
     return true;
