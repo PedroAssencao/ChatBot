@@ -1,6 +1,3 @@
-
-
-
 use chatbot
 go
 -- Tabelas
@@ -50,7 +47,7 @@ go
 
 create table Atendimento (
     aten_id int identity(1,1) primary key,
-    aten_estado varchar(255),
+    aten_estado int,
     aten_data datetime,
     ate_id int,
     dep_id int,
@@ -195,3 +192,5 @@ select * from menus
 select * from chat
 select * from Mensagens
 select * from contatos
+
+select * from chat
