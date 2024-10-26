@@ -1,12 +1,6 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Chatbot.Domain.Models.Enums;
 
 namespace Chatbot.Infrastructure.Dtto
 {
@@ -24,7 +18,7 @@ namespace Chatbot.Infrastructure.Dtto
 
         public string? Usuario { get; set; }
         public string? Email { get; set; }
-    
+        public EPerfil Tipo { get; set; }
         public string? Senha { get; set; }
     
         public string? Imagem { get; set; }
@@ -49,6 +43,7 @@ namespace Chatbot.Infrastructure.Dtto
     {
         public string? Email { get; set; }
         public string? Senha { get; set; }
+        public EPerfil Tipo { get; set; }
         public string CriptografaSenha(string senha)
         {
             var a = Encoding.UTF8.GetBytes(senha);

@@ -1,13 +1,12 @@
 ﻿namespace Chatbot.Domain.Models.Enums
 {
     public enum ETiposDeOptions
-    {
-        PrimeiraMensagem = 1,
-        MensagemDeResposta = 2,
-        MensagemEnviada = 3,
-        MensagemDeRespostaInterativa = 4,
-        MensagemPorIA = 5,
-        MenuDaIA = 6,
-        RedirecinamentoHumano = 7
+    {        
+        MensagemDeResposta = 1,
+        MensagemEnviada = 2,
+        MensagemDeRespostaInterativa = 3,
+        MensagemPorIA = 4,
+        MenuDaIA = 5,
+        RedirecinamentoHumano = 6
     }
 }

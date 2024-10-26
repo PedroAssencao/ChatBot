@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Chatbot.Domain.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.Domain.Models;
@@ -35,7 +34,7 @@ public partial class Menu
     [Column("men_tipo")]
     [StringLength(255)]
     [Unicode(false)]
-    public string? MenTipo { get; set; }
+    public ETipoMenu? MenTipo { get; set; }
 
     [Column("log_id")]
     public int? LogId { get; set; }

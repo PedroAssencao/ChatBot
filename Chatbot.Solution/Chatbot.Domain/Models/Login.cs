@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using Chatbot.Domain.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chatbot.Domain.Models;
@@ -13,6 +11,9 @@ public partial class Login
     [Key]
     [Column("log_id")]
     public int LogId { get; set; }
+    [Key]
+    [Column("log_tipo")]
+    public EPerfil logTipo { get; set; }
 
     [Column("log_user")]
     [StringLength(255)]

@@ -2,8 +2,8 @@
 {
     public enum EPerfil
     {
-        Master,
-        Empress,
-        Client
+        Master = 1,
+        Usuario = 2,
+        Atendente = 3
     }
 }

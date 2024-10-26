@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chatbot.Domain.Models.Enums;
 
 namespace Chatbot.Infrastructure.Dtto
 {
@@ -17,7 +18,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Header { get; set; }
         public string? Body { get; set; }
         public string? Footer { get; set; }
-        public string? Tipo { get; set; }
+        public ETipoMenu? Tipo { get; set; }
         public LoginDttoGet? Login { get; set; }
         public List<OptionDttoGetForMenu>? Options { get; set; }
     }
@@ -27,7 +28,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Header { get; set; }
         public string? Body { get; set; }
         public string? Footer { get; set; }
-        public string? Tipo { get; set; }
+        public ETipoMenu? Tipo { get; set; }
         public int? CodigoLogin { get; set; }
     }
 
@@ -38,7 +39,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Header { get; set; }
         public string? Body { get; set; }
         public string? Footer { get; set; }
-        public string? Tipo { get; set; }
+        public ETipoMenu? Tipo { get; set; }
         public int? CodigoLogin { get; set; }
     }
 
@@ -49,7 +50,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? MenHeader { get; set; }
         public string? MenBody { get; set; }
         public string? MenFooter { get; set; }
-        public string? MenTipo { get; set; }
+        public ETipoMenu? MenTipo { get; set; }
         public LoginDttoGetForView? Login { get; set; }
         public List<OptionDttoGetForMenu>? Options { get; set; }
     }

@@ -58,7 +58,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await GetALl();
-                return dados.FirstOrDefault(x => x.Tipo == nameof(ETiposDeOptions.PrimeiraMensagem) && x?.Login?.Codigo == logId);
+                return dados.FirstOrDefault(x => x.Tipo == ETipoMenu.PrimeiraMensagem && x?.Login?.Codigo == logId);
             }
             catch (Exception)
             {
@@ -71,7 +71,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await GetALl();
-                return dados.FirstOrDefault(x => x.Tipo == nameof(ETiposDeOptions.MenuDaIA) && x?.Login?.Codigo == logId);
+                return dados.FirstOrDefault(x => x.Tipo == ETipoMenu.MenuDaIa && x?.Login?.Codigo == logId);
             }
             catch (Exception)
             {
@@ -136,7 +136,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await _repository.GetALl();
-                var item = dados.First(x => x.LogId == id && x.MenTipo == nameof(ETiposDeOptions.PrimeiraMensagem));
+                var item = dados.First(x => x.LogId == id && x.MenTipo == ETipoMenu.PrimeiraMensagem);
                 MenuDttoGet Model = new MenuDttoGet
                 {
                     Codigo = item.MenId,

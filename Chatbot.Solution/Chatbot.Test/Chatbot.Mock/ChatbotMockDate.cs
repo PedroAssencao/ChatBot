@@ -90,7 +90,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 MenHeader = "Empresas Senai",
                                 MenFooter = "Todos direitos reservados",
                                 MenBody = "Seja Bem Vindo ao Nosso Robo de Atendimento...",
-                                MenTipo = "PrimeiraMensagem",
+                                MenTipo = ETipoMenu.PrimeiraMensagem,
                                 MenTitle = "Menu Inicial",
                                 LogId = login.LogId
                             },
@@ -99,7 +99,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 MenHeader = "Empresas Senai",
                                 MenFooter = "Todos direitos reservados",
                                 MenBody = "Por Favor Escolha Qual Parte das Finança Voce Esta Tendo Problemas",
-                                MenTipo = "MenuBot",
+                                MenTipo = ETipoMenu.MenuBot,
                                 MenTitle = "Finanças",
                                 LogId = 1
                             },
@@ -108,7 +108,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 MenHeader = "Empresas Senai",
                                 MenFooter = "Todos direitos reservados",
                                 MenBody = "Por Favor Escolha Qual Setor de Suporte Que Voce Deseja Ser Atendido",
-                                MenTipo = "MenuBot",
+                                MenTipo = ETipoMenu.MenuBot,
                                 MenTitle = "Suporte",
                                 LogId = 1
                             },
@@ -117,7 +117,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 MenHeader = "Empresas Senai",
                                 MenFooter = "Todos direitos reservados",
                                 MenBody = "Escolha Quais Das Opções Abaixo Descreve Melhor o Seu Problema",
-                                MenTipo = "MenuBot",
+                                MenTipo = ETipoMenu.MenuBot,
                                 MenTitle = "Menu de Dificuldades ao Acessar o Sistema",
                                 LogId = 1
                             },
@@ -126,7 +126,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 MenHeader = "Empresas Senai",
                                 MenFooter = "Todos direitos reservados",
                                 MenBody = "Escolha Quais Das Opções Abaixo Descreve Melhor o Seu Problema de Pagamento",
-                                MenTipo = "MenuBot",
+                                MenTipo = ETipoMenu.MenuBot,
                                 MenTitle = "DificuldadePagar",
                                 LogId = 1
                             },
@@ -135,7 +135,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 MenHeader = "Empresas Senai",
                                 MenFooter = "Todos direitos reservados",
                                 MenBody = "Escolha Quais Das Opções Abaixo e a Sua Vontade Se Tiver Mais Alguma Pergunta Apenas Pergunte!",
-                                MenTipo = "MenuDaIA",
+                                MenTipo = ETipoMenu.MenuDaIa,
                                 MenTitle = "Menu IA",
                                 LogId = 1
                             }

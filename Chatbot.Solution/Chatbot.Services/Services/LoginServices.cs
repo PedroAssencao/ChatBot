@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Net;
 using Chatbot.API.DAL;
 using Microsoft.EntityFrameworkCore;
+using Chatbot.Domain.Models.Enums;
 namespace Chatbot.Services.Services
 {
     public class LoginServices : ILoginInterfaceServices
@@ -40,7 +41,9 @@ namespace Chatbot.Services.Services
                         Email = item.LogEmail,
                         Senha = item.LogSenha,
                         Imagem = item.LogImg,
+                        Tipo = item.logTipo,
                         Plano = item.LogPlano,
+
                     };
                     List.Add(NewModel);
                 }
@@ -64,6 +67,7 @@ namespace Chatbot.Services.Services
                     Email = dados.LogEmail,
                     Senha = dados.LogSenha,
                     Imagem = dados.LogImg,
+                    Tipo = dados.logTipo,
                     Plano = dados.LogPlano,
                 };
                 return NewModel;
@@ -95,6 +99,7 @@ namespace Chatbot.Services.Services
                             Email = LoginEntity.LogEmail,
                             Senha = LoginEntity.LogSenha,
                             Imagem = LoginEntity.LogImg,
+                            Tipo = LoginEntity.logTipo,
                             Plano = LoginEntity.LogPlano,
                         };
                         return NewModel;
@@ -120,6 +125,7 @@ namespace Chatbot.Services.Services
                     LogUser = Model.Usuario,
                     LogEmail = Model.Email,
                     LogSenha = Model.Senha,
+                    logTipo = Model.Tipo,   
                     LogImg = Model.Imagem,
                     LogPlano = Model.Plano
                 };
@@ -142,6 +148,7 @@ namespace Chatbot.Services.Services
                     LogUser = Model.Usuario,
                     LogEmail = Model.Email,
                     LogSenha = Model.Senha,
+                    logTipo = Model.Tipo,
                     LogImg = Model.Imagem,
                     LogPlano = Model.Plano
                 };
@@ -209,6 +216,7 @@ namespace Chatbot.Services.Services
                     Email = item.LogEmail,
                     Senha = item.LogSenha,
                     Imagem = item.LogImg,
+                    Tipo = item.logTipo,
                     Plano = item.LogPlano,
                 };
                 await _repository.delete(NewModel.Codigo);
@@ -236,7 +244,7 @@ namespace Chatbot.Services.Services
                     var claims = new List<Claim>
                     {
                      new Claim(ClaimTypes.Name, usuarioSelecionado.LogId.ToString()),
-                     new Claim(ClaimTypes.Role, usuarioSelecionado.LogPlano == "master" ? "Master" : "Usuario"),
+                     new Claim(ClaimTypes.Role, usuarioSelecionado.logTipo == EPerfil.Master ? "Master" : "Usuario"),
                      new Claim(ClaimTypes.NameIdentifier, usuarioSelecionado.LogUser)
                     };
 
