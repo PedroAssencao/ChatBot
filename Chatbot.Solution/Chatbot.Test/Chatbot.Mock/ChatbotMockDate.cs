@@ -155,7 +155,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Referente a Financeiro",
                                 OptFinalizar = false,
                                 OptResposta = "2",
-                                OptTipo = "MensagemDeRespostaInterativa",
+                                OptTipo = ETiposDeOptions.MensagemDeRespostaInterativa,
                                 OptTitle = "Financeiro"
                             },
                             new Option
@@ -166,7 +166,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Referente a Suporte",
                                 OptFinalizar = false,
                                 OptResposta = "3",
-                                OptTipo = "MensagemDeRespostaInterativa",
+                                OptTipo = ETiposDeOptions.MensagemDeRespostaInterativa,
                                 OptTitle = "Suporte"
                             },
                             new Option
@@ -177,7 +177,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "História do Senai Contada Pela IA e Interação Geral Com IA",
                                 OptFinalizar = false,
                                 OptResposta = null,
-                                OptTipo = "MensagemPorIA",
+                                OptTipo = ETiposDeOptions.MensagemPorIA,
                                 OptTitle = "História Senai"
                             },
                             new Option
@@ -188,7 +188,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Pagamento Não Disponível",
                                 OptFinalizar = true,
                                 OptResposta = "Sua Forma de Pagamento não está disponível no sistema? Use esse QR code para pagar diretamente: (exemploQRCode)",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Pagamento Indisponível"
                             },
                             new Option
@@ -199,7 +199,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Pagamento Não Autorizado",
                                 OptFinalizar = true,
                                 OptResposta = "Sinto Muito Pelo Transtorno, se possível, tente checar seu saldo para verificar se houve uma transação errônea.",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Pagamento Não Autorizado"
                             },
                             new Option
@@ -210,7 +210,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Finalizar Atendimento",
                                 OptFinalizar = true,
                                 OptResposta = "Muito Obrigado Por Interagir.",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Finalizar"
                             },
                             new Option
@@ -221,7 +221,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Esqueci Minha Senha",
                                 OptFinalizar = true,
                                 OptResposta = "Aqui está um link para preencher as informações para o reset da sua senha: (linkExemplo), espero que fique bem.",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Esquecimento da Senha"
                             },
                             new Option
@@ -232,7 +232,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Instabilidade No Geral",
                                 OptFinalizar = true,
                                 OptResposta = "Lamentamos se o sistema está lento hoje, estamos em período de manutenção e voltaremos ao normal em breve.",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Dificuldades Sistemas"
                             },
                             new Option
@@ -243,7 +243,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Finalizar Atendimento",
                                 OptFinalizar = true,
                                 OptResposta = "Obrigado por interagir, volte sempre.",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Finalizar"
                             },
                             new Option
@@ -254,7 +254,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Dificuldades no Pagamento",
                                 OptFinalizar = false,
                                 OptResposta = "5",
-                                OptTipo = "MensagemDeRespostaInterativa",
+                                OptTipo = ETiposDeOptions.MensagemDeRespostaInterativa,
                                 OptTitle = "Pagamento"
                             },
                             new Option
@@ -265,7 +265,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Finalizar Atendimento",
                                 OptFinalizar = true,
                                 OptResposta = "Obrigado por interagir, espero que tenha conseguido resolver seu problema.",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Finalizar"
                             },
                             new Option
@@ -276,7 +276,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Dificuldades com o Sistema",
                                 OptFinalizar = false,
                                 OptResposta = "4",
-                                OptTipo = "MensagemDeRespostaInterativa",
+                                OptTipo = ETiposDeOptions.MensagemDeRespostaInterativa,
                                 OptTitle = "Sistema"
                             },
                             new Option
@@ -287,7 +287,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Falar com Atendente do Setor de Suporte",
                                 OptFinalizar = false,
                                 OptResposta = "1",
-                                OptTipo = "RedirecionamentoHumano",
+                                OptTipo = ETiposDeOptions.RedirecinamentoHumano,
                                 OptTitle = "Suporte Humano"
                             },
                             new Option
@@ -298,7 +298,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Finalizar Atendimento",
                                 OptFinalizar = true,
                                 OptResposta = "Obrigado por interagir, espero que tenha conseguido resolver seu problema.",
-                                OptTipo = "MensagemDeResposta",
+                                OptTipo = ETiposDeOptions.MensagemDeResposta,
                                 OptTitle = "Finalizar"
                             },
                             new Option
@@ -309,7 +309,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Voltar ao Fluxo de Atendimento Normal",
                                 OptFinalizar = false,
                                 OptResposta = "Sim",
-                                OptTipo = "MensagemPorIA",
+                                OptTipo = ETiposDeOptions.MensagemPorIA,
                                 OptTitle = "Sim"
                             },
                             new Option
@@ -320,7 +320,7 @@ namespace Chatbot.Test.Chatbot.Mock
                                 OptDescricao = "Finalizar o Atendimento",
                                 OptFinalizar = true,
                                 OptResposta = "Obrigado por interagir com o sistema!",
-                                OptTipo = "MensagemPorIA",
+                                OptTipo = ETiposDeOptions.MensagemPorIA,
                                 OptTitle = "Finalizar"
                             }
                         };

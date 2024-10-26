@@ -3,13 +3,6 @@ using Chatbot.Domain.Models.Enums;
 using Chatbot.Infrastructure.Dtto;
 using Chatbot.Infrastructure.Repository.Interfaces;
 using Chatbot.Services.Services.Interfaces;
-using Microsoft.Extensions.Logging.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatbot.Services.Services
 {
@@ -59,6 +52,7 @@ namespace Chatbot.Services.Services
         {
             try
             {
+                //essa logica aqui e funcional porem não fica no padrão de projeto dar uma atenção a isso aqui futuramente
                 var dados = await GetALl();
                 var AtendimentoDados = await _atendimentoInterface.GetALl();
                 List<dynamic> List = new List<dynamic>();

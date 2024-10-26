@@ -222,7 +222,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
         {
             return "Status Atualizado";
         }
-
         public async Task<BotRespostaInitialVariables> montarObjDeMsg(DataAndType Model)
         {
             var descricaoDaMensagem = Model.Dados.entry[0].changes[0].value.messages[0].interactive.list_reply.description ?? Model.Dados.entry[0].changes[0].value.messages[0].text.body;
@@ -296,20 +295,20 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     }
 
                     //Se o Menu for do tipo de mensagem com multipla escolha ele vai responder com essa resposta
-                    if (Obj.OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.mensagemderespostainterativa).Trim()?.ToLower())
+                    if (Obj.OptionSelecionada?.Tipo == ETiposDeOptions.MensagemDeRespostaInterativa)
                     {
                         string result = await MontarMenuParaEnvio(Obj.MenuSelecionadoOption, Obj.numero, Obj.Atendimento, Obj.chat);
                         await PostAsync(_configuration["BaseUrl"], _configuration["Token"], result);
                     }
 
                     //Se For Uma Mensagem Simples ele vai responder aqui
-                    if (Obj.OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.MensagemDeResposta).Trim()?.ToLower())
+                    if (Obj.OptionSelecionada?.Tipo == ETiposDeOptions.MensagemDeResposta)
                     {
                         await EnviarMensagemDoTipoSimples(Obj.OptionSelecionada?.Resposta, Obj.numero, Obj.Atendimento, Obj.chat);
                     }
 
                     //Se For Uma Mensagem Feita Por Ia ele vai Respoder assim
-                    if (Obj.OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.MensagemPorIA).Trim()?.ToLower() && isFinalizar != true)
+                    if (Obj.OptionSelecionada?.Tipo ==ETiposDeOptions.MensagemPorIA && isFinalizar != true)
                     {
                         if (Obj.Atendimento != null && Obj.Atendimento?.EstadoAtendimento != EEstadoAtendimento.GPT)
                         {
@@ -322,7 +321,7 @@ namespace Chatbot.Infrastructure.Meta.Repository
                     }
 
                     //Se For Uma Mensagem Para conduzir para o atendimento humano
-                    if (Obj.OptionSelecionada?.Tipo?.Trim()?.ToLower() == nameof(ETipos.RedirecinamentoHumano).Trim()?.ToLower())
+                    if (Obj.OptionSelecionada?.Tipo==ETiposDeOptions.RedirecinamentoHumano)
                     {
                         if (Obj.Atendimento != null && Obj.Atendimento?.EstadoAtendimento != EEstadoAtendimento.HUMANO)
                         {

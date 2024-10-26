@@ -1,12 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Chatbot.Domain.Models.Enums;
 
 namespace Chatbot.Infrastructure.Dtto
 {
@@ -18,7 +10,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Descricao { get; set; }
         public bool? Finalizar { get; set; }
         public string? Resposta { get; set; }
-        public string? Tipo { get; set; }
+        public ETiposDeOptions? Tipo { get; set; }
         public string? Titulo { get; set; }
         public LoginDttoGetForView? Login { get; set; }
     }
@@ -29,7 +21,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Descricao { get; set; }
         public bool? Finalizar { get; set; }
         public string? Resposta { get; set; }
-        public string? Tipo { get; set; }
+        public ETiposDeOptions Tipo { get; set; }
         public string? Titulo { get; set; }
         public int? CodigoLogin { get; set; }
     }
@@ -42,7 +34,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Descricao { get; set; }
         public bool? Finalizar { get; set; }
         public string? Resposta { get; set; }
-        public string? Tipo { get; set; }
+        public ETiposDeOptions Tipo { get; set; }
         public string? Titulo { get; set; }
         public int? CodigoLogin { get; set; }
     }
@@ -54,7 +46,7 @@ namespace Chatbot.Infrastructure.Dtto
         public string? Titulo { get; set; }
         public string? Descricao { get; set; }
         public string? Resposta { get; set; }
-        public string? Tipo { get; set; }
+        public ETiposDeOptions? Tipo { get; set; }
         public bool? Finalizar { get; set; }
     }
 

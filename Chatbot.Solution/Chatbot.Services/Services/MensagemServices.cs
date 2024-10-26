@@ -81,7 +81,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await _repository.GetALl();
-                var dadosFiltrados = dados.Where(x => x.ChaId == cha && x.MenTipo == nameof(ETipos.MensagemEnviada)).ToList();
+                var dadosFiltrados = dados.Where(x => x.ChaId == cha && x.MenTipo == nameof(ETiposDeOptions.MensagemEnviada)).ToList();
                 List<MensagensDttoGetForView> list = new List<MensagensDttoGetForView>();
                 foreach (var item in dadosFiltrados)
                 {
@@ -124,7 +124,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var dados = await GetALl();
-                var item = dados.LastOrDefault(x => x?.Contato?.CodigoWhatsapp == ConWaID && x?.Login?.CodigoWhatsapp == LogConWaID && x.TipoDaMensagem == nameof(ETipos.MensagemEnviada));
+                var item = dados.LastOrDefault(x => x?.Contato?.CodigoWhatsapp == ConWaID && x?.Login?.CodigoWhatsapp == LogConWaID && x.TipoDaMensagem == nameof(ETiposDeOptions.MensagemEnviada));
                 return item;
             }
             catch (Exception)
