@@ -2,6 +2,8 @@
 using Chatbot.API.Repository;
 using Chatbot.Infrastructure.Interfaces;
 using Chatbot.Infrastructure.Repository.Interfaces;
+using Chatbot.Infrastructure.Services;
+using Chatbot.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -40,6 +42,7 @@ namespace Chatbot.Test.Chatbot.Mock
                 services.AddScoped<IOptionsInterface, optionsRepository>();
                 services.AddScoped<IChatsInterface, ChatRepository>();
                 services.AddScoped<IMenuInterface, menuRepository>();
+                services.AddScoped<IContatoInterfaceServices, ContatoServices>();
             });
 
 

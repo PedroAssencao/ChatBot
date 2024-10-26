@@ -7,11 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Chatbot.Test.Chatbot.Infrastructure.Test.Get
 {
 
-    public class ContatoRepositoryTest : IClassFixture<ChatbotConnection>
+    public class ContatoServicesTest : IClassFixture<ChatbotConnection>
     {
         private readonly IContatosInterface _repository;
 
-        public ContatoRepositoryTest(ChatbotConnection application)
+        public ContatoServicesTest(ChatbotConnection application)
         {
             ChatbotMockDate.CreateDates(application, true).Wait();
             var scope = application.Services.CreateScope();
