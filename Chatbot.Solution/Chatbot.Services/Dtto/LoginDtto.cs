@@ -37,7 +37,7 @@ namespace Chatbot.Infrastructure.Dtto
             return b;
         }
 
-        public string DescriptografaSenha(string senha)
+        public string? DescriptografaSenha(string senha)
         {
             var c = Convert.FromBase64String(senha);
             var d = Encoding.UTF8.GetString(c);
