@@ -52,6 +52,62 @@ export default function Registro() {
         }
 
     }
+
+    const metodoCadastrar = async () => {
+        if (inputSenhaCadastro.value.length > 6) {
+            const url = urlBase + '/v1/Login/login/Cadastrar';
+
+            const User = document.getElementById('inputNomeCadastrar').value
+            const Email = document.getElementById('inputEmailCadastrar').value
+            const Senha = document.getElementById('inputSenhaCadastrar').value
+
+            console.log(User)
+            console.log(Email)
+            console.log(Senha)
+
+            // Dados a serem enviados no corpo da requisição
+            const data = {
+                Usuario: User,
+                Email: Email,
+                Senha: Senha,
+            };
+
+            // Configurações da requisição
+            const options = {
+                method: 'POST', // Método HTTP POST
+                headers: {
+                    'Content-Type': 'application/json' // Tipo de conteúdo JSON
+                },
+                credentials: 'include',
+                body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
+            };
+
+            // Realiza a requisição usando fetch
+            fetch(url, options)
+                .then(response => {
+                    if (response.ok) {
+                        location.replace(location.origin) //Redireciona Para a Tela Desejada
+                    } else {
+                        document.getElementById('errorCadastro').style.display = "block"
+                        throw new Error('Erro ao enviar os dados.'); // Lança um erro se a requisição falhar
+                    }
+
+                })
+                // .then(data => {
+                //     console.log('Resposta do servidor:', data);
+                //     location.reload()
+
+                // })
+                .catch(error => {
+                    console.error('Ocorreu um erro:', error);
+
+                });
+        }
+        else {
+            document.getElementById('errorCadastroSenha').style.display = 'block';
+        }
+    }
+
     const CheckEntrar = (event) => {
         console.log(event)
         if (event.key === 'Enter'){
@@ -62,12 +118,11 @@ export default function Registro() {
     const CheckCadastrar = (event) => {
         console.log(event)
         if (event.key === 'Enter'){
-             
+            metodoCadastrar()
         }
     }
-    useEffect(() => {
 
-        var inputSenhaCadastro = document.getElementById("inputSenhaCadastrar")
+    useEffect(() => {
 
         //function para enviar dados para efeturar login
         document.getElementById('buttonEntrar').addEventListener('click', async () => {
@@ -76,60 +131,8 @@ export default function Registro() {
 
 
         //function para enviar dados para cadastro
-        document.getElementById('buttonCadastrar').addEventListener('click', () => {
-            if (inputSenhaCadastro.value.length > 6) {
-                const url = urlBase + '/v1/Login/login/Cadastrar';
-
-                const User = document.getElementById('inputNomeCadastrar').value
-                const Email = document.getElementById('inputEmailCadastrar').value
-                const Senha = document.getElementById('inputSenhaCadastrar').value
-
-                console.log(User)
-                console.log(Email)
-                console.log(Senha)
-
-                // Dados a serem enviados no corpo da requisição
-                const data = {
-                    Usuario: User,
-                    Email: Email,
-                    Senha: Senha,
-                };
-
-                // Configurações da requisição
-                const options = {
-                    method: 'POST', // Método HTTP POST
-                    headers: {
-                        'Content-Type': 'application/json' // Tipo de conteúdo JSON
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(data) // Converte o objeto JavaScript em JSON
-                };
-
-                // Realiza a requisição usando fetch
-                fetch(url, options)
-                    .then(response => {
-                        if (response.ok) {
-                            location.replace(location.origin) //Redireciona Para a Tela Desejada
-                        } else {
-                            document.getElementById('errorCadastro').style.display = "block"
-                            throw new Error('Erro ao enviar os dados.'); // Lança um erro se a requisição falhar
-                        }
-
-                    })
-                    // .then(data => {
-                    //     console.log('Resposta do servidor:', data);
-                    //     location.reload()
-
-                    // })
-                    .catch(error => {
-                        console.error('Ocorreu um erro:', error);
-
-                    });
-            }
-            else {
-                document.getElementById('errorCadastroSenha').style.display = 'block';
-            }
-
+        document.getElementById('buttonCadastrar').addEventListener('click', async () => {
+            await metodoCadastrar()
         })
 
         // Coloque todo o seu código JavaScript dentro desta função de efeito
