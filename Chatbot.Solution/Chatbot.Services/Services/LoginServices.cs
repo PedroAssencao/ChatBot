@@ -232,7 +232,7 @@ namespace Chatbot.Services.Services
             try
             {
                 var usuarios = await _repository.GetALl();
-                var usuarioSelecionado = usuarios.FirstOrDefault(x => x.LogEmail == Model?.Email && Model?.DescriptografaSenha(x?.LogSenha) == Model?.Senha || IsCadastre);
+                var usuarioSelecionado = usuarios.FirstOrDefault(x => x.LogEmail == Model?.Email && Model?.DescriptografaSenha(x?.LogSenha) == Model?.Senha);
                 Atendente? teste = null;
                 if (usuarioSelecionado == null)
                 {

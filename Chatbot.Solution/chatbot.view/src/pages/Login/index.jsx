@@ -54,7 +54,7 @@ export default function Registro() {
     }
 
     const metodoCadastrar = async () => {
-        if (inputSenhaCadastro.value.length > 6) {
+        if (document.querySelector("#inputSenhaCadastrar").value.length > 6) {
             const url = urlBase + '/v1/Login/login/Cadastrar';
 
             const User = document.getElementById('inputNomeCadastrar').value

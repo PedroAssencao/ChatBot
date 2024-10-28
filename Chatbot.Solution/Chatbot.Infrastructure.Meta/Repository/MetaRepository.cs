@@ -248,7 +248,6 @@ namespace Chatbot.Infrastructure.Meta.Repository
             };
         }
 
-
         public async Task<dynamic> BotResposta(DataAndType Model)
         {
             BotRespostaInitialVariables Obj = await montarObjDeMsg(Model);
