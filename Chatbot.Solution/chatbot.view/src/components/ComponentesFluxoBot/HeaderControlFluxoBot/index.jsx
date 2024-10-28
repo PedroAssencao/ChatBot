@@ -4,7 +4,7 @@ export default function HeaderControlFluxobot(props) {
     return (
         <div className='headerControlFluxoBot p-2'>
             <div className='ms-3'>
-                <button className='btn btnColorForFluxoBot d-flex gap-3'>Ligar
+                <button className='btn btnColorForFluxoBot btnHoverClass d-flex gap-3'>Ligar
                     <div className="form-check form-switch ">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                     </div>
@@ -12,7 +12,7 @@ export default function HeaderControlFluxobot(props) {
             </div>
             <div className='me-3'>
                 <ButtonBase
-                    className="btn btnColorForFluxoBot"
+                    className="btn btnColorForFluxoBot btnHoverClass"
                     Description="Salvar"
                 />
             </div>

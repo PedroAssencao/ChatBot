@@ -15,6 +15,11 @@ export default function Home() {
                 console.log("Usuario Redirecionado")
                 location.replace(location.origin + "/login");
             }
+
+            if (result.tipoUsuario == "Atendente") {
+                console.log("Usuario Redirecionado")
+                location.replace(location.origin + "/Atendimento");
+            }
             setIsLoading(false)
         });
     }, []);

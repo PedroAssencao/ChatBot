@@ -10,10 +10,14 @@ export const fetchNewDatas = async () => {
     var UsuarioLogadoId = await UsuarioLogado()
     console.log(UsuarioLogadoId)
     const response = await fetch(`${urlBase}/v1/Menus/Menus/GetAllMenusByLogId/${UsuarioLogadoId.usuarioLogadoId}`);
-    console.log(response)
     const responseJson = await response.json();
+    console.log(responseJson)
     data = responseJson;
-    return true;
+    if (data.length > 0) {
+      return true; 
+    }else{
+      return false
+    }
   } catch (error) {
     console.error(error);
     //deixar isso aqui apenas no ambiente de teste 
@@ -183,7 +187,7 @@ const gerarMenuHtml = (menu, nivel = 0) => {
           <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
             onclick="localStorage.setItem('MenId', ${option.codigoMenu})" 
             class="dropdown-item" href="#">
-            Adicionar Opção Ao Menu Principal
+            Adicionar Opção Ao Menu: ${getMenuPorId(option.codigoMenu).titulo}
           </a>
         </li>`
     }
@@ -298,7 +302,7 @@ export const Iniciar = () => {
   const MenuInicial = getMenuPorTipo(1);
   const menuHtml = gerarMenuHtml(MenuInicial);
   document.querySelector("#LinhaMenuPrincipal").innerHTML = `<div class="col-12 p-0">
-            <button class="btn buttonAdicionarFromHome" onclick=() id="CreateMenu"><strong>Adicionar Menu</strong></button>
+            <button class="btn buttonAdicionarFromHome btnHoverClass" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="localStorage.setItem('MenId', ${getMenuPorTipo(1).codigo})" id="CreateMenu"><strong>Adicionar Menu</strong></button>
         </div>
         ` + menuHtml;
   resetarAndStartPlumbJS()
@@ -322,6 +326,8 @@ export const AdicionarEmDados = async (e) => {
 
     var UsuarioLogadoIdResult = await UsuarioLogado()
     var UsuarioLogadoId = parseInt(UsuarioLogadoIdResult.usuarioLogadoId)
+    console.log("Id Usuario logado")
+    console.log(UsuarioLogadoId)
     //esquema para deixar fixo para teste 
 
     // const newOption = {

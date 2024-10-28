@@ -16,6 +16,11 @@ export default function FluxoBot() {
       if (result.usuarioLogadoId == null) {
         location.replace(location.origin + "/login");
       }
+
+      if (result.tipoUsuario == "Atendente") {
+        location.replace(location.origin + "/home");
+      }
+
     });
 
     const initialize = async () => {
@@ -24,6 +29,8 @@ export default function FluxoBot() {
         jsPlumb.ready(Iniciar);
         window.addEventListener('resize', resetarAndStartPlumbJS);
         SetLoadDate(true)
+      }else{
+        console.log("Colocar aqui")
       }
     };
 
