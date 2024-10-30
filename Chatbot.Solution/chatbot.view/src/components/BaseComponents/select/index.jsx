@@ -1,19 +1,26 @@
 export default function Select(props) {
-    const className = props.className !== undefined ? props.className : "form-select p-3 backgroudVerderInput";
+    const { optionsList, onChange, id, className, placeholder } = props;
+
+    // Verifica se as props necessárias estão presentes e se optionsList possui conteúdo
+    if (!optionsList || optionsList.length === 0 || !onChange || !id) {
+        return null;
+    }
+
+    const selectClassName = className || "form-select p-3 backgroudVerderInput";
 
     const handleChange = (event) => {
         const selectedValue = event.target.value;
-        props.onChange(selectedValue);
+        onChange(selectedValue);
     };
 
     return (
         <select
-            id={props.id}
+            id={id}
             onChange={handleChange}
-            className={className}
-            placeholder={props.placeholder}
+            className={selectClassName}
+            placeholder={placeholder}
         >
-            {props.optionsList.map((x) => (
+            {optionsList.map((x) => (
                 <option value={x.value} key={x.id}>
                     {x.descricao}
                 </option>

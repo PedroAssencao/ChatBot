@@ -14,8 +14,8 @@ export const fetchNewDatas = async () => {
     console.log(responseJson)
     data = responseJson;
     if (data.length > 0) {
-      return true; 
-    }else{
+      return true;
+    } else {
       return false
     }
   } catch (error) {
@@ -49,6 +49,12 @@ const AdicionarNovaOpcao = async (element) => {
 };
 
 const AdicionarNovoMenu = async (element) => {
+  console.log(element)
+  if (element?.CodigoLogin == undefined) {
+    var UsuarioLogadoIdResult = await UsuarioLogado()
+    var UsuarioLogadoId = parseInt(UsuarioLogadoIdResult.usuarioLogadoId)
+    element.CodigoLogin = UsuarioLogadoId
+  }
   try {
     const response = await fetch(`${urlBase}/v1/Menus/Menus/Create`, {
       method: 'POST',
@@ -140,6 +146,7 @@ export const SelectTipoHandEvent = (element) => {
 
 
 // Funções para simular o backend enquanto não integra com a página principal
+
 const getMenuPorId = (codigo) => data.filter(x => x.codigo == codigo)[0];
 const getMenuPorTipo = (Tipo) => data.filter(x => x.tipo == Tipo)[0];
 
@@ -162,10 +169,10 @@ const gerarMenuHtml = (menu, nivel = 0) => {
                           <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
                             onclick="localStorage.setItem('MenId', ${menu.codigo})" 
                             class="dropdown-item" href="#">
-                            Adicionar Opção
+                            Adicionar Opção ao Menu
                           </a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Atualizar Opção</a></li>
+                        <li><a class="dropdown-item" href="#">Atualizar Menu</a></li>
                         <li><a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item border-top-5 border-dark" href="#">Excluir</a></li>
                     </ul>
                 </div>
@@ -180,18 +187,22 @@ const gerarMenuHtml = (menu, nivel = 0) => {
     let optionMarginClass = `marginClasses-${optionNivel}`;
 
     let TipoACriacao = ``
+    let TipoAAtualziacao = ``
+    
+    //console.log("Opção Aqui")
+    //console.log(option)
 
-    if (option.tipo == 3 || option.tipo == 4) {
-      TipoACriacao = `
-        <li>
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
-            onclick="localStorage.setItem('MenId', ${option.codigoMenu})" 
-            class="dropdown-item" href="#">
-            Adicionar Opção Ao Menu: ${getMenuPorId(option.codigoMenu).titulo}
-          </a>
-        </li>`
+    if (option.tipo == 3 || option.tipo == 4 || option.finalizar) {
+      // TipoACriacao = `
+      //   <li>
+      //     <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
+      //       onclick="localStorage.setItem('MenId', ${option.codigoMenu})" 
+      //       class="dropdown-item" href="#">
+      //       Adicionar Opção Ao Menu: ${getMenuPorId(option.codigoMenu).titulo}
+      //     </a>
+      //   </li>`
     }
-    else {
+    if (option.tipo == 5) {
       TipoACriacao = `
         <li>
           <a data-bs-toggle="modal" data-bs-target="#exampleModal" 
@@ -201,6 +212,7 @@ const gerarMenuHtml = (menu, nivel = 0) => {
           </a>
         </li>`
     }
+
 
     menuHtml += `
         <div class="col-12 p-0 mt-4 ${optionMarginClass}">
@@ -236,6 +248,13 @@ const gerarMenuHtml = (menu, nivel = 0) => {
 };
 
 export const resetarAndStartPlumbJS = () => {
+  const containerPaiFluxoCards = document.querySelector(".ContainerPaiFluxoCards");
+  if (containerPaiFluxoCards) {
+    // console.log("Entrou no if ao resetar")
+    containerPaiFluxoCards.scrollTop = 0;
+  }
+
+  // console.log("Ativou a função de repaint jsPlumb")
   //esse esquema com console.log so serve para desativar as mensagens que o plumbjs fica setando
   const originalLog = console.log;
   console.log = function () { };
@@ -302,7 +321,7 @@ export const Iniciar = () => {
   const MenuInicial = getMenuPorTipo(1);
   const menuHtml = gerarMenuHtml(MenuInicial);
   document.querySelector("#LinhaMenuPrincipal").innerHTML = `<div class="col-12 p-0">
-            <button class="btn buttonAdicionarFromHome btnHoverClass" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="localStorage.setItem('MenId', ${getMenuPorTipo(1).codigo})" id="CreateMenu"><strong>Adicionar Menu</strong></button>
+            <button class="btn buttonAdicionarFromHome btnHoverClass" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="localStorage.setItem('MenId', ${getMenuPorTipo(1).codigo})" id="CreateMenu"><strong>Adicionar Opção</strong></button>
         </div>
         ` + menuHtml;
   resetarAndStartPlumbJS()

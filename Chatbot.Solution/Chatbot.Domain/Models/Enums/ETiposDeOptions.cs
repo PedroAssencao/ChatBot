@@ -6,7 +6,7 @@
         MensagemEnviada = 2,
         MensagemDeRespostaInterativa = 3,
         MensagemPorIA = 4,
-        MenuDaIA = 5,
+        MensagemDePergunta = 5,
         RedirecinamentoHumano = 6
     }
 }

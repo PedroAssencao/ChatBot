@@ -1,7 +1,71 @@
 import './style.css';
-import {AdicionarEmDados,SelectTipoHandEvent} from '../../../Repository/FluxoBoxRepository'
+import { AdicionarEmDados, SelectTipoHandEvent } from '../../../Repository/FluxoBoxRepository'
+import { urlBase, UsuarioLogado } from "../../../appsettings";
+import { useEffect, useState } from "react";
+import Select from '../../BaseComponents/select';
 import ButtonBase from '../../BaseComponents/button';
 export default function ModalDeAdicaoFluxoBot(props) {
+    const [resultDep, setResultDep] = useState(null);
+    const [DepartamentoAtivoId, setDepartamentoAtivoId] = useState(0);
+    const [IdUsuarioLogado, setIdUsuarioLogado] = useState(0)
+    const fetchData = async (param) => {
+
+        let url = `${urlBase}/v1/Departamaneto/Departamento/BuscarTodosDepartamentoPorLogId?id=${param}`;
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error('Erro na requisição');
+            }
+
+            const data = await response.json();
+            var listTratada = []
+            data.map(x => {
+                listTratada.push({
+                    id: x.codigo,
+                    descricao: x.nomeDepartamento,
+                    value: x.codigo
+                })
+            })
+            setResultDep(listTratada);
+            setDepartamentoAtivoId(listTratada[0].id)
+            // setIsLoading(false)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    const DepartamentoUsuario = 0;
+
+    const selecionarDepartamentoAtivoNoSelect = (param) => {
+        try {
+            const selectElement = document.querySelector("#SelectDepartamentoUsuarioModal");
+            if (selectElement && param) {
+                selectElement.value = param;
+            } else {
+                selectElement.value = 1;
+            }
+        } catch (error) {
+
+        }
+    };
+
+    useEffect(() => {
+        selecionarDepartamentoAtivoNoSelect(DepartamentoUsuario);
+    }, [DepartamentoUsuario]);
+
+
+    useEffect(() => {
+        UsuarioLogado().then(result => {
+            if (result.usuarioLogadoId == null) {
+                location.replace(location.origin + "/login");
+            } else {
+                fetchData(result.usuarioLogadoId);
+                setIdUsuarioLogado(result.usuarioLogadoId)
+            }
+        });
+    }, []);
     return (
         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered modal-xl">
@@ -23,12 +87,18 @@ export default function ModalDeAdicaoFluxoBot(props) {
                                 <label className="mb-2"><strong>Departamento destinado ao Redirecionamento</strong></label>
                                 {/* Puxar Aqui Do Codigo Todos os Departamentos Para Inserção
                                             Lembrar que id vai ser o id do departamento selecionado em questao */}
-                                <select id="selectDepartamento" className="form-select">
+                                <Select
+                                    // onChange={props.SetDepartamentoAtivoId}
+                                    id={"SelectDepartamentoFluxoBotModal"}
+                                    placeholder={"Departamentos"}
+                                    optionsList={resultDep}
+                                />
+                                {/* <select id="selectDepartamento" className="form-select">
                                     <option defaultValue={true}>Selecione um Departamento</option>
                                     <option id="1" value="1">Suporte</option>
                                     <option id="2" value="2">Financeiro</option>
                                     <option id="3" value="3">Técnico</option>
-                                </select>
+                                </select> */}
                             </div>
 
                         </div>
@@ -108,12 +178,13 @@ export default function ModalDeAdicaoFluxoBot(props) {
 
                     </div>
                     <div className="modal-footer border-top-0">
-                    <ButtonBase
+                        <ButtonBase
                             AtributoPersonalizado={{ 'data-bs-dismiss': "modal" }}
                             className="btn buttonCancelarFromModal"
                             Description="Cancelar"
                         />
-                        <ButtonBase                            
+                        <ButtonBase
+                            AtributoPersonalizado={{ 'data-bs-dismiss': "modal" }}
                             className={"btn buttonSalvarFromHome"}
                             Description={"Salvar"}
                             onClick={AdicionarEmDados}

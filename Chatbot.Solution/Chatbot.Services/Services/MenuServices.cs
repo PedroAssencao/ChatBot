@@ -194,6 +194,8 @@ namespace Chatbot.Services.Services
                     MenTitle = Model.Titulo,
                     LogId = Convert.ToInt32(Model.CodigoLogin)
                 };
+
+
                 var item = await _repository.Adicionar(NewModel);
                 MenuDttoGet ViewModel = new MenuDttoGet
                 {
