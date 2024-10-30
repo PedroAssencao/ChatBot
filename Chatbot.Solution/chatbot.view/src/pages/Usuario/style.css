@@ -1,0 +1,62 @@
+.Title{
+    color: #263a6d;
+    font-weight: bold;
+}
+
+.card{
+    box-shadow: 2px 2px 2px 2px grey;
+    padding: 0.8rem;
+}
+
+.cardBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cardIcon{
+    display: flex;
+    flex-direction: column;
+}
+
+p{
+    margin: 0px;
+}
+
+.cardInfo{
+/* display: flex;
+justify-content: space-around; */
+margin-top: 10.4rem;
+}
+
+.Name{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.Type{
+   font-size: 16px;
+   margin-bottom: 0.5rem;
+}
+
+.Number{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.Header{
+    display: flex;
+}
+
+.BlueButton{
+ background-color: #263a6d;
+ --bs-btn-hover-color:  #263a6d solid 1px;
+ display: flex;
+ align-items: center;
+ border-color: #263a6d;
+}
+
+
+.perfil{
+    min-width: 40vw;
+}

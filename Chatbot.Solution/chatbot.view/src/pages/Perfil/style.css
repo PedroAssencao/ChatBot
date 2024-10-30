@@ -1,0 +1,30 @@
+.Title{
+    font-weight: bold;
+    color: #263a6d;
+}
+
+.input-group{
+    width: 25rem;
+}
+
+.SubTitle{
+    font-weight: bold;
+    color: #263a6d;
+    font-size: 18px;
+}
+
+.principal{
+    padding: 1rem;
+}
+
+.img{
+    width: 50rem;
+    height: 50rem;
+}
+
+.imagem{
+    width: 25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

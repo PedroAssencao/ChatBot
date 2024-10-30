@@ -1,0 +1,47 @@
+.Header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Title{
+    color: #263a6d;
+}
+
+.Content{
+    padding:1rem;
+}
+
+.Page{
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.Date{
+    font-size: 18px;
+}
+
+.bi-calendar-date{
+    margin-left: 0.3rem;
+}
+
+.GraficosPrimarios{
+    display: flex;
+    justify-content: space-between;
+}
+
+.GraficosSecundarios{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.DashBoardNovidades{
+    color: #263a6d;
+    font-size: 18px;
+    font-weight: 400;
+}
+.col{
+    padding: 0.5rem;
+}
