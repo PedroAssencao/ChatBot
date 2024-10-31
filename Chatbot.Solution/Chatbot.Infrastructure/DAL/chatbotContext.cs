@@ -37,7 +37,7 @@ namespace Chatbot.API.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
+                optionsBuilder.UseSqlServer("Data Source=LAPTOP-M68K5TBC\\SQLEXPRESS;Initial Catalog=chatbot;Integrated Security=True;Encrypt=False");
             }
         }
 

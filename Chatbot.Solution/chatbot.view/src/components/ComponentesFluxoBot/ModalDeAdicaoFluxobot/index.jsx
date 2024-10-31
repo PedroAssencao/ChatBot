@@ -29,6 +29,8 @@ export default function ModalDeAdicaoFluxoBot(props) {
                 })
             })
             setResultDep(listTratada);
+            console.log("Aqui esta a lista tratada")
+            console.log(listTratada)
             setDepartamentoAtivoId(listTratada[0].id)
             // setIsLoading(false)
         } catch (error) {
@@ -87,12 +89,14 @@ export default function ModalDeAdicaoFluxoBot(props) {
                                 <label className="mb-2"><strong>Departamento destinado ao Redirecionamento</strong></label>
                                 {/* Puxar Aqui Do Codigo Todos os Departamentos Para Inserção
                                             Lembrar que id vai ser o id do departamento selecionado em questao */}
-                                <Select
-                                    // onChange={props.SetDepartamentoAtivoId}
-                                    id={"SelectDepartamentoFluxoBotModal"}
-                                    placeholder={"Departamentos"}
-                                    optionsList={resultDep}
-                                />
+                                {resultDep != null &&
+                                    <Select
+                                        // onChange={props.SetDepartamentoAtivoId}
+                                        id={"SelectDepartamentoFluxoBotModal"}
+                                        placeholder={"Departamentos"}
+                                        optionsList={resultDep}
+                                    />
+                                }
                                 {/* <select id="selectDepartamento" className="form-select">
                                     <option defaultValue={true}>Selecione um Departamento</option>
                                     <option id="1" value="1">Suporte</option>

@@ -29,7 +29,7 @@ export default function FluxoBot() {
         jsPlumb.ready(Iniciar);
         window.addEventListener('resize', resetarAndStartPlumbJS);
         SetLoadDate(true)
-      }else{
+      } else {
         console.log("Colocar aqui")
       }
     };

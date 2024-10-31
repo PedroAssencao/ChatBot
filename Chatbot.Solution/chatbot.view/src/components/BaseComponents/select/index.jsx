@@ -1,10 +1,9 @@
 export default function Select(props) {
-    const { optionsList, onChange, id, className, placeholder } = props;
+    console.log("Dentro do select")
+    console.log("optionsList aqui")
+    console.log(props.optionsList)
+    const { optionsList, onChange, id, className, placeholder } = props;    
 
-    // Verifica se as props necessárias estão presentes e se optionsList possui conteúdo
-    if (!optionsList || optionsList.length === 0 || !onChange || !id) {
-        return null;
-    }
 
     const selectClassName = className || "form-select p-3 backgroudVerderInput";
 
@@ -25,6 +24,7 @@ export default function Select(props) {
                     {x.descricao}
                 </option>
             ))}
+            
         </select>
     );
 }
