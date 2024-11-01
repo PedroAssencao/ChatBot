@@ -73,8 +73,8 @@ export default function ModalDeAdicaoFluxoBot(props) {
             <div className="modal-dialog modal-dialog-centered modal-xl">
                 <div className="modal-content">
                     <div className="modal-body">
-                        <div className="d-flex gap-3 mt-3 justify-content-between">
-                            <div className="containerTipo">
+                        <div className="row mt-3 justify-content-between">
+                            <div className="containerTipo col-6">
                                 <label className="mb-2"><strong>Tipo</strong></label>
                                 {/* Puxar Aqui Do Codigo Todos os Tipo Para Inserção */}
                                 <select onChange={(e) => SelectTipoHandEvent(e)} className="form-select" id="SelectTipo">
@@ -85,14 +85,15 @@ export default function ModalDeAdicaoFluxoBot(props) {
                                 </select>
                             </div>
 
-                            <div className="containerTipo" style={{ display: "none" }} id="DepartamentoSelect">
-                                <label className="mb-2"><strong>Departamento destinado ao Redirecionamento</strong></label>
+                            <div className="containerTipo col-6" style={{ display: "none" }} id="DepartamentoSelect">
+                                <label className="mb-2"><strong>Departamento</strong></label>
                                 {/* Puxar Aqui Do Codigo Todos os Departamentos Para Inserção
                                             Lembrar que id vai ser o id do departamento selecionado em questao */}
                                 {resultDep != null &&
                                     <Select
                                         // onChange={props.SetDepartamentoAtivoId}
-                                        id={"SelectDepartamentoFluxoBotModal"}
+                                        id={"selectDepartamento"}
+                                        className={"DepartamentoModalAddFluxoBot form-select p-3"}
                                         placeholder={"Departamentos"}
                                         optionsList={resultDep}
                                     />

@@ -180,7 +180,8 @@
 }
 
 #LinhaMenuPrincipal{
-    max-width: 97%;
+    /* max-width: 97%; */
+    margin-left: 0!important;
 }
 
 ::-webkit-scrollbar {

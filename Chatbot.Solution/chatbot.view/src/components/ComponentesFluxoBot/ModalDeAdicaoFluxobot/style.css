@@ -1,12 +1,12 @@
-#SelectTipo{
-    min-width: 34rem;
-}
+/* #selecttipo{
+    width: 49%;
+} */
 
 .containerTipo{
-    margin-right: 4rem;
+    /* margin-right: 4rem; */
+    width: 50%!important;
 }
 
-#SelectDepartamentoFluxoBotModal{
-    min-width: 34.1rem !important;
+.DepartamentoModalAddFluxoBot{
     padding: 7px!important;
 }
